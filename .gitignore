@@ -7,7 +7,7 @@
 *.sqlite3
 *.tmp
 *.log
-*.txt
+*.ini
 __pycache__
-app/conf/static_files
-app/conf/settings_production.py
+static_files/
+migrations/
