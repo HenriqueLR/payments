@@ -1,0 +1,31 @@
+<html>
+	<head><title>create account</title></head>
+	<body>
+
+	{% if messages %}
+		{% for message in messages %}
+			{{ message }}
+		{% endfor %}
+	{% endif %}
+
+		{% if form_user.errors %}
+			{{ form_user.errors }}
+		{% endif %}
+
+		{% if form_profile.errors %}
+			{{ form_profile.errors }}
+		{% endif %}
+
+		{% if form_account.errors %}
+			{{ form_account.errors }}
+		{% endif %}
+
+		<form method='post'>
+			{% csrf_token %}
+			{{ form_profile.as_p }}
+			{{ form_user.as_p }}
+			{{ form_account.as_p }}
+			<input type='submit' value='salvar' />
+		</form>
+	</body>
+</html>
