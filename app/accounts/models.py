@@ -10,10 +10,6 @@ from django.contrib.auth.models import (AbstractBaseUser, PermissionsMixin, User
 
 
 
-ORDER_CHOICE = ((0, 'super'),(1, 'user'))
-
-
-
 class Account(models.Model):
 
     id_account = models.AutoField(primary_key=True, verbose_name=u'Cod Account', db_column='id_account')
@@ -58,8 +54,8 @@ class User(AbstractBaseUser, PermissionsMixin):
             'seguintes caracteres: @/./+/-/_', 'invalid')]
     )
     email = models.EmailField(verbose_name=u'E-mail', unique=True)
-    is_active = models.BooleanField(verbose_name=u'Está ativo?', blank=False, null=False, default=False)
-    is_staff = models.BooleanField(verbose_name=u'É da equipe?', blank=False, null=False, default=False)
+    is_active = models.BooleanField(verbose_name=u'Está ativo?', default=False)
+    is_staff = models.BooleanField(verbose_name=u'É da equipe?', default=False)
     date_joined = models.DateTimeField(verbose_name=u'Data de Entrada', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name=u'Atualizado em', auto_now=True, db_column='updated_at')
     account = models.ForeignKey(Account, verbose_name='Conta', related_name='user_account',
@@ -108,7 +104,7 @@ class PasswordReset(models.Model):
                              on_delete=models.CASCADE, null=False)
     key = models.CharField(verbose_name=u'Chave', max_length=100, unique=True)
     created_at = models.DateTimeField(verbose_name=u'Criado em', auto_now_add=True)
-    confirmed = models.BooleanField(verbose_name=u'Confirmado?', default=False, blank=True)
+    confirmed = models.BooleanField(verbose_name=u'Confirmado?', default=False)
 
     def __unicode__(self):
         return u'%s' % self.user
@@ -138,6 +134,8 @@ class ProfileManager(models.Manager):
 
 class Profile(models.Model):
 
+    ORDER_CHOICE = ((0, 'super'),(1, 'user'))
+
     id_profile = models.AutoField(primary_key=True, verbose_name=u'id_profile', db_column='id_profile')
     first_name = models.CharField(max_length=50, verbose_name=u'Nome', db_column='first_name',
                                   validators=[validators.RegexValidator(re.compile('^[\A-Za-z]+$'),
@@ -150,9 +148,10 @@ class Profile(models.Model):
     birthday = models.DateField(verbose_name=u'Aniversario', db_column='birthday', blank=True, null=True)
     url = models.CharField(max_length=100, verbose_name=u'Site', db_column='url', blank=True, null=True)
     description = models.TextField(db_column='description', blank=True, null=True, verbose_name=u'Descricao')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Usuário', related_name='profile_user',
-                             unique=True, on_delete=models.CASCADE, null=False)
-    order = models.IntegerField(choices=ORDER_CHOICE, verbose_name=u'Ordem', db_column='order', default=1)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name='Usuário', related_name='profile_user',
+                                on_delete=models.CASCADE, null=False)
+    order = models.IntegerField(choices=ORDER_CHOICE, verbose_name=u'Ordem', db_column='order',
+                                default=ORDER_CHOICE[1][0])
 
     objects = ProfileManager()
 

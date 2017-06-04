@@ -19,6 +19,7 @@ from main.utils import apps_permissions
 from main.decorators import ajax_required
 
 
+
 class AccountView(View):
 
     template_name = 'accounts/register/create_account.html'
@@ -103,7 +104,7 @@ def edit_password(request):
 def edit_profile(request):
     template_name = 'accounts/user/edit_profile.html'
     form_user = EditUserForm(request.POST or None, instance=request.user)
-    form_profile = AddProfileForm(request.POST or None,
+    form_profile = ProfileForm(request.POST or None,
                                   instance=get_object_or_404(Profile, user=request.user))
     if form_user.is_valid() and form_profile.is_valid():
         form_user.save(profile=form_profile.save())
