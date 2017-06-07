@@ -1,11 +1,55 @@
-<html>
-	<head>
-		<title>teste</title>
-	</head>
-	<body>
-		<h1>teste</h1>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="description" content="Template Base">
+        <meta name="author" content="Henrique Luz Rodrigues">
 
-		{{ user.username }}
+        <title>Payments</title>
+        {% block extra_styles %}{% endblock %}
+        {% block styles %}{% endblock %}
+    </head>
 
-	</body>
+    <body>
+        {% block navtop %}
+			<ul>
+				<li><a href="{% url 'accounts:logout' %}">sair</a></li>
+				{% if not user.is_superuser %}
+					<li><a href="{{ user.get_edit_profile }}">Profile</a></li>
+				{% endif %}
+			</ul>
+        {% endblock %}
+
+        {% block navleft %}
+			<h1>Menu</h1>
+			<ul>
+				<li class="{% if label_app == 'Home' %}active parent {% endif %}">
+					<a href="{% url 'main:home' %}"><i class="fa fa-home"></i> <span>Home</span></a>
+				</li>
+				{% for app in apps %}
+					<li class="{% if app.name == label_app %}active parent {% else %} parent{% endif %}">
+						<a href="#">
+							<i class="{% if app.name == 'accounts' %}fa fa-chain{% endif %}"></i>
+							<span>{{ app.name }}</span>
+						</a>
+						<ul class="children">
+							{% for model in app.models %}
+							  	<li class="{% if model.name == object_name %}active{% endif %}">
+							  		<a href="/{{ model.app_url }}">{{ model.name }}</a>
+							  	</li>
+							{% endfor %}
+						</ul>
+					</li>
+				{% endfor %}
+			</ul>
+		{% endblock %}
+
+		{% block content %}{% endblock %}
+
+		{% block extra_scripts %}{% endblock %}
+		{% block js %}{% endblock %}
+    </body>
+
 </html>

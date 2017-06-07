@@ -8,9 +8,13 @@ from django.apps import apps
 
 
 IGNORE_MODELS = ("sites", "sessions", "admin",
-    			 "contenttypes",'auth')
+    			 "contenttypes","auth")
 
-IGNORE_APPS = ()
+IGNORE_APPS = ("Profile")
+
+MAP_URL = {
+	"profile": "list_account",
+}
 
 def apps_permissions(request):
 	user = request.user
@@ -21,7 +25,7 @@ def apps_permissions(request):
 		app_label = model._meta.app_label
 		name = model._meta.verbose_name_plural
 
-		if app_label in IGNORE_MODELS or name in IGNORE_APPS:
+		if app_label in IGNORE_MODELS or name not in IGNORE_APPS:
 			continue
 		has_module_perms = user.has_module_perms(app_label)
 		if has_module_perms:
@@ -33,6 +37,7 @@ def apps_permissions(request):
 				model_dict = {
                     'name': capfirst(name),
                     'admin_url': mark_safe('%s/%s/' % (app_label, model.__name__.lower())),
+                    'app_url': ('%s/%s/') % (app_label, MAP_URL[model.__name__.lower()]),
                 }
 
 				if app_label in app_dict:

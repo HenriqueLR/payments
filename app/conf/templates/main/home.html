@@ -1,15 +1,5 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
-<html>
-	<head>
-		<title>teste</title>
-	</head>
-	<body>
-		<h1>teste</h1>
-		<ul>
-			<li><a href="{% url 'accounts:logout' %}">sair</a></li>
-			<li><a href="{{ user.get_edit_profile }}">Profile</a></li>
-		</ul>
-		{{ user.username }}
-
-	</body>
-</html>
+{% block content %}
+	<h1>Home</h1>
+{% endblock %}

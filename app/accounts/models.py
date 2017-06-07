@@ -22,16 +22,16 @@ class Account(models.Model):
         return u'%s' % self.cpf
 
     class Meta:
-        verbose_name='Conta'
-        verbose_name_plural='Contas'
+        verbose_name='Account'
+        verbose_name_plural='Account'
         ordering=['-created_at']
         db_table='account'
         permissions = (
-                ('add_new_account', 'Cadastrar Conta'),
-                ('list_new_account', 'Listar Contas'),
-                ('delete_new_account', 'Excluir Conta'),
-                ('change_new_account', 'Alterar Conta'),
-                ('detail_new_account', 'Detalhar Conta'),
+                ('add_new_account', 'add account'),
+                ('list_new_account', 'list account'),
+                ('delete_new_account', 'delete account'),
+                ('change_new_account', 'change account'),
+                ('detail_new_account', 'detail account'),
         )
 
 class UserManager(models.Manager):
@@ -85,15 +85,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         return ('accounts:edit_profile', {})
 
     class Meta:
-        verbose_name = 'Usuário'
-        verbose_name_plural = 'Usuários'
+        verbose_name = 'User'
+        verbose_name_plural = 'User'
         ordering = ['-date_joined']
         permissions = (
-                ('add_new_user', 'Cadastrar Usuários'),
-                ('list_new_user', 'Listar Usuários'),
-                ('delete_new_user', 'Excluir Usuários'),
-                ('change_new_user', 'Alterar Usuários'),
-                ('detail_new_user', 'Detalhar Usuários'),
+                ('add_new_user', 'add user'),
+                ('list_new_user', 'list user'),
+                ('delete_new_user', 'delete user'),
+                ('change_new_user', 'change user'),
+                ('detail_new_user', 'detail user'),
         )
 
 
@@ -110,15 +110,15 @@ class PasswordReset(models.Model):
         return u'%s' % self.user
 
     class Meta:
-        verbose_name = 'Nova Senha'
-        verbose_name_plural = 'Novas Senhas'
+        verbose_name = 'New Password'
+        verbose_name_plural = 'New Password'
         ordering = ['-created_at']
         permissions = (
-                ('add_new_password', 'Cadastrar Senhas'),
-                ('list_new_password', 'Listar Senhas'),
-                ('delete_new_password', 'Excluir Senhas'),
-                ('change_new_password', 'Alterar Senhas'),
-                ('detail_new_password', 'Detalhar Senhas'),
+                ('add_new_password', 'add password'),
+                ('list_new_password', 'list password'),
+                ('delete_new_password', 'delete password'),
+                ('change_new_password', 'change password'),
+                ('detail_new_password', 'detail password'),
         )
 
 
@@ -174,9 +174,9 @@ class Profile(models.Model):
         ordering=['-created_at']
         db_table='profile'
         permissions = (
-                ('add_new_profile', 'Cadastrar Perfil'),
-                ('list_new_profile', 'Listar Perfil'),
-                ('delete_new_profile', 'Excluir Perfil'),
-                ('change_new_profile', 'Alterar Perfil'),
-                ('detail_new_profile', 'Detalhar Perfil'),
+                ('add_new_profile', 'add profile'),
+                ('list_new_profile', 'list profile'),
+                ('delete_new_profile', 'delete profile'),
+                ('change_new_profile', 'change profile'),
+                ('detail_new_profile', 'detail profile'),
         )

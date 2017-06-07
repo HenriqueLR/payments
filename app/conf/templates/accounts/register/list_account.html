@@ -1,55 +1,52 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>list customer</title>
-	</head>
-	<body>
-		{% if messages %}
-			{% for message in messages %}
-				{{ message }}
-			{% endfor %}
-		{% endif %}
+{% extends 'base.html' %}
+{% load staticfiles %}
 
-        <ul class="list-inline" style='margin-top:30px;'>
-          <li><strong>Filtros:</strong>
-          <li><a href="?order=0" title="">Super</a></li>
-          <li><a href="?order=1" title="">User</a></li>
-        </ul>
-		<br>
+{% block content %}
 
-		{% if not object_list %}
-			<h1>Nao existem contas cadastradas</h1>
-		{% else %}
+	{% if messages %}
+		{% for message in messages %}
+			{{ message }}
+		{% endfor %}
+	{% endif %}
 
+    <ul class="list-inline" style='margin-top:30px;'>
+      <li><strong>Filtros:</strong>
+      <li><a href="?order=0" title="">Super</a></li>
+      <li><a href="?order=1" title="">User</a></li>
+    </ul>
 
-			{% for account in object_list %}
-				nome: {{ account.first_name }} /
-				sobre nome: {{ account.last_name }} /
-				email: {{ account.user.email }} /
-				<a href='{{ account.active_account }}'>ativar</a>
-				<br>
-			{% endfor %}
+	<br>
 
-	        <nav><!--nav-->
-	            <ul class="pagination pagination-centered" style='margin: 5px 0 7px;'><!--ul pagination pagination-centered -->
-	                <li>
-	                    <a class='{% if page_obj.has_previous %}btn{% else %} btn disabled{% endif %}' href="?page=1{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title=""><<</a>
-	                </li>
+	{% if not object_list %}
+		<h1>Nao existem contas cadastradas</h1>
+	{% else %}
+		{% for account in object_list %}
+			nome: {{ account.first_name }} /
+			sobre nome: {{ account.last_name }} /
+			email: {{ account.user.email }} /
+			<a href='{{ account.active_account }}'>ativar</a>
+			<br>
+		{% endfor %}
 
-	                <li>
-	                    <a class='{% if page_obj.has_previous %}btn{% else %} btn disabled {% endif %}' href="?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% endif %}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title=""><</a>
-	                </li>
+	    <nav><!--nav-->
+	        <ul class="pagination pagination-centered" style='margin: 5px 0 7px;'><!--ul pagination pagination-centered -->
+	            <li>
+	                <a class='{% if page_obj.has_previous %}btn{% else %} btn disabled{% endif %}' href="?page=1{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title=""><<</a>
+	            </li>
 
-	                <li>
-	                    <a class='{% if page_obj.has_next %}btn{% else %} btn disabled{% endif %}' href="?page={% if page_obj.has_next %}{{ page_obj.next_page_number }}{% endif %}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title="">></a>
-	                </li>
+	            <li>
+	                <a class='{% if page_obj.has_previous %}btn{% else %} btn disabled {% endif %}' href="?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% endif %}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title=""><</a>
+	            </li>
 
-	                <li>
-	                    <a class='{% if page_obj.has_next %}btn{% else %}btn disabled{% endif %}' href="?page={{paginator.num_pages}}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title="">>></a>
-	                </li>
-	            </ul><!--ul pagination pagination-centered -->
-	        </nav><!--nav-->
-	        <small>{{ page_obj.number }} de {{paginator.num_pages}}</small>
-		{% endif %}
-	</body>
-</html>
+	            <li>
+	                <a class='{% if page_obj.has_next %}btn{% else %} btn disabled{% endif %}' href="?page={% if page_obj.has_next %}{{ page_obj.next_page_number }}{% endif %}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title="">></a>
+	            </li>
+
+	            <li>
+	                <a class='{% if page_obj.has_next %}btn{% else %}btn disabled{% endif %}' href="?page={{paginator.num_pages}}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title="">>></a>
+	            </li>
+	        </ul><!--ul pagination pagination-centered -->
+	    </nav><!--nav-->
+	    <small>{{ page_obj.number }} de {{paginator.num_pages}}</small>
+	{% endif %}
+{% endblock %}

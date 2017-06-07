@@ -1,27 +1,20 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>profile</title>
-</head>
-<body>
+{% block content %}
+	{% if messages %}
+		{% for message in messages %}
+			{{ message }}
+		{% endfor %}
+	{% endif %}
 
-{% if messages %}
-	{% for message in messages %}
-		{{ message }}
-	{% endfor %}
-{% endif %}
+	<form method='post'>
+		{% csrf_token %}
+		{{ form_user.as_p }}
+		{{ form_profile.as_p }}
+		<input type='submit' value='Editar' />
+		<a href="{% url 'main:home' %}">voltar</a>
+	</form>
 
-<form method='post'>
-	{% csrf_token %}
-	{{ form_user.as_p }}
-	{{ form_profile.as_p }}
-	<input type='submit' value='Editar' />
-	<a href="{% url 'main:home' %}">voltar</a>
-</form>
-
-<a href="{% url 'accounts:edit_password' %}">Editar Senha</a>
-
-</body>
-</html>
+	<a href="{% url 'accounts:edit_password' %}">Editar Senha</a>
+{% endblock %}
