@@ -84,6 +84,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_edit_profile(self):
         return ('accounts:edit_profile', {})
 
+    @models.permalink
+    def get_detail_profile(self):
+        return ('accounts:detail_profile', {})
+
     class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'User'

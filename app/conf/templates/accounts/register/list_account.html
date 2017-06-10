@@ -1,52 +1,263 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block extra_styles %}
+	<style type="text/css">
+			/*.metric{
+				margin-bottom: 0 !important;
+			}*/
+			body{
+				font-family: 'Anaheim';
+			}
+			.metric .title {
+			    font-size: 14px;
+			    color: #a3a4a4;
+			}
+			.panel-footer{
+				background-color: white;
+				text-align: center;
+			}
+			table td, th{
+				text-align: center;
+			}
+			#notas .lnr{
+				font-size: 16px;
+			}
+			#overview .lnr{
+				font-size: 16px;
+			}
+			.layout-fullwidth #wrapper .btn-toggle-fullwidth {
+			    color: #696c6f;
+			}
+			.navbar-nav > li > .dropdown-menu {
+			    padding: 0;
+			    min-width: 200px;
+			}
+			ul.notifications > li > .more {
+			    padding-top: 12px;
+			    padding-bottom: 12px;
+			    text-align: center;
+			    text-decoration: none;
+			    font-weight: normal;
+			    color: #4787b2;
+			}
+			.navbar-btn {
+			    float: left;
+			    padding: 16px 0;
+			    margin-left: 13px;
+			}
+
+			.navbar-btn {
+			    margin-top: 8px;
+			    margin-bottom: 0px;
+			}
+
+			/* depositos */
+			.pagination {
+			    display: inline-block;
+			    padding-left: 0;
+			    margin: 0px 0px;
+			    border-radius: 4px;
+			}
+			.form-inline .input-group {
+    display: inline-table;
+    vertical-align: middle;
+
+}
+
+select:not([multiple]) {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-position: right 50%;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDZFNDEwNjlGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDZFNDEwNkFGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NkU0MTA2N0Y3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NkU0MTA2OEY3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuGsgwQAAAA5SURBVHjaYvz//z8DOYCJgUxAf42MQIzTk0D/M+KzkRGPoQSdykiKJrBGpOhgJFYTWNEIiEeAAAMAzNENEOH+do8AAAAASUVORK5CYII=);
+    padding-right: 2.0em
+}
+input{
+	padding-right: 2.0em;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="select"] {
+    max-width: 280px;
+    min-width: 170px;
+}
+			/* end lancamentos */
+
+.main-content {
+    padding: 5px 10px;
+}
+.breadcrumb {
+    padding: 0px 0px;
+    margin-bottom: 5px;
+    list-style: none;
+    background-color: #f5f5fa;
+    border-radius: 4px;
+}
+
+.panel .right {
+    position: absolute;
+    right: 20px;
+    top: 32%;
+}
+
+
+#list-accounts .panel .table > thead > tr > td:first-child, .panel .table > thead > tr > th:first-child, .panel .table > tbody > tr > td:first-child, .panel .table > tbody > tr > th:first-child, .panel .table > tfoot > tr > td:first-child, .panel .table > tfoot > tr > th:first-child {
+    padding-left: 0px;
+    text-align: left;
+}
+
+#list-accounts .panel .table > thead > tr > td:last-child, .panel .table > thead > tr > th:last-child, .panel .table > tbody > tr > td:last-child, .panel .table > tbody > tr > th:last-child, .panel .table > tfoot > tr > td:last-child, .panel .table > tfoot > tr > th:last-child {
+    padding-left: 0px;
+    text-align: right;
+}
+#list-accounts .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 4px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+.clean-td{
+	border-style : hidden!important;
+	background-color: white;
+	width: 20px;
+}
+.bg-danger{
+	background-color:#d9534f;
+}
+
+.right .list-inline a{
+	color:#686B71;
+}
+
+.navbar-btn button {
+    font-size: 24px;
+    padding: 4px 5px;
+    line-height: .7;
+    border: none;
+    background: none;
+    outline: none;
+}
+	</style>
+{% endblock %}
+
 {% block content %}
 
-	{% if messages %}
-		{% for message in messages %}
-			{{ message }}
-		{% endfor %}
-	{% endif %}
+<div class="container-fluid">
+	<ol class="breadcrumb">
+	    <li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Home</a></li>
+		<li class='active'><i class="fa fa-user-circle fa-fw"></i> Profile</a></li>
+	</ol>
+	<!-- DEPÓSITOS -->
+	<div class="row" id="list-accounts">
+		<div class="col-md-12">
+			<!-- TABLE STRIPED -->
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">Customers</h3>
+					<div class='right'>
+					<ul class="list-inline">
+						<li>
+							<form class="form-inline" method="get">
+					  			<div class="input-group">
+									<div class="input-group-addon">
+											<i class="fa fa-tags" aria-hidden="true"></i>
+									</div>
+					    			<select class="form-control" name="order">
+					                	<option {% if request.GET.order == 'all' %}selected{% endif %} value="all">all</option>
+					                	<option {% if request.GET.order == '0' %}selected{% endif %} value="0">super</option>
+						                <option {% if request.GET.order == '1' %}selected{% endif %} value="1">user</option>
+					            	</select>
+					  			</div>
+					  			<button type="submit"><i class='lnr lnr-magnifier'></i></button>
+							</form>
+						</li>
+				    	<li><a href="{% url 'accounts:create_account' %}"><i style="font-size:15px;" class='lnr lnr-plus-circle'></i></a></li>
+					</ul>
+				</div>
+				</div>
+				<div class="panel-body">
 
-    <ul class="list-inline" style='margin-top:30px;'>
-      <li><strong>Filtros:</strong>
-      <li><a href="?order=0" title="">Super</a></li>
-      <li><a href="?order=1" title="">User</a></li>
-    </ul>
 
-	<br>
+{% if messages %}
+    {% for message in messages %}
+      <div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{ message.tags }}:</strong> {{ message }}.
+      </div>
+    {% endfor %}
+{% endif %}
 
-	{% if not object_list %}
-		<h1>Nao existem contas cadastradas</h1>
-	{% else %}
-		{% for account in object_list %}
-			nome: {{ account.first_name }} /
-			sobre nome: {{ account.last_name }} /
-			email: {{ account.user.email }} /
-			<a href='{{ account.active_account }}'>ativar</a>
-			<br>
-		{% endfor %}
+<br>
 
-	    <nav><!--nav-->
-	        <ul class="pagination pagination-centered" style='margin: 5px 0 7px;'><!--ul pagination pagination-centered -->
-	            <li>
-	                <a class='{% if page_obj.has_previous %}btn{% else %} btn disabled{% endif %}' href="?page=1{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title=""><<</a>
-	            </li>
+{% if not object_list %}
+	<h1>Nao existem contas cadastradas</h1>
+{% else %}
+	<div class="table-responsive">
+		<table class="table table-striped mb30">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Type</th>
+					<th>Doc</th>
+					<th>Status</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for account in object_list %}
+					<tr>
+						<td>{{ account.pk }}</td>
+						<td>{{ account.first_name }} {{ account.last_name }}</td>
+						<td>{{ account.user.email }}</td>
+						<td>{{ account.get_order_display }}</td>
+						<td>{{ account.user.account.cpf }}
+						<td>
+							{% if account.user.is_active %}
+								<i style='color:green;' class='fa fa-check-circle'></i>
+							{% else %}
+								<i style='color:red;' class='fa fa-check-circle'></i>
+							{% endif %}
+						</td>
+						<td>
+							<a href='{{ account.active_account }}' class='btn btn-success btn-sm{% if account.user.is_active %} disabled{% endif %}'>
+								active
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 
-	            <li>
-	                <a class='{% if page_obj.has_previous %}btn{% else %} btn disabled {% endif %}' href="?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% endif %}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title=""><</a>
-	            </li>
 
-	            <li>
-	                <a class='{% if page_obj.has_next %}btn{% else %} btn disabled{% endif %}' href="?page={% if page_obj.has_next %}{{ page_obj.next_page_number }}{% endif %}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title="">></a>
-	            </li>
 
-	            <li>
-	                <a class='{% if page_obj.has_next %}btn{% else %}btn disabled{% endif %}' href="?page={{paginator.num_pages}}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title="">>></a>
-	            </li>
-	        </ul><!--ul pagination pagination-centered -->
-	    </nav><!--nav-->
-	    <small>{{ page_obj.number }} de {{paginator.num_pages}}</small>
-	{% endif %}
+	<nav><!--nav-->
+		<ul class="pagination pagination-centered" style='margin: 5px 0 7px;'><!--ul pagination pagination-centered -->
+			<li>
+				<a class='{% if page_obj.has_previous %}btn{% else %} btn disabled{% endif %}' href="?page=1{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title=""><<</a>
+			</li>
+
+			<li>
+				<a class='{% if page_obj.has_previous %}btn{% else %} btn disabled {% endif %}' href="?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% endif %}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title=""><</a>
+			</li>
+
+			<li>
+				<a class='{% if page_obj.has_next %}btn{% else %} btn disabled{% endif %}' href="?page={% if page_obj.has_next %}{{ page_obj.next_page_number }}{% endif %}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title="">></a>
+			</li>
+
+			<li>
+				<a class='{% if page_obj.has_next %}btn{% else %}btn disabled{% endif %}' href="?page={{paginator.num_pages}}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title="">>></a>
+			</li>
+		</ul><!--ul pagination pagination-centered -->
+	</nav><!--nav-->
+	<small>{{ page_obj.number }} de {{paginator.num_pages}}</small>
+{% endif %}
 {% endblock %}

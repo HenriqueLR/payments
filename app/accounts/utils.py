@@ -30,6 +30,11 @@ class AccountUtils(object):
 		gp = Group.objects.get(name='customers')
 		gp.user_set.add(self.user)
 
+	def check_status(self):
+		if (self.profile.status_profile and self.user.is_active
+			and self.account.status_account):
+			return True
+
 	def save_account(self):
 		self.account.save()
 		self.user.save()

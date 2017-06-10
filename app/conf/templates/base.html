@@ -2,54 +2,123 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <meta name="description" content="Template Base">
-        <meta name="author" content="Henrique Luz Rodrigues">
-
         <title>Payments</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+        <!-- GOOGLE FONTS -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Anaheim' rel='stylesheet'>
+        <!-- ICONS -->
+        <link rel="apple-touch-icon" sizes="76x76" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/img/apple-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/img/favicon.png' %}">
+
+        {% block styles %}
+            <!-- VENDOR CSS -->
+            <link rel="stylesheet" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+            <link rel="stylesheet" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/font-awesome/css/font-awesome.min.css' %}">
+            <link rel="stylesheet" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/linearicons/style.css' %}">
+            <!-- MAIN CSS -->
+            <link rel="stylesheet" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/css/main.css' %}">
+            <!-- CUSTOM CSS -->
+            <link rel="stylesheet" href="{% static 'css/custom_styles.css' %}">
+        {% endblock %}
+
         {% block extra_styles %}{% endblock %}
-        {% block styles %}{% endblock %}
     </head>
 
     <body>
-        {% block navtop %}
-			<ul>
-				<li><a href="{% url 'accounts:logout' %}">sair</a></li>
-				{% if not user.is_superuser %}
-					<li><a href="{{ user.get_edit_profile }}">Profile</a></li>
-				{% endif %}
-			</ul>
+        <div id="wrapper">
+
+            {% block navtop %}
+                <nav class="navbar navbar-default navbar-fixed-top">
+                    <div class="container-fluid">
+                        <div class="navbar-btn">
+                            <button id='open-menu' type="button" class="btn-toggle-fullwidth">
+                                <i class="lnr lnr-arrow-left-circle"></i>
+                            </button>
+                        </div>
+                        <div id="navbar-menu">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                                        <i class="lnr lnr-alarm"></i>
+                                        <span class="badge bg-danger">5</span>
+                                    </a>
+                                    <ul class="dropdown-menu notifications">
+                                        <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
+                                        <li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
+                                        <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
+                                        <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
+                                        <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
+                                        <li><a href="#" class="more">ver todos</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span>{{ user.username }}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                                    <ul class="dropdown-menu">
+                                        {% if not user.is_superuser %}
+                                            <li><a href="{{ user.get_detail_profile }}"><i class="lnr lnr-user"></i> <span>Profile</span></a></li>
+                                        {% endif %}
+                                        <li><a href="{% url 'accounts:logout' %}"><i class="lnr lnr-exit"></i> <span>Sair</span></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            {% endblock %}
+
+            {% block navleft %}
+                <div id="sidebar-nav" class="sidebar">
+                    <div class="sidebar-scroll">
+                        <nav>
+                            <ul id='left-nav' class="nav">
+                                {% for app in apps %}
+                                    <li>
+                                        <!--<a class="{% if app.name == label_app %}active{% else %}collapsed{% endif %}" href="#{{ app.name }}" data-toggle="collapse">
+                                            <i class="{{ app.icon }}"></i>
+                                            <span>{{ app.name }}</span>
+                                            <i class="icon-submenu lnr lnr-chevron-left"></i>
+                                        </a>-->
+
+                                        <!--<div id="{{ app.name }}" class="{% if app.name == label_app %}collapse in{% else %}collapse{% endif %}">-->
+                                            <!--<ul class="nav">-->
+                                                {% for model in app.models %}
+                                                    <!--<li>-->
+                                                        <a class="{% if model.name == object_name %}active{% endif %}" href="/{{ model.app_url }}">
+                                                            <i class="{{ model.icon }}"></i>
+                                                            <span class='children_icon'> {{ model.name }}</span>
+                                                        </a>
+                                                    <!--</li>-->
+                                                {% endfor %}
+                                            <!--</ul>-->
+                                        <!--</div>-->
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            {% endblock %}
+
+            <!-- MAIN -->
+            <div class="main">
+                <!-- MAIN CONTENT -->
+                <div class="main-content">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div> <!-- END wrapper -->
+        {% block js %}
+            <script src="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/jquery/jquery.min.js' %}"></script>
+            <script src="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+            <script src="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
+            <script src="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/scripts/klorofil-common.js' %}"></script>
+            <script src="{% static 'js/custom_app.js' %}"></script>
         {% endblock %}
-
-        {% block navleft %}
-			<h1>Menu</h1>
-			<ul>
-				<li class="{% if label_app == 'Home' %}active parent {% endif %}">
-					<a href="{% url 'main:home' %}"><i class="fa fa-home"></i> <span>Home</span></a>
-				</li>
-				{% for app in apps %}
-					<li class="{% if app.name == label_app %}active parent {% else %} parent{% endif %}">
-						<a href="#">
-							<i class="{% if app.name == 'accounts' %}fa fa-chain{% endif %}"></i>
-							<span>{{ app.name }}</span>
-						</a>
-						<ul class="children">
-							{% for model in app.models %}
-							  	<li class="{% if model.name == object_name %}active{% endif %}">
-							  		<a href="/{{ model.app_url }}">{{ model.name }}</a>
-							  	</li>
-							{% endfor %}
-						</ul>
-					</li>
-				{% endfor %}
-			</ul>
-		{% endblock %}
-
-		{% block content %}{% endblock %}
-
-		{% block extra_scripts %}{% endblock %}
-		{% block js %}{% endblock %}
+        {% block extra_scripts %}{% endblock %}
     </body>
 
 </html>

@@ -10,11 +10,21 @@ from django.apps import apps
 IGNORE_MODELS = ("sites", "sessions", "admin",
     			 "contenttypes","auth")
 
-IGNORE_APPS = ("Profile")
+ACCEPT_APPS = ("Profile")
 
 MAP_URL = {
 	"profile": "list_account",
+	"home": "main",
 }
+ICON_APPS = {
+	"main":"fa fa-bars",
+	"accounts":"fa fa-book",
+}
+ICON_MODEL = {
+	"profile":"fa fa-user-circle",
+	"home":"fa fa-home",
+}
+
 
 def apps_permissions(request):
 	user = request.user
@@ -25,7 +35,7 @@ def apps_permissions(request):
 		app_label = model._meta.app_label
 		name = model._meta.verbose_name_plural
 
-		if app_label in IGNORE_MODELS or name not in IGNORE_APPS:
+		if app_label in IGNORE_MODELS or name not in ACCEPT_APPS:
 			continue
 		has_module_perms = user.has_module_perms(app_label)
 		if has_module_perms:
@@ -38,6 +48,7 @@ def apps_permissions(request):
                     'name': capfirst(name),
                     'admin_url': mark_safe('%s/%s/' % (app_label, model.__name__.lower())),
                     'app_url': ('%s/%s/') % (app_label, MAP_URL[model.__name__.lower()]),
+                    'icon': ICON_MODEL[name.lower()],
                 }
 
 				if app_label in app_dict:
@@ -48,13 +59,33 @@ def apps_permissions(request):
                         'app_url': app_label + '/',
                         'has_module_perms': has_module_perms,
                         'models': [model_dict],
+                        'icon':ICON_APPS[app_label.lower()],
                     }
-	app_list = app_dict.values()
 
+	#include manual model
+	url_manual_model = MAP_URL['home']
+	include_dict = {}
+	manual_model = {
+		'name': 'Home',
+		'admin_url': ('%s/') % (url_manual_model),
+		'app_url': ('%s/') % (url_manual_model),
+		'icon': ICON_MODEL['home'],
+	}
+	include_dict['main'] = {
+	    'name': 'Main',
+	    'app_url': ('%s/') % (url_manual_model),
+	    'has_module_perms': True,
+	    'icon':ICON_APPS['main'],
+	    'models': [manual_model],
+    }
+
+	app_list = app_dict.values()
 	app_list.sort(key=lambda x: x['name'])
 
 	for app in app_list:
 		app['models'].sort(key=lambda x: x['name'])
+
+	app_list.insert(0, include_dict['main'])
 
 	return app_list
 

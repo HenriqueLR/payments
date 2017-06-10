@@ -1,5 +1,530 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-	<h1>Home</h1>
+    <div class="container-fluid" id="home">
+        <ol class="breadcrumb">
+        <li class='active'><i class="fa fa-home fa-fw"></i> Painel</li>
+        </ol>
+        <!-- OVERVIEW -->
+        <div class="row" id="overview">
+            <div class="col-md-12" id='teste-chart'>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Totalizadores</h3>
+                        <div class="right">
+                            <button type="button" class="btn-toggle-collapse">
+                                <i class="lnr lnr-chevron-up-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="metric">
+                                    <span class="icon" style="background-color:white;">
+                                        <i class="fa fa-thumbs-up" aria-hidden="true" style="color:#5cb85c;"></i>
+                                    </span>
+                                    <p>
+                                        <span class="number">1.252 R$</span>
+                                        <span class="title">Total Recebido</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="metric">
+                                    <span class="icon" style="background-color:white;">
+                                        <i class="fa fa-thumbs-down" aria-hidden="true" style="color:#d9534f;"></i>
+                                    </span>
+                                    <p>
+                                        <span class="number">1.252 R$</span>
+                                        <span class="title">Total Descontos</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="metric">
+                                    <span class="icon" style="background-color:white;">
+                                        <i class="fa fa-plus-square" aria-hidden="true" style="color:#5cb85c;"></i>
+                                    </span>
+                                    <p>
+                                        <span class="number">1.252 R$</span>
+                                        <span class="title">Saldo</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="metric">
+                                    <span class="icon" style="background-color:white;">
+                                        <i class="fa fa-minus-square" aria-hidden="true" style="color:#d9534f;"></i>
+                                    </span>
+                                    <p>
+                                        <span class="number">1.252 R$</span>
+                                        <span class="title">Débitos</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12' id='chart-col'>
+                                <div class="chart-container">
+                                    <div id="chart-line" style="width:100%;margin: 0 auto"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OVERVIEW -->
+        <!-- PAYMENTS -->
+        <div class="row" id="payments">
+            <div class="col-md-6">
+            <!-- TABLE STRIPED -->
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Débitos</h3>
+                        <div class="right">
+                            <ul class="list-inline">
+                            <li><a href='new_debit.html'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a></li>
+                            <li>
+                            <button type="button" class="btn-toggle-collapse">
+                            <i class="lnr lnr-chevron-up-circle"></i>
+                            </button></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                            <th></th>
+                            <th>#</th>
+                            <th>Origem</th>
+                            <th>Valor</th>
+                            <th>Data</th>
+                            <th>Documento</th>
+                            <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
+                            <td>1</td>
+                            <td>Venda</td>
+                            <td>29,39 R$</td>
+                            <td>01/04/2017</td>
+                            <td>12345</td>
+                            <td class="actions">
+                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
+                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
+                            <td>2</td>
+                            <td>Venda</td>
+                            <td>29,39 R$</td>
+                            <td>01/04/2017</td>
+                            <td></td>
+                            <td class="actions">
+                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
+                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
+                            <td>3</td>
+                            <td>Venda</td>
+                            <td>29,39 R$</td>
+                            <td>01/04/2017</td>
+                            <td>123</td>
+                            <td class="actions">
+                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
+                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
+                            <td>4</td>
+                            <td>Venda</td>
+                            <td>29,39 R$</td>
+                            <td>01/04/2017</td>
+                            <td>12</td>
+                            <td class="actions">
+                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
+                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
+                            <td>5</td>
+                            <td>Venda</td>
+                            <td>29,39 R$</td>
+                            <td>01/04/2017</td>
+                            <td>09</td>
+                            <td class="actions">
+                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
+                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
+                            <td>6</td>
+                            <td>Venda</td>
+                            <td>29,39 R$</td>
+                            <td>01/04/2017</td>
+                            <td></td>
+                            <td class="actions">
+                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
+                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
+                            </td>
+                            </tr>
+                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
+                            <td>7</td>
+                            <td>Venda</td>
+                            <td>29,39 R$</td>
+                            <td>01/04/2017</td>
+                            <td></td>
+                            <td class="actions">
+                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
+                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
+                            <td>8</td>
+                            <td>Venda</td>
+                            <td>29,39 R$</td>
+                            <td>01/04/2017</td>
+                            <td></td>
+                            <td class="actions">
+                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
+                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
+                            <td>9</td>
+                            <td>Venda</td>
+                            <td>29,39 R$</td>
+                            <td>01/04/2017</td>
+                            <td>8585</td>
+                            <td class="actions">
+                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
+                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
+                            <td>10</td>
+                            <td>Venda</td>
+                            <td>29,39 R$</td>
+                            <td>01/04/2017</td>
+                            <td></td>
+                            <td class="actions">
+                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
+                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
+                            </td>
+                            </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                        <div class="panel-footer">
+                        <a href="debitos.html">ver todos</a>
+                        </div>
+                        </div>
+                        <!-- END TABLE STRIPED -->
+                        </div>
+                        <div class="col-md-6">
+                        <!-- TABLE STRIPED -->
+                        <div class="panel">
+                        <div class="panel-heading">
+                        <h3 class="panel-title">Depósitos</h3>
+                        <div class="right">
+                        <ul class="list-inline">
+                        <li><a href='new_payment.html'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a></li>
+                        <li>
+                        <button type="button" class="btn-toggle-collapse">
+                        <i class="lnr lnr-chevron-up-circle"></i>
+                        </button></li>
+                        </ul>
+                        </div>
+                        </div>
+                        <div class="panel-body">
+                        <table class="table table-striped">
+                        <thead>
+                        <tr>
+                        <th></th>
+                        <th>#</th>
+                        <th>Origem</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                        <th>Documento</th>
+                        <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
+                        <td>1</td>
+                        <td>Venda</td>
+                        <td>29,39 R$</td>
+                        <td>01/04/2017</td>
+                        <td>12345</td>
+                        <td class="actions">
+                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
+                        <td>2</td>
+                        <td>Venda</td>
+                        <td>29,39 R$</td>
+                        <td>01/04/2017</td>
+                        <td></td>
+                        <td class="actions">
+                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
+                        <td>3</td>
+                        <td>Venda</td>
+                        <td>29,39 R$</td>
+                        <td>01/04/2017</td>
+                        <td>123</td>
+                        <td class="actions">
+                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
+                        <td>4</td>
+                        <td>Venda</td>
+                        <td>29,39 R$</td>
+                        <td>01/04/2017</td>
+                        <td>12</td>
+                        <td class="actions">
+                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
+                        <td>5</td>
+                        <td>Venda</td>
+                        <td>29,39 R$</td>
+                        <td>01/04/2017</td>
+                        <td>09</td>
+                        <td class="actions">
+                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
+                        <td>6</td>
+                        <td>Venda</td>
+                        <td>29,39 R$</td>
+                        <td>01/04/2017</td>
+                        <td></td>
+                        <td class="actions">
+                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
+                        </td>
+                        </tr>
+                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
+                        <td>7</td>
+                        <td>Venda</td>
+                        <td>29,39 R$</td>
+                        <td>01/04/2017</td>
+                        <td></td>
+                        <td class="actions">
+                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
+                        <td>8</td>
+                        <td>Venda</td>
+                        <td>29,39 R$</td>
+                        <td>01/04/2017</td>
+                        <td></td>
+                        <td class="actions">
+                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
+                        <td>9</td>
+                        <td>Venda</td>
+                        <td>29,39 R$</td>
+                        <td>01/04/2017</td>
+                        <td>8585</td>
+                        <td class="actions">
+                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
+                        <td>10</td>
+                        <td>Venda</td>
+                        <td>29,39 R$</td>
+                        <td>01/04/2017</td>
+                        <td></td>
+                        <td class="actions">
+                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
+                        </td>
+                        </tr>
+                        </tbody>
+                        </table>
+                        </div>
+                        <div class="panel-footer">
+                        <a href="depositos.html">ver todos</a>
+                        </div>
+                        </div>
+                        <!-- END TABLE STRIPED -->
+                        </div>
+                        </div>
+                        <!-- END PAYMENTS -->
+                        <!-- TODO LIST -->
+                        <div class="row" id="notas">
+                        <div class="col-md-12">
+                        <!-- TODO LIST -->
+                        <div class="panel">
+                        <div class="panel-heading">
+                        <h3 class="panel-title">Notas</h3>
+                        <div class="right">
+                        <ul class="list-inline">
+                        <li><a href='new_note.html'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a></li>
+                        <li>
+                        <button type="button" class="btn-toggle-collapse">
+                        <i class="lnr lnr-chevron-up-circle"></i>
+                        </button></li>
+                        </ul>
+                        </div>
+                        </div>
+                        <div class="panel-body">
+                        <ul class="list-unstyled todo-list">
+                        <li class='completed'>
+                        <label class="control-inline fancy-checkbox">
+                        <input type="checkbox" checked="true"><span></span>
+                        </label>
+                        <p>
+                        <span class="label label-primary">nota</span>
+                        <span class="label label-success">ALERTA</span>
+                        <span class="label label-danger">URGENTE</span>
+                        <span class="short-description">Dynamically integrate client-centric technologies without cooperative resources.</span>
+                        <span class="date">20/10/2017</span>
+                        </p>
+                        <div class="controls">
+                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
+                        </div>
+                        </li>
+                        <li>
+                        <label class="control-inline fancy-checkbox">
+                        <input type="checkbox"><span></span>
+                        </label>
+                        <p>
+                        <span class="label label-primary">nota</span>
+                        <span class="short-description">Compellingly implement clicks-and-mortar relationships without highly efficient metrics.</span>
+                        <span class="date">20/10/2017</span>
+                        </p>
+                        <div class="controls">
+                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
+                        </div>
+                        </li>
+                        <li>
+                        <label class="control-inline fancy-checkbox">
+                        <input type="checkbox"><span></span>
+                        </label>
+                        <p>
+                        <span class="label label-success">ALERTA</span>
+                        <span class="short-description">Monotonectally formulate client-focused core competencies after parallel web-readiness.</span>
+                        <span class="date">20/10/2017</span>
+                        </p>
+                        <div class="controls">
+                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
+                        </div>
+                        </li>
+                        <li class='completed'>
+                        <label class="control-inline fancy-checkbox">
+                        <input type="checkbox" checked="true"><span></span>
+                        </label>
+                        <p>
+                        <span class="label label-success">ALERTA</span>
+                        <span class="short-description">Monotonectally formulate client-focused core competencies after parallel web-readiness.</span>
+                        <span class="date">20/10/2017</span>
+                        </p>
+                        <div class="controls">
+                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
+                        </div>
+                        </li>
+                        <li>
+                        <label class="control-inline fancy-checkbox">
+                        <input type="checkbox"><span></span>
+                        </label>
+                        <p>
+                        <span class="label label-danger">URGENTE</span>
+                        <span class="short-description">Monotonectally formulate client-focused core competencies after parallel web-readiness.</span>
+                        <span class="date">20/10/2017</span>
+                        </p>
+                        <div class="controls">
+                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
+                        </div>
+                        </li>
+                        <li class='completed'>
+                        <label class="control-inline fancy-checkbox">
+                        <input type="checkbox" checked="true"><span></span>
+                        </label>
+                        <p>
+                        <span class="label label-danger">URGENTE</span>
+                        <span class="short-description">Monotonectally formulate client-focused core competencies after parallel web-readiness.</span>
+                        <span class="date">20/10/2017</span>
+                        </p>
+                        <div class="controls">
+                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
+                        </div>
+                        </li>
+                        <li>
+                        <label class="control-inline fancy-checkbox">
+                        <input type="checkbox"><span></span>
+                        </label>
+                        <p>
+                        <span class="label label-danger">URGENTE</span>
+                        <span class="short-description">Monotonectally formulate client-focused core competencies after parallel web-readiness.</span>
+                        <span class="date">20/10/2017</span>
+                        </p>
+                        <div class="controls">
+                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
+                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
+                        </div>
+                        </li>
+                        </ul>
+                        </div>
+                        <div class="panel-footer">
+                        <a href="notas.html">ver todos</a>
+                        </div>
+    </div>
+    <!-- END TODO LIST -->
+    </div>
+    </div>
+    </div>
+{% endblock %}
+{% block extra_scripts %}
+    <script src="{% static 'js/libs/highcharts.js' %}"></script>
+    <script src="{% static 'js/home.js' %}"></script>
 {% endblock %}

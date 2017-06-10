@@ -42,8 +42,9 @@ class AccountView(View):
                 user.account = form_account.save()
                 user.save()
                 profile.user = user
+                profile.order = Profile.ORDER_CHOICE[0][0]
                 profile.save()
-                messages.success(self.request, 'Conta criada com sucesso !')
+                messages.success(self.request, 'Conta criada com sucesso')
                 return HttpResponseRedirect(self.success_url)
             except Exception as Error:
                 messages.error(self.request, Error)
@@ -70,6 +71,9 @@ create_account = AccountView.as_view()
 def active_account(request, pk):
     account = AccountUtils(get_object_or_404(Profile, pk=pk))
     try:
+        if account.check_status():
+            messages.warning(request, 'Esta conta ja esta ativa.')
+            return HttpResponseRedirect(reverse_lazy('accounts:list_account'))
         account.active_account(True)
         account.add_user_group()
         account.save_account()
@@ -108,8 +112,17 @@ def edit_profile(request):
                                   instance=get_object_or_404(Profile, user=request.user))
     if form_user.is_valid() and form_profile.is_valid():
         form_user.save(profile=form_profile.save())
-        messages.success( request, 'Os dados da sua conta foram alterados com sucesso!')
+        messages.success( request, 'Os dados da sua conta foram alterados com sucesso')
         return redirect('accounts:edit_profile')
     context = {'form_profile':form_profile, 'form_user':form_user,
                'object_name':'Profile', 'apps':apps_permissions(request),'label_app':'None',}
+    return render(request, template_name, context)
+
+
+@login_required
+@user_passes_test(lambda u: u.is_active, login_url='accounts:logout')
+def detail_profile(request):
+    context = {'profile': get_object_or_404(Profile, user=request.user),
+               'app_label':None, 'object_name':None, 'apps':apps_permissions(request)}
+    template_name = 'accounts/user/detail_profile.html'
     return render(request, template_name, context)

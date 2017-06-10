@@ -26,14 +26,14 @@ class PermissionsAccountMixin(object):
         qs = Profile.objects.list_account(self.request.user)
 
         order = self.request.GET.get('order', '')
-        if order != '':
+        if order != '' and order != 'all':
             qs = qs.filter(order=order)
 
         return qs
 
     def get_context_data(self, **kwargs):
         context = super(PermissionsAccountMixin, self).get_context_data(**kwargs)
-        context.update({'object_name':'Account', 'apps':apps_permissions(self.request),
+        context.update({'object_name':'Profile', 'apps':apps_permissions(self.request),
                         'label_app':'Accounts'})
         return context
 

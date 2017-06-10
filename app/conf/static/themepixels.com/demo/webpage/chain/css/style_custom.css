@@ -1,0 +1,53 @@
+/*************  custom css *************/
+    /* MARGIN LEFT ICON CHILDREN MENU LEFT */
+	.children_icon{
+		margin-left: 6px;
+	}
+
+	/* COLOR SPAN LOGIN */
+	.error{
+		color:#af514f;
+	}
+
+	/* SIZE BAR BREADCRUMB */
+	.pageheader {
+	    padding: 20px;
+	    border-bottom: 1px solid #ffffff;
+	    padding-bottom: 20px;
+	    height: 0px;
+	    -webkit-box-shadow: 0 0px 0px rgba(0,0,0,0.03);
+	    box-shadow: 0 0px 0px rgba(0,0,0,0.03);
+	}
+
+	/* SPAN ALERT ERROR */
+	.alert-error {
+	    color: #a94442;
+	    background-color: #f2dede;
+	    border-color: #ebccd1;
+	}
+
+	/* CUSTOM HEIGHT SELECT */
+	select {
+		height: 40px !important;
+	}
+
+	/* TEXT LOGO */
+	.logo-menu{
+		color: white;
+		font-size: 19px;
+		margin-top: 6px;
+	}
+	/* SUB MENU LOGO */
+	.leftpanel .leftpanel-title {
+	    text-transform: uppercase;
+	    color: #ccc;
+	    font-size: 11px;
+	    font-weight: normal;
+	    margin: 15px 17px;
+	}
+
+	.social-list > li {
+	    padding: 5px 0;
+	    border-bottom: 0px dashed #eee !important;
+	}
+/*************  end custom *************/
