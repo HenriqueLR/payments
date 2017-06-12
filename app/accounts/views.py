@@ -6,14 +6,14 @@ from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render_to_response, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.template import RequestContext
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import update_session_auth_hash
-from accounts.models import Profile
+from accounts.models import Profile, PasswordReset
 from accounts.permissions import PermissionsAccountMixin
-from accounts.forms import EditUserForm, ProfileForm, AddUserForm, AccountForm
+from accounts.forms import EditUserForm, ProfileForm, AddUserForm, AccountForm, PasswordResetForm
 from accounts.utils import AccountUtils
 from main.utils import apps_permissions
 from main.decorators import ajax_required
@@ -88,7 +88,7 @@ def active_account(request, pk):
 @user_passes_test(lambda u: u.is_active, login_url='accounts:logout')
 @ajax_required
 def edit_password(request):
-    template_name = 'accounts/user/reset_password.html'
+    template_name = 'accounts/user/edit_password.html'
     context = {}
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
@@ -125,4 +125,35 @@ def detail_profile(request):
     context = {'profile': get_object_or_404(Profile, user=request.user),
                'app_label':None, 'object_name':None, 'apps':apps_permissions(request)}
     template_name = 'accounts/user/detail_profile.html'
+    return render(request, template_name, context)
+
+
+@ajax_required
+def reset_password(request):
+    template_name = 'accounts/register/reset_password.html'
+    context = {}
+    form = PasswordResetForm(request.POST or None)
+    if form.is_valid():
+        try:
+            form.save()
+            messages.success(request, 'Entre no seu email, e confirme o link para resetar a sua senha')
+        except Exception as Error:
+            print Error
+            messages.error(request, 'Tente novamente por favor, ocorreu um erro ao enviar o email de confirmacao')
+        return HttpResponse('ok')
+    context['form'] = form
+    return render(request, template_name, context)
+
+def confirm_reset_password(request):
+    template_name = 'accounts/register/confirm_reset_password.html'
+    context = {}
+    reset = get_object_or_404(PasswordReset, key=request.GET.get('key', ''), confirmed=False)
+    form = SetPasswordForm(user=reset.user, data=request.POST or None)
+    if form.is_valid():
+        form.save()
+        reset.confirmed = True
+        reset.save()
+        messages.success(request, 'Change password Sucess')
+        return HttpResponseRedirect(reverse_lazy('accounts:login'))
+    context['form'] = form
     return render(request, template_name, context)

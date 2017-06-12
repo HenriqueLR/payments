@@ -2,9 +2,11 @@
 
 from django import forms
 from django.contrib.auth import get_user_model
-from accounts.models import Profile, Account
+from accounts.models import Profile, Account, PasswordReset
 from django.contrib.auth.hashers import make_password
 from accounts.localflavor.br import forms as brforms
+from main.mail import send_mail_template
+from main.utils import generate_hash_key
 
 
 User = get_user_model()
@@ -80,3 +82,22 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         exclude = ['id_profile', 'status_profile', 'order',
                    'created_at', 'updated_at', 'user']
+
+
+class PasswordResetForm(forms.Form):
+
+    email = forms.EmailField(label='E-mail')
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            return email
+        raise forms.ValidationError('E-mail not found.')
+
+    def save(self):
+        user = User.objects.get(email=self.cleaned_data['email'])
+        key = generate_hash_key(user.username)
+        PasswordReset.objects.filter(user=user).update(confirmed=True)
+        reset = PasswordReset(key=key, user=user)
+        reset.save()
+        send_mail_template(reset)

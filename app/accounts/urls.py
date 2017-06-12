@@ -10,9 +10,10 @@ urlpatterns = patterns('',
     url(r'^active_account/(?P<pk>\d+)$','accounts.views.active_account',name='active_account'),
     url(r'^edit_profile/$','accounts.views.edit_profile',name='edit_profile'),
     url(r'^edit_password/$','accounts.views.edit_password',name='edit_password'),
-    url(r'^detail_profile/$','accounts.views.detail_profile',name='detail_profile')
+    url(r'^detail_profile/$','accounts.views.detail_profile',name='detail_profile'),
+    url(r'^reset_password/$', 'accounts.views.reset_password', name='reset_password'),
+    url(r'^confirm_reset_password/$','accounts.views.confirm_reset_password',name='confirm_reset_password'),
 
-    #recuperar senha
-     #email
+
     #criar usuario
 )

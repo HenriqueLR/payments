@@ -1,10 +1,12 @@
 #encoding: utf-8
 
+import hashlib
+import string
+import random
 from django.utils.safestring import mark_safe
 from django.contrib.admin import ModelAdmin
 from django.utils.text import capfirst
 from django.apps import apps
-
 
 
 IGNORE_MODELS = ("sites", "sessions", "admin",
@@ -100,3 +102,13 @@ def get_list_permissions(*args, **kwargs):
          for x in arg._meta.permissions for y in permission_list if y in x[0] or y == 'all']
 
 	return list_permissions
+
+
+def random_key(size=5):
+    chars = string.ascii_uppercase + string.digits
+    return ''.join(random.choice(chars) for x in range(size))
+
+def generate_hash_key(salt, random_str_size=5):
+    random_str = random_key(random_str_size)
+    text = random_str + salt
+    return hashlib.sha224(text.encode('utf-8')).hexdigest()

@@ -2,3 +2,19 @@
 .auth-box {
     height: 500px !important;
 }
+
+.modal-dialog {
+	margin-top:10%;
+}
+
+.alert-error {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.alert-error hr {
+  border-top-color: #e4b9c0;
+}
+.alert-error .alert-link {
+  color: #843534;
+}
