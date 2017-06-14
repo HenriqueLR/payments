@@ -37,8 +37,12 @@ class Account(models.Model):
 class UserManager(models.Manager):
 
     def list_user(self, user):
-        qs = super(UserManager, self).get_queryset()
-        if not user.is_superuser:
+        qs = super(UserManager, self).get_queryset().filter(~Q(pk=user.pk))
+        if not user.is_superuser and user.is_active:
+            qs = qs.filter(account=user.account)
+        elif user.is_superuser:
+            qs = qs
+        else:
             qs = qs.none()
         return qs
 
@@ -88,6 +92,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_detail_profile(self):
         return ('accounts:detail_profile', {})
 
+    @models.permalink
+    def get_edit_user(self):
+        return ('accounts:edit_user', [int(self.pk)], {})
+
+    @models.permalink
+    def get_delete_user(self):
+        return ('accounts:delete_user', [int(self.pk)], {})
+
     class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'User'
@@ -130,8 +142,12 @@ class PasswordReset(models.Model):
 class ProfileManager(models.Manager):
 
     def list_account(self, user):
-        qs = super(ProfileManager, self).get_queryset()
-        if not user.is_superuser:
+        qs = super(ProfileManager, self).get_queryset().filter(~Q(user=user))
+        if not user.is_superuser and user.is_active:
+            qs = qs.filter(user__account=user.account)
+        elif user.is_superuser:
+            qs = qs
+        else:
             qs = qs.none()
         return qs
 

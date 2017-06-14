@@ -77,24 +77,24 @@
                             <ul id='left-nav' class="nav">
                                 {% for app in apps %}
                                     <li>
-                                        <!--<a class="{% if app.name == label_app %}active{% else %}collapsed{% endif %}" href="#{{ app.name }}" data-toggle="collapse">
+                                        <a class="{% if app.name == label_app %}active{% else %}collapsed{% endif %}" href="#{{ app.name }}" data-toggle="collapse">
                                             <i class="{{ app.icon }}"></i>
                                             <span>{{ app.name }}</span>
                                             <i class="icon-submenu lnr lnr-chevron-left"></i>
-                                        </a>-->
+                                        </a>
 
-                                        <!--<div id="{{ app.name }}" class="{% if app.name == label_app %}collapse in{% else %}collapse{% endif %}">-->
-                                            <!--<ul class="nav">-->
+                                        <div id="{{ app.name }}" class="{% if app.name == label_app %}collapse in{% else %}collapse{% endif %}">
+                                            <ul class="nav">
                                                 {% for model in app.models %}
-                                                    <!--<li>-->
+                                                    <li>
                                                         <a class="{% if model.name == object_name %}active{% endif %}" href="/{{ model.app_url }}">
                                                             <i class="{{ model.icon }}"></i>
                                                             <span class='children_icon'> {{ model.name }}</span>
                                                         </a>
-                                                    <!--</li>-->
+                                                    </li>
                                                 {% endfor %}
-                                            <!--</ul>-->
-                                        <!--</div>-->
+                                            </ul>
+                                        </div>
                                     </li>
                                 {% endfor %}
                             </ul>

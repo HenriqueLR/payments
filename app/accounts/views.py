@@ -1,6 +1,7 @@
 #encoding: utf-8
 
 from django.views.generic.list import ListView
+from django.views.generic.edit import DeleteView
 from django.views.generic import View
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render_to_response, render, redirect
@@ -11,11 +12,11 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import update_session_auth_hash
-from accounts.models import Profile, PasswordReset
-from accounts.permissions import PermissionsAccountMixin
+from accounts.models import Profile, PasswordReset, User
+from accounts.permissions import PermissionsAccountMixin, PermissionsUserMixin
 from accounts.forms import EditUserForm, ProfileForm, AddUserForm, AccountForm, PasswordResetForm
 from accounts.utils import AccountUtils
-from main.utils import apps_permissions
+from main.utils import apps_permissions, get_list_permissions
 from main.decorators import ajax_required
 
 
@@ -56,12 +57,57 @@ class AccountView(View):
 
 class AccountListView(PermissionsAccountMixin, ListView):
 
-    paginate_by = 5
     model = Profile
+    paginate_by = 5
     template_name = 'accounts/register/list_account.html'
     success_url = reverse_lazy('accounts:login')
+    required_permissions = get_list_permissions(model, permission_list=['all'])
 
 
+class UserListView(PermissionsUserMixin, ListView):
+
+    model = User
+    paginate_by = 5
+    template_name = 'accounts/user/list_user.html'
+    success_url = reverse_lazy('accounts:login')
+    required_permissions = get_list_permissions(model, permission_list=['all'])
+
+
+@login_required
+@user_passes_test(lambda u: u.is_active, login_url='accounts:logout')
+def edit_user(request, pk):
+    template_name = 'accounts/user/edit_user.html'
+    user = get_object_or_404(User, pk=pk)
+    form_user = EditUserForm(request.POST or None, instance=user)
+    form_profile = ProfileForm(request.POST or None,
+                                  instance=get_object_or_404(Profile, user=user))
+    if form_user.is_valid() and form_profile.is_valid():
+        form_user.save(profile=form_profile.save())
+        messages.success(request, 'Os dados da sua conta foram alterados com sucesso')
+    context = {'form_profile':form_profile, 'form_user':form_user, 'object_name':'User',
+               'apps':apps_permissions(request),'label_app':'Accounts',}
+    return render(request, template_name, context)
+
+
+class UserDeleteView(PermissionsUserMixin, DeleteView):
+
+    model = User
+    template_name = 'accounts/user/user_confirm_delete.html'
+    success_url = reverse_lazy('accounts:list_user')
+    required_permissions = get_list_permissions(model, permission_list=['all'])
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        try:
+            self.object.delete()
+            messages.success(self.request, 'Conta deletada')
+        except Exception as Error:
+            messages.error(self.request, 'Tente novamente, ocorreu um erro')
+        return HttpResponseRedirect(self.success_url)
+
+
+delete_user = UserDeleteView.as_view()
+list_user = UserListView.as_view()
 list_account = AccountListView.as_view()
 create_account = AccountView.as_view()
 
@@ -75,7 +121,7 @@ def active_account(request, pk):
             messages.warning(request, 'Esta conta ja esta ativa.')
             return HttpResponseRedirect(reverse_lazy('accounts:list_account'))
         account.active_account(True)
-        account.add_user_group()
+        account.add_user_group('customers')
         account.save_account()
         messages.success(request, 'Conta ativada.')
     except Exception as Error:
@@ -112,7 +158,7 @@ def edit_profile(request):
                                   instance=get_object_or_404(Profile, user=request.user))
     if form_user.is_valid() and form_profile.is_valid():
         form_user.save(profile=form_profile.save())
-        messages.success( request, 'Os dados da sua conta foram alterados com sucesso')
+        messages.success(request, 'Os dados da sua conta foram alterados com sucesso')
         return redirect('accounts:edit_profile')
     context = {'form_profile':form_profile, 'form_user':form_user,
                'object_name':'Profile', 'apps':apps_permissions(request),'label_app':'None',}
@@ -127,6 +173,35 @@ def detail_profile(request):
     template_name = 'accounts/user/detail_profile.html'
     return render(request, template_name, context)
 
+
+@login_required
+@user_passes_test(lambda u: u.is_active, login_url='accounts:logout')
+def create_user(request):
+    template_name = 'accounts/user/create_user.html'
+    form_user = AddUserForm(request.POST or None)
+    form_profile = ProfileForm(request.POST or None)
+
+    if form_user.is_valid() and form_profile.is_valid():
+        try:
+            profile = form_profile.save(commit=False)
+            user = form_user.save(profile=profile, commit=False)
+            user.account = request.user.account
+            user.is_active = True
+            user.save()
+            profile.user = user
+            profile.order = Profile.ORDER_CHOICE[1][0]
+            profile.status_profile = True
+            profile.save()
+            accounts = AccountUtils(profile)
+            accounts.add_user_group('users')
+            messages.success(request, 'Usuario criado com sucesso')
+            return redirect('accounts:list_user')
+        except Exception as Error:
+            messages.error(request, 'Ocorreu um erro, tente novamente')
+
+    context = {'form_profile':form_profile, 'form_user':form_user,
+               'object_name':'User', 'apps':apps_permissions(request),'label_app':'Accounts',}
+    return render(request, template_name, context)
 
 @ajax_required
 def reset_password(request):

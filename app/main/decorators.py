@@ -3,6 +3,9 @@
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 def ajax_required(view):

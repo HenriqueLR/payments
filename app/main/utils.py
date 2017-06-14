@@ -12,19 +12,21 @@ from django.apps import apps
 IGNORE_MODELS = ("sites", "sessions", "admin",
     			 "contenttypes","auth")
 
-ACCEPT_APPS = ("Profile")
+ACCEPT_APPS = ("Profile", "User")
 
 MAP_URL = {
-	"profile": "list_account",
-	"home": "main",
+	"profile":"list_account",
+	"user":"list_user",
+	"home":"main",
+}
+ICON_MODEL = {
+	"profile":"fa fa-address-book",
+	"user":"fa fa-user",
+	"home":"fa fa-home",
 }
 ICON_APPS = {
 	"main":"fa fa-bars",
 	"accounts":"fa fa-book",
-}
-ICON_MODEL = {
-	"profile":"fa fa-user-circle",
-	"home":"fa fa-home",
 }
 
 

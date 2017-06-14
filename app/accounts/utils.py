@@ -26,14 +26,18 @@ class AccountUtils(object):
 		user.save()
 		return user
 
-	def add_user_group(self):
-		gp = Group.objects.get(name='customers')
+	def add_user_group(self, group):
+		gp = Group.objects.get(name=group)
 		gp.user_set.add(self.user)
 
 	def check_status(self):
 		if (self.profile.status_profile and self.user.is_active
 			and self.account.status_account):
 			return True
+
+	def save_user(self):
+		self.user.save()
+		self.profile.save()
 
 	def save_account(self):
 		self.account.save()

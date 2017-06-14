@@ -13,7 +13,8 @@ urlpatterns = patterns('',
     url(r'^detail_profile/$','accounts.views.detail_profile',name='detail_profile'),
     url(r'^reset_password/$', 'accounts.views.reset_password', name='reset_password'),
     url(r'^confirm_reset_password/$','accounts.views.confirm_reset_password',name='confirm_reset_password'),
-
-
-    #criar usuario
+    url(r'^create_user/$','accounts.views.create_user',name='create_user'),
+    url(r'^list_user/$','accounts.views.list_user',name='list_user'),
+    url(r'^edit_user/(?P<pk>\d+)$','accounts.views.edit_user',name='edit_user'),
+    url(r'^delete_user/(?P<pk>\d+)$','accounts.views.delete_user', name='delete_user'),
 )
