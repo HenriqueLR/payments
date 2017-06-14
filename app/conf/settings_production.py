@@ -8,6 +8,9 @@ ALLOWED_HOSTS = [
     '*'
 ]
 
+EMAIL_BACKEND = "sgbackend.SendGridBackend"
+SENDGRID_API_KEY = config.get('user_config', 'SENDGRID_API_KEY')
+
 DATABASES = {
     'default': {
         'ENGINE': ''.join(['django.db.backends.',

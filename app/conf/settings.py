@@ -57,9 +57,6 @@ TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
 )
 
-EMAIL_BACKEND = "sgbackend.SendGridBackend"
-SENDGRID_API_KEY = "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"
-
 ROOT_URLCONF = 'conf.urls'
 
 WSGI_APPLICATION = 'conf.wsgi.application'
