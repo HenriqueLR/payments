@@ -12,19 +12,21 @@ from django.apps import apps
 IGNORE_MODELS = ("sites", "sessions", "admin",
     			 "contenttypes","auth")
 
-ACCEPT_APPS = ("Profile", "User", "Debit")
+ACCEPT_APPS = ("Profile", "User", "Debit", "Deposit")
 
 MAP_URL = {
 	"profile":"list_account",
 	"user":"list_user",
 	"home":"main",
 	"debit":"list_debit",
+	"deposit":"list_deposit",
 }
 ICON_MODEL = {
 	"profile":"fa fa-address-book",
 	"user":"fa fa-user",
 	"home":"fa fa-home",
 	"debit":"fa fa-pie-chart",
+	"deposit":"fa fa-line-chart",
 }
 ICON_APPS = {
 	"main":"fa fa-bars",

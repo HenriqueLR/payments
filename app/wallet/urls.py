@@ -9,4 +9,10 @@ urlpatterns = patterns('wallet.views',
 	url(r'^update_debit/(?P<pk>\d+)$', 'update_debit', name='update_debit'),
 	url(r'^list_debit/$', 'list_debit', name='list_debit'),
 	url(r'^add_debit/$', 'add_debit', name='add_debit'),
+
+	url(r'^delete_deposit/(?P<pk>\d+)$', 'delete_deposit', name='delete_deposit'),
+	url(r'^detail_deposit/(?P<pk>\d+)$', 'detail_deposit', name='detail_deposit'),
+	url(r'^update_deposit/(?P<pk>\d+)$', 'update_deposit', name='update_deposit'),
+	url(r'^list_deposit/$', 'list_deposit', name='list_deposit'),
+	url(r'^add_deposit/$', 'add_deposit', name='add_deposit'),
 )

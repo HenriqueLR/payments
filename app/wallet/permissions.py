@@ -11,11 +11,21 @@ from django.conf import settings
 
 
 
-class PermissionsDebitMixin(object):
+class PermissionsGeralMixin(object):
 
     @classmethod
     def as_view(cls):
-        return login_required(super(PermissionsDebitMixin, cls).as_view())
+        return login_required(super(PermissionsGeralMixin, cls).as_view())
+
+    @method_decorator(never_cache)
+    @method_decorator(user_passes_test(lambda u: u.is_active,login_url='accounts:logout'))
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.has_perms(self.required_permissions):
+            raise Http404
+        return super(PermissionsGeralMixin, self).dispatch(request, *args, **kwargs)
+
+
+class PermissionsDebitMixin(PermissionsGeralMixin):
 
     def get_queryset(self):
         qs = self.model.objects.list_debits(self.request.user)
@@ -32,9 +42,20 @@ class PermissionsDebitMixin(object):
                         'label_app':'Wallet'})
         return context
 
-    @method_decorator(never_cache)
-    @method_decorator(user_passes_test(lambda u: u.is_active,login_url='accounts:logout'))
-    def dispatch(self, request, *args, **kwargs):
-        if not self.request.user.has_perms(self.required_permissions):
-            raise Http404
-        return super(PermissionsDebitMixin, self).dispatch(request, *args, **kwargs)
+
+class PermissionsDepositMixin(PermissionsGeralMixin):
+
+    def get_queryset(self):
+        qs = self.model.objects.list_deposits(self.request.user)
+
+        date = self.request.GET.get('date', '')
+        if date != '':
+            date = datetime.strptime(date, settings.DATE_FORMAT_BR)
+            qs = qs.filter(created_at = date)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(PermissionsDepositMixin, self).get_context_data(**kwargs)
+        context.update({'object_name':'Deposit', 'apps':apps_permissions(self.request),
+                        'label_app':'Wallet'})
+        return context
