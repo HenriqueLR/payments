@@ -34,6 +34,8 @@ class Account(models.Model):
                 ('detail_new_account', 'detail account'),
         )
 
+
+
 class UserManager(models.Manager):
 
     def list_user(self, user):
@@ -48,6 +50,7 @@ class UserManager(models.Manager):
 
     def get_by_natural_key(self, email):
         return self.get(email=email)
+
 
 class User(AbstractBaseUser, PermissionsMixin):
 

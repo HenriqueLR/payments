@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^security/', include(admin.site.urls)),
 	url(r'^main/', include('main.urls', namespace='main')),
 	url(r'^accounts/', include('accounts.urls', namespace='accounts')),
+	url(r'^wallet/', include('wallet.urls', namespace='wallet')),
 ]

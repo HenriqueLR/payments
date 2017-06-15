@@ -10,6 +10,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.hashers import make_password
 from accounts.models import Account, Profile, User
+from wallet.models import Debit
 from conf import settings
 
 
@@ -42,6 +43,7 @@ class ConfigStart(object):
 		group_admin = Group(name=self.group_admin)
 		group_admin.save()
 		self.set_permission_group(group_admin, User)
+		self.set_permission_group(group_admin, Debit)
 
 		group_user = Group(name=self.group_user)
 		group_user.save()

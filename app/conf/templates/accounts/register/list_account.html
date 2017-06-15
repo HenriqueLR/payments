@@ -219,7 +219,7 @@ input[type="select"] {
 						<td>{{ account.first_name }} {{ account.last_name }}</td>
 						<td>{{ account.user.email }}</td>
 						<td>{{ account.get_order_display }}</td>
-						<td>{{ account.user.account.cpf }}
+						<td>{{ account.user.account.cpf }}</td>
 						<td>
 							{% if account.user.is_active %}
 								<i style='color:green;' class='fa fa-check-circle'></i>
