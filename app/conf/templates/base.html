@@ -78,11 +78,10 @@
                                 {% for app in apps %}
                                     {% for model in app.models %}
                                         <li>
-                                                        <a class="{% if model.name == object_name %}active{% endif %}" href="/{{ model.app_url }}">
-                                                            <i class="{{ model.icon }}"></i>
-                                                            <span class='children_icon'> {{ model.name }}</span>
-                                                        </a>
-
+                                            <a class="{% if model.name == object_name %}active{% endif %}" href="/{{ model.app_url }}">
+                                                <i class="{{ model.icon }}"></i>
+                                                <span class='children_icon'> {{ model.name }}</span>
+                                            </a>
                                         </li>
                                     {% endfor %}
                                 {% endfor %}

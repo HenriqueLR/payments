@@ -311,8 +311,8 @@ input:checked + .status_slider:before {
 	<div class="container-fluid">
 		<ol class="breadcrumb">
 			<li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Home</a></li>
-			<li class="active"><i class="fa fa-id-card fa-fw"></i> Wallet</li>
-			<li class='active'><i class="fa fa-tags fa-fw"></i> Note</a></li>
+			<li><a href="{% url 'wallet:list_note' %}"><i class="fa fa-tags fa-fw"></i> Note</a></li>
+			<li class='active'><i class="fa fa-edit fa-fw"></i> Edit Note</li>
 		</ol>
 		<!-- NOTAS -->
 		<div class="row" id="note">

@@ -110,9 +110,9 @@
 {% block content %}
 	<div class="container-fluid">
 		<ol class="breadcrumb">
-			<li><a href="home.html"><i class="fa fa-home fa-fw"></i> Painel</a></li>
+			<li><a href="home.html"><i class="fa fa-home fa-fw"></i> Home</a></li>
 			<li><a href="{{ user.get_detail_profile }}"><i class="fa fa-user fa-fw"></i> Profile</a></li>
-			<li class="active"><i class="fa fa-pencil fa-fw"></i> Edit Profile</li>
+			<li class="active"><i class="fa fa-edit fa-fw"></i> Edit Profile</li>
 		</ol>
 		<!-- NOTAS -->
 		<div class="row" id="profile-edit">
@@ -120,7 +120,7 @@
 				<!-- TODO LIST -->
 				<div class="panel">
 					<div class="panel-heading">
-						<h3 class="panel-title">Profile Edit</h3>
+						<h3 class="panel-title">Edit Profile</h3>
 						<div class='right'>
 							<ul class="list-inline">
 								<li><a href='{{ user.get_detail_profile }}'><i style="font-size:15px;" class='lnr lnr-cross'></i></a></li>
