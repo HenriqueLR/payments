@@ -197,3 +197,19 @@ input[type="select"] {
 #confirm-reset-password{
     margin-top:5%;
 }
+
+
+
+/* NOTE */
+
+/* list note */
+#list-note .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+
+#list-note .title {
+    display: block;
+}
+
+/* END NOTE */

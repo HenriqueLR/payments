@@ -15,3 +15,9 @@ install:
 
 create_superuser:
 	python ./app/conf/config_start.py
+
+clean_migrations:
+	rm -rf ./app/wallet/migrations/*.pyc
+	find ./app/wallet/migrations/ |grep '0'|xargs rm -f
+	rm -rf ./app/accounts/migrations/*.pyc
+	find ./app/accounts/migrations/ |grep '0'|xargs rm -f

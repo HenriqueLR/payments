@@ -12,7 +12,7 @@ from django.apps import apps
 IGNORE_MODELS = ("sites", "sessions", "admin",
     			 "contenttypes","auth")
 
-ACCEPT_APPS = ("Profile", "User", "Debit", "Deposit")
+ACCEPT_APPS = ("Profile", "User", "Debit", "Deposit", "Note")
 
 MAP_URL = {
 	"profile":"list_account",
@@ -20,6 +20,7 @@ MAP_URL = {
 	"home":"main",
 	"debit":"list_debit",
 	"deposit":"list_deposit",
+	"note":"list_note",
 }
 ICON_MODEL = {
 	"profile":"fa fa-address-book",
@@ -27,6 +28,7 @@ ICON_MODEL = {
 	"home":"fa fa-home",
 	"debit":"fa fa-pie-chart",
 	"deposit":"fa fa-line-chart",
+	"note":"fa fa-tags",
 }
 ICON_APPS = {
 	"main":"fa fa-bars",
@@ -89,10 +91,10 @@ def apps_permissions(request):
     }
 
 	app_list = app_dict.values()
-	app_list.sort(key=lambda x: x['name'])
+	#app_list.sort(key=lambda x: x['name'])
 
-	for app in app_list:
-		app['models'].sort(key=lambda x: x['name'])
+	#for app in app_list:
+	#	app['models'].sort(key=lambda x: x['name'])
 
 	app_list.insert(0, include_dict['main'])
 

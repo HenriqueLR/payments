@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load formtags %}
 
 {% block extra_styles %}
+	<link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
+
 	<style type="text/css">
 			/*.metric{
 				margin-bottom: 0 !important;
@@ -105,16 +108,16 @@ input[type="select"] {
 }
 
 
-#list-accounts .panel .table > thead > tr > td:first-child, .panel .table > thead > tr > th:first-child, .panel .table > tbody > tr > td:first-child, .panel .table > tbody > tr > th:first-child, .panel .table > tfoot > tr > td:first-child, .panel .table > tfoot > tr > th:first-child {
+#list-note .panel .table > thead > tr > td:first-child, .panel .table > thead > tr > th:first-child, .panel .table > tbody > tr > td:first-child, .panel .table > tbody > tr > th:first-child, .panel .table > tfoot > tr > td:first-child, .panel .table > tfoot > tr > th:first-child {
     padding-left: 0px;
     text-align: left;
 }
 
-#list-accounts .panel .table > thead > tr > td:last-child, .panel .table > thead > tr > th:last-child, .panel .table > tbody > tr > td:last-child, .panel .table > tbody > tr > th:last-child, .panel .table > tfoot > tr > td:last-child, .panel .table > tfoot > tr > th:last-child {
+#list-note .panel .table > thead > tr > td:last-child, .panel .table > thead > tr > th:last-child, .panel .table > tbody > tr > td:last-child, .panel .table > tbody > tr > th:last-child, .panel .table > tfoot > tr > td:last-child, .panel .table > tfoot > tr > th:last-child {
     padding-left: 0px;
     text-align: right;
 }
-#list-accounts .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+#list-note .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     padding: 4px;
     line-height: 1.42857143;
     vertical-align: top;
@@ -149,21 +152,66 @@ input[type="select"] {
 <div class="container-fluid">
 	<ol class="breadcrumb">
 	    <li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Home</a></li>
-		<li class='active'><i class="fa fa-book fa-fw"></i> Accounts</a></li>
-		<li class='active'><i class="fa fa-user fa-fw"></i> User</a></li>
+	    <li class='active'><i class="fa fa-id-card fa-fw"></i> Wallet</a></li>
+		<li class='active'><i class="fa fa-tags fa-fw"></i> Note</a></li>
 	</ol>
-
-	<div class="row" id="list-accounts">
+	<!-- DEPÓSITOS -->
+	<div class="row" id="list-note">
 		<div class="col-md-12">
 			<!-- TABLE STRIPED -->
 			<div class="panel">
 				<div class="panel-heading">
-					<h3 class="panel-title">Users</h3>
-					<div class='right'>
-					<ul class="list-inline">
-				    	<li><a href="{% url 'accounts:create_user' %}"><i style="font-size:15px;" class='lnr lnr-plus-circle'></i></a></li>
-					</ul>
-				</div>
+					<h3 class="panel-title">Note</h3>
+										<div class='right'>
+<ul class="list-inline">
+<li>
+<form class="form-inline">
+										  <label class="sr-only" for="date">Data</label>
+										  <div class="input-group">
+    										<div class="input-group-addon">
+     											<i class="fa fa-tags" aria-hidden="true"></i>
+    										</div>
+										    <select class="form-control" name="filtro">
+                <option value="0">todos</option>
+                <option value="1">alerta</option>
+                <option value="2">nota</option>
+                <option value="2">urgente</option>
+            </select>
+										  </div>
+
+										</form>
+</li>
+    <li>
+<form class="form-inline">
+										  <label class="sr-only" for="date">Data</label>
+										  <div class="input-group">
+    										<div class="input-group-addon">
+     											<i class="fa fa-eye" aria-hidden="true"></i>
+    										</div>
+										    <select class="form-control" name="filtro">
+                <option value="0">todos</option>
+                <option value="1">abertas</option>
+                <option value="2">fechadas</option>
+            </select>
+										  </div>
+
+										</form>
+
+                </li>
+    <li><form class="form-inline">
+										  <label class="sr-only" for="date">Data</label>
+										  <div class="input-group">
+    										<div class="input-group-addon">
+     											<i class="fa fa-calendar"></i>
+    										</div>
+										    <input type="text" class="form-control" name='date' id="date" placeholder="01/02/2017">
+										  </div>
+										  <button type="button"><i class='lnr lnr-magnifier'></i></button>
+
+										</form></li>
+    <li><a href='{% url "wallet:add_note" %}'><i style="font-size:15px;" class='lnr lnr-plus-circle'></i></a></li>
+</ul>
+										</div>
 				</div>
 				<div class="panel-body">
 
@@ -182,39 +230,31 @@ input[type="select"] {
 					<br>
 
 					{% if not object_list %}
-						<h3>Nao existem usuarios cadastrados</h3>
+						<h3>Nao existem notas cadastradas</h3>
 					{% else %}
-						<div class="table-responsive">
-							<table class="table table-striped mb30">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Email</th>
-										<th>Status</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									{% for user_list in object_list %}
-										<tr>
-											<td>{{ user_list.profile_user.first_name }} {{ user_list.profile_user.last_name }}</td>
-											<td>{{ user_list.email }}</td>
-											<td>
-												{% if user_list.is_active %}
-													<i style='color:green;' class='fa fa-check-circle'></i>
-												{% else %}
-													<i style='color:red;' class='fa fa-check-circle'></i>
-												{% endif %}
-											</td>
-											<td class="actions">
-												<a href="{{ user_list.get_edit_user }}"><i class="lnr lnr-pencil"></i></a>
-												<a href="{{ user_list.get_delete_user }}"><i class="lnr lnr-trash"></i></a>
-											</td>
-										</tr>
-									{% endfor %}
-								</tbody>
-							</table>
-						</div>
+
+						<ul class="list-unstyled todo-list">
+							{% for note in object_list %}
+								<li class='{% if not note.status_note %}completed{% endif %}'>
+									<label class="control-inline fancy-checkbox">
+										<input id='{{ note.pk }}' type="checkbox" {% if not note.status_note %}checked{% endif %}><span></span>
+									</label>
+									<p>
+										<span class="label label-primary">nota</span>
+										{% if note.status_alert %}
+											<span class="label label-success">ALERTA</span>
+										{% endif %}
+										<span class="title">{{ note.title }}</span>
+										<span class="short-description">{{ note.description }}</span>
+										<span class="date">{{ note.created_at | date:"d/m/Y" }}</span>
+									</p>
+									<div class="controls">
+										<a href="{{ note.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>
+										<a href="{{ note.get_delete_url }}"><i class="lnr lnr-trash"></i></a>
+									</div>
+								</li>
+							{% endfor %}
+						</ul>
 
 						<nav><!--nav-->
 							<ul class="pagination pagination-centered" style='margin: 5px 0 7px;'><!--ul pagination pagination-centered -->
@@ -236,14 +276,29 @@ input[type="select"] {
 							</ul><!--ul pagination pagination-centered -->
 						</nav><!--nav-->
 						<small>{{ page_obj.number }} de {{paginator.num_pages}}</small>
-
-
-				</div>
-
-
 					{% endif %}
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+{% endblock %}
+{% block extra_scripts %}
+	<script src="{% static 'js/libs/moment.min.js' %}"></script>
+	<script src="{% static 'js/libs/daterangepicker.js' %}"></script>
+	<script src="{% static 'js/wallet.js' %}"></script>
+
+	<script type="text/javascript">
+
+	    $('input[type^="checkbox"]').click(function (e) {
+	     	url = '/wallet/list_note/?note='+$(this).attr("id");
+	     	note_get_function(url)
+	    });
+
+		function note_get_function(url){
+		  $.ajax({type: 'get', url: url,});
+		  return false;
+		}
+
+	</script>
 {% endblock %}

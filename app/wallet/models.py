@@ -29,7 +29,7 @@ class Debit(models.Model):
                                 on_delete=models.CASCADE, null=False)
     author = models.CharField(verbose_name=u'Autor', db_column='author', max_length=30, null=False, blank=False)
     description = models.TextField(db_column='description', blank=True, null=True, verbose_name=u'Descricao')
-    created_at = models.DateField(verbose_name=u'Data de criação', auto_now_add=True, db_column='date_created')
+    created_at = models.DateTimeField(verbose_name=u'Data de criação', auto_now_add=True, db_column='date_created')
     updated_at = models.DateTimeField(verbose_name=u'Atualizado em', auto_now=True, db_column='updated_at')
 
     objects = DebitManager()
@@ -88,7 +88,7 @@ class Deposit(models.Model):
                                 on_delete=models.CASCADE, null=False)
     author = models.CharField(verbose_name=u'Autor', db_column='author', max_length=30, null=False, blank=False)
     description = models.TextField(db_column='description', blank=True, null=True, verbose_name=u'Descricao')
-    created_at = models.DateField(verbose_name=u'Data de criação', auto_now_add=True, db_column='date_created')
+    created_at = models.DateTimeField(verbose_name=u'Data de criação', auto_now_add=True, db_column='date_created')
     updated_at = models.DateTimeField(verbose_name=u'Atualizado em', auto_now=True, db_column='updated_at')
 
     objects = DepositManager()
@@ -144,9 +144,9 @@ class Note(models.Model):
                                 on_delete=models.CASCADE, null=False)
     author = models.CharField(verbose_name=u'Autor', db_column='author', max_length=30, null=False, blank=False)
     status_alert = models.BooleanField(verbose_name=u'Status Alert', default=False, db_column='status_alert')
-    status_note = models.BooleanField(verbose_name=u'Status Note', default=False, db_column='status_note')
+    status_note = models.BooleanField(verbose_name=u'Status Note', default=True, db_column='status_note')
     description = models.TextField(db_column='description', blank=True, null=True, verbose_name=u'Descricao')
-    created_at = models.DateField(verbose_name=u'Data de criação', auto_now_add=True, db_column='date_created')
+    created_at = models.DateTimeField(verbose_name=u'Data de criação', auto_now_add=True, db_column='date_created')
     updated_at = models.DateTimeField(verbose_name=u'Atualizado em', auto_now=True, db_column='updated_at')
 
     objects = NoteManager()
@@ -155,16 +155,16 @@ class Note(models.Model):
         return (u'%s - %s') % (self.status_note, self.title)
 
     @models.permalink
-    def get_update_deposit(self):
+    def get_delete_url(self):
+        return('wallet:delete_note', [int(self.pk)], {})
+
+    @models.permalink
+    def get_update_url(self):
         return ('wallet:update_note', [int(self.pk)], {})
 
     @models.permalink
     def get_absolute_url(self):
         return('wallet:detail_note', [int(self.pk)], {})
-
-    @models.permalink
-    def get_delete_deposit(self):
-        return('wallet:delete_note', [int(self.pk)], {})
 
     class Meta:
         verbose_name=u'Note'

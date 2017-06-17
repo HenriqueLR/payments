@@ -107,6 +107,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'User'
         verbose_name_plural = 'User'
         ordering = ['-date_joined']
+        db_table='user'
         permissions = (
                 ('add_new_user', 'add user'),
                 ('list_new_user', 'list user'),
@@ -132,6 +133,7 @@ class PasswordReset(models.Model):
         verbose_name = 'New Password'
         verbose_name_plural = 'New Password'
         ordering = ['-created_at']
+        db_table='passwordreset'
         permissions = (
                 ('add_new_password', 'add password'),
                 ('list_new_password', 'list password'),

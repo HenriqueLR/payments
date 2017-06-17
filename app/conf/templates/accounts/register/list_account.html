@@ -197,7 +197,7 @@ input[type="select"] {
 <br>
 
 {% if not object_list %}
-	<h1>Nao existem contas cadastradas</h1>
+	<h3>Nao existem contas cadastradas</h3>
 {% else %}
 	<div class="table-responsive">
 		<table class="table table-striped mb30">
@@ -238,10 +238,6 @@ input[type="select"] {
 		</table>
 	</div>
 
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 
@@ -265,6 +261,15 @@ input[type="select"] {
 		</ul><!--ul pagination pagination-centered -->
 	</nav><!--nav-->
 	<small>{{ page_obj.number }} de {{paginator.num_pages}}</small>
+
+
+				</div>
+
 {% endif %}
+
+</div>
+		</div>
+	</div>
+
 </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 #encoding: utf-8
 
 from django import forms
-from wallet.models import Deposit, Debit
+from wallet.models import Deposit, Debit, Note
 
 
 
@@ -40,3 +40,21 @@ class DepositForm(forms.ModelForm):
 		model = Deposit
 		fields = ['origin', 'value', 'document', 'description']
 		widgets = {'value': forms.NumberInput(attrs={'min': 0})}
+
+
+
+class NoteForm(forms.ModelForm):
+
+	def save(self, user=None, commit=True):
+		note = super(NoteForm, self).save(commit=False)
+		if user:
+			note.author = user.username
+			note.account = user.account
+
+		if commit:
+			note.save()
+		return note
+
+	class Meta:
+		model = Note
+		fields = ['title', 'status_alert', 'status_note', 'description']

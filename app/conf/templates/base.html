@@ -7,10 +7,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-        <!-- GOOGLE FONTS
+        <!-- GOOGLE FONTS -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Anaheim' rel='stylesheet'>
-        -->
         <!-- ICONS -->
         <link rel="apple-touch-icon" sizes="76x76" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/img/apple-icon.png' %}">
         <link rel="icon" type="image/png" sizes="96x96" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/img/favicon.png' %}">
@@ -77,6 +76,17 @@
                         <nav>
                             <ul id='left-nav' class="nav">
                                 {% for app in apps %}
+                                    {% for model in app.models %}
+                                        <li>
+                                                        <a class="{% if model.name == object_name %}active{% endif %}" href="/{{ model.app_url }}">
+                                                            <i class="{{ model.icon }}"></i>
+                                                            <span class='children_icon'> {{ model.name }}</span>
+                                                        </a>
+
+                                        </li>
+                                    {% endfor %}
+                                {% endfor %}
+                                <!--{% for app in apps %}
                                     <li>
                                         <a class="{% if app.name == label_app %}active{% else %}collapsed{% endif %}" href="#{{ app.name }}" data-toggle="collapse">
                                             <i class="{{ app.icon }}"></i>
@@ -97,7 +107,7 @@
                                             </ul>
                                         </div>
                                     </li>
-                                {% endfor %}
+                                {% endfor %}-->
                             </ul>
                         </nav>
                     </div>

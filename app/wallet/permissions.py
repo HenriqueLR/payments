@@ -25,6 +25,22 @@ class PermissionsGeralMixin(object):
         return super(PermissionsGeralMixin, self).dispatch(request, *args, **kwargs)
 
 
+
+class PermissionsNoteMixin(PermissionsGeralMixin):
+
+    def get_queryset(self):
+        qs = self.model.objects.list_notes(self.request.user)
+
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(PermissionsNoteMixin, self).get_context_data(**kwargs)
+        context.update({'object_name':'Note', 'apps':apps_permissions(self.request),
+                        'label_app':'Wallet'})
+        return context
+
+
+
 class PermissionsDebitMixin(PermissionsGeralMixin):
 
     def get_queryset(self):
@@ -41,6 +57,7 @@ class PermissionsDebitMixin(PermissionsGeralMixin):
         context.update({'object_name':'Debit', 'apps':apps_permissions(self.request),
                         'label_app':'Wallet'})
         return context
+
 
 
 class PermissionsDepositMixin(PermissionsGeralMixin):
