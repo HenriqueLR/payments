@@ -96,3 +96,4 @@ STATIC_URL = '/static/'
 
 DATE_FORMAT_US = '%Y-%m-%d'
 DATE_FORMAT_BR = '%d/%m/%Y'
+DATETIME_FORMAT_BR = '%d/%m/%Y %H:%M:%S'

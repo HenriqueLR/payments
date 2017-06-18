@@ -160,6 +160,22 @@ input[type="select"] {
 					<h3 class="panel-title">User</h3>
 					<div class='right'>
 					<ul class="list-inline">
+    					<li>
+							<form class="form-inline" method='get'>
+								<label class="sr-only" for="date">Data</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+								<select class="form-control" name="status_user" id="id_status_user">
+									<option {% if request.GET.status_user == 'all' %}selected{% endif %} value="all">todos</option>
+									<option {% if request.GET.status_user == 'True' %}selected{% endif %} value="True">ativo</option>
+									<option {% if request.GET.status_user == 'False' %}selected{% endif %} value="False">bloqueado</option>
+								</select>
+								</div>
+								<button type="submit"><i class='lnr lnr-magnifier'></i></button>
+							</form>
+						</li>
 				    	<li><a href="{% url 'accounts:create_user' %}"><i style="font-size:15px;" class='lnr lnr-plus-circle'></i></a></li>
 					</ul>
 				</div>

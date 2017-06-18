@@ -132,7 +132,7 @@ input[type="select"] {
 	background-color:#d9534f;
 }
 
-.right .list-inline a{
+.right a{
 	color:#686B71;
 }
 
@@ -144,6 +144,29 @@ input[type="select"] {
     background: none;
     outline: none;
 }
+
+#list-note #alert-label label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+    height: 29px;
+}
+
+#list-note #alert-label .fancy-checkbox input[type="checkbox"] + span {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    content: "";
+    border: 0px solid #ccc;
+    margin-left: 10px;
+    margin-top: 9px;
+}
+
 	</style>
 {% endblock %}
 
@@ -162,54 +185,45 @@ input[type="select"] {
 				<div class="panel-heading">
 					<h3 class="panel-title">Note</h3>
 										<div class='right'>
-<ul class="list-inline">
-<li>
-<form class="form-inline">
-										  <label class="sr-only" for="date">Data</label>
+<form class="form-inline" method="get">
+
+										  <label class="sr-only" for="id_status_note">status_alert</label>
 										  <div class="input-group">
     										<div class="input-group-addon">
      											<i class="fa fa-tags" aria-hidden="true"></i>
     										</div>
-										    <select class="form-control" name="filtro">
-                <option value="0">todos</option>
-                <option value="1">alerta</option>
-                <option value="2">nota</option>
-                <option value="2">urgente</option>
+										    <select class="form-control" name="status_alert" id="id_status_alert">
+                <option {% if request.GET.status_alert == 'all' %}selected{% endif %} value="all">todos</option>
+                <option {% if request.GET.status_alert == 'True' %}selected{% endif %} value="True">alerta</option>
+                <option {% if request.GET.status_alert == 'False' %}selected{% endif %} value="False">notas</option>
             </select>
 										  </div>
 
-										</form>
-</li>
-    <li>
-<form class="form-inline">
-										  <label class="sr-only" for="date">Data</label>
+										  <label class="sr-only" for="id_status_note">status_note</label>
 										  <div class="input-group">
     										<div class="input-group-addon">
-     											<i class="fa fa-eye" aria-hidden="true"></i>
+     											<i class="fa fa-tags" aria-hidden="true"></i>
     										</div>
-										    <select class="form-control" name="filtro">
-                <option value="0">todos</option>
-                <option value="1">abertas</option>
-                <option value="2">fechadas</option>
+										    <select class="form-control" name="status_note" id="id_status_note">
+                <option {% if request.GET.status_note == 'all' %}selected{% endif %} value="all">todos</option>
+                <option {% if request.GET.status_note == 'True' %}selected{% endif %} value="True">abertas</option>
+                <option {% if request.GET.status_note == 'False' %}selected{% endif %} value="False">fechadas</option>
             </select>
 										  </div>
 
-										</form>
-
-                </li>
-    <li><form class="form-inline">
-										  <label class="sr-only" for="date">Data</label>
+										  <label class="sr-only" for="date">Date</label>
 										  <div class="input-group">
     										<div class="input-group-addon">
      											<i class="fa fa-calendar"></i>
     										</div>
-										    <input type="text" class="form-control" name='date' id="date" placeholder="01/02/2017">
+										    <input type="text" class="form-control" name='date' id="date" placeholder="dd/mm/yyyy" value="{% if request.GET.date %}{{ request.GET.date }}{% endif %}">
 										  </div>
-										  <button type="button"><i class='lnr lnr-magnifier'></i></button>
+										  <button type="submit"><i class='lnr lnr-magnifier'></i></button>
 
-										</form></li>
-    <li><a href='{% url "wallet:add_note" %}'><i style="font-size:15px;" class='lnr lnr-plus-circle'></i></a></li>
-</ul>
+
+			<a href='{% url "wallet:add_note" %}'><i style="font-size:15px;" class='lnr lnr-plus-circle'></i></a>
+</form>
+
 										</div>
 				</div>
 				<div class="panel-body">
@@ -235,7 +249,7 @@ input[type="select"] {
 						<ul class="list-unstyled todo-list">
 							{% for note in object_list %}
 								<li class='{% if not note.status_note %}completed{% endif %}'>
-									<label class="control-inline fancy-checkbox">
+									<label id='note-list-input' class="control-inline fancy-checkbox">
 										<input id='{{ note.pk }}' type="checkbox" {% if not note.status_note %}checked{% endif %}><span></span>
 									</label>
 									<p>
@@ -286,18 +300,4 @@ input[type="select"] {
 	<script src="{% static 'js/libs/moment.min.js' %}"></script>
 	<script src="{% static 'js/libs/daterangepicker.js' %}"></script>
 	<script src="{% static 'js/wallet.js' %}"></script>
-
-	<script type="text/javascript">
-
-	    $('input[type^="checkbox"]').click(function (e) {
-	     	url = '/wallet/list_note/?note='+$(this).attr("id");
-	     	note_get_function(url)
-	    });
-
-		function note_get_function(url){
-		  $.ajax({type: 'get', url: url,});
-		  return false;
-		}
-
-	</script>
 {% endblock %}

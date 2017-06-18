@@ -7,6 +7,8 @@ from django.utils.safestring import mark_safe
 from django.contrib.admin import ModelAdmin
 from django.utils.text import capfirst
 from django.apps import apps
+from datetime import datetime
+from django.conf import settings
 
 
 IGNORE_MODELS = ("sites", "sessions", "admin",
@@ -121,3 +123,11 @@ def generate_hash_key(salt, random_str_size=5):
     random_str = random_key(random_str_size)
     text = random_str + salt
     return hashlib.sha224(text.encode('utf-8')).hexdigest()
+
+def format_date(date_start, date_end):
+	date_start = datetime.strptime(''.join([date_start.strip(), ' 00:00:00']),
+									settings.DATETIME_FORMAT_BR)
+	date_end = datetime.strptime(''.join([date_end.strip(), ' 23:59:59']),
+									settings.DATETIME_FORMAT_BR)
+
+	return date_start, date_end

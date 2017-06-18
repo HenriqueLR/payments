@@ -48,6 +48,11 @@ class PermissionsUserMixin(object):
 
     def get_queryset(self):
         qs = self.model.objects.list_user(self.request.user)
+
+        status_user = self.request.GET.get('status_user', '')
+        if status_user != '' and status_user != 'all':
+            qs = qs.filter(is_active=eval(status_user))
+
         return qs
 
     def get_context_data(self, **kwargs):
