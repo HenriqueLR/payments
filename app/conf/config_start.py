@@ -49,6 +49,9 @@ class ConfigStart(object):
 
 		group_user = Group(name=self.group_user)
 		group_user.save()
+		self.set_permission_group(group_user, Debit)
+		self.set_permission_group(group_user, Deposit)
+		self.set_permission_group(group_user, Note)
 
 	def set_permission_group(self, group, model):
 		permissions = Permission.objects.filter(content_type__name = model.__name__).all()

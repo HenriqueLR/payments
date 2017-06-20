@@ -1,14 +1,53 @@
 #encoding: utf-8
 
+import json
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required, user_passes_test
-from main.utils import apps_permissions
+from django.db.models import Sum
+from django.contrib.auth.decorators import login_required
+from main.utils import apps_permissions, format_json
+from main.decorators import permissions_denied, ajax_required
+from wallet.models import Debit, Deposit, Note
+from django.http import HttpResponse, JsonResponse
 
 
-#CRIAR DECORATOR PARA VERIFICAR AS PERMISSIONS DE CADA MODEL QUE FOR USAR.
+
 @login_required
-@user_passes_test(lambda u: u.is_active, login_url='accounts:logout')
+@permissions_denied
 def home(request):
-	context = {'apps':apps_permissions(request),
-			   'label_app': 'Main', 'object_name': 'Home'}
-	return render(request, 'main/home.html', context)
+	template_name = 'main/home.html'
+	total_deposit = Deposit.objects.sum_deposits(request.user)
+	total_debit = Debit.objects.sum_debits(request.user)
+	balance = (total_deposit - total_debit)
+	debits = Debit.objects.list_debits(request.user)[:10]
+	deposits = Deposit.objects.list_deposits(request.user)[:10]
+	notes = Note.objects.list_notes(request.user)[:10]
+	apps = apps_permissions(request)
+
+	context = {'apps':apps, 'label_app':'Main', 'object_name':'Home',
+			   'total_deposit':total_deposit, 'total_debit':total_debit,
+			   'debits':debits, 'deposits':deposits, 'notes':notes,
+			   'balance':balance}
+	return render(request, template_name, context)
+
+
+@login_required
+@ajax_required
+def graphics(request):
+	if request.method == 'GET':
+		list_graphics = []
+		select_date = {"date": "to_date(cast(date_created as TEXT),'YYYY-MM-DD')"}
+		list_graphics.append(format_json(Deposit.objects.extra(select=select_date).values('date').annotate(total=Sum('value')).order_by()[:30],
+							 Deposit._meta.verbose_name_plural))
+		list_graphics.append(format_json(Debit.objects.extra(select=select_date).values('date').annotate(total=Sum('value')).order_by()[:30],
+							 Debit._meta.verbose_name_plural))
+
+		return JsonResponse(list_graphics, safe=False)
+
+
+@login_required
+@ajax_required
+def alerts(request):
+	template_name = 'main/alerts.html'
+	if request.method == 'GET':
+		alerts = Note.objects.filter(status_alert=True)
+		return render(request, template_name, {'alerts':alerts})

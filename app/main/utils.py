@@ -3,12 +3,14 @@
 import hashlib
 import string
 import random
+import time
 from django.utils.safestring import mark_safe
 from django.contrib.admin import ModelAdmin
 from django.utils.text import capfirst
 from django.apps import apps
 from datetime import datetime
 from django.conf import settings
+
 
 
 IGNORE_MODELS = ("sites", "sessions", "admin",
@@ -131,3 +133,10 @@ def format_date(date_start, date_end):
 									settings.DATETIME_FORMAT_BR)
 
 	return date_start, date_end
+
+def format_json(list_objects, name):
+	context = {'name':name, 'data': []}
+	for obj in list_objects:
+		context['data'].append([time.mktime(obj['date'].timetuple()),
+								int(str(obj['total']).split('.')[0])])
+	return context

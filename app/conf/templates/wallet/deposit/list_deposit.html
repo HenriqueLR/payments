@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load formtags %}
 
 {% block extra_styles %}
 	<link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
@@ -214,10 +215,10 @@ input[type="select"] {
 								<tbody>
 									{% for deposit in object_list %}
 										<tr>
-											<td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i>
+											<td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
 											<td>{{ forloop.counter }}</td>
 											<td>{{ deposit.origin }}</td>
-											<td>R$ {{ deposit.value }}</td>
+											<td>R$ {{ deposit.value|decimal_to_real }}</td>
 											<td>{{ deposit.created_at | date:"d/m/Y" }}</td>
 											<td>{{ deposit.document }}</td>
 											<td>{{ deposit.author }}</td>

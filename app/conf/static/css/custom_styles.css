@@ -9,6 +9,11 @@ body{
     font-size: 14px;
     color: #a3a4a4;
 }
+.metric .number {
+    display: block;
+    font-size: 28px;
+    font-weight: 300;
+}
 .panel-footer{
 	background-color: white;
 	text-align: center;
@@ -89,10 +94,11 @@ input[type="select"] {
 }
 /* END GLOBAL */
 
+
 #payments .table {
     width: 100%;
     max-width: 100%;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
 }
 #payments .panel .table > thead > tr > td:first-child, .panel .table > thead > tr > th:first-child, .panel .table > tbody > tr > td:first-child, .panel .table > tbody > tr > th:first-child, .panel .table > tfoot > tr > td:first-child, .panel .table > tfoot > tr > th:first-child {
     padding-left: 0px;
@@ -103,10 +109,11 @@ input[type="select"] {
     text-align: right;
 }
 #payments .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    padding: 4px;
+    padding: 3px;
     line-height: 1.42857143;
     vertical-align: top;
     border-top: 1px solid #ddd;
+    font-size: 14px;
 }
 #notas ol, ul {
     margin-top: 0;
@@ -210,6 +217,10 @@ input[type="select"] {
 
 #list-note .title {
     display: block;
+}
+
+.bg-warning {
+    background-color: #5cb85c;
 }
 
 /* END NOTE */

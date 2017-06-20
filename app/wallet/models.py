@@ -2,6 +2,7 @@
 
 from django.db import models
 from accounts.models import Account
+from django.db.models import Sum
 
 
 
@@ -15,6 +16,13 @@ class DebitManager(models.Manager):
             qs = qs
         else:
             qs = qs.none()
+        return qs
+
+    def sum_debits(self, user):
+        qs = super(DebitManager, self).get_queryset()
+        if not user.is_superuser and user.is_active:
+            qs = qs.filter(account=user.account).aggregate(Sum('value')).get('value__sum') or 0
+
         return qs
 
 
@@ -74,6 +82,13 @@ class DepositManager(models.Manager):
             qs = qs
         else:
             qs = qs.none()
+        return qs
+
+    def sum_deposits(self, user):
+        qs = super(DepositManager, self).get_queryset()
+        if not user.is_superuser and user.is_active:
+            qs = qs.filter(account=user.account).aggregate(Sum('value')).get('value__sum') or 0
+
         return qs
 
 

@@ -41,7 +41,7 @@
                         </div>
                         <div id="navbar-menu">
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="dropdown">
+                                <li class="dropdown" id='alerts-nav-bar'>
                                     <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
                                         <i class="lnr lnr-alarm"></i>
                                         <span class="badge bg-danger">5</span>
@@ -129,6 +129,20 @@
             <script src="{% static 'js/custom_app.js' %}"></script>
         {% endblock %}
         {% block extra_scripts %}{% endblock %}
+        {% block fix_scripts %}
+            <script type="text/javascript">
+                $.ajax({
+                    type: 'get',
+                    url: '/main/alerts/',
+                    success: function(data) {
+                        $("#alerts-nav-bar").html(data);
+                    },
+                    error: function (data) {
+                        $("#alerts-nav-bar").html('Error');
+                    },
+                });
+            </script>
+        {% endblock %}
     </body>
 
 </html>

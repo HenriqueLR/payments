@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load formtags %}
+
 {% block content %}
     <div class="container-fluid" id="home">
         <ol class="breadcrumb">
-        <li class='active'><i class="fa fa-home fa-fw"></i> Home</li>
+            <li class='active'><i class="fa fa-home fa-fw"></i> Home</li>
         </ol>
         <!-- OVERVIEW -->
         <div class="row" id="overview">
@@ -17,49 +19,39 @@
                             </button>
                         </div>
                     </div>
+
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="metric">
                                     <span class="icon" style="background-color:white;">
                                         <i class="fa fa-thumbs-up" aria-hidden="true" style="color:#5cb85c;"></i>
                                     </span>
                                     <p>
-                                        <span class="number">1.252 R$</span>
+                                        <span class="number">R$ {{ total_deposit|decimal_to_real }}</span>
                                         <span class="title">Total Recebido</span>
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="metric">
                                     <span class="icon" style="background-color:white;">
                                         <i class="fa fa-thumbs-down" aria-hidden="true" style="color:#d9534f;"></i>
                                     </span>
                                     <p>
-                                        <span class="number">1.252 R$</span>
+                                        <span class="number">R$ {{ total_debit|decimal_to_real }}</span>
                                         <span class="title">Total Descontos</span>
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="metric">
                                     <span class="icon" style="background-color:white;">
                                         <i class="fa fa-plus-square" aria-hidden="true" style="color:#5cb85c;"></i>
                                     </span>
                                     <p>
-                                        <span class="number">1.252 R$</span>
+                                        <span class="number">R$ {{ balance|decimal_to_real }}</span>
                                         <span class="title">Saldo</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="metric">
-                                    <span class="icon" style="background-color:white;">
-                                        <i class="fa fa-minus-square" aria-hidden="true" style="color:#d9534f;"></i>
-                                    </span>
-                                    <p>
-                                        <span class="number">1.252 R$</span>
-                                        <span class="title">Débitos</span>
                                     </p>
                                 </div>
                             </div>
@@ -74,457 +66,251 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div><!-- end row -->
         <!-- END OVERVIEW -->
         <!-- PAYMENTS -->
         <div class="row" id="payments">
             <div class="col-md-6">
-            <!-- TABLE STRIPED -->
+                <!-- TABLE STRIPED -->
                 <div class="panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">Débitos</h3>
                         <div class="right">
                             <ul class="list-inline">
-                            <li><a href='new_debit.html'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a></li>
-                            <li>
-                            <button type="button" class="btn-toggle-collapse">
-                            <i class="lnr lnr-chevron-up-circle"></i>
-                            </button></li>
+                                <li><a href='{% url "wallet:add_debit" %}'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a></li>
+                                <li>
+                                    <button type="button" class="btn-toggle-collapse">
+                                        <i class="lnr lnr-chevron-up-circle"></i>
+                                    </button>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                            <th></th>
-                            <th>#</th>
-                            <th>Origem</th>
-                            <th>Valor</th>
-                            <th>Data</th>
-                            <th>Documento</th>
-                            <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
-                            <td>1</td>
-                            <td>Venda</td>
-                            <td>29,39 R$</td>
-                            <td>01/04/2017</td>
-                            <td>12345</td>
-                            <td class="actions">
-                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
-                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
-                            <td>2</td>
-                            <td>Venda</td>
-                            <td>29,39 R$</td>
-                            <td>01/04/2017</td>
-                            <td></td>
-                            <td class="actions">
-                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
-                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
-                            <td>3</td>
-                            <td>Venda</td>
-                            <td>29,39 R$</td>
-                            <td>01/04/2017</td>
-                            <td>123</td>
-                            <td class="actions">
-                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
-                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
-                            <td>4</td>
-                            <td>Venda</td>
-                            <td>29,39 R$</td>
-                            <td>01/04/2017</td>
-                            <td>12</td>
-                            <td class="actions">
-                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
-                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
-                            <td>5</td>
-                            <td>Venda</td>
-                            <td>29,39 R$</td>
-                            <td>01/04/2017</td>
-                            <td>09</td>
-                            <td class="actions">
-                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
-                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
-                            <td>6</td>
-                            <td>Venda</td>
-                            <td>29,39 R$</td>
-                            <td>01/04/2017</td>
-                            <td></td>
-                            <td class="actions">
-                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
-                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
-                            </td>
-                            </tr>
-                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
-                            <td>7</td>
-                            <td>Venda</td>
-                            <td>29,39 R$</td>
-                            <td>01/04/2017</td>
-                            <td></td>
-                            <td class="actions">
-                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
-                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
-                            <td>8</td>
-                            <td>Venda</td>
-                            <td>29,39 R$</td>
-                            <td>01/04/2017</td>
-                            <td></td>
-                            <td class="actions">
-                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
-                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
-                            <td>9</td>
-                            <td>Venda</td>
-                            <td>29,39 R$</td>
-                            <td>01/04/2017</td>
-                            <td>8585</td>
-                            <td class="actions">
-                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
-                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
-                            </td>
-                            </tr>
-                            <tr>
-                            <td class='clean-td'><i style='color:#d9534f;' class='fa fa-minus'></i></td>
-                            <td>10</td>
-                            <td>Venda</td>
-                            <td>29,39 R$</td>
-                            <td>01/04/2017</td>
-                            <td></td>
-                            <td class="actions">
-                            <a href="edit_debit.html"><i class="lnr lnr-pencil"></i></a>
-                            <a href="remove_debit.html"><i class="lnr lnr-trash"></i></a>
-                            </td>
-                            </tr>
-                            </tbody>
-                            </table>
-                        </div>
-                        <div class="panel-footer">
-                        <a href="debitos.html">ver todos</a>
-                        </div>
-                        </div>
-                        <!-- END TABLE STRIPED -->
-                        </div>
-                        <div class="col-md-6">
-                        <!-- TABLE STRIPED -->
-                        <div class="panel">
-                        <div class="panel-heading">
+                        {% if not debits %}
+                            <h3>Nao existem Lancamentos de debitos cadastrados</h3>
+                        {% else %}
+                            <div class="table-responsive">
+                                <table class="table table-striped mb30">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>#</th>
+                                            <th>Origin</th>
+                                            <th>Value</th>
+                                            <th>Date</th>
+                                            <th>Author</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for debit in debits %}
+                                            <tr>
+                                                <td class='clean-td'><i class='fa fa-minus text-danger'></i></td>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ debit.origin }}</td>
+                                                <td>R$ {{ debit.value|decimal_to_real }}</td>
+                                                <td>{{ debit.created_at | date:"d/m/Y" }}</td>
+                                                <td>{{ debit.author }}</td>
+                                                <td class="actions">
+                                                    <a href="{{ debit.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>
+                                                    <a href="{{ debit.get_delete_debit }}"><i class="lnr lnr-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="panel-footer">
+                        <a href="{% url 'wallet:list_debit' %}">ver todos</a>
+                    </div>
+                    <!-- END TABLE STRIPED -->
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- TABLE STRIPED -->
+                <div class="panel">
+                    <div class="panel-heading">
                         <h3 class="panel-title">Depósitos</h3>
                         <div class="right">
-                        <ul class="list-inline">
-                        <li><a href='new_payment.html'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a></li>
-                        <li>
-                        <button type="button" class="btn-toggle-collapse">
-                        <i class="lnr lnr-chevron-up-circle"></i>
-                        </button></li>
-                        </ul>
+                            <ul class="list-inline">
+                                <li>
+                                    <a href='{% url "wallet:add_deposit" %}'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn-toggle-collapse">
+                                        <i class="lnr lnr-chevron-up-circle"></i>
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
-                        </div>
-                        <div class="panel-body">
-                        <table class="table table-striped">
-                        <thead>
-                        <tr>
-                        <th></th>
-                        <th>#</th>
-                        <th>Origem</th>
-                        <th>Valor</th>
-                        <th>Data</th>
-                        <th>Documento</th>
-                        <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
-                        <td>1</td>
-                        <td>Venda</td>
-                        <td>29,39 R$</td>
-                        <td>01/04/2017</td>
-                        <td>12345</td>
-                        <td class="actions">
-                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
-                        <td>2</td>
-                        <td>Venda</td>
-                        <td>29,39 R$</td>
-                        <td>01/04/2017</td>
-                        <td></td>
-                        <td class="actions">
-                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
-                        <td>3</td>
-                        <td>Venda</td>
-                        <td>29,39 R$</td>
-                        <td>01/04/2017</td>
-                        <td>123</td>
-                        <td class="actions">
-                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
-                        <td>4</td>
-                        <td>Venda</td>
-                        <td>29,39 R$</td>
-                        <td>01/04/2017</td>
-                        <td>12</td>
-                        <td class="actions">
-                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
-                        <td>5</td>
-                        <td>Venda</td>
-                        <td>29,39 R$</td>
-                        <td>01/04/2017</td>
-                        <td>09</td>
-                        <td class="actions">
-                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
-                        <td>6</td>
-                        <td>Venda</td>
-                        <td>29,39 R$</td>
-                        <td>01/04/2017</td>
-                        <td></td>
-                        <td class="actions">
-                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
-                        </td>
-                        </tr>
-                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
-                        <td>7</td>
-                        <td>Venda</td>
-                        <td>29,39 R$</td>
-                        <td>01/04/2017</td>
-                        <td></td>
-                        <td class="actions">
-                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
-                        <td>8</td>
-                        <td>Venda</td>
-                        <td>29,39 R$</td>
-                        <td>01/04/2017</td>
-                        <td></td>
-                        <td class="actions">
-                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
-                        <td>9</td>
-                        <td>Venda</td>
-                        <td>29,39 R$</td>
-                        <td>01/04/2017</td>
-                        <td>8585</td>
-                        <td class="actions">
-                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
-                        <td>10</td>
-                        <td>Venda</td>
-                        <td>29,39 R$</td>
-                        <td>01/04/2017</td>
-                        <td></td>
-                        <td class="actions">
-                        <a href="edit_payment.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_payment.html"><i class="lnr lnr-trash"></i></a>
-                        </td>
-                        </tr>
-                        </tbody>
-                        </table>
-                        </div>
-                        <div class="panel-footer">
-                        <a href="depositos.html">ver todos</a>
-                        </div>
-                        </div>
-                        <!-- END TABLE STRIPED -->
-                        </div>
-                        </div>
-                        <!-- END PAYMENTS -->
-                        <!-- TODO LIST -->
-                        <div class="row" id="notas">
-                        <div class="col-md-12">
-                        <!-- TODO LIST -->
-                        <div class="panel">
-                        <div class="panel-heading">
+                    </div>
+                    <div class="panel-body">
+                        {% if not deposits %}
+                            <h3>Nao existem Lancamentos de depositos cadastrados</h3>
+                        {% else %}
+                            <div class="table-responsive">
+                                <table class="table table-striped mb30">
+                                    <thead>
+                                        <tr>
+                                        <th></th>
+                                        <th>#</th>
+                                        <th>origin</th>
+                                        <th>value</th>
+                                        <th>Date</th>
+                                        <th>author</th>
+                                        <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for deposit in deposits %}
+                                            <tr>
+                                                <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ deposit.origin }}</td>
+                                                <td>R$ {{ deposit.value|decimal_to_real }}</td>
+                                                <td>{{ deposit.created_at | date:"d/m/Y" }}</td>
+                                                <td>{{ deposit.author }}</td>
+                                                <td class="actions">
+                                                    <a href="{{ deposit.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>
+                                                    <a href="{{ deposit.get_delete_deposit }}"><i class="lnr lnr-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="panel-footer">
+                        <a href="{% url 'wallet:list_deposit' %}">ver todos</a>
+                    </div>
+                </div>
+                <!-- END TABLE STRIPED -->
+            </div>
+        </div>
+        <!-- END PAYMENTS -->
+        <!-- TODO LIST -->
+        <div class="row" id="notas">
+            <div class="col-md-12">
+                <!-- TODO LIST -->
+                <div class="panel">
+                    <div class="panel-heading">
                         <h3 class="panel-title">Notas</h3>
                         <div class="right">
-                        <ul class="list-inline">
-                        <li><a href='new_note.html'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a></li>
-                        <li>
-                        <button type="button" class="btn-toggle-collapse">
-                        <i class="lnr lnr-chevron-up-circle"></i>
-                        </button></li>
-                        </ul>
+                            <ul class="list-inline">
+                                <li><a href='{% url "wallet:add_note" %}'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a></li>
+                                <li>
+                                    <button type="button" class="btn-toggle-collapse">
+                                        <i class="lnr lnr-chevron-up-circle"></i>
+                                    </button></li>
+                            </ul>
                         </div>
-                        </div>
-                        <div class="panel-body">
+                    </div>
+                    <div class="panel-body">
+
+                        {% if not notes %}
+                            <h3>Nao existem notas cadastradas</h3>
+                        {% else %}
+
                         <ul class="list-unstyled todo-list">
-                        <li class='completed'>
-                        <label class="control-inline fancy-checkbox">
-                        <input type="checkbox" checked="true"><span></span>
-                        </label>
-                        <p>
-                        <span class="label label-primary">nota</span>
-                        <span class="label label-success">ALERTA</span>
-                        <span class="label label-danger">URGENTE</span>
-                        <span class="short-description">Dynamically integrate client-centric technologies without cooperative resources.</span>
-                        <span class="date">20/10/2017</span>
-                        </p>
-                        <div class="controls">
-                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
-                        </div>
-                        </li>
-                        <li>
-                        <label class="control-inline fancy-checkbox">
-                        <input type="checkbox"><span></span>
-                        </label>
-                        <p>
-                        <span class="label label-primary">nota</span>
-                        <span class="short-description">Compellingly implement clicks-and-mortar relationships without highly efficient metrics.</span>
-                        <span class="date">20/10/2017</span>
-                        </p>
-                        <div class="controls">
-                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
-                        </div>
-                        </li>
-                        <li>
-                        <label class="control-inline fancy-checkbox">
-                        <input type="checkbox"><span></span>
-                        </label>
-                        <p>
-                        <span class="label label-success">ALERTA</span>
-                        <span class="short-description">Monotonectally formulate client-focused core competencies after parallel web-readiness.</span>
-                        <span class="date">20/10/2017</span>
-                        </p>
-                        <div class="controls">
-                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
-                        </div>
-                        </li>
-                        <li class='completed'>
-                        <label class="control-inline fancy-checkbox">
-                        <input type="checkbox" checked="true"><span></span>
-                        </label>
-                        <p>
-                        <span class="label label-success">ALERTA</span>
-                        <span class="short-description">Monotonectally formulate client-focused core competencies after parallel web-readiness.</span>
-                        <span class="date">20/10/2017</span>
-                        </p>
-                        <div class="controls">
-                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
-                        </div>
-                        </li>
-                        <li>
-                        <label class="control-inline fancy-checkbox">
-                        <input type="checkbox"><span></span>
-                        </label>
-                        <p>
-                        <span class="label label-danger">URGENTE</span>
-                        <span class="short-description">Monotonectally formulate client-focused core competencies after parallel web-readiness.</span>
-                        <span class="date">20/10/2017</span>
-                        </p>
-                        <div class="controls">
-                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
-                        </div>
-                        </li>
-                        <li class='completed'>
-                        <label class="control-inline fancy-checkbox">
-                        <input type="checkbox" checked="true"><span></span>
-                        </label>
-                        <p>
-                        <span class="label label-danger">URGENTE</span>
-                        <span class="short-description">Monotonectally formulate client-focused core competencies after parallel web-readiness.</span>
-                        <span class="date">20/10/2017</span>
-                        </p>
-                        <div class="controls">
-                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
-                        </div>
-                        </li>
-                        <li>
-                        <label class="control-inline fancy-checkbox">
-                        <input type="checkbox"><span></span>
-                        </label>
-                        <p>
-                        <span class="label label-danger">URGENTE</span>
-                        <span class="short-description">Monotonectally formulate client-focused core competencies after parallel web-readiness.</span>
-                        <span class="date">20/10/2017</span>
-                        </p>
-                        <div class="controls">
-                        <a href="edit_note.html"><i class="lnr lnr-pencil"></i></a>
-                        <a href="remove_note.html"><i class="lnr lnr-trash"></i></a>
-                        </div>
-                        </li>
+                            {% for note in notes %}
+                                <li class='{% if not note.status_note %}completed{% endif %}'>
+                                    <label id='note-list-input' class="control-inline fancy-checkbox">
+                                        <input id='{{ note.pk }}' type="checkbox" {% if not note.status_note %}checked{% endif %}><span></span>
+                                    </label>
+                                    <p>
+                                        <span class="label label-primary">nota</span>
+                                        {% if note.status_alert %}
+                                            <span class="label label-success">ALERTA</span>
+                                        {% endif %}
+                                        <span class="title">{{ note.title }}</span>
+                                        <span class="short-description">{{ note.description }}</span>
+                                        <span class="date">{{ note.created_at | date:"d/m/Y" }}</span>
+                                    </p>
+                                    <div class="controls">
+                                        <a href="{{ note.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>
+                                        <a href="{{ note.get_delete_url }}"><i class="lnr lnr-trash"></i></a>
+                                    </div>
+                                </li>
+                            {% endfor %}
                         </ul>
-                        </div>
-                        <div class="panel-footer">
-                        <a href="notas.html">ver todos</a>
-                        </div>
-    </div>
-    <!-- END TODO LIST -->
-    </div>
-    </div>
+                        {% endif %}
+                    </div>
+                    <div class="panel-footer">
+                        <a href="{% url 'wallet:list_note' %}">ver todos</a>
+                    </div>
+                </div>
+                <!-- END TODO LIST -->
+            </div>
+        </div>
     </div>
 {% endblock %}
+
 {% block extra_scripts %}
     <script src="{% static 'js/libs/highcharts.js' %}"></script>
     <script src="{% static 'js/home.js' %}"></script>
+
+<script type="text/javascript">
+    $(function() {
+        $('#notas input[type^="checkbox"]').click(function (e) {
+            url = '/wallet/list_note/?note='+$(this).attr("id");
+            note_get_function(url)
+        });
+
+        function note_get_function(url){
+            $.ajax({type: 'get', url: url,});
+            return false;
+        }
+
+        function get_graphics(){
+            $.ajax({
+                type: 'get',
+                url: '/main/graphics/',
+                dataType: "json",
+                success: function(data){
+                    create_graphic(data);
+                },
+            });
+        }
+
+        get_graphics();
+
+
+        function create_graphic(data){
+            /* GRAPHIC HOME */
+            $('#chart-line').highcharts({
+                colors: ['#90ed7d','#f45b5b'],
+                plotOptions: {
+                    series: {lineWidth:3,}
+                },
+                title: {text: ''},
+                subtitle: {text: ''},
+                yAxis: {title: {text: ''}},
+                credits: {enabled: false},
+                tooltip: {
+                    formatter:function(){
+                        return '<b>' + this.point.series.name + '</b><br>Valor: <b>R$ ' + Highcharts.numberFormat(this.point.y,0,',','.') + '</b><br>Data: ' + Highcharts.dateFormat('%d/%m/%Y', this.x*1000);
+                    }
+                },
+                exporting: {enabled: false},
+                xAxis: {
+                    type: 'datetime',
+                    labels: {
+                        formatter:function(){
+                            return Highcharts.dateFormat('%d/%m/%Y',this.value * 1000);
+                        }
+                    },
+                    title: {text: ''},
+                },
+                series: data,
+            });
+        }
+
+    }); //end function
+</script>
+
 {% endblock %}
