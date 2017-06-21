@@ -35,10 +35,10 @@ def home(request):
 def graphics(request):
 	if request.method == 'GET':
 		list_graphics = []
-		select_date = {"date": "to_date(cast(date_created as TEXT),'YYYY-MM-DD')"}
-		list_graphics.append(format_json(Deposit.objects.extra(select=select_date).values('date').annotate(total=Sum('value')).order_by()[:30],
+		select_date = {"date": "to_date(cast(date_created as TEXT),'YYYY-MM-DD')", "created_at":"date_created"}
+		list_graphics.append(format_json(Deposit.objects.filter(account=request.user.account).extra(select=select_date).values('date').annotate(total=Sum('value')).order_by('date')[:30],
 							 Deposit._meta.verbose_name_plural))
-		list_graphics.append(format_json(Debit.objects.extra(select=select_date).values('date').annotate(total=Sum('value')).order_by()[:30],
+		list_graphics.append(format_json(Debit.objects.filter(account=request.user.account).extra(select=select_date).values('date').annotate(total=Sum('value')).order_by('date')[:30],
 							 Debit._meta.verbose_name_plural))
 
 		return JsonResponse(list_graphics, safe=False)
@@ -49,5 +49,5 @@ def graphics(request):
 def alerts(request):
 	template_name = 'main/alerts.html'
 	if request.method == 'GET':
-		alerts = Note.objects.filter(status_alert=True)
+		alerts = Note.objects.filter(status_alert=True, account=request.user.account)
 		return render(request, template_name, {'alerts':alerts})

@@ -285,8 +285,11 @@
             $('#chart-line').highcharts({
                 colors: ['#90ed7d','#f45b5b'],
                 plotOptions: {
-                    series: {lineWidth:3,}
+                    series: {
+                             lineWidth:3,
+                    }
                 },
+
                 title: {text: ''},
                 subtitle: {text: ''},
                 yAxis: {title: {text: ''}},
@@ -305,6 +308,7 @@
                         }
                     },
                     title: {text: ''},
+
                 },
                 series: data,
             });

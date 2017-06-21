@@ -135,7 +135,7 @@ def format_date(date_start, date_end):
 	return date_start, date_end
 
 def format_json(list_objects, name):
-	context = {'name':name, 'data': []}
+	context = {'name':name, 'data': [],}
 	for obj in list_objects:
 		context['data'].append([time.mktime(obj['date'].timetuple()),
 								int(str(obj['total']).split('.')[0])])
