@@ -20,7 +20,7 @@ class DebitManager(models.Manager):
 
     def sum_debits(self, user):
         qs = super(DebitManager, self).get_queryset()
-        if not user.is_superuser and user.is_active:
+        if user.is_active:
             qs = qs.filter(account=user.account).aggregate(Sum('value')).get('value__sum') or 0
 
         return qs
@@ -86,7 +86,7 @@ class DepositManager(models.Manager):
 
     def sum_deposits(self, user):
         qs = super(DepositManager, self).get_queryset()
-        if not user.is_superuser and user.is_active:
+        if user.is_active:
             qs = qs.filter(account=user.account).aggregate(Sum('value')).get('value__sum') or 0
 
         return qs

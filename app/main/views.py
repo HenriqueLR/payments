@@ -51,3 +51,9 @@ def alerts(request):
 	if request.method == 'GET':
 		alerts = Note.objects.filter(status_alert=True, account=request.user.account)
 		return render(request, template_name, {'alerts':alerts})
+
+
+def site(request):
+	template_name = 'main/site.html'
+	if request.method == 'GET':
+		return render(request, template_name, {'test':'test'})

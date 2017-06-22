@@ -1,0 +1,53 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Payments</title>
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Anaheim' rel='stylesheet'>
+        <!-- ICONS -->
+        <link rel="apple-touch-icon" sizes="76x76" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/img/apple-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/img/favicon.png' %}">
+        <!-- VENDOR CSS -->
+        <link rel="stylesheet" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/font-awesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/linearicons/style.css' %}">
+        <!-- MAIN CSS -->
+        <link rel="stylesheet" href="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/css/main.css' %}">
+        <!-- CUSTOM CSS -->
+        <link rel="stylesheet" href="{% static 'css/custom_styles.css' %}">
+        {% block extra_extyles %}
+        	<style type="text/css">
+        		body{
+        			font-size: 15px;
+        		}
+        		h1{
+        			font-size: 70px;
+        			color: white;
+        		}
+        		p{
+        			color: white;
+        			font-size: 20px;
+        		}
+				.btn-primary {
+				    background-color: #5d4773;
+				    border-color: #ffffff;
+				}
+				.btn-primary:hover, .btn-primary:focus {
+				    background-color: #5d4773;
+				    border-color: #ffffff;
+				}
+        	</style>
+        {% endblock %}
+	</head>
+	<body background="{% static 'img/light.jpg' %}">
+		<div class='row'>
+			<div class='col-md-4 col-md-offset-1' style='margin-top:10%;'>
+				<h1>Payments</h1>
+				<p>sua carteira virtual, disponivel 24 horas.</p>
+				<p>realize o seu cadastro</p>
+				<a href="{% url 'accounts:create_account' %}" class='btn btn-primary'>Cadastrar</a>
+			</div>
+		</div>
+	</body>
+</html>
