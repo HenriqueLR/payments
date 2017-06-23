@@ -4,6 +4,7 @@ import hashlib
 import string
 import random
 import time
+import calendar
 from django.utils.safestring import mark_safe
 from django.contrib.admin import ModelAdmin
 from django.utils.text import capfirst
@@ -135,6 +136,16 @@ def format_date(date_start, date_end):
 									settings.DATETIME_FORMAT_BR)
 
 	return date_start, date_end
+
+
+def get_period_this_month():
+	date = datetime.now().date()
+	_, num_days = calendar.monthrange(date.year, date.month)
+	start_date = datetime.strptime(('%s/%s/%s 00:00:00') % ('01', date.month, date.year),
+									settings.DATETIME_FORMAT_BR)
+	end_date = datetime.strptime(('%s/%s/%s 23:59:59') % (num_days, date.month, date.year),
+									settings.DATETIME_FORMAT_BR)
+	return start_date, end_date
 
 
 def format_json_graphic(list_objects, name):

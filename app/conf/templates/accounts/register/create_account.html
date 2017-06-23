@@ -32,14 +32,9 @@
         			color: white;
         			font-size: 20px;
         		}
-				.btn-primary {
-				    background-color: #5d4773;
-				    border-color: #ffffff;
-				}
-				.btn-primary:hover, .btn-primary:focus {
-				    background-color: #5d4773;
-				    border-color: #ffffff;
-				}
+        		.input-group{
+        			margin-bottom:10px;
+        		}
         	</style>
         {% endblock %}
 	</head>
@@ -53,7 +48,7 @@
 
 					<div class='input-group {% if form_account.cpf.errors %}has-error{% endif %}'>
 						<div class='input-group-addon'>
-							<i class='fa fa-id-card fa-fw'></i>
+							<i class='fa fa-user fa-fw'></i>
 						</div>
 						{{ form_account.cpf|placeholder:"Cpf" |addcss:"form-control" }}
 					</div>
@@ -91,6 +86,26 @@
 					</div>
 					<span class="error text-danger">{{ form_user.email.errors|join:"<br \>" }}</span>
 
+				</div><!-- col-md-4 -->
+
+				<div class='col-md-3'>
+
+					<div class='input-group {% if form_profile.state.errors %}has-error{% endif %}'>
+						<div class='input-group-addon'>
+							<i class='fa fa-map-marker fa-fw'></i>
+						</div>
+						{{ form_profile.state|addcss:"form-control" }}
+					</div>
+					<span class="error text-danger">{{ form_profile.state.errors|join:"<br \>" }}</span>
+
+					<div class='input-group {% if form_profile.url.errors %}has-error{% endif %}'>
+						<div class='input-group-addon'>
+							<i class='fa fa-bookmark fa-fw'></i>
+						</div>
+						{{ form_profile.url|placeholder:"Site / Rede Social" |addcss:"form-control" }}
+					</div>
+					<span class="error text-danger">{{ form_profile.url.errors|join:"<br \>" }}</span>
+
 					<div class='input-group {% if form_user.password1.errors %}has-error{% endif %}'>
 						<div class='input-group-addon'>
 							<i class='fa fa-key fa-fw'></i>
@@ -109,46 +124,79 @@
 
 				</div><!-- col-md-4 -->
 
-				<div class='col-md-3'>
-					<div class='input-group {% if form_profile.description.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-							<i class='fa fa-pencil fa-fw'></i>
-						</div>
-						{{ form_profile.description|placeholder:"Informacoes do perfil" |textarea:"8" |addcss:"form-control" }}
-					</div>
-					<span class="error text-danger">{{ form_profile.description.errors|join:"<br \>" }}</span>
-
-					<div class='input-group {% if form_profile.state.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-							<i class='fa fa-map-marker fa-fw'></i>
-						</div>
-						{{ form_profile.state|addcss:"form-control" }}
-					</div>
-					<span class="error text-danger">{{ form_profile.state.errors|join:"<br \>" }}</span>
-
-					<div class='input-group {% if form_profile.url.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-							<i class='fa fa-bookmark fa-fw'></i>
-						</div>
-						{{ form_profile.url|placeholder:"Site / Rede Social" |addcss:"form-control" }}
-					</div>
-					<span class="error text-danger">{{ form_profile.url.errors|join:"<br \>" }}</span>
-
-				</div><!-- col-md-4 -->
-
 			</div><!-- row -->
 
 
 			<div class="text-center" style='margin-top:20px;'>
-				<button class='btn btn-primary' type='submit' name='save_profile' id='save_profile'>
+				<button class='btn btn-danger btn-lg' type='submit' name='save_profile' id='save_profile'>
 				Criar Conta
 				</button>
-				<a href='{% url "main:site" %}' class='btn btn-success' type='text' name='voltar' id='voltar'>
-				Voltar
-				</a>
 			</div>
 
 			</form>
+
+    <script src="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/libs/moment.min.js' %}"></script>
+	<script src="{% static 'js/libs/daterangepicker.js' %}"></script>
+
+	<script type="text/javascript">
+
+	//GET CONFIG DATAPICKER
+	function get_config_datapicker(list_dict){
+		context = {
+		 "ranges": {
+			'Today': [moment(), moment()],
+			'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+			'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+			'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+			'This Month': [moment().startOf('month'), moment().endOf('month')],
+			'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+		},
+		 "linkedCalendars": false,
+		 "opens": "right",
+		}
+
+		$.each(list_dict, function(key, value) {
+			$.extend(context, value);
+		});
+		return context;
+	}
+
+	//GET LOCALE
+	function get_locale(format_date){
+		locale = {
+			"locale": {
+		    "separator": " - ",
+		    "applyLabel": "Apply",
+		    "cancelLabel": "Cancel",
+		    "fromLabel": "From",
+		    "toLabel": "To",
+		    "customRangeLabel": "Custom",
+		    "weekLabel": "W",
+		    "daysOfWeek": ["Su","Mo","Tu","We","Th","Fr","Sa"],
+		    "monthNames": ["January","February","March","April","May","June","July",
+		    			   "August","September","October","November","December"],
+		    "firstDay": 1
+			},
+		}
+		if(format_date){
+			$.extend(locale["locale"], format_date);
+		}
+		return locale;
+	}
+
+	$(function(){
+		//CHECK EXIST NOTE
+		if($('#id_birthday')){
+			list_dict = [];
+			list_dict.push({"singleDatePicker": true,"timePicker": false});
+			list_dict.push(get_locale({"format": "DD/MM/YYYY"}));
+			$('input[name="birthday"]').daterangepicker(get_config_datapicker(list_dict));
+		}
+	});
+
+	</script>
 
 	</body>
 </html>

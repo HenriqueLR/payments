@@ -144,6 +144,10 @@ input[type="select"] {
     background: none;
     outline: none;
 }
+
+#list-debit .panel{
+	min-height: 320px;
+}
 	</style>
 {% endblock %}
 
@@ -195,7 +199,11 @@ input[type="select"] {
 					<br>
 
 					{% if not object_list %}
-						<h3>Nao existem Lancamentos de debitos cadastrados</h3>
+						<div class='empty-object'>
+							<center>
+								<h3>Nao existem Lancamentos de debitos cadastrados</h3>
+							</center>
+						</div>
 					{% else %}
 						<div class="table-responsive">
 							<table class="table table-striped mb30">

@@ -33,7 +33,7 @@ class PermissionsNoteMixin(PermissionsGeralMixin):
         if date != '':
             range_date = date.split('-')
             date_start, date_end = format_date(range_date[0], range_date[1])
-            qs = qs.filter(created_at__gte=date_start, created_at__lte=date_end)
+            qs = qs.filter(date_note__gte=date_start, date_note__lte=date_end)
 
         note = self.request.GET.get('status_note', '')
         if note != '' and note != 'all':

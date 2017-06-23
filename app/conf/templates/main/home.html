@@ -9,15 +9,10 @@
         </ol>
         <!-- OVERVIEW -->
         <div class="row" id="overview">
-            <div class="col-md-12" id='teste-chart'>
+            <div class="col-md-12">
                 <div class="panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">Totalizadores</h3>
-                        <div class="right">
-                            <button type="button" class="btn-toggle-collapse">
-                                <i class="lnr lnr-chevron-up-circle"></i>
-                            </button>
-                        </div>
                     </div>
 
                     <div class="panel-body">
@@ -70,7 +65,7 @@
         <!-- END OVERVIEW -->
         <!-- PAYMENTS -->
         <div class="row" id="payments">
-            <div class="col-md-6">
+            <div class="col-md-6" id='debit-col'>
                 <!-- TABLE STRIPED -->
                 <div class="panel">
                     <div class="panel-heading">
@@ -78,12 +73,6 @@
                         <div class="right">
                             <ul class="list-inline">
                                 <li><a href='{% url "wallet:add_debit" %}'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a></li>
-                                <li>
-                                    <button type="button" class="btn-toggle-collapse">
-                                        <i class="lnr lnr-chevron-up-circle"></i>
-                                    </button>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -123,14 +112,11 @@
                             </div>
                         {% endif %}
                     </div>
-                    <div class="panel-footer">
-                        <a href="{% url 'wallet:list_debit' %}">ver todos</a>
-                    </div>
                     <!-- END TABLE STRIPED -->
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6" id='deposit-col'>
                 <!-- TABLE STRIPED -->
                 <div class="panel">
                     <div class="panel-heading">
@@ -139,11 +125,6 @@
                             <ul class="list-inline">
                                 <li>
                                     <a href='{% url "wallet:add_deposit" %}'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a>
-                                </li>
-                                <li>
-                                    <button type="button" class="btn-toggle-collapse">
-                                        <i class="lnr lnr-chevron-up-circle"></i>
-                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -185,9 +166,6 @@
                             </div>
                         {% endif %}
                     </div>
-                    <div class="panel-footer">
-                        <a href="{% url 'wallet:list_deposit' %}">ver todos</a>
-                    </div>
                 </div>
                 <!-- END TABLE STRIPED -->
             </div>
@@ -203,10 +181,6 @@
                         <div class="right">
                             <ul class="list-inline">
                                 <li><a href='{% url "wallet:add_note" %}'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a></li>
-                                <li>
-                                    <button type="button" class="btn-toggle-collapse">
-                                        <i class="lnr lnr-chevron-up-circle"></i>
-                                    </button></li>
                             </ul>
                         </div>
                     </div>
@@ -223,11 +197,11 @@
                                         <input id='{{ note.pk }}' type="checkbox" {% if not note.status_note %}checked{% endif %}><span></span>
                                     </label>
                                     <p>
-                                        <span class="label label-primary">nota</span>
-                                        {% if note.status_alert %}
-                                            <span class="label label-success">ALERTA</span>
-                                        {% endif %}
                                         <span class="title">{{ note.title }}</span>
+                                        <span class="label label-primary"><i class='fa fa-edit'></i></span>
+                                        {% if note.status_alert %}
+                                            <span class="label label-success"><i class='fa fa-warning'></i></span>
+                                        {% endif %}
                                         <span class="short-description">{{ note.description }}</span>
                                         <span class="date">{{ note.created_at | date:"d/m/Y" }}</span>
                                     </p>
@@ -240,9 +214,6 @@
                         </ul>
                         {% endif %}
                     </div>
-                    <div class="panel-footer">
-                        <a href="{% url 'wallet:list_note' %}">ver todos</a>
-                    </div>
                 </div>
                 <!-- END TODO LIST -->
             </div>
@@ -253,68 +224,4 @@
 {% block extra_scripts %}
     <script src="{% static 'js/libs/highcharts.js' %}"></script>
     <script src="{% static 'js/home.js' %}"></script>
-
-<script type="text/javascript">
-    $(function() {
-        $('#notas input[type^="checkbox"]').click(function (e) {
-            url = '/wallet/list_note/?note='+$(this).attr("id");
-            note_get_function(url)
-        });
-
-        function note_get_function(url){
-            $.ajax({type: 'get', url: url,});
-            return false;
-        }
-
-        function get_graphics(){
-            $.ajax({
-                type: 'get',
-                url: '/main/graphics/',
-                dataType: "json",
-                success: function(data){
-                    create_graphic(data);
-                },
-            });
-        }
-
-        get_graphics();
-
-
-        function create_graphic(data){
-            /* GRAPHIC HOME */
-            $('#chart-line').highcharts({
-                colors: ['#90ed7d','#f45b5b'],
-                plotOptions: {
-                    series: {
-                             lineWidth:3,
-                    }
-                },
-
-                title: {text: ''},
-                subtitle: {text: ''},
-                yAxis: {title: {text: ''}},
-                credits: {enabled: false},
-                tooltip: {
-                    formatter:function(){
-                        return '<b>' + this.point.series.name + '</b><br>Valor: <b>R$ ' + Highcharts.numberFormat(this.point.y,0,',','.') + '</b><br>Data: ' + Highcharts.dateFormat('%d/%m/%Y', this.x*1000);
-                    }
-                },
-                exporting: {enabled: false},
-                xAxis: {
-                    type: 'datetime',
-                    labels: {
-                        formatter:function(){
-                            return Highcharts.dateFormat('%d/%m/%Y',this.value * 1000);
-                        }
-                    },
-                    title: {text: ''},
-
-                },
-                series: data,
-            });
-        }
-
-    }); //end function
-</script>
-
 {% endblock %}

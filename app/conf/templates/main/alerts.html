@@ -1,12 +1,18 @@
 {% load staticfiles %}
 {% load formtags %}
-    <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-        <i class="lnr lnr-alarm"></i>
-        <span class="badge bg-danger">{{ alerts.count }}</span>
-    </a>
-    <ul class="dropdown-menu notifications">
-    {% for alert in alerts %}
-        <li><a href="{{ alert.get_absolute_url }}" class="notification-item"><span class="dot bg-warning"></span>{{ alert.title }}</a></li>
-    {% endfor %}
-    <li><a href="{% url 'wallet:list_note' %}?status_alert=True&status_note=all" class="more">ver todos</a></li>
-    </ul>
+    {% if not alerts %}
+        <a href="#" class="dropdown-toggle icon-menu">
+            <i class="lnr lnr-alarm"></i>
+        </a>
+    {% else %}
+        <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+            <i class="lnr lnr-alarm"></i>
+            <span class="badge bg-danger">{{ alerts.count }}</span>
+        </a>
+        <ul class="dropdown-menu notifications">
+        {% for alert in alerts %}
+            <li><a href="{{ alert.get_absolute_url }}" class="notification-item"><span class="dot bg-warning"></span>{{ alert.title }}</a></li>
+        {% endfor %}
+        <li><a href="{% url 'wallet:list_note' %}?status_alert=True&status_note=all" class="more">ver todos</a></li>
+        </ul>
+    {% endif %}

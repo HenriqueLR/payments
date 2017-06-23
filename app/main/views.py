@@ -1,10 +1,11 @@
 #encoding: utf-8
 
 import json
+from datetime import datetime
 from django.shortcuts import render
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
-from main.utils import apps_permissions, format_json_graphic
+from main.utils import apps_permissions, format_json_graphic, get_period_this_month
 from main.decorators import permissions_denied, ajax_required
 from wallet.models import Debit, Deposit, Note
 from django.http import HttpResponse, JsonResponse
@@ -49,7 +50,10 @@ def graphics(request):
 def alerts(request):
 	template_name = 'main/alerts.html'
 	if request.method == 'GET':
-		alerts = Note.objects.filter(status_alert=True, account=request.user.account)
+		start_date, end_date = get_period_this_month()
+		alerts = Note.objects.filter(status_alert=True, account=request.user.account,
+									 date_note__gte=start_date, date_note__lte=end_date,
+									 status_note=True)
 		return render(request, template_name, {'alerts':alerts})
 
 

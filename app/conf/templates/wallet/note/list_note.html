@@ -167,6 +167,11 @@ input[type="select"] {
     margin-top: 9px;
 }
 
+
+#list-note .panel{
+	min-height: 320px;
+}
+
 	</style>
 {% endblock %}
 
@@ -243,7 +248,11 @@ input[type="select"] {
 					<br>
 
 					{% if not object_list %}
-						<h3>Nao existem notas cadastradas</h3>
+						<div class='empty-object'>
+							<center>
+								<h3>Nao existem notas cadastradas</h3>
+							</center>
+						</div>
 					{% else %}
 
 						<ul class="list-unstyled todo-list">
@@ -253,13 +262,13 @@ input[type="select"] {
 										<input id='{{ note.pk }}' type="checkbox" {% if not note.status_note %}checked{% endif %}><span></span>
 									</label>
 									<p>
-										<span class="label label-primary">nota</span>
-										{% if note.status_alert %}
-											<span class="label label-success">ALERTA</span>
-										{% endif %}
 										<span class="title">{{ note.title }}</span>
+										<span class="label label-primary"><i class='fa fa-edit'></i></span>
+										{% if note.status_alert %}
+											<span class="label label-success"><i class='fa fa-warning'></i></span>
+										{% endif %}
 										<span class="short-description">{{ note.description }}</span>
-										<span class="date">{{ note.created_at | date:"d/m/Y" }}</span>
+										<span class="date">{{ note.date_note | date:"d/m/Y H:m" }}</span>
 									</p>
 									<div class="controls">
 										<a href="{{ note.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>

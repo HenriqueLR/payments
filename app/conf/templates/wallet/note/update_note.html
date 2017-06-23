@@ -3,6 +3,7 @@
 {% load formtags %}
 
 {% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
 
 	<style>
 			/*.metric{
@@ -382,6 +383,14 @@ input:checked + .status_slider:before {
 </div></li>
 </ul>
 </div>
+
+<div class='row'>
+	<div class="form-group col-sm-3 {% if form.date_note.errors %}has-error{% endif %}">
+		<label for="id_date_note">Date Note:</label>
+		{{ form.date_note|placeholder:"dd/mm/yyyy" |addcss:"form-control" }}
+	</div>
+</div>
+
 <div class='row'>
 
 <div class="form-group col-sm-6 {% if form.description.errors %}has-error{% endif %}">
@@ -414,4 +423,10 @@ input:checked + .status_slider:before {
 		<!-- END note -->
 	</div>
 
+{% endblock %}
+
+{% block extra_scripts %}
+	<script src="{% static 'js/libs/moment.min.js' %}"></script>
+	<script src="{% static 'js/libs/daterangepicker.js' %}"></script>
+	<script src="{% static 'js/wallet.js' %}"></script>
 {% endblock %}

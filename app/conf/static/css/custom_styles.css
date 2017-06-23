@@ -18,14 +18,14 @@ body{
 	background-color: white;
 	text-align: center;
 }
+.panel{
+    margin-bottom: 20px;
+}
 table td, th{
 	text-align: center;
 }
-#payments .lnr{
-	font-size: 16px;
-}
-#notas .lnr{
-	font-size: 16px;
+#overview .panel{
+    min-height: 320px;
 }
 #overview .lnr{
 	font-size: 16px;
@@ -94,7 +94,6 @@ input[type="select"] {
 }
 /* END GLOBAL */
 
-
 #payments .table {
     width: 100%;
     max-width: 100%;
@@ -114,6 +113,25 @@ input[type="select"] {
     vertical-align: top;
     border-top: 1px solid #ddd;
     font-size: 14px;
+}
+#payments .lnr{
+    font-size: 16px;
+}
+#payments .panel{
+    min-height: 320px;
+}
+#payments #debit-col{
+    padding-right: 10px;
+}
+#payments #deposit-col{
+    padding-left: 10px;
+}
+
+#notas .panel{
+    min-height: 320px;
+}
+#notas .lnr{
+    font-size: 16px;
 }
 #notas ol, ul {
     margin-top: 0;
@@ -139,6 +157,7 @@ input[type="select"] {
 #notas .todo-list .short-description {
     display: block;
     margin-top: 0px;
+    color:#a3a3a3;
 }
 #home .panel .panel-body {
     padding-top: 0px;
@@ -213,10 +232,7 @@ input[type="select"] {
 #list-note .todo-list .short-description {
     display: block;
     margin-top: 0px;
-}
-
-#list-note .title {
-    display: block;
+    color:#a3a3a3;
 }
 
 .bg-warning {
@@ -224,3 +240,7 @@ input[type="select"] {
 }
 
 /* END NOTE */
+
+.empty-object{
+    margin-top:80px;
+}
