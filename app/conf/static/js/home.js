@@ -44,7 +44,7 @@ function get_graphics(){
         url: '/main/graphics/',
         dataType: "json",
         success: function(data){
-            if ((data[0].data.length > 0) || (data[1].dataaa.length > 0)){
+            if ((data[0].data.length > 0) || (data[1].data.length > 0)){
                 create_graphic(data);
             }else{
                 $('#chart-line').html('<h3 class="text-center">Nao existem atividades \

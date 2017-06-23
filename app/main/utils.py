@@ -154,3 +154,9 @@ def format_json_graphic(list_objects, name):
 		context['data'].append([time.mktime(obj['date'].timetuple()),
 								int(str(obj['total']).split('.')[0])])
 	return context
+
+
+def get_link_payment():
+	msg = 'Cadastro criado com sucesso, aguarde para ser redirecionado '+\
+		  'para tela de pagamento ou clique <button onclick="open_window_payment()">'+\
+		  'aqui</button>';

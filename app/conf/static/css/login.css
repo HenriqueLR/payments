@@ -1,6 +1,11 @@
 /* LOGIN */
+
+.auth-box .form-auth-small .btn {
+    margin-top: 5px;
+}
+
 .auth-box {
-    height: 500px !important;
+    height: 550px !important;
 }
 
 .modal-dialog {

@@ -24,7 +24,7 @@ from main.decorators import ajax_required
 class AccountView(View):
 
     template_name = 'accounts/register/create_account.html'
-    success_url = reverse_lazy('accounts:login')
+    success_url = reverse_lazy('accounts:create_account')
 
     def get(self, request):
         context = {'form_profile': ProfileForm, 'form_user': AddUserForm,
@@ -45,14 +45,19 @@ class AccountView(View):
                 profile.user = user
                 profile.order = Profile.ORDER_CHOICE[0][0]
                 profile.save()
-                messages.success(self.request, 'Conta criada com sucesso')
+
+                account = AccountUtils(profile)
+                account.active_account(True)
+                account.add_user_group('customers')
+                account.save_account()
+                messages.info(self.request,'Cadastro criado com sucesso, aguarde para ser redirecionado '+\
+                              'para tela de pagamento ou clique')
                 return HttpResponseRedirect(self.success_url)
             except Exception as Error:
                 messages.error(self.request, Error)
         context = {'form_profile': form_profile, 'form_user': form_user,
                    'form_account': form_account}
         return render(self.request, self.template_name, context)
-
 
 
 class AccountListView(PermissionsAccountMixin, ListView):

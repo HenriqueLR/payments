@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Payments</title>
+	</head>
+
+	<body>
+
+		<div target="_blank" class='btn-pgseguro' style='display: none;'>
+			<!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+			<form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post">
+				<!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
+				<input type="hidden" name="code" value="6ACCF025EFEF9E6554727F8AB5526B95" />
+				<input type="hidden" name="iot" value="button" />
+				<input id='send' type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/120x53-comprar.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+			</form>
+			<!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
+		</div>
+
+		<script src="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/jquery/jquery.min.js' %}"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('#send').click();
+			});
+		</script>
+
+	</body>
+
+</html>

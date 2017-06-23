@@ -57,7 +57,5 @@ def alerts(request):
 		return render(request, template_name, {'alerts':alerts})
 
 
-def site(request):
-	template_name = 'main/site.html'
-	if request.method == 'GET':
-		return render(request, template_name, {'test':'test'})
+def payment(request):
+	return render(request, 'main/payment.html', {})

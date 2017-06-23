@@ -20,39 +20,102 @@
         <link rel="stylesheet" href="{% static 'css/custom_styles.css' %}">
         {% block extra_extyles %}
         	<style type="text/css">
+				button {
+				    font-family: inherit;
+				    font-size: inherit;
+				    line-height: inherit;
+				    background: transparent;
+				    border: transparent;
+				}
         		body{
         			font-size: 15px;
         		}
         		h1{
         			font-size: 50px;
         			color: white;
-        			margin-left:20px;
         		}
         		p{
         			color: white;
         			font-size: 20px;
         		}
         		.input-group{
-        			margin-bottom:10px;
+        			margin-bottom:5px;
         		}
+				.alert {
+				    padding: 15px;
+				    margin-bottom: 0px;
+				    border: 1px solid transparent;
+				    border-radius: 4px;
+				}
+				.alert-dismissible .close {
+				    position: relative;
+				    top: -2px;
+				    right: -5px;
+				    color: inherit;
+				}
         	</style>
         {% endblock %}
 	</head>
 	<body background="{% static 'img/light.jpg' %}">
-			<h1>Criar Conta</h1>
-			<form name='create_user' method='POST'>
+
+		<div class='row'>
+			<div class='col-md-8 col-md-offset-2' style='margin-top:40px;'>
+
+	{% if messages %}
+		{% for message in messages %}
+			<div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong>{{ message.tags }}:</strong> {{ message }}
+				{% if message.tags == 'info' %}
+					<button onclick='open_window_payment()'>aqui</button>.
+				{% endif %}
+			</div>
+		{% endfor %}
+	{% endif %}
+
+	{% if form.errors %}
+		<div class="alert alert-danger">
+			<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+			<strong>Error: </strong>
+			{% for field, error in form.errors.items %}
+				{% if field != '__all__' %}{{ field }}{% endif %}
+				{{ error | striptags }}<br />
+			{% endfor %}
+		</div>
+	{% endif %}
+
+			</div>
+		</div>
+
+
+
+
+		<div class='row'>
+
+			<div class='col-md-4 col-md-offset-1' style='margin-top:10%;'>
+				<h1>Payments</h1>
+				<p>sua carteira virtual, disponivel 24 horas</p>
+				<p>realize o seu cadastro.</p>
+			</div>
+
+<div class='col-md-4'>
+
+	<form name='create_user' method='POST'>
 			{% csrf_token %}
-			<div class='row' style='margin-top:60px;'>
+			<div class='row'>
 
-				<div class='col-md-3 col-md-offset-3'>
-
+				<div class='col-md-8 col-md-offset-2'>
+					<div class="text-center">
+						<h1>Cadastrar</h1>
+					</div>
 					<div class='input-group {% if form_account.cpf.errors %}has-error{% endif %}'>
 						<div class='input-group-addon'>
 							<i class='fa fa-user fa-fw'></i>
 						</div>
 						{{ form_account.cpf|placeholder:"Cpf" |addcss:"form-control" }}
 					</div>
-					<span class="error text-danger">{{ form_account.cpf.errors|join:"<br \>" }}</span>
 
 					<div class='input-group {% if form_profile.first_name.errors %}has-error{% endif %}'>
 						<div class='input-group-addon'>
@@ -60,7 +123,6 @@
 						</div>
 						{{ form_profile.first_name|placeholder:"Nome" |addcss:"form-control" }}
 					</div>
-					<span class="error text-danger">{{ form_profile.first_name.errors|join:"<br \>" }}</span>
 
 					<div class='input-group {% if form_profile.last_name.errors %}has-error{% endif %}'>
 						<div class='input-group-addon'>
@@ -68,15 +130,6 @@
 						</div>
 						{{ form_profile.last_name|placeholder:"Sobrenome" |addcss:"form-control" }}
 					</div>
-					<span class="error text-danger">{{ form_profile.last_name.errors|join:"<br \>" }}</span>
-
-					<div class='input-group {% if form_profile.birthday.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-							<i class='fa fa-birthday-cake fa-fw'></i>
-						</div>
-						{{ form_profile.birthday|addcss:"form-control" }}
-					</div>
-					<span class="error text-danger">{{ form_profile.birthday.errors|join:"<br \>" }}</span>
 
 					<div class='input-group {% if form_user.email.errors %}has-error{% endif %}'>
 						<div class='input-group-addon'>
@@ -84,11 +137,13 @@
 						</div>
 						{{ form_user.email|addcss:"form-control" }}
 					</div>
-					<span class="error text-danger">{{ form_user.email.errors|join:"<br \>" }}</span>
 
-				</div><!-- col-md-4 -->
-
-				<div class='col-md-3'>
+					<div class='input-group {% if form_profile.birthday.errors %}has-error{% endif %}'>
+						<div class='input-group-addon'>
+							<i class='fa fa-birthday-cake fa-fw'></i>
+						</div>
+						{{ form_profile.birthday|addcss:"form-control" }}
+					</div>
 
 					<div class='input-group {% if form_profile.state.errors %}has-error{% endif %}'>
 						<div class='input-group-addon'>
@@ -96,7 +151,6 @@
 						</div>
 						{{ form_profile.state|addcss:"form-control" }}
 					</div>
-					<span class="error text-danger">{{ form_profile.state.errors|join:"<br \>" }}</span>
 
 					<div class='input-group {% if form_profile.url.errors %}has-error{% endif %}'>
 						<div class='input-group-addon'>
@@ -104,7 +158,6 @@
 						</div>
 						{{ form_profile.url|placeholder:"Site / Rede Social" |addcss:"form-control" }}
 					</div>
-					<span class="error text-danger">{{ form_profile.url.errors|join:"<br \>" }}</span>
 
 					<div class='input-group {% if form_user.password1.errors %}has-error{% endif %}'>
 						<div class='input-group-addon'>
@@ -112,7 +165,6 @@
 						</div>
 						{{ form_user.password1|placeholder:"password" |addcss:"form-control" }}
 					</div>
-					<span class="error text-danger">{{ form_user.password1.errors|join:"<br \>" }}</span>
 
 					<div class='input-group {% if form_user.password2.errors %}has-error{% endif %}'>
 						<div class='input-group-addon'>
@@ -120,20 +172,24 @@
 						</div>
 						{{ form_user.password2|placeholder:"Repeat password" |addcss:"form-control" }}
 					</div>
-					<span class="error text-danger">{{ form_user.password2.errors|join:"<br \>" }}</span>
+
+
+			<div class="text-center" style='margin-top:20px;'>
+				<button class='btn btn-danger' type='submit' name='create_account' id='id_create_account'>
+				Criar Conta
+				</button>
+				<a class='btn btn-primary' href="{% url 'accounts:login' %}" name='login' id='id_login'>
+				Fazer Login
+				</a>
+			</div>
 
 				</div><!-- col-md-4 -->
 
 			</div><!-- row -->
 
-
-			<div class="text-center" style='margin-top:20px;'>
-				<button class='btn btn-danger btn-lg' type='submit' name='save_profile' id='save_profile'>
-				Criar Conta
-				</button>
-			</div>
-
 			</form>
+		</div>
+		</div>
 
     <script src="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
@@ -141,6 +197,11 @@
 	<script src="{% static 'js/libs/daterangepicker.js' %}"></script>
 
 	<script type="text/javascript">
+
+	//SUCCESS CREATE ACCOUNT REDIRECT PGSEGURO
+	function open_window_payment(){
+		window.open('/main/payment/', '_blank');
+	}
 
 	//GET CONFIG DATAPICKER
 	function get_config_datapicker(list_dict){
@@ -187,6 +248,14 @@
 	}
 
 	$(function(){
+
+		//AUTOMATIC OPEN WINDOW PAYMENT
+		if($('.alert-info').length){
+	        setTimeout(function(){
+	            open_window_payment();
+	        }, 2500);
+		}
+
 		//CHECK EXIST NOTE
 		if($('#id_birthday')){
 			list_dict = [];
@@ -194,6 +263,7 @@
 			list_dict.push(get_locale({"format": "DD/MM/YYYY"}));
 			$('input[name="birthday"]').daterangepicker(get_config_datapicker(list_dict));
 		}
+
 	});
 
 	</script>
