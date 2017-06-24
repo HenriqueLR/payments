@@ -61,36 +61,32 @@
 		<div class='row'>
 			<div class='col-md-8 col-md-offset-2' style='margin-top:40px;'>
 
-	{% if messages %}
-		{% for message in messages %}
-			<div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<strong>{{ message.tags }}:</strong> {{ message }}
-				{% if message.tags == 'info' %}
-					<button onclick='open_window_payment()'>aqui</button>.
+				{% if messages %}
+					{% for message in messages %}
+						<div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>{{ message.tags }}:</strong> {{ message }}
+							{% if message.tags == 'info' %}
+								<button onclick='open_window_payment()'>aqui</button>.
+							{% endif %}
+						</div>
+					{% endfor %}
+				{% endif %}
+
+				{% if form.errors %}
+					<div class="alert alert-danger">
+						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+						<strong>Error: </strong>
+						{% for field, error in form.errors.items %}
+							{% if field != '__all__' %}{{ field }}{% endif %}
+								{{ error | striptags }}<br />
+							{% endfor %}
+					</div>
 				{% endif %}
 			</div>
-		{% endfor %}
-	{% endif %}
-
-	{% if form.errors %}
-		<div class="alert alert-danger">
-			<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-			<strong>Error: </strong>
-			{% for field, error in form.errors.items %}
-				{% if field != '__all__' %}{{ field }}{% endif %}
-				{{ error | striptags }}<br />
-			{% endfor %}
 		</div>
-	{% endif %}
-
-			</div>
-		</div>
-
-
-
 
 		<div class='row'>
 
@@ -100,177 +96,177 @@
 				<p>realize o seu cadastro.</p>
 			</div>
 
-<div class='col-md-4'>
+			<div class='col-md-4'>
 
-	<form id='id_form_account' name='form_account' method='POST'>
-			{% csrf_token %}
-			<div class='row'>
+				<form id='id_form_account' name='form_account' method='POST'>
+					{% csrf_token %}
+					<div class='row'>
 
-				<div class='col-md-8 col-md-offset-2'>
-					<div class="text-center">
-						<h1>Cadastrar</h1>
-					</div>
-					<div class='input-group {% if form_account.cpf.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-							<i class='fa fa-user fa-fw'></i>
-						</div>
-						{{ form_account.cpf|placeholder:"Cpf" |addcss:"form-control" }}
-					</div>
+						<div class='col-md-8 col-md-offset-2'>
+							<div class="text-center">
+								<h1>Cadastrar</h1>
+							</div>
+							<div class='input-group {% if form_account.cpf.errors %}has-error{% endif %}'>
+								<div class='input-group-addon'>
+									<i class='fa fa-user fa-fw'></i>
+								</div>
+								{{ form_account.cpf|placeholder:"Cpf" |addcss:"form-control" }}
+							</div>
 
-					<div class='input-group {% if form_profile.first_name.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-							<i class='fa fa-id-card fa-fw'></i>
-						</div>
-						{{ form_profile.first_name|placeholder:"Nome" |addcss:"form-control" }}
-					</div>
+							<div class='input-group {% if form_profile.first_name.errors %}has-error{% endif %}'>
+								<div class='input-group-addon'>
+									<i class='fa fa-id-card fa-fw'></i>
+								</div>
+								{{ form_profile.first_name|placeholder:"Nome" |addcss:"form-control" }}
+							</div>
 
-					<div class='input-group {% if form_profile.last_name.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-							<i class='fa fa-id-card fa-fw'></i>
-						</div>
-						{{ form_profile.last_name|placeholder:"Sobrenome" |addcss:"form-control" }}
-					</div>
+							<div class='input-group {% if form_profile.last_name.errors %}has-error{% endif %}'>
+								<div class='input-group-addon'>
+									<i class='fa fa-id-card fa-fw'></i>
+								</div>
+								{{ form_profile.last_name|placeholder:"Sobrenome" |addcss:"form-control" }}
+							</div>
 
-					<div class='input-group {% if form_user.email.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-							<i class='fa fa-envelope fa-fw'></i>
-						</div>
-						{{ form_user.email|addcss:"form-control" }}
-					</div>
+							<div class='input-group {% if form_user.email.errors %}has-error{% endif %}'>
+								<div class='input-group-addon'>
+									<i class='fa fa-envelope fa-fw'></i>
+								</div>
+								{{ form_user.email|addcss:"form-control" }}
+							</div>
 
-					<div class='input-group {% if form_profile.birthday.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-							<i class='fa fa-birthday-cake fa-fw'></i>
-						</div>
-						{{ form_profile.birthday|addcss:"form-control" }}
-					</div>
+							<div class='input-group {% if form_profile.birthday.errors %}has-error{% endif %}'>
+								<div class='input-group-addon'>
+									<i class='fa fa-birthday-cake fa-fw'></i>
+								</div>
+								{{ form_profile.birthday|addcss:"form-control" }}
+							</div>
 
-					<div class='input-group {% if form_profile.state.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-							<i class='fa fa-map-marker fa-fw'></i>
-						</div>
-						{{ form_profile.state|addcss:"form-control" }}
-					</div>
+							<div class='input-group {% if form_profile.state.errors %}has-error{% endif %}'>
+								<div class='input-group-addon'>
+									<i class='fa fa-map-marker fa-fw'></i>
+								</div>
+								{{ form_profile.state|addcss:"form-control" }}
+							</div>
 
-					<div class='input-group {% if form_profile.url.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-							<i class='fa fa-bookmark fa-fw'></i>
-						</div>
-						{{ form_profile.url|placeholder:"Site / Rede Social" |addcss:"form-control" }}
-					</div>
+							<div class='input-group {% if form_profile.url.errors %}has-error{% endif %}'>
+								<div class='input-group-addon'>
+									<i class='fa fa-bookmark fa-fw'></i>
+								</div>
+								{{ form_profile.url|placeholder:"Site / Rede Social" |addcss:"form-control" }}
+							</div>
 
-					<div class='input-group {% if form_user.password1.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-							<i class='fa fa-key fa-fw'></i>
-						</div>
-						{{ form_user.password1|placeholder:"password" |addcss:"form-control" }}
-					</div>
+							<div class='input-group {% if form_user.password1.errors %}has-error{% endif %}'>
+								<div class='input-group-addon'>
+									<i class='fa fa-key fa-fw'></i>
+								</div>
+								{{ form_user.password1|placeholder:"password" |addcss:"form-control" }}
+							</div>
 
-					<div class='input-group {% if form_user.password2.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-							<i class='fa fa-lock fa-fw'></i>
-						</div>
-						{{ form_user.password2|placeholder:"Repeat password" |addcss:"form-control" }}
-					</div>
+							<div class='input-group {% if form_user.password2.errors %}has-error{% endif %}'>
+								<div class='input-group-addon'>
+									<i class='fa fa-lock fa-fw'></i>
+								</div>
+								{{ form_user.password2|placeholder:"Repeat password" |addcss:"form-control" }}
+							</div>
 
+							<div class="text-center" style='margin-top:20px;'>
+								<button class='btn btn-danger' type='submit' name='create_account' id='id_create_account'>
+									Criar Conta
+								</button>
+								<a class='btn btn-primary' href="{% url 'accounts:login' %}" name='login' id='id_login'>
+									Fazer Login
+								</a>
+							</div>
 
-			<div class="text-center" style='margin-top:20px;'>
-				<button class='btn btn-danger' type='submit' name='create_account' id='id_create_account'>
-				Criar Conta
-				</button>
-				<a class='btn btn-primary' href="{% url 'accounts:login' %}" name='login' id='id_login'>
-				Fazer Login
-				</a>
+						</div><!-- col-md-4 -->
+
+					</div><!-- row -->
+
+				</form>
 			</div>
 
-				</div><!-- col-md-4 -->
+		</div><!-- END ROW -->
 
-			</div><!-- row -->
+		<script src="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/jquery/jquery.min.js' %}"></script>
+		<script src="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'js/libs/moment.min.js' %}"></script>
+		<script src="{% static 'js/libs/daterangepicker.js' %}"></script>
 
-			</form>
-		</div>
-		</div>
+		<script type="text/javascript">
 
-    <script src="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'klorofil-free-dashboard-template-v2.0/template/assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'js/libs/moment.min.js' %}"></script>
-	<script src="{% static 'js/libs/daterangepicker.js' %}"></script>
-
-	<script type="text/javascript">
-
-	//SUCCESS CREATE ACCOUNT REDIRECT PGSEGURO
-	function open_window_payment(){
+		//SUCCESS CREATE ACCOUNT REDIRECT PGSEGURO
+		function open_window_payment(){
 		window.open('/main/payment/', '_blank');
-	}
+		}
 
-	//GET CONFIG DATAPICKER
-	function get_config_datapicker(list_dict){
+		//GET CONFIG DATAPICKER
+		function get_config_datapicker(list_dict){
 		context = {
-		 "ranges": {
-			'Today': [moment(), moment()],
-			'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-			'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-			'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-			'This Month': [moment().startOf('month'), moment().endOf('month')],
-			'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+		"ranges": {
+		'Today': [moment(), moment()],
+		'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+		'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+		'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+		'This Month': [moment().startOf('month'), moment().endOf('month')],
+		'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
 		},
-		 "linkedCalendars": false,
-		 "opens": "right",
+		"linkedCalendars": false,
+		"opens": "right",
 		}
 
 		$.each(list_dict, function(key, value) {
-			$.extend(context, value);
+		$.extend(context, value);
 		});
 		return context;
-	}
+		}
 
-	//GET LOCALE
-	function get_locale(format_date){
+		//GET LOCALE
+		function get_locale(format_date){
 		locale = {
-			"locale": {
-		    "separator": " - ",
-		    "applyLabel": "Apply",
-		    "cancelLabel": "Cancel",
-		    "fromLabel": "From",
-		    "toLabel": "To",
-		    "customRangeLabel": "Custom",
-		    "weekLabel": "W",
-		    "daysOfWeek": ["Su","Mo","Tu","We","Th","Fr","Sa"],
-		    "monthNames": ["January","February","March","April","May","June","July",
-		    			   "August","September","October","November","December"],
-		    "firstDay": 1
-			},
+		"locale": {
+		"separator": " - ",
+		"applyLabel": "Apply",
+		"cancelLabel": "Cancel",
+		"fromLabel": "From",
+		"toLabel": "To",
+		"customRangeLabel": "Custom",
+		"weekLabel": "W",
+		"daysOfWeek": ["Su","Mo","Tu","We","Th","Fr","Sa"],
+		"monthNames": ["January","February","March","April","May","June","July",
+		"August","September","October","November","December"],
+		"firstDay": 1
+		},
 		}
 		if(format_date){
-			$.extend(locale["locale"], format_date);
+		$.extend(locale["locale"], format_date);
 		}
 		return locale;
-	}
+		}
 
-	$(function(){
+		$(function(){
 		//DISABLE BUTTON SUBMIT FORM
 		$("#id_form_account").submit(function(e){
-			$('#id_create_account').attr("disabled", true);
+		$('#id_create_account').attr("disabled", true);
 		});
 
 		//AUTOMATIC OPEN WINDOW PAYMENT
 		if($('.alert-info').length){
-	        setTimeout(function(){
-	            open_window_payment();
-	        }, 7000);
+		setTimeout(function(){
+		open_window_payment();
+		}, 7000);
 		}
 
 		//CHECK EXIST NOTE
 		if($('#id_birthday')){
-			list_dict = [];
-			list_dict.push({"singleDatePicker": true,"timePicker": false});
-			list_dict.push(get_locale({"format": "DD/MM/YYYY"}));
-			$('input[name="birthday"]').daterangepicker(get_config_datapicker(list_dict));
+		list_dict = [];
+		list_dict.push({"singleDatePicker": true,"timePicker": false});
+		list_dict.push(get_locale({"format": "DD/MM/YYYY"}));
+		$('input[name="birthday"]').daterangepicker(get_config_datapicker(list_dict));
 		}
 
-	});
+		});
 
-	</script>
+		</script>
 
 	</body>
 </html>

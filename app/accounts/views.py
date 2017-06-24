@@ -81,10 +81,11 @@ class UserListView(PermissionsUserMixin, ListView):
 
 
 @login_required
-@user_passes_test(lambda u: u.is_active, login_url='accounts:logout')
+@user_passes_test(lambda u: u.groups.filter(name='customers').exists(),
+                                            login_url='accounts:logout')
 def edit_user(request, pk):
     template_name = 'accounts/user/edit_user.html'
-    user = get_object_or_404(User, pk=pk)
+    user = get_object_or_404(User, pk=pk, account=request.user.account)
     form_user = EditUserForm(request.POST or None, instance=user)
     form_profile = ProfileForm(request.POST or None,
                                   instance=get_object_or_404(Profile, user=user))
@@ -136,7 +137,6 @@ def active_account(request, pk):
 
 
 @login_required
-@user_passes_test(lambda u: u.is_active, login_url='accounts:logout')
 @ajax_required
 def edit_password(request):
     template_name = 'accounts/user/edit_password.html'
@@ -155,7 +155,6 @@ def edit_password(request):
 
 
 @login_required
-@user_passes_test(lambda u: u.is_active, login_url='accounts:logout')
 def edit_profile(request):
     template_name = 'accounts/user/edit_profile.html'
     form_user = EditUserForm(request.POST or None, instance=request.user)
@@ -171,7 +170,6 @@ def edit_profile(request):
 
 
 @login_required
-@user_passes_test(lambda u: u.is_active, login_url='accounts:logout')
 def detail_profile(request):
     context = {'profile': get_object_or_404(Profile, user=request.user),
                'app_label':None, 'object_name':None, 'apps':apps_permissions(request)}
@@ -180,7 +178,8 @@ def detail_profile(request):
 
 
 @login_required
-@user_passes_test(lambda u: u.is_active, login_url='accounts:logout')
+@user_passes_test(lambda u: u.groups.filter(name='customers').exists(),
+                                            login_url='accounts:logout')
 def create_user(request):
     template_name = 'accounts/user/create_user.html'
     form_user = AddUserForm(request.POST or None)
@@ -208,6 +207,7 @@ def create_user(request):
                'object_name':'User', 'apps':apps_permissions(request),'label_app':'Accounts',}
     return render(request, template_name, context)
 
+
 @ajax_required
 def reset_password(request):
     template_name = 'accounts/register/reset_password.html'
@@ -218,11 +218,11 @@ def reset_password(request):
             form.save()
             messages.success(request, 'Entre no seu email, e confirme o link para resetar a sua senha')
         except Exception as Error:
-            print Error
             messages.error(request, 'Tente novamente por favor, ocorreu um erro ao enviar o email de confirmacao')
         return HttpResponse('ok')
     context['form'] = form
     return render(request, template_name, context)
+
 
 def confirm_reset_password(request):
     template_name = 'accounts/register/confirm_reset_password.html'

@@ -21,6 +21,7 @@ def ajax_required(view):
 	wrap.__name__ = view.__name__
 	return wrap
 
+
 def permissions_denied(view):
 	def wrap(request, *args, **kwargs):
 		list_model = [Debit, Deposit, Note]
