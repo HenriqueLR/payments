@@ -27,7 +27,7 @@ class ConfigStart(object):
 		self.group_user = 'users'
 
 	def create_account(self):
-		account = Account(cpf=self.cpf, status_account=True)
+		account = Account(cpf=self.cpf, status_account=True, status_payment=True)
 		account.save()
 		return account
 

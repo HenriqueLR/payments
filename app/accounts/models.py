@@ -15,6 +15,7 @@ class Account(models.Model):
     id_account = models.AutoField(primary_key=True, verbose_name=u'Cod Account', db_column='id_account')
     cpf = models.CharField(max_length=30, verbose_name=u'Cpf', db_column='cpf', unique=True)
     status_account = models.BooleanField(verbose_name=u'Status', default=False, db_column='status_account')
+    status_payment = models.BooleanField(verbose_name=u'Status Payments', default=False, db_column='status_payment')
     updated_at = models.DateTimeField(verbose_name=u'Atualizado em', auto_now=True, db_column='updated_at')
     created_at = models.DateTimeField(verbose_name=u'Criado em', auto_now_add=True)
 

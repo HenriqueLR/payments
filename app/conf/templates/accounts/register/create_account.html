@@ -175,7 +175,7 @@
 
 
 			<div class="text-center" style='margin-top:20px;'>
-				<button class='btn btn-danger' type='submit' name='create_account' id='id_create_account'>
+				<button id='create_account' class='btn btn-danger' type='submit' name='create_account' id='id_create_account'>
 				Criar Conta
 				</button>
 				<a class='btn btn-primary' href="{% url 'accounts:login' %}" name='login' id='id_login'>
@@ -253,7 +253,7 @@
 		if($('.alert-info').length){
 	        setTimeout(function(){
 	            open_window_payment();
-	        }, 2500);
+	        }, 5000);
 		}
 
 		//CHECK EXIST NOTE

@@ -6,14 +6,14 @@ from django.shortcuts import render
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from main.utils import apps_permissions, format_json_graphic, get_period_this_month
-from main.decorators import permissions_denied, ajax_required
+from main.decorators import permissions_denied, ajax_required, verify_payment
 from wallet.models import Debit, Deposit, Note
 from django.http import HttpResponse, JsonResponse
 
 
 
 @login_required
-@permissions_denied
+@verify_payment
 def home(request):
 	template_name = 'main/home.html'
 	total_deposit = Deposit.objects.sum_deposits(request.user)

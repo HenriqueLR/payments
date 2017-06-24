@@ -21,7 +21,6 @@ def ajax_required(view):
 	wrap.__name__ = view.__name__
 	return wrap
 
-
 def permissions_denied(view):
 	def wrap(request, *args, **kwargs):
 		list_model = [Debit, Deposit, Note]
@@ -30,6 +29,17 @@ def permissions_denied(view):
 			if not request.user.has_perms(permissions):
 				messages.error(request, 'Nao possui as permissoes necessarias, contate o administrador')
 				return redirect('accounts:logout')
+		return view(request, *args, **kwargs)
+	wrap.__doc__ = view.__doc__
+	wrap.__name__ = view.__name__
+	return wrap
+
+
+def verify_payment(view):
+	def wrap(request, *args, **kwargs):
+		if not request.user.account.status_payment:
+			messages.error(request, 'Estamos aguardando o pagamento para liberacao do sistema')
+			return redirect('accounts:logout')
 		return view(request, *args, **kwargs)
 	wrap.__doc__ = view.__doc__
 	wrap.__name__ = view.__name__

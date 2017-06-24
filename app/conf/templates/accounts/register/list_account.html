@@ -227,7 +227,7 @@ input[type="select"] {
 							{% endif %}
 						</td>
 						<td>
-							<a href='{{ account.active_account }}' class='btn btn-success btn-sm{% if account.user.is_active %} disabled{% endif %}'>
+							<a href='{{ account.active_account }}' class='btn btn-success btn-sm{% if account.user.account.status_payment %} disabled{% endif %}'>
 								active
 							</a>
 						</td>

@@ -18,6 +18,7 @@ from accounts.forms import EditUserForm, ProfileForm, AddUserForm, AccountForm, 
 from accounts.utils import AccountUtils
 from main.utils import apps_permissions, get_list_permissions
 from main.decorators import ajax_required
+from main.mail import send_mail_confirm_account
 
 
 
@@ -52,6 +53,7 @@ class AccountView(View):
                 account.save_account()
                 messages.info(self.request,'Cadastro criado com sucesso, aguarde para ser redirecionado '+\
                               'para tela de pagamento ou clique')
+                send_mail_confirm_account(profile)
                 return HttpResponseRedirect(self.success_url)
             except Exception as Error:
                 messages.error(self.request, Error)
@@ -125,9 +127,7 @@ def active_account(request, pk):
         if account.check_status():
             messages.warning(request, 'Esta conta ja esta ativa.')
             return HttpResponseRedirect(reverse_lazy('accounts:list_account'))
-        account.active_account(True)
-        account.add_user_group('customers')
-        account.save_account()
+        account.active_payment()
         messages.success(request, 'Conta ativada.')
     except Exception as Error:
         account.roll_back()

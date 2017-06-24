@@ -21,3 +21,18 @@ def send_mail_template(reset, fail_silently=False):
 
 	email.attach_alternative(body_text, "text/html")
 	email.send()
+
+
+def send_mail_confirm_account(profile):
+	body_text = '''<p>Bem Vindo, estamos aguardando o confirmamento do pagamento</p>'''
+	message_txt = striptags(body_text)
+
+	email = EmailMultiAlternatives(
+		subject='Payments - Bem Vindo',
+		body=message_txt,
+		from_email='payments@payments.com',
+		to=[profile.user.email],
+	)
+
+	email.attach_alternative(body_text, "text/html")
+	email.send()

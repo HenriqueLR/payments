@@ -19,6 +19,10 @@ class AccountUtils(object):
 		self.user.is_active = status
 		self.account.status_account = status
 
+	def active_payment(self):
+		self.account.status_payment = True
+		self.account.save()
+
 	def create_user(self):
 		user = User(password=self.account.password, email=self.account.email,
 					first_name=self.account.first_name, last_name=self.account.last_name,
@@ -32,7 +36,7 @@ class AccountUtils(object):
 
 	def check_status(self):
 		if (self.profile.status_profile and self.user.is_active
-			and self.account.status_account):
+			and self.account.status_account and self.account.status_payment):
 			return True
 
 	def save_user(self):
