@@ -102,7 +102,7 @@
 
 <div class='col-md-4'>
 
-	<form name='create_user' method='POST'>
+	<form id='id_form_account' name='form_account' method='POST'>
 			{% csrf_token %}
 			<div class='row'>
 
@@ -175,7 +175,7 @@
 
 
 			<div class="text-center" style='margin-top:20px;'>
-				<button id='create_account' class='btn btn-danger' type='submit' name='create_account' id='id_create_account'>
+				<button class='btn btn-danger' type='submit' name='create_account' id='id_create_account'>
 				Criar Conta
 				</button>
 				<a class='btn btn-primary' href="{% url 'accounts:login' %}" name='login' id='id_login'>
@@ -248,12 +248,16 @@
 	}
 
 	$(function(){
+		//DISABLE BUTTON SUBMIT FORM
+		$("#id_form_account").submit(function(e){
+			$('#id_create_account').attr("disabled", true);
+		});
 
 		//AUTOMATIC OPEN WINDOW PAYMENT
 		if($('.alert-info').length){
 	        setTimeout(function(){
 	            open_window_payment();
-	        }, 5000);
+	        }, 7000);
 		}
 
 		//CHECK EXIST NOTE
