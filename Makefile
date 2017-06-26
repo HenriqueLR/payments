@@ -32,3 +32,9 @@ clean_migrations:
 	find ./app/wallet/migrations/ |grep '0'|xargs rm -f
 	rm -rf ./app/accounts/migrations/*.pyc
 	find ./app/accounts/migrations/ |grep '0'|xargs rm -f
+
+capture_words:
+	./app/manage.py makemessages -l en
+
+compile_words:
+	./app/manage.py compilemessages

@@ -311,9 +311,9 @@ input:checked + .status_slider:before {
 {% block content %}
 	<div class="container-fluid">
 		<ol class="breadcrumb">
-			<li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Home</a></li>
-			<li><a href="{% url 'wallet:list_note' %}"><i class="fa fa-tags fa-fw"></i> Note</a></li>
-			<li class='active'><i class="fa fa-plus fa-fw"></i> New Note</li>
+			<li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Inicio</a></li>
+			<li><a href="{% url 'wallet:list_note' %}"><i class="fa fa-tags fa-fw"></i> Notas</a></li>
+			<li class='active'><i class="fa fa-plus fa-fw"></i> Nova Nota</li>
 		</ol>
 		<!-- NOTAS -->
 		<div class="row" id="note">
@@ -321,7 +321,7 @@ input:checked + .status_slider:before {
 				<!-- TODO LIST -->
 				<div class="panel">
 					<div class="panel-heading">
-						<h3 class="panel-title">New Note</h3>
+						<h3 class="panel-title">Nova Nota</h3>
 						<div class='right'>
 							<ul class="list-inline">
 								<li><a href='{% url "wallet:list_note" %}'><i style="font-size:15px;" class='lnr lnr-cross'></i></a></li>
@@ -360,8 +360,8 @@ input:checked + .status_slider:before {
 								{% csrf_token %}
 <div class='row'>
 <div class="form-group col-sm-3 {% if form.title.errors %}has-error{% endif %}">
-  <label for="id_title">Title:</label>
-  {{ form.title|placeholder:"Title" |addcss:"form-control" }}
+  <label for="id_title">Título:</label>
+  {{ form.title|placeholder:"Título" |addcss:"form-control" }}
   <span class="error text-danger">{{ form.title.errors|join:"<br \>" }}</span>
 </div>
 
@@ -387,15 +387,15 @@ input:checked + .status_slider:before {
 
 <div class='row'>
 	<div class="form-group col-sm-3 {% if form.date_note.errors %}has-error{% endif %}">
-		<label for="id_date_note">Date Note:</label>
+		<label for="id_date_note">Data da Nota:</label>
 		{{ form.date_note|placeholder:"dd/mm/yyyy" |addcss:"form-control" }}
 	</div>
 </div>
 
 <div class='row'>
 	<div class="form-group col-sm-6 {% if form.description.errors %}has-error{% endif %}">
-	  <label for="id_description">Note:</label>
-		{{ form.description|placeholder:"Description" |textarea:"5" |addcss:"form-control" }}
+	  <label for="id_description">Nota:</label>
+		{{ form.description|placeholder:"Descrição" |textarea:"5" |addcss:"form-control" }}
 		<span class="error text-danger">{{ form.description.errors|join:"<br \>" }}</span>
 	</div>
 </div>
@@ -403,11 +403,11 @@ input:checked + .status_slider:before {
 <div class='row'>
 	<div class="form-group col-sm-6">
 		<button class='btn btn-primary' type="submit" name='save_note' id='save_note'>
-		save
+		Salvar
 		</button>
 
 		<a class='btn btn-danger' href="{% url 'wallet:list_note' %}" name='close_note' id='close_note'>
-		close
+		Fechar
 		</a>
 	</div>
 </div>

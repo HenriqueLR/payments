@@ -9,6 +9,7 @@ from main.utils import apps_permissions, format_json_graphic, get_period_this_mo
 from main.decorators import permissions_denied, ajax_required, verify_payment
 from wallet.models import Debit, Deposit, Note
 from django.http import HttpResponse, JsonResponse
+from django.utils.translation import ugettext as _
 
 
 
@@ -37,10 +38,12 @@ def graphics(request):
 	if request.method == 'GET':
 		list_graphics = []
 		select_date = {"date": "to_date(cast(date_created as TEXT),'YYYY-MM-DD')", "created_at":"date_created"}
-		list_graphics.append(format_json_graphic(Deposit.objects.filter(account=request.user.account).extra(select=select_date).values('date').annotate(total=Sum('value')).order_by('date')[:30],
-							 Deposit._meta.verbose_name_plural))
-		list_graphics.append(format_json_graphic(Debit.objects.filter(account=request.user.account).extra(select=select_date).values('date').annotate(total=Sum('value')).order_by('date')[:30],
-							 Debit._meta.verbose_name_plural))
+		list_graphics.append(format_json_graphic(Deposit.objects.filter(account=request.user.account)\
+							.extra(select=select_date).values('date').annotate(total=Sum('value')).order_by('date')[:30],
+							 _(Deposit._meta.verbose_name_plural)))
+		list_graphics.append(format_json_graphic(Debit.objects.filter(account=request.user.account)\
+							.extra(select=select_date).values('date').annotate(total=Sum('value')).order_by('date')[:30],
+							 _(Debit._meta.verbose_name_plural)))
 
 		return JsonResponse(list_graphics, safe=False)
 

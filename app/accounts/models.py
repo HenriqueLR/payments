@@ -1,4 +1,4 @@
-#encoding: utf-8
+#coding: utf-8
 
 import re
 from django.db.models import Q
@@ -23,8 +23,8 @@ class Account(models.Model):
         return u'%s' % self.cpf
 
     class Meta:
-        verbose_name='Account'
-        verbose_name_plural='Account'
+        verbose_name = 'Account'
+        verbose_name_plural = 'Account'
         ordering=['-created_at']
         db_table='account'
         permissions = (
@@ -195,8 +195,8 @@ class Profile(models.Model):
         return ('accounts:active_account', [int(self.pk)], {})
 
     class Meta:
-        verbose_name=u'Profile'
-        verbose_name_plural=u'Profile'
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profile'
         ordering=['-created_at']
         db_table='profile'
         permissions = (

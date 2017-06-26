@@ -103,9 +103,9 @@
 {% block content %}
 	<div class="container-fluid">
 		<ol class="breadcrumb">
-			<li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Home</a></li>
-			<li><a href="{% url 'accounts:list_user' %}"><i class="fa fa-user fa-fw"></i> User</a></li>
-			<li class="active"><i class="fa fa-trash fa-fw"></i> Remove User</li>
+			<li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Inicio</a></li>
+			<li><a href="{% url 'accounts:list_user' %}"><i class="fa fa-user fa-fw"></i> Usuários</a></li>
+			<li class="active"><i class="fa fa-trash fa-fw"></i> Apagar Usuário</li>
 		</ol>
 		<!-- PROFILE -->
 		<div class="row" id="profile">
@@ -113,7 +113,7 @@
 				<!-- TODO LIST -->
 				<div class="panel">
 					<div class="panel-heading">
-						<h3 class="panel-title">Remove User</h3>
+						<h3 class="panel-title">Apagar Usuário</h3>
 						<div class='right'>
 							<ul class="list-inline">
 								<li><a href="{% url 'accounts:list_user' %}"><i style="font-size:15px;" class='lnr lnr-cross'></i></a></li>
@@ -125,15 +125,15 @@
 							<div class="profile-detail">
 								<div class="profile-info">
 									<ul class="list-unstyled list-justify">
-										<li><i class='fa fa-user fa-fw'></i> Name <span>{{ object.profile_user.first_name }} {{ object.profile_user.last_name }}</span></li>
-										<li><i class='fa fa-birthday-cake fa-fw'></i> Birthday <span>{{ object.profile_user.birthday }}</span></li>
-										<li><i class='fa fa-map-marker fa-fw'></i> State <span>{{ object.profile_user.state }}</span></li>
-										<li><i class='fa fa-envelope fa-fw'></i> Email <span>{{ object.email }}</span></li>
+										<li><i class='fa fa-user fa-fw'></i> Nome <span>{{ object.profile_user.first_name }} {{ object.profile_user.last_name }}</span></li>
+										<li><i class='fa fa-birthday-cake fa-fw'></i> Aniversário <span>{{ object.profile_user.birthday }}</span></li>
+										<li><i class='fa fa-map-marker fa-fw'></i> Estado <span>{{ object.profile_user.state }}</span></li>
+										<li><i class='fa fa-envelope fa-fw'></i> E-mail <span>{{ object.email }}</span></li>
 										<li><i class='fa fa-bookmark fa-fw'></i> Website <span><a href="{{ object.url }}">{{ object.profile_user.url }}</a></span></li>
 									</ul>
 								</div>
 								<div class="profile-info">
-									<h4 class="heading">Informations</h4>
+									<h4 class="heading">Informações</h4>
 									<p>{{ object.profile_user.description }}</p>
 								</div>
 								<div class="text-center">

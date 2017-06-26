@@ -14,7 +14,7 @@ User = get_user_model()
 def ajax_required(view):
 	def wrap(request, *args, **kwargs):
 		if not request.is_ajax():
-			messages.error(request, 'Impossivel acessar o link, entre em contato com administrador do sistema.')
+			messages.error(request, 'Impossivel acessar o link, entre em contato com administrador do sistema')
 			return redirect('accounts:logout')
 		return view(request, *args, **kwargs)
 	wrap.__doc__ = view.__doc__
@@ -28,7 +28,7 @@ def permissions_denied(view):
 		for model in list_model:
 			permissions = get_list_permissions(model, permission_list=['all'])
 			if not request.user.has_perms(permissions):
-				messages.error(request, 'Nao possui as permissoes necessarias, contate o administrador')
+				messages.error(request, 'Não possui as permissões necessárias, contate o administrador do sistema')
 				return redirect('accounts:logout')
 		return view(request, *args, **kwargs)
 	wrap.__doc__ = view.__doc__
@@ -39,7 +39,7 @@ def permissions_denied(view):
 def verify_payment(view):
 	def wrap(request, *args, **kwargs):
 		if not request.user.account.status_payment:
-			messages.error(request, 'Estamos aguardando o pagamento para liberacao do sistema')
+			messages.error(request, 'Estamos aguardando o pagamento para liberação do sistema')
 			return redirect('accounts:logout')
 		return view(request, *args, **kwargs)
 	wrap.__doc__ = view.__doc__

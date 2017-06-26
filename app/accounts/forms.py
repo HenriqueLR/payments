@@ -14,7 +14,7 @@ User = get_user_model()
 
 class AccountForm(forms.ModelForm):
 
-    cpf = brforms.BRCPFField(error_messages={'required':'Campo obrigatorio.'},
+    cpf = brforms.BRCPFField(error_messages={'required':'Campo obrigatório.'},
                              required=True, label='Cpf', widget=forms.TextInput)
 
     class Meta:

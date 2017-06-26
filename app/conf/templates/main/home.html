@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container-fluid" id="home">
         <ol class="breadcrumb">
-            <li class='active'><i class="fa fa-home fa-fw"></i> Home</li>
+            <li class='active'><i class="fa fa-home fa-fw"></i> Inicio</li>
         </ol>
         <!-- OVERVIEW -->
         <div class="row" id="overview">
@@ -42,7 +42,7 @@
                             <div class="col-md-4">
                                 <div class="metric">
                                     <span class="icon" style="background-color:white;">
-                                        <i class="fa fa-plus-square" aria-hidden="true" style="color:#5cb85c;"></i>
+                                        <i class="fa {% if balance >= 0 %}fa-plus-square icon-panel-success{% else %}fa-minus-square icon-panel-danger{% endif %}" aria-hidden="true"></i>
                                     </span>
                                     <p>
                                         <span class="number">R$ {{ balance|decimal_to_real }}</span>
@@ -77,7 +77,7 @@
                     </div>
                     <div class="panel-body">
                         {% if not debits %}
-                            <h3>Nao existem Lancamentos de debitos cadastrados</h3>
+                            <h3>Não existem lançamentos de débitos cadastrados</h3>
                         {% else %}
                             <div class="table-responsive">
                                 <table class="table table-striped mb30">
@@ -85,10 +85,10 @@
                                         <tr>
                                             <th></th>
                                             <th>#</th>
-                                            <th>Origin</th>
-                                            <th>Value</th>
-                                            <th>Date</th>
-                                            <th>Author</th>
+                                            <th>Origem</th>
+                                            <th>Valor</th>
+                                            <th>Data</th>
+                                            <th>Autor</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -131,7 +131,7 @@
                     </div>
                     <div class="panel-body">
                         {% if not deposits %}
-                            <h3>Nao existem Lancamentos de depositos cadastrados</h3>
+                            <h3>Não existem lançamentos de depósitos cadastrados</h3>
                         {% else %}
                             <div class="table-responsive">
                                 <table class="table table-striped mb30">
@@ -139,10 +139,10 @@
                                         <tr>
                                         <th></th>
                                         <th>#</th>
-                                        <th>origin</th>
-                                        <th>value</th>
-                                        <th>Date</th>
-                                        <th>author</th>
+                                        <th>Origem</th>
+                                        <th>Valor</th>
+                                        <th>Data</th>
+                                        <th>Autor</th>
                                         <th></th>
                                         </tr>
                                     </thead>
@@ -187,7 +187,7 @@
                     <div class="panel-body">
 
                         {% if not notes %}
-                            <h3>Nao existem notas cadastradas</h3>
+                            <h3>Não existem notas cadastradas</h3>
                         {% else %}
 
                         <ul class="list-unstyled todo-list">
@@ -203,7 +203,7 @@
                                             <span class="label label-success"><i class='fa fa-warning'></i></span>
                                         {% endif %}
                                         <span class="short-description">{{ note.description }}</span>
-                                        <span class="date">{{ note.created_at | date:"d/m/Y" }}</span>
+                                        <span class="date">{{ note.date_note | date:"d/m/Y H:m" }}</span>
                                     </p>
                                     <div class="controls">
                                         <a href="{{ note.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>

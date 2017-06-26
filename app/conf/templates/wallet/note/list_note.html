@@ -179,8 +179,8 @@ input[type="select"] {
 
 <div class="container-fluid">
 	<ol class="breadcrumb">
-	    <li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Home</a></li>
-		<li class='active'><i class="fa fa-tags fa-fw"></i> Note</a></li>
+	    <li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Inicio</a></li>
+		<li class='active'><i class="fa fa-tags fa-fw"></i> Notas</a></li>
 	</ol>
 	<!-- DEPÓSITOS -->
 	<div class="row" id="list-note">
@@ -188,7 +188,7 @@ input[type="select"] {
 			<!-- TABLE STRIPED -->
 			<div class="panel">
 				<div class="panel-heading">
-					<h3 class="panel-title">Note</h3>
+					<h3 class="panel-title">Notas</h3>
 										<div class='right'>
 <form class="form-inline" method="get">
 
@@ -216,7 +216,7 @@ input[type="select"] {
             </select>
 										  </div>
 
-										  <label class="sr-only" for="date">Date</label>
+										  <label class="sr-only" for="date">Data</label>
 										  <div class="input-group">
     										<div class="input-group-addon">
      											<i class="fa fa-calendar"></i>
@@ -250,7 +250,7 @@ input[type="select"] {
 					{% if not object_list %}
 						<div class='empty-object'>
 							<center>
-								<h3>Nao existem notas cadastradas</h3>
+								<h3>Não existem notas cadastradas</h3>
 							</center>
 						</div>
 					{% else %}

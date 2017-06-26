@@ -110,9 +110,9 @@
 {% block content %}
 	<div class="container-fluid">
 		<ol class="breadcrumb">
-			<li><a href="home.html"><i class="fa fa-home fa-fw"></i> Home</a></li>
-			<li><a href="{{ user.get_detail_profile }}"><i class="fa fa-user fa-fw"></i> Profile</a></li>
-			<li class="active"><i class="fa fa-edit fa-fw"></i> Edit Profile</li>
+			<li><a href="home.html"><i class="fa fa-home fa-fw"></i> Inicio</a></li>
+			<li><a href="{{ user.get_detail_profile }}"><i class="fa fa-user fa-fw"></i> Perfil</a></li>
+			<li class="active"><i class="fa fa-edit fa-fw"></i> Editar Perfil</li>
 		</ol>
 		<!-- NOTAS -->
 		<div class="row" id="profile-edit">
@@ -120,7 +120,7 @@
 				<!-- TODO LIST -->
 				<div class="panel">
 					<div class="panel-heading">
-						<h3 class="panel-title">Edit Profile</h3>
+						<h3 class="panel-title">Editar Perfil</h3>
 						<div class='right'>
 							<ul class="list-inline">
 								<li><a href='{{ user.get_detail_profile }}'><i style="font-size:15px;" class='lnr lnr-cross'></i></a></li>
@@ -219,7 +219,7 @@
 											<span class="error text-danger">{{ form_profile.description.errors|join:"<br \>" }}</span>
 											<br>
 											<a onclick="get_form_password('{% url 'accounts:edit_password' %}');" class='col-sm-10 col-sm-offset-2' href="#" data-toggle="modal" data-target=".bs-example-modal-static">
-												<i class='fa fa-lock fa-fw'></i> * Change Password
+												<i class='fa fa-lock fa-fw'></i> * Editar Senha
 											</a>
 
 										</div><!-- col-md-4 -->
@@ -229,11 +229,11 @@
 
 									<div class="text-center">
 										<button class='btn btn-primary' type='submit' name='save_profile' id='save_profile'>
-										Save
+										Editar
 										</button>
 
 										<a class='btn btn-danger' href="{{ user.get_detail_profile }}" name='close_profile' id='close_profile'>
-										Close
+										Fechar
 										</a>
 									</div>
 
@@ -255,7 +255,7 @@
 
 	    <div class="modal-header">
 	      <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><i style="font-size:15px;" class='lnr lnr-cross'></i></button>
-	      <h4 class="modal-title">Change Password</h4>
+	      <h4 class="modal-title">Editar Senha</h4>
 	    </div>
 
 	    <div class="modal-body">

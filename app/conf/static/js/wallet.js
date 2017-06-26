@@ -35,7 +35,10 @@ $(function() {
 		//ACTION CLICK CHECKBOX
 	    $('#note-list-input input[type^="checkbox"]').click(function (e){
 	     	url = '/wallet/list_note/?note='+$(this).attr("id");
-	     	note_get_function(url)
+	     	note_get_function(url);
+            setTimeout(function(){
+                get_list_alerts();
+            }, 100);
 	    });
 
 	    //CALL AJAX GET URL

@@ -37,9 +37,9 @@ class DebitDeleteView(PermissionsDebitMixin, DeleteView):
         self.object = self.get_object()
         try:
             self.object.delete()
-            messages.success(self.request, 'Lancamento de debito apagado com sucesso')
+            messages.success(self.request, 'Lançamento de débito apagado com sucesso')
         except Exception as Error:
-            messages.error(self.request, 'Ocorreu um erro ao apagar o lancamento, tente novamente')
+            messages.error(self.request, 'Ocorreu um erro ao apagar o lançamento, tente novamente')
         return HttpResponseRedirect(self.success_url)
 
 
@@ -77,9 +77,9 @@ class DebitAddView(PermissionsDebitMixin, CreateView):
     def form_valid(self, form):
         try:
             form.save(user=self.request.user)
-            messages.success(self.request, 'Debito lancado com sucesso')
+            messages.success(self.request, 'Débito lançado com sucesso')
         except Exception as Error:
-            messages.error(self.request, 'Erro ao lancar debito, tente novamente')
+            messages.error(self.request, 'Erro ao lançar débito, tente novamente')
         return super(DebitAddView, self).form_valid(form)
 
 
@@ -111,9 +111,9 @@ class DepositDeleteView(PermissionsDepositMixin, DeleteView):
         self.object = self.get_object()
         try:
             self.object.delete()
-            messages.success(self.request, 'Lancamento de Deposito apagado com sucesso')
+            messages.success(self.request, 'Lançamento de déposito apagado com sucesso')
         except Exception as Error:
-            messages.error(self.request, 'Ocorreu um erro ao apagar o lancamento, tente novamente')
+            messages.error(self.request, 'Ocorreu um erro ao apagar o lançamento, tente novamente')
         return HttpResponseRedirect(self.success_url)
 
 
@@ -151,9 +151,9 @@ class DepositAddView(PermissionsDepositMixin, CreateView):
     def form_valid(self, form):
         try:
             form.save(user=self.request.user)
-            messages.success(self.request, 'Debito lancado com sucesso')
+            messages.success(self.request, 'Déposito lançado com sucesso')
         except Exception as Error:
-            messages.error(self.request, 'Erro ao lancar debito, tente novamente')
+            messages.error(self.request, 'Erro ao lançar déposito, tente novamente')
         return super(DepositAddView, self).form_valid(form)
 
 

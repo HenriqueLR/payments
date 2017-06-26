@@ -1,4 +1,4 @@
-#encoding: utf-8
+#coding: utf-8
 
 from django.db import models
 from accounts.models import Account
@@ -59,8 +59,8 @@ class Debit(models.Model):
         return('wallet:delete_debit', [int(self.pk)], {})
 
     class Meta:
-        verbose_name=u'Debit'
-        verbose_name_plural=u'Debit'
+        verbose_name = 'Debit'
+        verbose_name_plural = 'Debit'
         ordering=['-created_at']
         db_table='debit'
         permissions = (
@@ -125,8 +125,8 @@ class Deposit(models.Model):
         return('wallet:delete_deposit', [int(self.pk)], {})
 
     class Meta:
-        verbose_name=u'Deposit'
-        verbose_name_plural=u'Deposit'
+        verbose_name = 'Deposit'
+        verbose_name_plural = 'Deposit'
         ordering=['-created_at']
         db_table='deposit'
         permissions = (
@@ -184,8 +184,8 @@ class Note(models.Model):
         return('wallet:detail_note', [int(self.pk)], {})
 
     class Meta:
-        verbose_name=u'Note'
-        verbose_name_plural=u'Note'
+        verbose_name = 'Note'
+        verbose_name_plural = 'Note'
         ordering=['-created_at']
         db_table='note'
         permissions = (

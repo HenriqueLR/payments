@@ -8,4 +8,5 @@ urlpatterns = [
 	url(r'^main/', include('main.urls', namespace='main')),
 	url(r'^accounts/', include('accounts.urls', namespace='accounts')),
 	url(r'^wallet/', include('wallet.urls', namespace='wallet')),
+	url(r'^i18n/', include('django.conf.urls.i18n')),
 ]

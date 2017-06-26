@@ -1,7 +1,7 @@
-##Pagamentos
+### Pagamentos
 Aplicação que tem a ideia de uma carteira on-line, cadastre os seus depósitos, débitos e anotações.
 
-##Requisitos
+### Requisitos
 
 * 1 - Criar uma conta no SendGrid, o cadastro é free, e possui 100 e-mails diários.
 
@@ -35,7 +35,7 @@ Aplicação que tem a ideia de uma carteira on-line, cadastre os seus depósitos
 
 		./config_vars.sh
 
-##Instalação
+### Instalação
 
 * 1 - make install
 * 2 - make config
@@ -64,7 +64,7 @@ Aplicação que tem a ideia de uma carteira on-line, cadastre os seus depósitos
 * make clean_migrations
 	* Cuidado: este comando apaga os arquivos de migração
 
-###Atenção
+### Atenção
 
  * SEMPRE QUE RODAR UM COMANDO, não esqueça de colocar o parametro, indicando qual arquivo de configuração será usado.
  	* ex: make start settings='production'

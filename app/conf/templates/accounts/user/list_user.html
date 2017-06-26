@@ -152,8 +152,8 @@ input[type="select"] {
 
 <div class="container-fluid">
 	<ol class="breadcrumb">
-	    <li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Home</a></li>
-		<li class='active'><i class="fa fa-user fa-fw"></i> User</li>
+	    <li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Inicio</a></li>
+		<li class='active'><i class="fa fa-user fa-fw"></i> Usuários</li>
 	</ol>
 
 	<div class="row" id="list-accounts">
@@ -161,7 +161,7 @@ input[type="select"] {
 			<!-- TABLE STRIPED -->
 			<div class="panel">
 				<div class="panel-heading">
-					<h3 class="panel-title">User</h3>
+					<h3 class="panel-title">Usuários</h3>
 					<div class='right'>
 					<ul class="list-inline">
     					<li>
@@ -203,7 +203,7 @@ input[type="select"] {
 					{% if not object_list %}
 						<div class='empty-object'>
 							<center>
-								<h3>Nao existem usuarios cadastrados</h3>
+								<h3>Não existem usuários cadastrados</h3>
 							</center>
 						</div>
 					{% else %}
@@ -211,8 +211,8 @@ input[type="select"] {
 							<table class="table table-striped mb30">
 								<thead>
 									<tr>
-										<th>Name</th>
-										<th>Email</th>
+										<th>Nome</th>
+										<th>E-mail</th>
 										<th>Status</th>
 										<th></th>
 									</tr>

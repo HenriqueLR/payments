@@ -1,4 +1,4 @@
-#encoding: utf-8
+#coding: utf-8
 
 import hashlib
 import string
@@ -27,6 +27,7 @@ MAP_URL = {
 	"deposit":"list_deposit",
 	"note":"list_note",
 }
+
 ICON_MODEL = {
 	"profile":"fa fa-address-book",
 	"user":"fa fa-user",
@@ -35,6 +36,7 @@ ICON_MODEL = {
 	"deposit":"fa fa-line-chart",
 	"note":"fa fa-tags",
 }
+
 ICON_APPS = {
 	"main":"fa fa-bars",
 	"accounts":"fa fa-book",

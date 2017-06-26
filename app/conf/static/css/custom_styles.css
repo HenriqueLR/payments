@@ -217,6 +217,14 @@ input[type="select"] {
 .alert-error .alert-link {
   color: #843534;
 }
+
+.icon-panel-danger{
+    color: #d9534f !important;
+}
+
+.icon-panel-success{
+    color: #5cb85c !important;
+}
 /****** END HOME ******/
 
 

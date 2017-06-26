@@ -108,7 +108,7 @@ class UserDeleteView(PermissionsUserMixin, DeleteView):
         self.object = self.get_object()
         try:
             self.object.delete()
-            messages.success(self.request, 'Conta deletada')
+            messages.success(self.request, 'Usuário removido')
         except Exception as Error:
             messages.error(self.request, 'Tente novamente, ocorreu um erro')
         return HttpResponseRedirect(self.success_url)
@@ -126,10 +126,10 @@ def active_account(request, pk):
     account = AccountUtils(get_object_or_404(Profile, pk=pk))
     try:
         if account.check_status():
-            messages.warning(request, 'Esta conta ja esta ativa.')
+            messages.warning(request, 'Esta conta já está ativa.')
             return HttpResponseRedirect(reverse_lazy('accounts:list_account'))
         account.active_payment()
-        messages.success(request, 'Conta ativada.')
+        messages.success(request, 'Conta ativada')
     except Exception as Error:
         account.roll_back()
         messages.error(request, Error)
@@ -145,7 +145,7 @@ def edit_password(request):
         form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Senha alterada com sucesso.')
+            messages.success(request, 'Senha alterada com sucesso')
             update_session_auth_hash(request, form.user)
             return HttpResponse('ok')
     else:
@@ -162,7 +162,7 @@ def edit_profile(request):
                                   instance=get_object_or_404(Profile, user=request.user))
     if form_user.is_valid() and form_profile.is_valid():
         form_user.save(profile=form_profile.save())
-        messages.success(request, 'Os dados da sua conta foram alterados com sucesso')
+        messages.success(request, 'Os dados do seu perfil foram alterados com sucesso')
         return redirect('accounts:edit_profile')
     context = {'form_profile':form_profile, 'form_user':form_user,
                'object_name':'Profile', 'apps':apps_permissions(request),'label_app':'None',}
@@ -198,7 +198,7 @@ def create_user(request):
             profile.save()
             accounts = AccountUtils(profile)
             accounts.add_user_group('users')
-            messages.success(request, 'Usuario criado com sucesso')
+            messages.success(request, 'Usuário criado com sucesso')
             return redirect('accounts:list_user')
         except Exception as Error:
             messages.error(request, 'Ocorreu um erro, tente novamente')
@@ -216,9 +216,9 @@ def reset_password(request):
     if form.is_valid():
         try:
             form.save()
-            messages.success(request, 'Entre no seu email, e confirme o link para resetar a sua senha')
+            messages.success(request, 'Entre no seu e-mail, e confirme o link para resetar a sua senha')
         except Exception as Error:
-            messages.error(request, 'Tente novamente por favor, ocorreu um erro ao enviar o email de confirmacao')
+            messages.error(request, 'Tente novamente por favor, ocorreu um erro ao enviar o e-mail de confirmação')
         return HttpResponse('ok')
     context['form'] = form
     return render(request, template_name, context)
@@ -233,7 +233,7 @@ def confirm_reset_password(request):
         form.save()
         reset.confirmed = True
         reset.save()
-        messages.success(request, 'Change password Sucess')
+        messages.success(request, 'Senha alterada com sucesso')
         return HttpResponseRedirect(reverse_lazy('accounts:login'))
     context['form'] = form
     return render(request, template_name, context)

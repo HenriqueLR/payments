@@ -103,8 +103,8 @@
 {% block content %}
 	<div class="container-fluid">
 		<ol class="breadcrumb">
-			<li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Painel</a></li>
-			<li class="active"><i class="fa fa-user fa-fw"></i> Detail Profile</li>
+			<li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Inicio</a></li>
+			<li class="active"><i class="fa fa-user fa-fw"></i> Detalhar Perfil</li>
 		</ol>
 		<!-- PROFILE -->
 		<div class="row" id="profile">
@@ -112,7 +112,7 @@
 				<!-- TODO LIST -->
 				<div class="panel">
 					<div class="panel-heading">
-						<h3 class="panel-title">Detail Profile</h3>
+						<h3 class="panel-title">Detalhar Perfil</h3>
 						<div class='right'>
 							<ul class="list-inline">
 								<li><a href="{% url 'main:home' %}"><i style="font-size:15px;" class='lnr lnr-cross'></i></a></li>
@@ -124,20 +124,20 @@
 							<div class="profile-detail">
 								<div class="profile-info">
 									<ul class="list-unstyled list-justify">
-										<li><i class='fa fa-user fa-fw'></i> Name <span>{{ profile.first_name }} {{ profile.last_name }}</span></li>
-										<li><i class='fa fa-birthday-cake fa-fw'></i> Birthday <span>{{ profile.birthday }}</span></li>
-										<li><i class='fa fa-map-marker fa-fw'></i> State <span>{{ profile.state }}</span></li>
-										<li><i class='fa fa-envelope fa-fw'></i> Email <span>{{ profile.user.email }}</span></li>
+										<li><i class='fa fa-user fa-fw'></i> Nome <span>{{ profile.first_name }} {{ profile.last_name }}</span></li>
+										<li><i class='fa fa-birthday-cake fa-fw'></i> Aniversário <span>{{ profile.birthday }}</span></li>
+										<li><i class='fa fa-map-marker fa-fw'></i> Estado <span>{{ profile.state }}</span></li>
+										<li><i class='fa fa-envelope fa-fw'></i> E-mail <span>{{ profile.user.email }}</span></li>
 										<li><i class='fa fa-bookmark fa-fw'></i> Website <span><a href="{{ profile.url }}">{{ profile.url }}</a></span></li>
 									</ul>
 								</div>
 								<div class="profile-info">
-									<h4 class="heading">Informations</h4>
+									<h4 class="heading">Informações</h4>
 									<p>{{ profile.description }}</p>
 								</div>
 								<div class="text-center">
-									<a href="{{ profile.user.get_edit_profile }}" class="btn btn-primary">Edit</a>
-									<a href="{% url 'main:home' %}" class='btn btn-danger' href='home.html' name='close_profile' id='close_profile'>Close</a>
+									<a href="{{ profile.user.get_edit_profile }}" class="btn btn-primary">Editar</a>
+									<a href="{% url 'main:home' %}" class='btn btn-danger' href='home.html' name='close_profile' id='close_profile'>Fechar</a>
 								</div>
 							</div>
 						</div>

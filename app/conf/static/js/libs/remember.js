@@ -22,7 +22,7 @@
      } else {
          $('#rememberMe').removeAttr('checked');
          $('#id_username').val('');
-         $('#id_password').val('123123123');
+         $('#id_password').val('');
      }
  });
 /**** END LOGIN ****/

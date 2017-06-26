@@ -1,0 +1,92 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-26 12:14-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: accounts/localflavor/br/forms.py:18
+msgid "Enter a zip code in the format XXXXX-XXX."
+msgstr "Digite o codigo postal no formato XXXXX-XXX."
+
+#: accounts/localflavor/br/forms.py:30
+msgid "Phone numbers must be in XX-XXXX-XXXX format."
+msgstr ""
+
+#: accounts/localflavor/br/forms.py:57
+msgid ""
+"Select a valid brazilian state. That state is not one of the available "
+"states."
+msgstr ""
+
+#: accounts/localflavor/br/forms.py:89
+msgid "Invalid CPF number."
+msgstr ""
+
+#: accounts/localflavor/br/forms.py:90
+msgid "This field requires at most 11 digits or 14 characters."
+msgstr ""
+
+#: accounts/localflavor/br/forms.py:91 accounts/localflavor/br/forms.py:133
+msgid "This field requires only numbers."
+msgstr ""
+
+#: accounts/localflavor/br/forms.py:132
+msgid "Invalid CNPJ number."
+msgstr ""
+
+#: accounts/localflavor/br/forms.py:134
+msgid "This field requires at least 14 digits"
+msgstr ""
+
+#: accounts/models.py:27 accounts/models.py:28
+msgid "Account"
+msgstr "Conta"
+
+#: accounts/models.py:109 accounts/models.py:110
+msgid "User"
+msgstr "Usuário"
+
+#: accounts/models.py:135 accounts/models.py:136
+msgid "New Password"
+msgstr "Nova Senha"
+
+#: accounts/models.py:199 accounts/models.py:200
+msgid "Profile"
+msgstr "Perfil"
+
+#: wallet/models.py:63
+msgid "Debit"
+msgstr "Débitos"
+
+#: wallet/models.py:64
+msgid "Debits"
+msgstr "Débitos"
+
+#: wallet/models.py:129
+msgid "Deposit"
+msgstr "Depósitos"
+
+#: wallet/models.py:130
+msgid "Deposits"
+msgstr "Depósitos"
+
+#: wallet/models.py:188
+msgid "Note"
+msgstr "Notas"
+
+#: wallet/models.py:189
+msgid "Notes"
+msgstr "Notas"

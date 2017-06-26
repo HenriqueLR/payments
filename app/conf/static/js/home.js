@@ -47,8 +47,8 @@ function get_graphics(){
             if ((data[0].data.length > 0) || (data[1].data.length > 0)){
                 create_graphic(data);
             }else{
-                $('#chart-line').html('<h3 class="text-center">Nao existem atividades \
-                                      cadastradas para gerar o grafico</h3>')
+                $('#chart-line').html('<h3 class="text-center">Não existem atividades \
+                                        cadastradas para gerar o gráfico</h3>')
             }
         },
     });

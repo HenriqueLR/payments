@@ -156,8 +156,8 @@ input[type="select"] {
 
 <div class="container-fluid">
 	<ol class="breadcrumb">
-	    <li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Home</a></li>
-		<li class='active'><i class="fa fa-line-chart fa-fw"></i> Deposit</li>
+	    <li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Inicio</a></li>
+		<li class='active'><i class="fa fa-line-chart fa-fw"></i> Dépositos</li>
 	</ol>
 	<!-- DEPÓSITOS -->
 	<div class="row" id="list-deposit">
@@ -165,7 +165,7 @@ input[type="select"] {
 			<!-- TABLE STRIPED -->
 			<div class="panel">
 				<div class="panel-heading">
-					<h3 class="panel-title">Deposit</h3>
+					<h3 class="panel-title">Dépositos</h3>
 										<div class='right'>
 <ul class="list-inline">
     <li><form class="form-inline" method="GET">
@@ -202,7 +202,7 @@ input[type="select"] {
 					{% if not object_list %}
 						<div class='empty-object'>
 							<center>
-								<h3>Nao existem Lancamentos de depositos cadastrados</h3>
+								<h3>Não existem lançamentos de depósitos cadastrados</h3>
 							</center>
 						</div>
 					{% else %}
@@ -212,12 +212,12 @@ input[type="select"] {
 									<tr>
 										<th></th>
 										<th>#</th>
-										<th>origin</th>
-										<th>value</th>
-										<th>Date</th>
-										<th>document</th>
-										<th>author</th>
-										<th>description</th>
+										<th>Origem</th>
+										<th>Valor</th>
+										<th>Data</th>
+										<th>Documento</th>
+										<th>Autor</th>
+										<th>Descrição</th>
 										<th></th>
 									</tr>
 								</thead>
