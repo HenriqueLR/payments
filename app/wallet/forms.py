@@ -43,7 +43,7 @@ class DepositForm(forms.ModelForm):
 
 
 
-class NoteForm(forms.ModelForm):
+class EditNoteForm(forms.ModelForm):
 
 	def save(self, user=None, commit=True):
 		note = super(NoteForm, self).save(commit=False)
@@ -58,3 +58,20 @@ class NoteForm(forms.ModelForm):
 	class Meta:
 		model = Note
 		fields = ['title', 'status_alert', 'status_note', 'description', 'date_note']
+
+
+class AddNoteForm(forms.ModelForm):
+
+	def save(self, user=None, commit=True):
+		note = super(NoteForm, self).save(commit=False)
+		if user:
+			note.author = user.username
+			note.account = user.account
+
+		if commit:
+			note.save()
+		return note
+
+	class Meta:
+		model = Note
+		fields = ['title', 'status_alert', 'description', 'date_note']

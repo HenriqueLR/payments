@@ -7,7 +7,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import render, get_object_or_404
 from wallet.models import Debit, Deposit, Note
-from wallet.forms import DebitForm, DepositForm, NoteForm
+from wallet.forms import DebitForm, DepositForm, AddNoteForm, EditNoteForm
 from wallet.permissions import (PermissionsDebitMixin, PermissionsDepositMixin,
                                 PermissionsNoteMixin)
 from main.utils import get_list_permissions, apps_permissions
@@ -210,7 +210,7 @@ class NoteDetailView(PermissionsNoteMixin, DetailView):
 class NoteUpdateView(PermissionsNoteMixin, UpdateView):
 
     model = Note
-    form_class = NoteForm
+    form_class = EditNoteForm
     template_name = 'wallet/note/update_note.html'
     success_url = reverse_lazy('wallet:list_note')
     required_permissions = get_list_permissions(model, permission_list=['all'])
@@ -224,7 +224,7 @@ class NoteUpdateView(PermissionsNoteMixin, UpdateView):
 class NoteAddView(PermissionsNoteMixin, CreateView):
 
     model = Note
-    form_class = NoteForm
+    form_class = AddNoteForm
     template_name = 'wallet/note/add_note.html'
     success_url = reverse_lazy('wallet:add_note')
     required_permissions = get_list_permissions(model, permission_list=['all'])
