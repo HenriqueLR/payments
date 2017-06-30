@@ -37,7 +37,7 @@ class Debit(models.Model):
     account = models.ForeignKey(Account, verbose_name='Conta', related_name='debits_account',
                                 on_delete=models.CASCADE, null=False)
     author = models.CharField(verbose_name=u'Autor', db_column='author', max_length=30, null=False, blank=False)
-    date_debit = models.DateTimeField(verbose_name=u'Data do Debito', db_column='date_debit')
+    date_releases = models.DateTimeField(verbose_name=u'Data do Debito', db_column='date_releases')
     description = models.TextField(db_column='description', blank=True, null=True, verbose_name=u'Descricao')
     created_at = models.DateTimeField(verbose_name=u'Data de criação', auto_now_add=True, db_column='date_created')
     updated_at = models.DateTimeField(verbose_name=u'Atualizado em', auto_now=True, db_column='updated_at')
@@ -104,7 +104,7 @@ class Deposit(models.Model):
     account = models.ForeignKey(Account, verbose_name='Conta', related_name='deposits_account',
                                 on_delete=models.CASCADE, null=False)
     author = models.CharField(verbose_name=u'Autor', db_column='author', max_length=30, null=False, blank=False)
-    date_deposit = models.DateTimeField(verbose_name=u'Data do Deposito', db_column='date_deposit')
+    date_releases = models.DateTimeField(verbose_name=u'Data do Deposito', db_column='date_releases')
     description = models.TextField(db_column='description', blank=True, null=True, verbose_name=u'Descricao')
     created_at = models.DateTimeField(verbose_name=u'Data de criação', auto_now_add=True, db_column='date_created')
     updated_at = models.DateTimeField(verbose_name=u'Atualizado em', auto_now=True, db_column='updated_at')

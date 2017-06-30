@@ -387,7 +387,7 @@ input:checked + .status_slider:before {
 <div class='row'>
 	<div class="form-group col-sm-3 {% if form.date_note.errors %}has-error{% endif %}">
 		<label for="id_date_note">Data da Nota:</label>
-		{{ form.date_note|placeholder:"dd/mm/yyyy" |addcss:"form-control" }}
+		{{ form.date_note|placeholder:"dd/mm/yyyy H:i" |addcss:"form-control" }}
 	</div>
 </div>
 

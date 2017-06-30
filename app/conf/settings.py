@@ -84,13 +84,13 @@ LANGUAGES = (
     ('es', u'Espanhol'),
 )
 
-TIME_ZONE = 'America/Sao_Paulo'
+TIME_ZONE = 'America/Fortaleza'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = False
+USE_TZ = True
 
 
 TEMPLATE_DIRS = (

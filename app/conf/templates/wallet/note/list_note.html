@@ -268,7 +268,7 @@ input[type="select"] {
 											<span class="label label-success"><i class='fa fa-warning'></i></span>
 										{% endif %}
 										<span class="short-description">{{ note.description }}</span>
-										<span class="date">{{ note.date_note | date:"d/m/Y H:m" }}</span>
+										<span class="date">{{ note.date_note | date:"d/m/Y H:i" }}</span>
 									</p>
 									<div class="controls">
 										<a href="{{ note.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>

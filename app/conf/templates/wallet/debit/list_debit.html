@@ -227,7 +227,7 @@ input[type="select"] {
 											<td>{{ forloop.counter }}</td>
 											<td>{{ debit.origin }}</td>
 											<td>R$ {{ debit.value|decimal_to_real }}</td>
-											<td>{{ debit.created_at | date:"d/m/Y" }}</td>
+											<td>{{ debit.date_releases | date:"d/m/Y H:i" }}</td>
 											<td>{{ debit.document }}</td>
 											<td>{{ debit.author }}</td>
 											<td>{{ debit.description }}</td>

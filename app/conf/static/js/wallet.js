@@ -56,6 +56,22 @@ $(function() {
 		$('input[name="date_note"]').daterangepicker(get_config_datapicker(list_dict));
 	}
 
+	//CECK EXISTS ELEMENT ADD-DEPOSIT
+	if($('#add-deposit')){
+		list_dict = [];
+		list_dict.push({"singleDatePicker": true,"timePicker": true});
+		list_dict.push(get_locale({"format": "DD/MM/YYYY h:mm"}));
+		$('input[name="date_releases"]').daterangepicker(get_config_datapicker(list_dict));
+	}
+
+	//CHECK EXISTS ELEMENT ADD-DEBIT
+	if($('#add-debit')){
+		list_dict = [];
+		list_dict.push({"singleDatePicker": true,"timePicker": true});
+		list_dict.push(get_locale({"format": "DD/MM/YYYY h:mm"}));
+		$('input[name="date_releases"]').daterangepicker(get_config_datapicker(list_dict));
+	}
+
 	//GET CONFIG DATAPICKER
 	function get_config_datapicker(list_dict){
 		context = {

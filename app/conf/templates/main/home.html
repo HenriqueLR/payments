@@ -99,7 +99,7 @@
                                                 <td>{{ forloop.counter }}</td>
                                                 <td>{{ debit.origin }}</td>
                                                 <td>R$ {{ debit.value|decimal_to_real }}</td>
-                                                <td>{{ debit.created_at | date:"d/m/Y" }}</td>
+                                                <td>{{ debit.date_releases | date:"d/m/Y H:i" }}</td>
                                                 <td>{{ debit.author }}</td>
                                                 <td class="actions">
                                                     <a href="{{ debit.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>
@@ -153,7 +153,7 @@
                                                 <td>{{ forloop.counter }}</td>
                                                 <td>{{ deposit.origin }}</td>
                                                 <td>R$ {{ deposit.value|decimal_to_real }}</td>
-                                                <td>{{ deposit.created_at | date:"d/m/Y" }}</td>
+                                                <td>{{ deposit.date_releases | date:"d/m/Y H:i" }}</td>
                                                 <td>{{ deposit.author }}</td>
                                                 <td class="actions">
                                                     <a href="{{ deposit.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>
@@ -203,7 +203,7 @@
                                             <span class="label label-success"><i class='fa fa-warning'></i></span>
                                         {% endif %}
                                         <span class="short-description">{{ note.description }}</span>
-                                        <span class="date">{{ note.date_note | date:"d/m/Y H:m" }}</span>
+                                        <span class="date">{{ note.date_note | date:"d/m/Y H:i" }}</span>
                                     </p>
                                     <div class="controls">
                                         <a href="{{ note.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>

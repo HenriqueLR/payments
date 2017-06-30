@@ -3,7 +3,7 @@
 {% load formtags %}
 
 {% block extra_styles %}
-
+	<link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
 	<style>
 		/* EDIT PROFILE */
 
@@ -182,6 +182,13 @@
 											</div>
 											<span class="error text-danger">{{ form.document.errors|join:"<br \>" }}</span>
 
+											<div class='input-group {% if form.date_releases.errors %}has-error{% endif %}'>
+												<div class='input-group-addon'>
+													<i class='fa fa-calendar fa-fw'></i>
+												</div>
+												{{ form.date_releases|placeholder:"dd/mm/yyyy H:i" |addcss:"form-control" }}
+											</div>
+											<span class="error text-danger">{{ form.date_releases.errors|join:"<br \>" }}</span>
 
 										</div><!-- col-md-4 -->
 
@@ -219,4 +226,10 @@
 		<!-- END add-debit -->
 	</div>
 
+{% endblock %}
+
+{% block extra_scripts %}
+	<script src="{% static 'js/libs/moment.min.js' %}"></script>
+	<script src="{% static 'js/libs/daterangepicker.js' %}"></script>
+	<script src="{% static 'js/wallet.js' %}"></script>
 {% endblock %}

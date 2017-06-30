@@ -19,7 +19,7 @@ class DebitForm(forms.ModelForm):
 
 	class Meta:
 		model = Debit
-		fields = ['origin', 'value', 'document', 'description']
+		fields = ['origin', 'value', 'document', 'description', 'date_releases']
 		widgets = {'value': forms.NumberInput(attrs={'min': 0})}
 
 
@@ -38,7 +38,7 @@ class DepositForm(forms.ModelForm):
 
 	class Meta:
 		model = Deposit
-		fields = ['origin', 'value', 'document', 'description']
+		fields = ['origin', 'value', 'document', 'description', 'date_releases']
 		widgets = {'value': forms.NumberInput(attrs={'min': 0})}
 
 

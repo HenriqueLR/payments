@@ -228,7 +228,7 @@ input[type="select"] {
 											<td>{{ forloop.counter }}</td>
 											<td>{{ deposit.origin }}</td>
 											<td>R$ {{ deposit.value|decimal_to_real }}</td>
-											<td>{{ deposit.created_at | date:"d/m/Y" }}</td>
+											<td>{{ deposit.date_releases | date:"d/m/Y H:i" }}</td>
 											<td>{{ deposit.document }}</td>
 											<td>{{ deposit.author }}</td>
 											<td>{{ deposit.description }}</td>
