@@ -21,6 +21,13 @@ class AccountForm(forms.ModelForm):
         model = Account
         exclude = ['cpf', 'status_account']
 
+    def clean_cpf(self):
+        cpf = self.cleaned_data['cpf']
+
+        if Account.objects.filter(cpf=cpf, status_payment=False).exists():
+            raise forms.ValidationError('Conta já existente, pendente por falta de pagamento')
+        return cpf
+
     def save(self, commit=True):
         account = super(AccountForm, self).save(commit=False)
         account.cpf = self.cleaned_data['cpf']

@@ -75,16 +75,39 @@
 					{% endfor %}
 				{% endif %}
 
-				{% if form.errors %}
+				{% if form_account.errors %}
 					<div class="alert alert-danger">
 						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
 						<strong>Error: </strong>
-						{% for field, error in form.errors.items %}
+						{% for field, error in form_account.errors.items %}
 							{% if field != '__all__' %}{{ field }}{% endif %}
 								{{ error | striptags }}<br />
 							{% endfor %}
 					</div>
 				{% endif %}
+
+				{% if form_profile.errors %}
+					<div class="alert alert-danger">
+						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+						<strong>Error: </strong>
+						{% for field, error in form_profile.errors.items %}
+							{% if field != '__all__' %}{{ field }}{% endif %}
+								{{ error | striptags }}<br />
+							{% endfor %}
+					</div>
+				{% endif %}
+
+				{% if form_user.errors %}
+					<div class="alert alert-danger">
+						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+						<strong>Error: </strong>
+						{% for field, error in form_user.errors.items %}
+							{% if field != '__all__' %}{{ field }}{% endif %}
+								{{ error | striptags }}<br />
+							{% endfor %}
+					</div>
+				{% endif %}
+
 			</div>
 		</div>
 
@@ -194,77 +217,76 @@
 
 		<script type="text/javascript">
 
-		//SUCCESS CREATE ACCOUNT REDIRECT PGSEGURO
-		function open_window_payment(){
-		window.open('/main/payment/', '_blank');
-		}
+			//SUCCESS CREATE ACCOUNT REDIRECT PGSEGURO
+			function open_window_payment(){
+				window.open('/main/payment/', '_blank');
+			}
 
-		//GET CONFIG DATAPICKER
-		function get_config_datapicker(list_dict){
-		context = {
-		"ranges": {
-		'Today': [moment(), moment()],
-		'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-		'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-		'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-		'This Month': [moment().startOf('month'), moment().endOf('month')],
-		'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-		},
-		"linkedCalendars": false,
-		"opens": "right",
-		}
+			//GET CONFIG DATAPICKER
+			function get_config_datapicker(list_dict){
+				context = {
+					"ranges": {
+					'Today': [moment(), moment()],
+					'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+					'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+					'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+					'This Month': [moment().startOf('month'), moment().endOf('month')],
+					'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+					},
+					"linkedCalendars": false,
+					"opens": "right",
+				}
 
-		$.each(list_dict, function(key, value) {
-		$.extend(context, value);
-		});
-		return context;
-		}
+				$.each(list_dict, function(key, value) {
+					$.extend(context, value);
+				});
+				return context;
+			}
 
-		//GET LOCALE
-		function get_locale(format_date){
-		locale = {
-		"locale": {
-		"separator": " - ",
-		"applyLabel": "Apply",
-		"cancelLabel": "Cancel",
-		"fromLabel": "From",
-		"toLabel": "To",
-		"customRangeLabel": "Custom",
-		"weekLabel": "W",
-		"daysOfWeek": ["Su","Mo","Tu","We","Th","Fr","Sa"],
-		"monthNames": ["January","February","March","April","May","June","July",
-		"August","September","October","November","December"],
-		"firstDay": 1
-		},
-		}
-		if(format_date){
-		$.extend(locale["locale"], format_date);
-		}
-		return locale;
-		}
+			//GET LOCALE
+			function get_locale(format_date){
+				locale = {
+					"locale": {
+					"separator": " - ",
+					"applyLabel": "Apply",
+					"cancelLabel": "Cancel",
+					"fromLabel": "From",
+					"toLabel": "To",
+					"customRangeLabel": "Custom",
+					"weekLabel": "W",
+					"daysOfWeek": ["Su","Mo","Tu","We","Th","Fr","Sa"],
+					"monthNames": ["January","February","March","April","May","June","July",
+					"August","September","October","November","December"],
+					"firstDay": 1
+					},
+				}
+				if(format_date){
+					$.extend(locale["locale"], format_date);
+				}
+				return locale;
+			}
 
-		$(function(){
-		//DISABLE BUTTON SUBMIT FORM
-		$("#id_form_account").submit(function(e){
-		$('#id_create_account').attr("disabled", true);
-		});
+			$(function(){
+				//DISABLE BUTTON SUBMIT FORM
+				$("#id_form_account").submit(function(e){
+					$('#id_create_account').attr("disabled", true);
+				});
 
-		//AUTOMATIC OPEN WINDOW PAYMENT
-		if($('.alert-info').length){
-		setTimeout(function(){
-		open_window_payment();
-		}, 7000);
-		}
+				//AUTOMATIC OPEN WINDOW PAYMENT
+				if($('.alert-info').length){
+					setTimeout(function(){
+						open_window_payment();
+					}, 7000);
+				}
 
-		//CHECK EXIST NOTE
-		if($('#id_birthday')){
-		list_dict = [];
-		list_dict.push({"singleDatePicker": true,"timePicker": false});
-		list_dict.push(get_locale({"format": "DD/MM/YYYY"}));
-		$('input[name="birthday"]').daterangepicker(get_config_datapicker(list_dict));
-		}
-
-		});
+				//CHECK EXIST NOTE
+				if($('#id_birthday')){
+					list_dict = [];
+					list_dict.push({"singleDatePicker": true,"timePicker": false});
+					list_dict.push(get_locale({"format": "DD/MM/YYYY"}));
+					$('input[name="birthday"]').daterangepicker(get_config_datapicker(list_dict));
+				}
+			});
 
 		</script>
 
