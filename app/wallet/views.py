@@ -2,6 +2,7 @@
 
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.core.urlresolvers import reverse_lazy
+
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -213,28 +214,28 @@ class NoteUpdateView(PermissionsNoteMixin, UpdateView):
 
     model = Note
     form_class = EditNoteForm
-    template_name = 'wallet/note/update_note.html'
+    template_name = 'wallet/note/update_note_modal.html'
     success_url = reverse_lazy('wallet:list_note')
     required_permissions = get_list_permissions(model, permission_list=['all'])
 
     def form_valid(self, form):
-        messages.success(self.request, 'Alterado com sucesso')
-        return super(NoteUpdateView, self).form_valid(form)
-
+        try:
+            form.save(user=self.request.user)
+            messages.success(self.request, 'Alterado com sucesso')
+        except Exception as Error:
+            messages.error(self.request, 'Erro ao alterar a nota, tente novamente')
+        return HttpResponseRedirect(reverse_lazy('wallet:update_note', kwargs={'pk': self.object.pk}))
 
 
 class NoteAddView(PermissionsNoteMixin, CreateView):
 
     model = Note
     form_class = AddNoteForm
-    template_name = 'wallet/note/modal_test.html'
+    template_name = 'wallet/note/add_note_modal.html'
     success_url = reverse_lazy('wallet:add_note')
     required_permissions = get_list_permissions(model, permission_list=['all'])
 
     def form_valid(self, form, **kwargs):
-        print to_locale(get_language())
-        print self.request.LANGUAGE_CODE
-        print self.request
         try:
             self.object = form.save(user=self.request.user)
             messages.success(self.request, 'Nota criada com sucesso')

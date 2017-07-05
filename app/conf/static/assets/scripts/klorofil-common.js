@@ -21,7 +21,7 @@ $(document).ready(function() {
 			} else {
 				$('body').removeClass('offcanvas-active');
 			}
-		}		
+		}
 	});
 
 	$(window).on('load', function() {
@@ -125,19 +125,6 @@ $(document).ready(function() {
 			wheelStep: 2,
 		});
 	}
-
-	/*-----------------------------------/
-	/*	TODO LIST
-	/*----------------------------------*/
-
-	$('.todo-list input').change( function() {
-		if( $(this).prop('checked') ) {
-			$(this).parents('li').addClass('completed');
-		}else {
-			$(this).parents('li').removeClass('completed');
-		}
-	});
-
 
 	/*-----------------------------------/
 	/* TOASTR NOTIFICATION

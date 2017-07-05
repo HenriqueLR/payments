@@ -66,6 +66,13 @@ def alerts(request):
 @login_required
 @ajax_required
 def list_note(request):
-	template_name = 'main/list_note.html'
+	template_name = 'wallet/note/list_note_single.html'
 	notes = Note.objects.list_notes(request.user)[:10]
 	return render(request, template_name, {'objects':notes})
+
+
+@login_required
+@ajax_required
+def delete_note(request, pk):
+	Note.objects.filter(pk=pk, account=request.user.account).delete()
+	return HttpResponse("ok")

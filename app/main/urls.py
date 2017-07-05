@@ -7,4 +7,5 @@ urlpatterns = patterns('main.views',
     url(r'^alerts/$', 'alerts', name='alerts'),
     url(r'^payment/$', 'payment', name='payment'),
     url(r'^list_note/$', 'list_note', name='list_note'),
+    url(r'^delete_note/(?P<pk>\d+)$', 'delete_note', name='delete_note'),
 )
