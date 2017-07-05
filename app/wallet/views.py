@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
@@ -14,6 +14,7 @@ from main.utils import get_list_permissions, apps_permissions
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
 from main.decorators import ajax_required
+from django.utils.translation import to_locale, get_language
 
 
 
@@ -173,8 +174,9 @@ class NoteListView(PermissionsNoteMixin, ListView):
     required_permissions = get_list_permissions(model, permission_list=['all'])
 
     def get(self, request, *args, **kwargs):
-        if self.request.is_ajax():
-            note = get_object_or_404(Note, pk=self.request.GET.get('note'), account=self.request.user.account)
+        if self.request.GET.get('note') and self.request.is_ajax():
+            note = get_object_or_404(Note, pk=self.request.GET.get('note'),
+                                     account=self.request.user.account)
             note.status_note = not note.status_note
             note.save()
         return super(NoteListView, self).get(self.request, *args, **kwargs)
@@ -225,17 +227,20 @@ class NoteAddView(PermissionsNoteMixin, CreateView):
 
     model = Note
     form_class = AddNoteForm
-    template_name = 'wallet/note/add_note.html'
+    template_name = 'wallet/note/modal_test.html'
     success_url = reverse_lazy('wallet:add_note')
     required_permissions = get_list_permissions(model, permission_list=['all'])
 
-    def form_valid(self, form):
+    def form_valid(self, form, **kwargs):
+        print to_locale(get_language())
+        print self.request.LANGUAGE_CODE
+        print self.request
         try:
-            form.save(user=self.request.user)
+            self.object = form.save(user=self.request.user)
             messages.success(self.request, 'Nota criada com sucesso')
         except Exception as Error:
-            messages.error(self.request, 'Erro ao criar nota, tente novamente')
-        return super(NoteAddView, self).form_valid(form)
+            messages.error(self.request, 'Erro ao criar a nota, tente novamente')
+        return HttpResponseRedirect(self.success_url)
 
 
 delete_note = NoteDeleteView.as_view()

@@ -31,12 +31,6 @@ function create_graphic(data){
     });
 }
 
-//FUNCTION EDIT STATUS NOTE
-function note_get_function(url){
-    $.ajax({type: 'get', url: url,});
-    return false;
-}
-
 //FUNCTION GET DATA GRAPHIC
 function get_graphics(){
     $.ajax({
@@ -97,6 +91,7 @@ $(function() {
     });
 
     //CHECK EXISTS DIV
+    /*
     if($('#notas').length){
 
         //CONTROL EVENT CHECKBOX LIST NOTE
@@ -109,5 +104,6 @@ $(function() {
         });
 
     }//ENDIF
+    */
 
 }); //END FUNCTION

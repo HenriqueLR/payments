@@ -2,6 +2,101 @@
 {% load staticfiles %}
 {% load formtags %}
 
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
+
+    <style>
+.switch {
+    position: relative;
+    display: block;
+    width: 48px;
+    height: 23px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 1px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+   /* Hiding the checkbox, but allowing it to be focused */
+.badgebox
+{
+    opacity: 0;
+}
+
+.badgebox + .badge
+{
+    /* Move the check mark away when unchecked */
+    text-indent: -999999px;
+    /* Makes the badge's width stay the same checked and unchecked */
+    width: 27px;
+}
+
+.badgebox:focus + .badge
+{
+    /* Set something to make the badge looks focused */
+    /* This really depends on the application, in my case it was: */
+
+    /* Adding a light border */
+    box-shadow: inset 0px 0px 5px;
+    /* Taking the difference out of the padding */
+}
+
+.badgebox:checked + .badge
+{
+    /* Move the check mark back when checked */
+    text-indent: 0;
+}
+
+    </style>
+{% endblock %}
+
 {% block content %}
     <div class="container-fluid" id="home">
         <ol class="breadcrumb">
@@ -171,57 +266,168 @@
             </div>
         </div>
         <!-- END PAYMENTS -->
-        <!-- TODO LIST -->
+
+        <!-- NOTE LIST -->
         <div class="row" id="notas">
             <div class="col-md-12">
-                <!-- TODO LIST -->
                 <div class="panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">Notas</h3>
                         <div class="right">
                             <ul class="list-inline">
-                                <li><a href='{% url "wallet:add_note" %}'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a></li>
+                                <li>
+                                    <a class="add-form" data-toggle="modal" data-target=".bs-example-modal-static" href='#'>
+                                        <i style="font-size:16px;" class='lnr lnr-plus-circle'></i>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="panel-body">
-
-                        {% if not notes %}
-                            <h3>Não existem notas cadastradas</h3>
-                        {% else %}
-
-                        <ul class="list-unstyled todo-list">
-                            {% for note in notes %}
-                                <li class='{% if not note.status_note %}completed{% endif %}'>
-                                    <label id='note-list-input' class="control-inline fancy-checkbox">
-                                        <input id='{{ note.pk }}' type="checkbox" {% if not note.status_note %}checked{% endif %}><span></span>
-                                    </label>
-                                    <p>
-                                        <span class="title">{{ note.title }}</span>
-                                        <span class="label label-primary"><i class='fa fa-edit'></i></span>
-                                        {% if note.status_alert %}
-                                            <span class="label label-success"><i class='fa fa-warning'></i></span>
-                                        {% endif %}
-                                        <span class="short-description">{{ note.description }}</span>
-                                        <span class="date">{{ note.date_note | date:"d/m/Y H:i" }}</span>
-                                    </p>
-                                    <div class="controls">
-                                        <a href="{{ note.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>
-                                        <a href="{{ note.get_delete_url }}"><i class="lnr lnr-trash"></i></a>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
+                        <div id="context-notes"></div>
                     </div>
-                </div>
-                <!-- END TODO LIST -->
-            </div>
-        </div>
-    </div>
+                </div><!-- END PANEL -->
+            </div><!-- END COL-MD-12 -->
+        </div><!-- END ROW NOTAS -->
+        <!-- END NOTE LIST -->
+
+        <!--MODAL INIT-->
+        <div class="modal fade bs-example-modal-static" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div id="modal-home"></div>
+          </div><!--modal-content-->
+        </div><!--modal-dialog-->
+        </div><!--modal-->
+        <!--MODAL END-->
+
+    </div><!-- container-fluid -->
 {% endblock %}
 
 {% block extra_scripts %}
+    <script src="{% static 'js/libs/moment.min.js' %}"></script>
+    <script src="{% static 'js/libs/daterangepicker.js' %}"></script>
     <script src="{% static 'js/libs/highcharts.js' %}"></script>
     <script src="{% static 'js/home.js' %}"></script>
+
+    <script type="text/javascript">
+
+        //GLOBAL FUNCTIONS
+        var global_function = {
+            display_error_modal_dash:function(){
+                return '<div class="modal-header"><button aria-hidden="true" \
+                        data-dismiss="modal" class="close" type="button"> \
+                        <i style="font-size:15px;" class="lnr lnr-cross"></i> \
+                        </button><h4 class="modal-title">Error</h4></div> \
+                        <div class="modal-body"><div id="modal-home">Ocorreu um \
+                        erro, tente novamente.</div></div>';
+            },
+            get_config_datapicker:function(list_dict){
+                context = {"ranges": {'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'),
+                                   moment().subtract(1, 'month').endOf('month')]
+                },"linkedCalendars": false,"opens": "left",}
+
+                $.each(list_dict,function(key, value){
+                    $.extend(context, value);
+                });
+
+                return context;
+            },
+            get_locale:function(format_date){
+                locale = {
+                    "locale":{
+                    "separator": " - ","applyLabel": "Apply",
+                    "cancelLabel": "Cancel","fromLabel": "From",
+                    "toLabel": "To","customRangeLabel": "Custom",
+                    "weekLabel": "W","daysOfWeek": ["Su","Mo","Tu","We","Th","Fr","Sa"],
+                    "monthNames": ["January","February","March","April",
+                                   "May","June","July","August","September",
+                                   "October","November","December"],
+                    "firstDay": 1},}
+                if(format_date){
+                    $.extend(locale["locale"], format_date);
+                }
+
+                return locale;
+            },
+            get_single_datetime:function(){
+                list_dict = [];
+                list_dict.push({"singleDatePicker": true, "timePicker": true});
+                list_dict.push(global_function.get_locale({"format": "DD/MM/YYYY h:mm"}));
+                return global_function.get_config_datapicker(list_dict);
+            },
+        };
+        //END GLOBAL FUNCTIONS
+
+        //OBJECT NOTE
+        var note = {
+            list_note:function(){
+                $.ajax({type:'get', url:'/main/list_note/',
+                    success:function(data){$("#context-notes").html(data);},
+                    error:function (data){$("#context-notes").html("<h3>Não existem notas cadastradas</h3>");},
+                });
+            },
+            update_status:function(id){
+                $.ajax({type:'get', url:'/wallet/list_note/?note='+id});
+            },
+            get_form_add_note:function(){
+                $.ajax({type:'get', url:'/wallet/add_note/',
+                    success:function(data){$("#modal-home").html(data);},
+                    error:function(data){$("#modal-home").html(global_function.display_error_modal_dash());},
+                }).done(function(){$('input[name="date_note"]').daterangepicker(global_function.get_single_datetime());});
+            },
+            send_form_add_note:function(form){
+                $.ajax({type:form.attr('method'),
+                    url:form.attr('action'),
+                    data:form.serialize(),
+                    beforeSend:function(){form.find(":submit").prop('disabled', true);},
+                    success:function(data, textStatus, xhr){
+                        $("#modal-home").html(data);
+                        if($(data).find("success")){
+                            setTimeout(function(){get_list_alerts();},100);
+                            setTimeout(function(){note.list_note();},100);
+                        }
+                    },
+                    error:function(data){$("#modal-home").html(global_function.display_error_modal_dash());},
+                }).done(function(){form.find(":submit").prop('disabled', false);});
+            },
+        };
+        //END NOTE OBJECT
+
+        $(document).ready(function(){
+
+            //CHECK EXISTS DIV NOTAS
+            if($('#notas').length){
+
+                //GET LIST NOTES
+                note.list_note();
+
+                //CHECKBOX UPDATE STATUS NOTE
+                $('#notas #context-notes').on('click','input[type^="checkbox"]',function(){
+                    note.update_status($(this).attr("id"));
+                    //CALL UPDATE STATUS NOTE
+                    setTimeout(function(){get_list_alerts();},100);
+                });
+
+                //GET ADD FORM NOTE
+                $('#notas').on('click','.add-form',function(){
+                    note.get_form_add_note();
+                });
+
+                //SUBMIT ADD FORM NOTE
+                $('#modal-home').on('submit','.form-modal-note',function(e){
+                    e.preventDefault();
+                    note.send_form_add_note($(this));
+                });
+
+            }//END CHECK NOTES
+
+        });//END READY FUNCTION
+
+    </script>
 {% endblock %}

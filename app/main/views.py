@@ -13,6 +13,10 @@ from django.utils.translation import ugettext as _
 
 
 
+def payment(request):
+	return render(request, 'main/payment.html', {})
+
+
 @login_required
 @verify_payment
 def home(request):
@@ -44,7 +48,6 @@ def graphics(request):
 		list_graphics.append(format_json_graphic(Debit.objects.filter(account=request.user.account)\
 							.extra(select=select_date).values('date').annotate(total=Sum('value')).order_by('date')[:30],
 							 _(Debit._meta.verbose_name_plural)))
-
 		return JsonResponse(list_graphics, safe=False)
 
 
@@ -60,5 +63,9 @@ def alerts(request):
 		return render(request, template_name, {'alerts':alerts})
 
 
-def payment(request):
-	return render(request, 'main/payment.html', {})
+@login_required
+@ajax_required
+def list_note(request):
+	template_name = 'main/list_note.html'
+	notes = Note.objects.list_notes(request.user)[:10]
+	return render(request, template_name, {'objects':notes})

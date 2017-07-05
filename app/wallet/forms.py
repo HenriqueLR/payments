@@ -46,7 +46,7 @@ class DepositForm(forms.ModelForm):
 class EditNoteForm(forms.ModelForm):
 
 	def save(self, user=None, commit=True):
-		note = super(NoteForm, self).save(commit=False)
+		note = super(EditNoteForm, self).save(commit=False)
 		if user:
 			note.author = user.username
 			note.account = user.account
@@ -63,7 +63,7 @@ class EditNoteForm(forms.ModelForm):
 class AddNoteForm(forms.ModelForm):
 
 	def save(self, user=None, commit=True):
-		note = super(NoteForm, self).save(commit=False)
+		note = super(AddNoteForm, self).save(commit=False)
 		if user:
 			note.author = user.username
 			note.account = user.account

@@ -6,4 +6,5 @@ urlpatterns = patterns('main.views',
     url(r'^graphics/$', 'graphics', name='graphics'),
     url(r'^alerts/$', 'alerts', name='alerts'),
     url(r'^payment/$', 'payment', name='payment'),
+    url(r'^list_note/$', 'list_note', name='list_note'),
 )
