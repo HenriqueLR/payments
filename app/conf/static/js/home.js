@@ -106,6 +106,94 @@ var note = {
     },
 };//END NOTE OBJECT
 
+//OBJECT DEBIT
+var releases = {
+    list_debits_timeout:function(time){
+        setTimeout(function(){releases.list_debits();}, time);
+    },
+    list_debits:function(){
+        $.ajax({type:'get', url:'/main/list_debit/',
+            success:function(data){$("#context-debits").html(data);},
+            error:function (data){$("#context-debits").html("<h3>Não existem débitos cadastrados</h3>");},
+        });
+    },
+    list_deposits_timeout:function(time){
+        setTimeout(function(){releases.list_deposits();}, time);
+    },
+    list_deposits:function(){
+        $.ajax({type:'get', url:'/main/list_deposit/',
+            success:function(data){$("#context-deposits").html(data);},
+            error:function (data){$("#context-deposits").html("<h3>Não existem depósitos cadastrados</h3>");},
+        });
+    },
+    delete_debit:function(id){
+        $.ajax({type:'get', url:'/main/delete_debit/'+id,
+            success:function(data){
+                if(data=="ok"){
+                    releases.list_debits_timeout(100);
+                    graphics.get_overview_timeout(100);
+                }
+            },
+        });
+    },
+    delete_deposit:function(id){
+        $.ajax({type:'get', url:'/main/delete_deposit/'+id,
+            success:function(data){
+                if(data=="ok"){
+                    releases.list_deposits_timeout(100);
+                    graphics.get_overview_timeout(100);
+                }
+            },
+        });
+    },
+    get_form_payment:function(url){
+        $.ajax({type:'get', url:url,
+            success:function(data){$("#modal-home").html(data);},
+            error:function(data){$("#modal-home").html(global_function.display_error_modal_dash());console.log(data.responseText);},
+        }).done(function(){$('input[name="date_releases"]').daterangepicker(global_function.get_single_datetime());});
+    },
+    send_form_debit:function(form){
+        $.ajax({type:form.attr('method'),
+            url:form.attr('action'),
+            data:form.serialize(),
+            beforeSend:function(){form.find(":submit").prop('disabled', true);},
+            success:function(data, textStatus, xhr){
+                $("#modal-home").html(data);
+                if($(data).find("success")){
+                    releases.list_debits_timeout(100);
+                    graphics.get_overview_timeout(100);
+                }
+            },
+            error:function(data){
+                $("#modal-home").html(global_function.display_error_modal_dash());
+            },
+            complete:function(){
+                form.find(":submit").prop('disabled', false);
+            },
+        }).done(function(){$('input[name="date_releases"]').daterangepicker(global_function.get_single_datetime());});
+    },
+    send_form_deposit:function(form){
+        $.ajax({type:form.attr('method'),
+            url:form.attr('action'),
+            data:form.serialize(),
+            beforeSend:function(){form.find(":submit").prop('disabled', true);},
+            success:function(data, textStatus, xhr){
+                $("#modal-home").html(data);
+                if($(data).find("success")){
+                    releases.list_deposits_timeout(100);
+                    graphics.get_overview_timeout(100);
+                }
+            },
+            error:function(data){
+                $("#modal-home").html(global_function.display_error_modal_dash());
+            },
+            complete:function(){
+                form.find(":submit").prop('disabled', false);
+            },
+        }).done(function(){$('input[name="date_releases"]').daterangepicker(global_function.get_single_datetime());});
+    },
+};//END DEBIT OBJECT
+
 //OBJECT GRAPHIC
 var graphics = {
     get_data_graphics:function(){
@@ -167,13 +255,21 @@ var graphics = {
             // do nothing
         }
     },
+    balance_charts:function(){
+        $.ajax({type:'get', url:'/main/balance/',
+            success:function(data){$("#totalizadores").html(data);},
+        });
+    },
+    get_overview_timeout:function(time){
+        setTimeout(function(){
+            graphics.get_data_graphics();
+            graphics.balance_charts();
+        }, time);
+    },
 };//END OBJECT GRAPHIC
 
-//GRAPHICS CONTROLL
+//GRAPHICS CONTROLL RESIZE
 $(function(){
-    //INIT GRAPHIC
-    graphics.get_data_graphics();
-
     //ADJUST SIZE FOR HIDDEN CHARTS
     $(window).resize(function () {
         if (this.resizeTO) clearTimeout(this.resizeTO);
@@ -195,7 +291,6 @@ $(function(){
 $(document).ready(function(){
     //CHECK EXISTS DIV NOTAS
     if($('#notas').length){
-
         //GET LIST NOTES
         note.list_note();
 
@@ -220,8 +315,8 @@ $(document).ready(function(){
         });
 
         //GET ADD FORM NOTE
-        $('#notas').on('click','.add-form',function(){
-            note.get_form_note("/wallet/add_note/");
+        $('#notas').on('click','.add-form',function(e){
+            note.get_form_note('/wallet/add_note/');
         });
 
         //SUBMIT ADD FORM NOTE
@@ -229,6 +324,59 @@ $(document).ready(function(){
             e.preventDefault();
             note.send_form_note($(this));
         });
-
     }//END CHECK NOTES
+
+    //CHECK EXISTS DIV PAYMENTS
+    if($('#payments').length){
+        //GET LIST DEBIT AND DEPOSITS
+        releases.list_debits();
+        releases.list_deposits();
+
+        //GET ADD FORM DEBIT
+        $('#payments #debit-col').on('click','.add-form',function(e){
+            releases.get_form_payment('/wallet/add_debit/');
+        });
+
+        $('#payments #deposit-col').on('click','.add-form',function(e){
+            releases.get_form_payment('/wallet/add_deposit/');
+        });
+
+        //DELETE DEBIT AND DEPOSITS
+        $('#payments #context-debits').on('click','.delete-debit',function(e){
+            e.preventDefault();
+            releases.delete_debit($(this).attr("id"));
+        });
+
+        $('#payments #context-deposits').on('click','.delete-deposit',function(e){
+            e.preventDefault();
+            releases.delete_deposit($(this).attr("id"));
+        });
+
+        //SUBMIT ADD FORM DEBIT
+        $('#modal-home').on('submit','.form-modal-debit',function(e){
+            e.preventDefault();
+            releases.send_form_debit($(this));
+        });
+
+        $('#modal-home').on('submit','.form-modal-deposit',function(e){
+            e.preventDefault();
+            releases.send_form_deposit($(this));
+        });
+
+        //EDIT NOTE
+        $('#payments #context-debits').on('click','.edit-debit',function(e){
+            releases.get_form_payment("/wallet/update_debit/"+$(this).attr("id"));
+        });
+
+        $('#payments #context-deposits').on('click','.edit-deposit',function(e){
+            releases.get_form_payment("/wallet/update_deposit/"+$(this).attr("id"));
+        });
+    }//END CHECK PAYMENTS
+
+    //CHECK EXISTS DIV OVERLOAD
+    if($("#overview").length){
+        //GET OVERVIEW
+        graphics.get_overview_timeout(100);
+    }//END CHECK OVERLOAD
+
 });//END HOME ACTION CONTROLL

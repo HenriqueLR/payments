@@ -4,7 +4,7 @@
 		<button aria-hidden="true" data-dismiss="modal" class="close" type="button">
 			<i style="font-size:15px;" class='lnr lnr-cross'></i>
 		</button>
-		<h4 class="modal-title">Adicionar Notas</h4>
+		<h4 class="modal-title">Nova Nota</h4>
 	</div>
 	<div class="modal-body">
 		<div class="row" id="note">
@@ -78,11 +78,11 @@
 											<!--<button onclick="send_form('{% url 'wallet:add_note' %}', 'id_new_note', 'id_save_note');" class='btn btn-primary' type="button" name='save_note' id='id_save_note'>
 												Salvar
 											</button>-->
-											<button type="submit" class="btn btn-primary">
+											<button type="submit" class="btn btn-primary" name="new_note" id="id_new_note">
 												Salvar
 											</button>
 
-											<button class="btn btn-danger" aria-hidden="true" data-dismiss="modal" type="button">
+											<button name="close_new_note" id="id_close_new_note" class="btn btn-danger" aria-hidden="true" data-dismiss="modal" type="button">
 												Fechar
 											</button>
 										</div>

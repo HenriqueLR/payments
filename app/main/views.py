@@ -21,18 +21,8 @@ def payment(request):
 @verify_payment
 def home(request):
 	template_name = 'main/home.html'
-	total_deposit = Deposit.objects.sum_deposits(request.user)
-	total_debit = Debit.objects.sum_debits(request.user)
-	balance = (total_deposit - total_debit)
-	debits = Debit.objects.list_debits(request.user)[:10]
-	deposits = Deposit.objects.list_deposits(request.user)[:10]
-	notes = Note.objects.list_notes(request.user)[:10]
 	apps = apps_permissions(request)
-
-	context = {'apps':apps, 'label_app':'Main', 'object_name':'Home',
-			   'total_deposit':total_deposit, 'total_debit':total_debit,
-			   'debits':debits, 'deposits':deposits, 'notes':notes,
-			   'balance':balance}
+	context = {'apps':apps,'label_app':'Main','object_name':'Home'}
 	return render(request, template_name, context)
 
 
@@ -49,6 +39,17 @@ def graphics(request):
 							.extra(select=select_date).values('date').annotate(total=Sum('value')).order_by('date')[:30],
 							 _(Debit._meta.verbose_name_plural)))
 		return JsonResponse(list_graphics, safe=False)
+
+
+@login_required
+@ajax_required
+def balance(request):
+	template_name = 'main/balance.html'
+	total_deposit = Deposit.objects.sum_deposits(request.user)
+	total_debit = Debit.objects.sum_debits(request.user)
+	balance = (total_deposit - total_debit)
+	context = {'total_deposit':total_deposit,'total_debit':total_debit,'balance':balance}
+	return render(request, template_name, context)
 
 
 @login_required
@@ -75,4 +76,34 @@ def list_note(request):
 @ajax_required
 def delete_note(request, pk):
 	Note.objects.filter(pk=pk, account=request.user.account).delete()
+	return HttpResponse("ok")
+
+
+@login_required
+@ajax_required
+def list_debit(request):
+	template_name = 'wallet/debit/list_debit_single.html'
+	debits = Debit.objects.list_debits(request.user)[:10]
+	return render(request, template_name, {'objects':debits})
+
+
+@login_required
+@ajax_required
+def delete_debit(request, pk):
+	Debit.objects.filter(pk=pk, account=request.user.account).delete()
+	return HttpResponse("ok")
+
+
+@login_required
+@ajax_required
+def list_deposit(request):
+	template_name = 'wallet/deposit/list_deposit_single.html'
+	deposits = Deposit.objects.list_deposits(request.user)[:10]
+	return render(request, template_name, {'objects':deposits})
+
+
+@login_required
+@ajax_required
+def delete_deposit(request, pk):
+	Deposit.objects.filter(pk=pk, account=request.user.account).delete()
 	return HttpResponse("ok")

@@ -58,13 +58,17 @@ class DebitUpdateView(PermissionsDebitMixin, UpdateView):
 
     model = Debit
     form_class = DebitForm
-    template_name = 'wallet/debit/update_debit.html'
+    template_name = 'wallet/debit/update_debit_modal.html'
     success_url = reverse_lazy('wallet:list_debit')
     required_permissions = get_list_permissions(model, permission_list=['all'])
 
     def form_valid(self, form):
-        messages.success(self.request, 'Alterado com sucesso.')
-        return super(DebitUpdateView, self).form_valid(form)
+        try:
+            form.save(user=self.request.user)
+            messages.success(self.request, 'Alterado com sucesso')
+        except Exception as Error:
+            messages.error(self.request, 'Erro ao alterar a débito, tente novamente')
+        return HttpResponseRedirect(reverse_lazy('wallet:update_debit', kwargs={'pk': self.object.pk}))
 
 
 
@@ -72,7 +76,7 @@ class DebitAddView(PermissionsDebitMixin, CreateView):
 
     model = Debit
     form_class = DebitForm
-    template_name = 'wallet/debit/add_debit.html'
+    template_name = 'wallet/debit/add_debit_modal.html'
     success_url = reverse_lazy('wallet:add_debit')
     required_permissions = get_list_permissions(model, permission_list=['all'])
 
@@ -82,7 +86,7 @@ class DebitAddView(PermissionsDebitMixin, CreateView):
             messages.success(self.request, 'Débito lançado com sucesso')
         except Exception as Error:
             messages.error(self.request, 'Erro ao lançar débito, tente novamente')
-        return super(DebitAddView, self).form_valid(form)
+        return HttpResponseRedirect(self.success_url)
 
 
 delete_debit = DebitDeleteView.as_view()
@@ -132,13 +136,17 @@ class DepositUpdateView(PermissionsDepositMixin, UpdateView):
 
     model = Deposit
     form_class = DepositForm
-    template_name = 'wallet/deposit/update_deposit.html'
+    template_name = 'wallet/deposit/update_deposit_modal.html'
     success_url = reverse_lazy('wallet:list_deposit')
     required_permissions = get_list_permissions(model, permission_list=['all'])
 
     def form_valid(self, form):
-        messages.success(self.request, 'Alterado com sucesso.')
-        return super(DepositUpdateView, self).form_valid(form)
+        try:
+            form.save(user=self.request.user)
+            messages.success(self.request, 'Alterado com sucesso')
+        except Exception as Error:
+            messages.error(self.request, 'Erro ao alterar o depósito, tente novamente')
+        return HttpResponseRedirect(reverse_lazy('wallet:update_deposit', kwargs={'pk': self.object.pk}))
 
 
 
@@ -146,7 +154,7 @@ class DepositAddView(PermissionsDepositMixin, CreateView):
 
     model = Deposit
     form_class = DepositForm
-    template_name = 'wallet/deposit/add_deposit.html'
+    template_name = 'wallet/deposit/add_deposit_modal.html'
     success_url = reverse_lazy('wallet:add_deposit')
     required_permissions = get_list_permissions(model, permission_list=['all'])
 
@@ -156,7 +164,7 @@ class DepositAddView(PermissionsDepositMixin, CreateView):
             messages.success(self.request, 'Déposito lançado com sucesso')
         except Exception as Error:
             messages.error(self.request, 'Erro ao lançar déposito, tente novamente')
-        return super(DepositAddView, self).form_valid(form)
+        return HttpResponseRedirect(self.success_url)
 
 
 delete_deposit = DepositDeleteView.as_view()

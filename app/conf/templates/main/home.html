@@ -7,142 +7,142 @@
 
     <style>
 
-.status_slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+        .status_slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
 
-.status_slider:before {
-    position: absolute;
-    content: "";
-    height: 20px;
-    width: 20px;
-    left: 1px;
-    bottom: 2px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
+        .status_slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 1px;
+            bottom: 2px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
-input:checked + .status_slider {
-  background-color: #41b314;
-}
+        input:checked + .status_slider {
+          background-color: #41b314;
+        }
 
-input:focus + .status_slider {
-  box-shadow: 0 0 1px #41b314;
-}
+        input:focus + .status_slider {
+          box-shadow: 0 0 1px #41b314;
+        }
 
-input:checked + .status_slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
+        input:checked + .status_slider:before {
+          -webkit-transform: translateX(26px);
+          -ms-transform: translateX(26px);
+          transform: translateX(26px);
+        }
 
-/* Rounded sliders */
-.status_slider.round {
-  border-radius: 34px;
-}
+        /* Rounded sliders */
+        .status_slider.round {
+          border-radius: 34px;
+        }
 
-.status_slider.round:before {
-  border-radius: 50%;
-}
+        .status_slider.round:before {
+          border-radius: 50%;
+        }
 
 
 
-.switch {
-    position: relative;
-    display: block;
-    width: 48px;
-    height: 23px;
-}
+        .switch {
+            position: relative;
+            display: block;
+            width: 48px;
+            height: 23px;
+        }
 
-/* Hide default HTML checkbox */
-.switch input {display:none;}
+        /* Hide default HTML checkbox */
+        .switch input {display:none;}
 
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+        /* The slider */
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 20px;
-    width: 20px;
-    left: 1px;
-    bottom: 2px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 1px;
+            bottom: 2px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
-input:checked + .slider {
-  background-color: #2196F3;
-}
+        input:checked + .slider {
+          background-color: #2196F3;
+        }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
+        input:focus + .slider {
+          box-shadow: 0 0 1px #2196F3;
+        }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
+        input:checked + .slider:before {
+          -webkit-transform: translateX(26px);
+          -ms-transform: translateX(26px);
+          transform: translateX(26px);
+        }
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
+        /* Rounded sliders */
+        .slider.round {
+          border-radius: 34px;
+        }
 
-.slider.round:before {
-  border-radius: 50%;
-}
+        .slider.round:before {
+          border-radius: 50%;
+        }
 
-   /* Hiding the checkbox, but allowing it to be focused */
-.badgebox
-{
-    opacity: 0;
-}
+           /* Hiding the checkbox, but allowing it to be focused */
+        .badgebox
+        {
+            opacity: 0;
+        }
 
-.badgebox + .badge
-{
-    /* Move the check mark away when unchecked */
-    text-indent: -999999px;
-    /* Makes the badge's width stay the same checked and unchecked */
-    width: 27px;
-}
+        .badgebox + .badge
+        {
+            /* Move the check mark away when unchecked */
+            text-indent: -999999px;
+            /* Makes the badge's width stay the same checked and unchecked */
+            width: 27px;
+        }
 
-.badgebox:focus + .badge
-{
-    /* Set something to make the badge looks focused */
-    /* This really depends on the application, in my case it was: */
+        .badgebox:focus + .badge
+        {
+            /* Set something to make the badge looks focused */
+            /* This really depends on the application, in my case it was: */
 
-    /* Adding a light border */
-    box-shadow: inset 0px 0px 5px;
-    /* Taking the difference out of the padding */
-}
+            /* Adding a light border */
+            box-shadow: inset 0px 0px 5px;
+            /* Taking the difference out of the padding */
+        }
 
-.badgebox:checked + .badge
-{
-    /* Move the check mark back when checked */
-    text-indent: 0;
-}
+        .badgebox:checked + .badge
+        {
+            /* Move the check mark back when checked */
+            text-indent: 0;
+        }
 
     </style>
 {% endblock %}
@@ -152,6 +152,7 @@ input:checked + .slider:before {
         <ol class="breadcrumb">
             <li class='active'><i class="fa fa-home fa-fw"></i> Inicio</li>
         </ol>
+
         <!-- OVERVIEW -->
         <div class="row" id="overview">
             <div class="col-md-12">
@@ -161,14 +162,14 @@ input:checked + .slider:before {
                     </div>
 
                     <div class="panel-body">
-                        <div class="row">
+                        <div class="row" id="totalizadores">
                             <div class="col-md-4">
                                 <div class="metric">
                                     <span class="icon" style="background-color:white;">
                                         <i class="fa fa-thumbs-up" aria-hidden="true" style="color:#5cb85c;"></i>
                                     </span>
                                     <p>
-                                        <span class="number">R$ {{ total_deposit|decimal_to_real }}</span>
+                                        <span class="number">R$ 0</span>
                                         <span class="title">Total Recebido</span>
                                     </p>
                                 </div>
@@ -179,7 +180,7 @@ input:checked + .slider:before {
                                         <i class="fa fa-thumbs-down" aria-hidden="true" style="color:#d9534f;"></i>
                                     </span>
                                     <p>
-                                        <span class="number">R$ {{ total_debit|decimal_to_real }}</span>
+                                        <span class="number">R$ 0</span>
                                         <span class="title">Total Descontos</span>
                                     </p>
                                 </div>
@@ -190,7 +191,7 @@ input:checked + .slider:before {
                                         <i class="fa {% if balance >= 0 %}fa-plus-square icon-panel-success{% else %}fa-minus-square icon-panel-danger{% endif %}" aria-hidden="true"></i>
                                     </span>
                                     <p>
-                                        <span class="number">R$ {{ balance|decimal_to_real }}</span>
+                                        <span class="number">R$ 0</span>
                                         <span class="title">Saldo</span>
                                     </p>
                                 </div>
@@ -208,6 +209,7 @@ input:checked + .slider:before {
             </div>
         </div><!-- end row -->
         <!-- END OVERVIEW -->
+
         <!-- PAYMENTS -->
         <div class="row" id="payments">
             <div class="col-md-6" id='debit-col'>
@@ -217,45 +219,13 @@ input:checked + .slider:before {
                         <h3 class="panel-title">Débitos</h3>
                         <div class="right">
                             <ul class="list-inline">
-                                <li><a href='{% url "wallet:add_debit" %}'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a></li>
+                                <li><a class="add-form" data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="panel-body">
-                        {% if not debits %}
-                            <h3>Não existem lançamentos de débitos cadastrados</h3>
-                        {% else %}
-                            <div class="table-responsive">
-                                <table class="table table-striped mb30">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>#</th>
-                                            <th>Origem</th>
-                                            <th>Valor</th>
-                                            <th>Data</th>
-                                            <th>Autor</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for debit in debits %}
-                                            <tr>
-                                                <td class='clean-td'><i class='fa fa-minus text-danger'></i></td>
-                                                <td>{{ forloop.counter }}</td>
-                                                <td>{{ debit.origin }}</td>
-                                                <td>R$ {{ debit.value|decimal_to_real }}</td>
-                                                <td>{{ debit.date_releases | date:"d/m/Y H:i" }}</td>
-                                                <td>{{ debit.author }}</td>
-                                                <td class="actions">
-                                                    <a href="{{ debit.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>
-                                                    <a href="{{ debit.get_delete_debit }}"><i class="lnr lnr-trash"></i></a>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        {% endif %}
+                        <div id="context-debits"></div>
                     </div>
                     <!-- END TABLE STRIPED -->
                 </div>
@@ -269,47 +239,13 @@ input:checked + .slider:before {
                         <div class="right">
                             <ul class="list-inline">
                                 <li>
-                                    <a href='{% url "wallet:add_deposit" %}'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a>
+                                    <a class="add-form" data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="panel-body">
-                        {% if not deposits %}
-                            <h3>Não existem lançamentos de depósitos cadastrados</h3>
-                        {% else %}
-                            <div class="table-responsive">
-                                <table class="table table-striped mb30">
-                                    <thead>
-                                        <tr>
-                                        <th></th>
-                                        <th>#</th>
-                                        <th>Origem</th>
-                                        <th>Valor</th>
-                                        <th>Data</th>
-                                        <th>Autor</th>
-                                        <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for deposit in deposits %}
-                                            <tr>
-                                                <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
-                                                <td>{{ forloop.counter }}</td>
-                                                <td>{{ deposit.origin }}</td>
-                                                <td>R$ {{ deposit.value|decimal_to_real }}</td>
-                                                <td>{{ deposit.date_releases | date:"d/m/Y H:i" }}</td>
-                                                <td>{{ deposit.author }}</td>
-                                                <td class="actions">
-                                                    <a href="{{ deposit.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>
-                                                    <a href="{{ deposit.get_delete_deposit }}"><i class="lnr lnr-trash"></i></a>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        {% endif %}
+                        <div id="context-deposits"></div>
                     </div>
                 </div>
                 <!-- END TABLE STRIPED -->
@@ -326,9 +262,7 @@ input:checked + .slider:before {
                         <div class="right">
                             <ul class="list-inline">
                                 <li>
-                                    <a class="add-form" data-toggle="modal" data-target=".bs-example-modal-static" href='#'>
-                                        <i style="font-size:16px;" class='lnr lnr-plus-circle'></i>
-                                    </a>
+                                    <a class="add-form" data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a>
                                 </li>
                             </ul>
                         </div>
