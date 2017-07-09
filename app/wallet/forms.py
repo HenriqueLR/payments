@@ -45,11 +45,8 @@ class DepositForm(forms.ModelForm):
 
 class EditNoteForm(forms.ModelForm):
 
-	def save(self, user=None, commit=True):
+	def save(self, commit=True):
 		note = super(EditNoteForm, self).save(commit=False)
-		if user:
-			note.author = user.username
-			note.account = user.account
 
 		if commit:
 			note.save()

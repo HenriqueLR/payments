@@ -10,9 +10,11 @@ from main.utils import apps_permissions, format_date
 
 
 class PermissionsGeralMixin(object):
+    template_name_ajax = None
 
     @classmethod
     def as_view(cls):
+        print cls
         return login_required(super(PermissionsGeralMixin, cls).as_view())
 
     @method_decorator(never_cache)
@@ -20,6 +22,8 @@ class PermissionsGeralMixin(object):
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.has_perms(self.required_permissions):
             raise Http404
+        if self.request.is_ajax() and self.template_name_ajax:
+            self.template_name = self.template_name_ajax
         return super(PermissionsGeralMixin, self).dispatch(request, *args, **kwargs)
 
 

@@ -2,6 +2,9 @@
 
 //GLOBAL FUNCTIONS
 var global_function = {
+    close_modal_dash:function(time){
+        setTimeout(function(){$('#modal-home button[class="close"]').click();}, time);
+    },
     display_error_modal_dash:function(){
         return '<div class="modal-header"><button aria-hidden="true" \
                 data-dismiss="modal" class="close" type="button"> \
@@ -60,13 +63,13 @@ var note = {
         setTimeout(function(){note.list_note();}, time);
     },
     list_note:function(){
-        $.ajax({type:'get', url:'/main/list_note/',
+        $.ajax({type:'get', url:'/wallet/list_note/',
             success:function(data){$("#context-notes").html(data);},
             error:function (data){$("#context-notes").html("<h3>Não existem notas cadastradas</h3>");},
         });
     },
     update_status_note:function(id){
-        $.ajax({type:'get', url:'/wallet/list_note/?note='+id});
+        $.ajax({type:'get', url:'/wallet/update_status_note/'+id});
     },
     get_form_note:function(url){
         $.ajax({type:'get', url:url,
@@ -80,39 +83,36 @@ var note = {
             data:form.serialize(),
             beforeSend:function(){form.find(":submit").prop('disabled', true);},
             success:function(data, textStatus, xhr){
-                $("#modal-home").html(data);
-                if($(data).find("success")){
-                    global_function.list_alerts_timeout(100);
-                    note.list_note_timeout(100);
+                if(form.attr('name') == 'delete_note'){
+                    $("#context-notes").html(data);
+                    if(($(data).find("div.alert-success").length)){
+                        global_function.list_alerts_timeout(100);
+                    }
+                }else{
+                    $("#modal-home").html(data);
+                    if(($(data).find("div.alert-success").length)){
+                        global_function.list_alerts_timeout(100);
+                        note.list_note_timeout(100);
+                    }
                 }
             },
-            error:function(data){
-                $("#modal-home").html(global_function.display_error_modal_dash());
-            },
-            complete:function(){
-                form.find(":submit").prop('disabled', false);
-            },
-        }).done(function(){$('input[name="date_note"]').daterangepicker(global_function.get_single_datetime());});
-    },
-    delete_note:function(id){
-        $.ajax({type:'get', url:'/main/delete_note/'+id,
-            success:function(data){
-                if(data=="ok"){
-                    global_function.list_alerts_timeout(100);
-                    note.list_note_timeout(100);
-                }
-            },
-        });
+            error:function(data){$("#modal-home").html(global_function.display_error_modal_dash());},
+            complete:function(){form.find(":submit").prop('disabled', false);},
+        }).done(function(){
+            if(form.attr('name') != 'delete_note'){
+                $('input[name="date_note"]').daterangepicker(global_function.get_single_datetime());
+            }else{global_function.close_modal_dash(300);}
+        });//END CALL AJAX
     },
 };//END NOTE OBJECT
 
-//OBJECT DEBIT
+//OBJECT DEBIT / DEPOSIT
 var releases = {
     list_debits_timeout:function(time){
         setTimeout(function(){releases.list_debits();}, time);
     },
     list_debits:function(){
-        $.ajax({type:'get', url:'/main/list_debit/',
+        $.ajax({type:'get', url:'/wallet/list_debit/',
             success:function(data){$("#context-debits").html(data);},
             error:function (data){$("#context-debits").html("<h3>Não existem débitos cadastrados</h3>");},
         });
@@ -121,35 +121,15 @@ var releases = {
         setTimeout(function(){releases.list_deposits();}, time);
     },
     list_deposits:function(){
-        $.ajax({type:'get', url:'/main/list_deposit/',
+        $.ajax({type:'get', url:'/wallet/list_deposit/',
             success:function(data){$("#context-deposits").html(data);},
             error:function (data){$("#context-deposits").html("<h3>Não existem depósitos cadastrados</h3>");},
-        });
-    },
-    delete_debit:function(id){
-        $.ajax({type:'get', url:'/main/delete_debit/'+id,
-            success:function(data){
-                if(data=="ok"){
-                    releases.list_debits_timeout(100);
-                    graphics.get_overview_timeout(100);
-                }
-            },
-        });
-    },
-    delete_deposit:function(id){
-        $.ajax({type:'get', url:'/main/delete_deposit/'+id,
-            success:function(data){
-                if(data=="ok"){
-                    releases.list_deposits_timeout(100);
-                    graphics.get_overview_timeout(100);
-                }
-            },
         });
     },
     get_form_payment:function(url){
         $.ajax({type:'get', url:url,
             success:function(data){$("#modal-home").html(data);},
-            error:function(data){$("#modal-home").html(global_function.display_error_modal_dash());console.log(data.responseText);},
+            error:function(data){console.log(data);$("#modal-home").html(global_function.display_error_modal_dash());},
         }).done(function(){$('input[name="date_releases"]').daterangepicker(global_function.get_single_datetime());});
     },
     send_form_debit:function(form){
@@ -158,10 +138,17 @@ var releases = {
             data:form.serialize(),
             beforeSend:function(){form.find(":submit").prop('disabled', true);},
             success:function(data, textStatus, xhr){
-                $("#modal-home").html(data);
-                if($(data).find("success")){
-                    releases.list_debits_timeout(100);
-                    graphics.get_overview_timeout(100);
+                if(form.attr('name') == 'delete_debit'){
+                    $("#context-debits").html(data);
+                    if(($(data).find("div.alert-success").length)){
+                        graphics.get_overview_timeout(100);
+                    }
+                }else{
+                    $("#modal-home").html(data);
+                    if(($(data).find("div.alert-success").length)){
+                        releases.list_debits_timeout(100);
+                        graphics.get_overview_timeout(100);
+                    }
                 }
             },
             error:function(data){
@@ -170,7 +157,11 @@ var releases = {
             complete:function(){
                 form.find(":submit").prop('disabled', false);
             },
-        }).done(function(){$('input[name="date_releases"]').daterangepicker(global_function.get_single_datetime());});
+        }).done(function(){
+            if(form.attr('name') != 'delete_debit'){
+                $('input[name="date_releases"]').daterangepicker(global_function.get_single_datetime());
+            }else{global_function.close_modal_dash(300);}
+        });
     },
     send_form_deposit:function(form){
         $.ajax({type:form.attr('method'),
@@ -178,10 +169,17 @@ var releases = {
             data:form.serialize(),
             beforeSend:function(){form.find(":submit").prop('disabled', true);},
             success:function(data, textStatus, xhr){
-                $("#modal-home").html(data);
-                if($(data).find("success")){
-                    releases.list_deposits_timeout(100);
-                    graphics.get_overview_timeout(100);
+                if(form.attr('name') == 'delete_deposit'){
+                    $("#context-deposits").html(data);
+                    if(($(data).find("div.alert-success").length)){
+                        graphics.get_overview_timeout(100);
+                    }
+                }else{
+                    $("#modal-home").html(data);
+                    if(($(data).find("div.alert-success").length)){
+                        releases.list_deposits_timeout(100);
+                        graphics.get_overview_timeout(100);
+                    }
                 }
             },
             error:function(data){
@@ -190,9 +188,13 @@ var releases = {
             complete:function(){
                 form.find(":submit").prop('disabled', false);
             },
-        }).done(function(){$('input[name="date_releases"]').daterangepicker(global_function.get_single_datetime());});
+        }).done(function(){
+            if(form.attr('name') != 'delete_deposit'){
+                $('input[name="date_releases"]').daterangepicker(global_function.get_single_datetime());
+            }else{global_function.close_modal_dash(300);}
+        });
     },
-};//END DEBIT OBJECT
+};//END DEBIT / DEPOSIT
 
 //OBJECT GRAPHIC
 var graphics = {
@@ -305,8 +307,7 @@ $(document).ready(function(){
 
         //DELETE NOTE
         $('#notas #context-notes').on('click','.delete-note',function(e){
-            e.preventDefault();
-            note.delete_note($(this).attr("id"));
+            note.get_form_note("/wallet/delete_note/"+$(this).attr("id"));
         });
 
         //EDIT NOTE
@@ -319,7 +320,7 @@ $(document).ready(function(){
             note.get_form_note('/wallet/add_note/');
         });
 
-        //SUBMIT ADD FORM NOTE
+        //SUBMIT ADD/EDIT/DELETE FORM NOTE
         $('#modal-home').on('submit','.form-modal-note',function(e){
             e.preventDefault();
             note.send_form_note($(this));
@@ -342,14 +343,12 @@ $(document).ready(function(){
         });
 
         //DELETE DEBIT AND DEPOSITS
-        $('#payments #context-debits').on('click','.delete-debit',function(e){
-            e.preventDefault();
-            releases.delete_debit($(this).attr("id"));
+        $('#payments #context-deposits').on('click','.delete-deposit',function(e){
+            releases.get_form_payment("/wallet/delete_deposit/"+$(this).attr("id"));
         });
 
-        $('#payments #context-deposits').on('click','.delete-deposit',function(e){
-            e.preventDefault();
-            releases.delete_deposit($(this).attr("id"));
+        $('#payments #context-debits').on('click','.delete-debit',function(e){
+            releases.get_form_payment("/wallet/delete_debit/"+$(this).attr("id"));
         });
 
         //SUBMIT ADD FORM DEBIT

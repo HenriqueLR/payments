@@ -1,7 +1,20 @@
 {% load staticfiles %}
 {% load formtags %}
-
-{% if not objects %}
+<div class="row">
+    <div class="col-md-12">
+        {% if messages %}
+            {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>{{ message.tags }}:</strong> {{ message }}.
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% if not object_list %}
     <h3>Não existem lançamentos de débitos cadastrados</h3>
 {% else %}
     <div class="table-responsive">
@@ -18,7 +31,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for debit in objects %}
+                {% for debit in object_list %}
                     <tr>
                         <td class='clean-td'><i class='fa fa-minus text-danger'></i></td>
                         <td>{{ forloop.counter }}</td>
@@ -28,7 +41,7 @@
                         <td>{{ debit.author }}</td>
                         <td class="actions">
                             <a class="edit-debit" id='{{ debit.pk }}' data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i class="lnr lnr-pencil"></i></a>
-                            <a class="delete-debit" id="{{ debit.pk }}" href="#"><i class="lnr lnr-trash"></i></a>
+                            <a class="delete-debit" id="{{ debit.pk }}" data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i class="lnr lnr-trash"></i></a>
                         </td>
                     </tr>
                 {% endfor %}

@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from main.utils import apps_permissions, format_json_graphic, get_period_this_month
-from main.decorators import permissions_denied, ajax_required, verify_payment
+from main.decorators import ajax_required, verify_payment
 from wallet.models import Debit, Deposit, Note
 from django.http import HttpResponse, JsonResponse
 from django.utils.translation import ugettext as _
@@ -62,48 +62,3 @@ def alerts(request):
 									 date_note__gte=start_date, date_note__lte=end_date,
 									 status_note=True)
 		return render(request, template_name, {'alerts':alerts})
-
-
-@login_required
-@ajax_required
-def list_note(request):
-	template_name = 'wallet/note/list_note_single.html'
-	notes = Note.objects.list_notes(request.user)[:10]
-	return render(request, template_name, {'objects':notes})
-
-
-@login_required
-@ajax_required
-def delete_note(request, pk):
-	Note.objects.filter(pk=pk, account=request.user.account).delete()
-	return HttpResponse("ok")
-
-
-@login_required
-@ajax_required
-def list_debit(request):
-	template_name = 'wallet/debit/list_debit_single.html'
-	debits = Debit.objects.list_debits(request.user)[:10]
-	return render(request, template_name, {'objects':debits})
-
-
-@login_required
-@ajax_required
-def delete_debit(request, pk):
-	Debit.objects.filter(pk=pk, account=request.user.account).delete()
-	return HttpResponse("ok")
-
-
-@login_required
-@ajax_required
-def list_deposit(request):
-	template_name = 'wallet/deposit/list_deposit_single.html'
-	deposits = Deposit.objects.list_deposits(request.user)[:10]
-	return render(request, template_name, {'objects':deposits})
-
-
-@login_required
-@ajax_required
-def delete_deposit(request, pk):
-	Deposit.objects.filter(pk=pk, account=request.user.account).delete()
-	return HttpResponse("ok")

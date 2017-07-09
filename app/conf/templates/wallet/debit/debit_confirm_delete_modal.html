@@ -1,0 +1,38 @@
+{% load formtags %}
+
+<div class="modal-header">
+	<button aria-hidden="true" data-dismiss="modal" class="close" type="button">
+		<i style="font-size:15px;" class='lnr lnr-cross'></i>
+	</button>
+	<h4 class="modal-title">Apagar Débito</h4>
+</div>
+<div class="modal-body">
+	<div class="row" id="deposit">
+		<div class='col-md-8 col-md-offset-2'>
+			<ul class="list-unstyled list-justify" style="margin-bottom:15px;">
+				<li><i class='fa fa-exchange fa-fw'></i> Origem <span>{{ object.origin }}</span></li>
+				<li><i class='fa fa-money fa-fw'></i> Valor <span>R$ {{ object.value }}</span></li>
+				<li><i class='fa fa-map-marker fa-fw'></i> Documento <span>{{ object.document }}</span></li>
+				<li><i class='fa fa-calendar fa-fw'></i> Data <span>{{ object.date_releases | date:"d/m/Y H:i"  }}</span></li>
+				<li><i class='fa fa-user-o fa-fw'></i> Autor <span>{{ object.author }}</span></li>
+				<li><i class='fa fa-pencil fa-fw'></i> Descrição <span>{{ object.description }}</span></li>
+			</ul>
+			<div class="text-center">
+			  <form id="id_delete_deposit" name="delete_debit" action="{{ object.get_delete_debit }}" method="post" class='form-inline form-modal-debit'>
+			    {% csrf_token %}
+			    <div class='row'>
+			        <div class="form-group">
+			          <input type="submit" class='btn btn-danger' value="Sim"/>
+			        </div>
+			        <div class="form-group">
+						<button name="close_delete_debit" id="id_close_delete_debit" class="btn btn-primary" aria-hidden="true" data-dismiss="modal" type="button">
+							Não
+						</button>
+			        </div>
+			    </div>
+			  </form>
+			</div>
+		</div>
+
+	</div><!-- row -->
+</div><!-- modal-body -->

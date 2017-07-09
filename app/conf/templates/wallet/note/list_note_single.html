@@ -1,9 +1,23 @@
 {% load staticfiles %}
-{% if not objects %}
+<div class="row">
+    <div class="col-md-12">
+        {% if messages %}
+            {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>{{ message.tags }}:</strong> {{ message }}.
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% if not object_list %}
     <h3>Não existem notas cadastradas</h3>
 {% else %}
     <ul class="list-unstyled todo-list">
-        {% for note in objects %}
+        {% for note in object_list %}
             <li class='{% if not note.status_note %}completed{% endif %}'>
                 <label id='note-list-input' class="control-inline fancy-checkbox">
                     <input id='{{ note.pk }}' type="checkbox" {% if not note.status_note %}checked{% endif %}><span></span>
@@ -19,7 +33,7 @@
                 </p>
                 <div class="controls">
                     <a class="edit-note" id='{{ note.pk }}' data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i class="lnr lnr-pencil"></i></a>
-                    <a class="delete-note" id='{{ note.pk }}' href="#"><i class="lnr lnr-trash"></i></a>
+                    <a class="delete-note" id='{{ note.pk }}' data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i class="lnr lnr-trash"></i></a>
                 </div>
             </li>
         {% endfor %}
