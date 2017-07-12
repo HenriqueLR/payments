@@ -9,7 +9,11 @@ clean:
 	@find . -name "*.pyc" | xargs rm -f
 
 create_superuser:
-	python ./app/conf/config_start.py
+	@if [ $(settings) ]; then \
+		python ./app/conf/config_start.py "conf.settings_production" ;\
+	else \
+		python ./app/conf/config_start.py "conf.settings" ;\
+	fi
 
 start: clean
 	@if [ $(settings) ]; then \
@@ -32,6 +36,10 @@ clean_migrations:
 	find ./app/wallet/migrations/ |grep '0'|xargs rm -f
 	rm -rf ./app/accounts/migrations/*.pyc
 	find ./app/accounts/migrations/ |grep '0'|xargs rm -f
+
+clean_sqlitedb:
+	rm -rf ./app/db.sqlite3
+	rm -rf ./db.sqlite3
 
 capture_words:
 	./app/manage.py makemessages -l en
