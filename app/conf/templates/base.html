@@ -1,140 +1,145 @@
 {% load staticfiles %}
 {% load i18n %}
-
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <title>Carteira Virtual</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <head>
+    <title>Carteira Virtual</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-        <!-- GOOGLE FONTS -->
-        <link rel="stylesheet" href="{% static 'css/fonts-google/css/font-googleapi.css' %}">
-        <!-- ICONS -->
-        <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png' %}">
-        <link rel="icon" type="image/png" sizes="96x96" href="{% static 'assets/img/favicon.png' %}">
+    <!-- GOOGLE FONTS -->
+    <link rel="stylesheet" href="{% static 'css/fonts-google/css/font-googleapi.css' %}">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'assets/img/favicon.png' %}">
 
-        {% block styles %}
-            <!-- VENDOR CSS -->
-            <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
-            <link rel="stylesheet" href="{% static 'assets/vendor/font-awesome/css/font-awesome.min.css' %}">
-            <link rel="stylesheet" href="{% static 'assets/vendor/linearicons/style.css' %}">
-            <!-- MAIN CSS -->
-            <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
-            <!-- CUSTOM CSS -->
-            <link rel="stylesheet" href="{% static 'css/custom_styles.css' %}">
-        {% endblock %}
+    {% block styles %}
+      <!-- VENDOR CSS -->
+      <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/vendor/font-awesome/css/font-awesome.min.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/vendor/linearicons/style.css' %}">
+      <!-- MAIN CSS -->
+      <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+      <!-- CUSTOM CSS -->
+      <link rel="stylesheet" href="{% static 'css/custom_styles.css' %}">
+    {% endblock %}
 
-        {% block extra_styles %}{% endblock %}
-    </head>
+    {% block extra_styles %}{% endblock %}
+  </head>
 
-    <body>
-        <div id="wrapper">
-
-            {% block navtop %}
-                <nav class="navbar navbar-default navbar-fixed-top">
-                    <div class="container-fluid">
-
-
-                        <!--{% get_available_languages as LANGUAGES %}
-                        <div class="idiomas">
-                            <form action="/i18n/setlang/" method="post">
-                                {% csrf_token %}
-                                <select name="language">
-                                {% for lang in LANGUAGES %}
-                                <option value="{{ lang.0 }}">{{ lang.1 }}</option>
-                                {% endfor %}
-                                </select>
-                                <input type="submit" value="{% trans "Mudar idioma" %}" />
-                            </form>
-                        </div>-->
-
-
-
-                        <div class="navbar-btn">
-                            <button id='open-menu' type="button" class="btn-toggle-fullwidth">
-                                <i class="lnr lnr-arrow-left-circle"></i>
-                            </button>
-                        </div>
-                        <div id="navbar-menu">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="dropdown" id='alerts-nav-bar'>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span>{{ user.username }}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-                                    <ul class="dropdown-menu">
-                                        {% if not user.is_superuser %}
-                                            <li><a href="{{ user.get_detail_profile }}"><i class="lnr lnr-user"></i> <span>Perfil</span></a></li>
-                                        {% endif %}
-                                        <li><a href="{% url 'accounts:logout' %}"><i class="lnr lnr-exit"></i> <span>Sair</span></a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            {% endblock %}
-
-            {% block navleft %}
-                <div id="sidebar-nav" class="sidebar">
-                    <div class="sidebar-scroll">
-                        <nav>
-                            <ul id='left-nav' class="nav">
-                                {% for app in apps %}
-                                    {% for model in app.models %}
-                                        <li>
-                                            <a class="{% if model.name == object_name %}active{% endif %}" href="/{{ model.app_url }}">
-                                                <i class="{{ model.icon }}"></i>
-                                                <span class='children_icon'> {% trans model.name %}</span>
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                {% endfor %}
-                                <!--{% for app in apps %}
-                                    <li>
-                                        <a class="{% if app.name == label_app %}active{% else %}collapsed{% endif %}" href="#{{ app.name }}" data-toggle="collapse">
-                                            <i class="{{ app.icon }}"></i>
-                                            <span>{{ app.name }}</span>
-                                            <i class="icon-submenu lnr lnr-chevron-left"></i>
-                                        </a>
-
-                                        <div id="{{ app.name }}" class="{% if app.name == label_app %}collapse in{% else %}collapse{% endif %}">
-                                            <ul class="nav">
-                                                {% for model in app.models %}
-                                                    <li>
-                                                        <a class="{% if model.name == object_name %}active{% endif %}" href="/{{ model.app_url }}">
-                                                            <i class="{{ model.icon }}"></i>
-                                                            <span class='children_icon'> {{ model.name }}</span>
-                                                        </a>
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                    </li>
-                                {% endfor %}-->
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            {% endblock %}
-
-            <!-- MAIN -->
-            <div class="main">
-                <!-- MAIN CONTENT -->
-                <div class="main-content">
-                    {% block content %}{% endblock %}
-                </div>
+  <body>
+    <!-- WRAPPER -->
+    <div id="wrapper">
+      {% block navtop %}
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container-fluid">
+            <!--{% get_available_languages as LANGUAGES %}
+            <div class="idiomas">
+            <form action="/i18n/setlang/" method="post">
+            {% csrf_token %}
+            <select name="language">
+            {% for lang in LANGUAGES %}
+            <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+            {% endfor %}
+            </select>
+            <input type="submit" value="{% trans "Mudar idioma" %}" />
+            </form>
+            </div>-->
+            <div class="navbar-btn">
+              <button id='open-menu' type="button" class="btn-toggle-fullwidth">
+                <i class="lnr lnr-arrow-left-circle"></i>
+              </button>
             </div>
-        </div> <!-- END wrapper -->
-        {% block js %}
-            <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
-            <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-            <script src="{% static 'assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
-            <script src="{% static 'assets/scripts/klorofil-common.js' %}"></script>
-            <script src="{% static 'js/custom_app.js' %}"></script>
-        {% endblock %}
-        {% block extra_scripts %}{% endblock %}
-    </body>
+            <div id="navbar-menu">
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" id='alerts-nav-bar'></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span>{{ user.username }}</span>
+                    <i class="icon-submenu lnr lnr-chevron-down"></i>
+                  </a>
+                  <ul class="dropdown-menu">
+                    {% if not user.is_superuser %}
+                      <li>
+                        <a href="{{ user.get_detail_profile }}">
+                          <i class="lnr lnr-user"></i> <span>Perfil</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                    <li>
+                      <a href="{% url 'accounts:logout' %}">
+                        <i class="lnr lnr-exit"></i> <span>Sair</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      {% endblock %}
 
+      {% block navleft %}
+        <div id="sidebar-nav" class="sidebar">
+          <div class="sidebar-scroll">
+            <nav>
+              <ul id='left-nav' class="nav">
+                {% for app in apps %}
+                  {% for model in app.models %}
+                    <li>
+                      <a class="{% if model.name == object_name %}active{% endif %}" href="/{{ model.app_url }}">
+                        <i class="{{ model.icon }}"></i>
+                        <span class='children_icon'> {% trans model.name %}</span>
+                      </a>
+                    </li>
+                  {% endfor %}
+                {% endfor %}
+                <!--{% for app in apps %}
+                <li>
+                <a class="{% if app.name == label_app %}active{% else %}collapsed{% endif %}" href="#{{ app.name }}" data-toggle="collapse">
+                <i class="{{ app.icon }}"></i>
+                <span>{{ app.name }}</span>
+                <i class="icon-submenu lnr lnr-chevron-left"></i>
+                </a>
+
+                <div id="{{ app.name }}" class="{% if app.name == label_app %}collapse in{% else %}collapse{% endif %}">
+                <ul class="nav">
+                {% for model in app.models %}
+                <li>
+                <a class="{% if model.name == object_name %}active{% endif %}" href="/{{ model.app_url }}">
+                <i class="{{ model.icon }}"></i>
+                <span class='children_icon'> {{ model.name }}</span>
+                </a>
+                </li>
+                {% endfor %}
+                </ul>
+                </div>
+                </li>
+                {% endfor %}-->
+              </ul>
+            </nav>
+          </div>
+        </div>
+      {% endblock %}
+
+      <!-- MAIN -->
+      <div class="main">
+        <div class="main-content">
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+      <!-- END MAIN -->
+    </div>
+    <!-- END WRAPPER -->
+
+    {% block js %}
+      <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+      <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
+      <script src="{% static 'assets/scripts/klorofil-common.js' %}"></script>
+      <script src="{% static 'js/custom_app.js' %}"></script>
+    {% endblock %}
+    {% block extra_scripts %}{% endblock %}
+  </body>
 </html>

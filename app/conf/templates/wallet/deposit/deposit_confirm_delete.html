@@ -2,104 +2,6 @@
 {% load staticfiles %}
 {% load formtags %}
 
-{% block extra_styles %}
-	<style type="text/css">
-		/****** PROFILE *******/
-
-		/* ####### */
-		#deposit ol, ul {
-		margin-top: 0;
-		margin-bottom: 20px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#deposit .todo-list > li p {
-		display: inline-block;
-		vertical-align: middle;
-		width: 90%;
-		margin: 0;
-		padding: 5px 0 5px 40px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#deposit .todo-list .controls {
-		float: right;
-		position: absolute;
-		top: 50%;
-		right: 3px;
-		margin-top: -11px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#deposit .todo-list > li:first-child {
-		border-top: 1px solid #F0F0F0;
-		}
-		/* ####### */
-
-		/* ####### */
-		#deposit .todo-list .short-description {
-		display: block;
-		margin-top: 0px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.todo-list > li.completed .controls{
-		pointer-events: none;
-		cursor: default;
-		opacity: 0.4;
-		}
-		/* ####### */
-
-		/* ####### */
-		.navbar-btn button {
-		font-size: 24px;
-		padding: 4px 5px;
-		line-height: .7;
-		border: none;
-		background: none;
-		outline: none;
-		}
-		/* ####### */
-
-		/* ####### */
-		.profile-info {
-		padding: -1 100px;
-		margin: 0px 0;
-		}
-		/* ####### */
-
-		/* ####### */
-		.social-icons {
-		margin-bottom: 20px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.text-center {
-		text-align: center;
-		margin-top: 35px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.instagram {
-		background-color: #000 !important;
-		}
-		/* ####### */
-
-		/* ####### */
-		.instagram a{
-		color: #000 !important;
-		}
-		/* ####### */
-		/*** END deposit ***/
-	</style>
-{% endblock %}
-
 {% block content %}
 	<div class="container-fluid">
 		<ol class="breadcrumb">
@@ -107,10 +9,11 @@
 			<li><a href="{% url 'wallet:list_deposit' %}"><i class="fa fa-line-chart fa-fw"></i> Depósitos</a></li>
 			<li class="active"><i class="fa fa-trash fa-fw"></i> Apagar Depósito</li>
 		</ol>
-		<!-- deposit -->
-		<div class="row" id="deposit">
+
+		<!-- ROW DELETE DEPOSIT -->
+		<div class="row" id="delete_deposit">
 			<div class="col-md-12">
-				<!-- TODO LIST -->
+
 				<div class="panel">
 					<div class="panel-heading">
 						<h3 class="panel-title">Apagar Depósito</h3>
@@ -134,28 +37,24 @@
 									</ul>
 								</div>
 								<div class="text-center">
-								  <form action="{{ object.get_delete_deposit }}" method="post" class='form-inline'>
-								    {% csrf_token %}
-								    <div class='row'><!--row-->
-
-								        <div class="form-group">
-								          <input type="submit" class='btn btn-danger' value="Sim"/>
-								        </div>
-								        <div class="form-group">
-								          <a class='btn btn-primary' href="{% url 'wallet:list_deposit' %}">Não</a>
-								        </div>
-
-
-								    </div>
-								  </form>
+									<form action="{{ object.get_delete_deposit }}" method="post" class='form-inline'>
+									{% csrf_token %}
+										<div class='row'>
+											<div class="form-group">
+												<input type="submit" class='btn btn-danger' value="Sim"/>
+											</div>
+											<div class="form-group">
+												<a name="delete_deposit" id="id_delete_deposit" class='btn btn-primary' href="{% url 'wallet:list_deposit' %}">Não</a>
+											</div>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			<!-- END TODO LIST -->
 			</div>
 		</div>
-		<!-- END PROFILE -->
+		<!-- END ROW DELETE DEPOSIT -->
 	</div>
 {% endblock %}

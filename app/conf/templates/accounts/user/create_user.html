@@ -4,107 +4,6 @@
 
 {% block extra_styles %}
 	<link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
-
-	<style>
-		/* EDIT PROFILE */
-
-		/* ####### */
-		#profile-edit ol, ul {
-		margin-top: 0;
-		margin-bottom: 20px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#profile-edit .todo-list > li p {
-		display: inline-block;
-		vertical-align: middle;
-		width: 90%;
-		margin: 0;
-		padding: 5px 0 5px 40px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#profile-edit .todo-list .controls {
-		float: right;
-		position: absolute;
-		top: 50%;
-		right: 3px;
-		margin-top: -11px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#profile-edit .todo-list > li:first-child {
-		border-top: 1px solid #F0F0F0;
-		}
-		/* ####### */
-
-		/* ####### */
-		#profile-edit .todo-list .short-description {
-		display: block;
-		margin-top: 0px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.form-inline .input-group {
-		display: inline-table;
-		vertical-align: middle;
-
-		}
-		/* ####### */
-
-		/* ####### */
-		.todo-list > li.completed .controls{
-		pointer-events: none;
-		cursor: default;
-		opacity: 0.4;
-		}
-		/* ####### */
-
-		/* ####### */
-		.profile-info {
-		padding: 0 20px;
-		margin: 0px 0;
-		}
-		/* ####### */
-
-		/* ####### */
-		.social-icons {
-		margin-bottom: 20px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.text-center {
-		text-align: center;
-		margin-top: 35px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.instagram {
-		background-color: #000 !important;
-		}
-		/* ####### */
-
-		/* ####### */
-		.instagram a{
-		color: #000 !important;
-		}
-		/* ####### */
-
-		/* ####### */
-		#profile-edit input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="select"] {
-		max-width: 100%;
-		min-width: 100%;
-		}
-		/* ####### */
-
-		/* END EDIT PROFILE */
-	</style>
 {% endblock %}
 
 {% block content %}
@@ -114,48 +13,31 @@
 			<li><a href="{% url 'accounts:list_user' %}"><i class="fa fa-user fa-fw"></i> Usuários</a></li>
 			<li class="active"><i class="fa fa-plus fa-fw"></i> Novo Usuário</li>
 		</ol>
-		<!-- NOTAS -->
-		<div class="row" id="profile-edit">
+		<!-- ROW CREATE USER -->
+		<div class="row" id="create_user">
 			<div class="col-md-12">
-				<!-- TODO LIST -->
+
 				<div class="panel">
 					<div class="panel-heading">
 						<h3 class="panel-title">Novo Usuário</h3>
 						<div class='right'>
 							<ul class="list-inline">
-								<li><a href='{% url "accounts:list_user" %}'><i style="font-size:15px;" class='lnr lnr-cross'></i></a></li>
+								<li>
+									<a href='{% url "accounts:list_user" %}'><i style="font-size:15px;" class='lnr lnr-cross'></i></a>
+								</li>
 							</ul>
 						</div>
 					</div>
+
 					<div class="panel-body">
 
-						{% if messages %}
-							{% for message in messages %}
-								<div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									<strong>{{ message.tags }}:</strong> {{ message }}.
-								</div>
-							{% endfor %}
-						{% endif %}
-
-						{% if form.errors %}
-							<div class="alert alert-danger">
-								<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-								<strong>Error: </strong>
-								{% for field, error in form.errors.items %}
-									{% if field != '__all__' %}{{ field }}{% endif %}
-									{{ error | striptags }}<br />
-								{% endfor %}
-							</div>
-						{% endif %}
+						{% include "messages.html" %}
 
 						<div class='col-md-12'>
 							<div class="profile-detail">
 
 								<form name='create_user' method='POST'>
-									{% csrf_token %}
+								{% csrf_token %}
 									<div class='row'>
 										<div class='col-md-4 col-md-offset-2'>
 
@@ -207,7 +89,7 @@
 											</div>
 											<span class="error text-danger">{{ form_user.password2.errors|join:"<br \>" }}</span>
 
-										</div><!-- col-md-4 -->
+										</div><!-- EMD COL-MD-4 -->
 
 										<div class='col-md-4'>
 											<div class='input-group {% if form_profile.description.errors %}has-error{% endif %}'>
@@ -234,18 +116,17 @@
 											</div>
 											<span class="error text-danger">{{ form_profile.url.errors|join:"<br \>" }}</span>
 
-										</div><!-- col-md-4 -->
-
-									</div><!-- row -->
+										</div><!-- END COL-MD-4 -->
+									</div><!-- END ROW -->
 
 
 									<div class="text-center">
-										<button class='btn btn-primary' type='submit' name='save_profile' id='save_profile'>
-										Salvar
+										<button class='btn btn-primary' type='submit' name='new_user' id='id_new_user'>
+											Salvar
 										</button>
 
-										<a class='btn btn-danger' href="{% url 'accounts:list_user' %}" name='close_profile' id='close_profile'>
-										Fechar
+										<a class='btn btn-danger' href="{% url 'accounts:list_user' %}" name='close_new_user' id='id_close_new_user'>
+											Fechar
 										</a>
 									</div>
 
@@ -253,13 +134,12 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- END TODO LIST -->
-			</div>
-		</div>
-		<!-- END PROFILE-EDIT -->
-	</div>
 
+				</div><!-- END PANEL -->
+			</div><!-- END COL-MD-12 -->
+
+		</div><!-- END ROW CREATE USER -->
+	</div><!-- END CONTAINER-FLUID -->
 {% endblock %}
 
 {% block extra_scripts %}

@@ -5,75 +5,26 @@
 <html>
 	<head>
 		<title>Payments</title>
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
-        <link href='https://fonts.googleapis.com/css?family=Anaheim' rel='stylesheet'>
-        <!-- ICONS -->
-        <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png' %}">
-        <link rel="icon" type="image/png" sizes="96x96" href="{% static 'assets/img/favicon.png' %}">
-        <!-- VENDOR CSS -->
-        <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'assets/vendor/font-awesome/css/font-awesome.min.css' %}">
-        <link rel="stylesheet" href="{% static 'assets/vendor/linearicons/style.css' %}">
-        <!-- MAIN CSS -->
-        <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
-        <!-- CUSTOM CSS -->
-        <link rel="stylesheet" href="{% static 'css/custom_styles.css' %}">
-        {% block extra_extyles %}
-        	<style type="text/css">
-				button {
-				    font-family: inherit;
-				    font-size: inherit;
-				    line-height: inherit;
-				    background: transparent;
-				    border: transparent;
-				}
-        		body{
-        			font-size: 15px;
-        		}
-        		h1{
-        			font-size: 50px;
-        			color: white;
-        		}
-        		p{
-        			color: white;
-        			font-size: 20px;
-        		}
-        		.input-group{
-        			margin-bottom:5px;
-        		}
-				.alert {
-				    padding: 15px;
-				    margin-bottom: 0px;
-				    border: 1px solid transparent;
-				    border-radius: 4px;
-				}
-				.alert-dismissible .close {
-				    position: relative;
-				    top: -2px;
-				    right: -5px;
-				    color: inherit;
-				}
-        	</style>
-        {% endblock %}
+		<!-- GOOGLE FONTS -->
+		<link rel="stylesheet" href="{% static 'css/fonts-google/css/font-googleapi.css' %}">
+		<!-- ICONS -->
+		<link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png' %}">
+		<link rel="icon" type="image/png" sizes="96x96" href="{% static 'assets/img/favicon.png' %}">
+		<!-- VENDOR CSS -->
+		<link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'assets/vendor/font-awesome/css/font-awesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'assets/vendor/linearicons/style.css' %}">
+		<!-- MAIN CSS -->
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+		<!-- CUSTOM CSS -->
+		<link rel="stylesheet" href="{% static 'css/custom_styles.css' %}">
 	</head>
 	<body background="{% static 'img/light.jpg' %}">
 
-		<div class='row'>
+		<div class='row' class="create_account_register">
 			<div class='col-md-8 col-md-offset-2' style='margin-top:40px;'>
 
-				{% if messages %}
-					{% for message in messages %}
-						<div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-							<strong>{{ message.tags }}:</strong> {{ message }}
-							{% if message.tags == 'info' %}
-								<button onclick='open_window_payment()'>aqui</button>.
-							{% endif %}
-						</div>
-					{% endfor %}
-				{% endif %}
+				{% include "messages.html" %}
 
 				{% if form_account.errors %}
 					<div class="alert alert-danger">
@@ -81,8 +32,8 @@
 						<strong>Error: </strong>
 						{% for field, error in form_account.errors.items %}
 							{% if field != '__all__' %}{{ field }}{% endif %}
-								{{ error | striptags }}<br />
-							{% endfor %}
+							{{ error | striptags }}<br />
+						{% endfor %}
 					</div>
 				{% endif %}
 
@@ -92,8 +43,8 @@
 						<strong>Error: </strong>
 						{% for field, error in form_profile.errors.items %}
 							{% if field != '__all__' %}{{ field }}{% endif %}
-								{{ error | striptags }}<br />
-							{% endfor %}
+							{{ error | striptags }}<br />
+						{% endfor %}
 					</div>
 				{% endif %}
 
@@ -103,15 +54,15 @@
 						<strong>Error: </strong>
 						{% for field, error in form_user.errors.items %}
 							{% if field != '__all__' %}{{ field }}{% endif %}
-								{{ error | striptags }}<br />
-							{% endfor %}
+							{{ error | striptags }}<br />
+						{% endfor %}
 					</div>
 				{% endif %}
 
 			</div>
 		</div>
 
-		<div class='row'>
+		<div class='row' class="create_account_register">
 
 			<div class='col-md-4 col-md-offset-1' style='margin-top:10%;'>
 				<h1>Wallet</h1>
@@ -122,7 +73,7 @@
 			<div class='col-md-4'>
 
 				<form id='id_form_account' name='form_account' method='POST'>
-					{% csrf_token %}
+				{% csrf_token %}
 					<div class='row'>
 
 						<div class='col-md-8 col-md-offset-2'>
@@ -201,12 +152,12 @@
 								</a>
 							</div>
 
-						</div><!-- col-md-4 -->
+						</div><!-- END COL-MD-8 -->
 
-					</div><!-- row -->
+					</div><!-- END ROW -->
 
 				</form>
-			</div>
+			</div><!-- END COL-MD-4 -->
 
 		</div><!-- END ROW -->
 
@@ -241,7 +192,8 @@
 					$.extend(context, value);
 				});
 				return context;
-			}
+
+			}//END FUNCTION
 
 			//GET LOCALE
 			function get_locale(format_date){
@@ -257,14 +209,13 @@
 					"daysOfWeek": ["Su","Mo","Tu","We","Th","Fr","Sa"],
 					"monthNames": ["January","February","March","April","May","June","July",
 					"August","September","October","November","December"],
-					"firstDay": 1
-					},
+					"firstDay": 1},
 				}
 				if(format_date){
 					$.extend(locale["locale"], format_date);
 				}
 				return locale;
-			}
+			}//END FUNCTION
 
 			$(function(){
 				//DISABLE BUTTON SUBMIT FORM

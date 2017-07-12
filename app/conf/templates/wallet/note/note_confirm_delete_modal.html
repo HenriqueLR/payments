@@ -7,28 +7,27 @@
 	<h4 class="modal-title">Apagar Nota</h4>
 </div>
 <div class="modal-body">
-	<div class="row" id="note">
+	<div class="row" id="delete_note_modal">
 		<div class='col-md-6 col-md-offset-3'>
-			<ul class="list-unstyled list-justify" style="margin-bottom:15px;">
-				<li><i class='fa fa-pencil fa-fw'></i> Título <span>{{ object.title }}</span></li>
-				<li><i class='fa fa-user fa-fw'></i> Autor <span>{{ object.author }}</span></li>
-				<li><i class='fa fa-calendar fa-fw'></i> Data <span>{{ object.date_note | date:"d/m/Y H:i" }}</span></li>
-				<li><i class='fa fa-edit fa-fw'></i> Nota <span>{{ object.description }}</span></li>
-			</ul>
+		<ul class="list-unstyled list-justify" style="margin-bottom:15px;">
+		<li><i class='fa fa-pencil fa-fw'></i> Título <span>{{ object.title }}</span></li>
+		<li><i class='fa fa-user fa-fw'></i> Autor <span>{{ object.author }}</span></li>
+		<li><i class='fa fa-calendar fa-fw'></i> Data <span>{{ object.date_note | date:"d/m/Y H:i" }}</span></li>
+		<li><i class='fa fa-edit fa-fw'></i> Nota <span>{{ object.description }}</span></li>
+		</ul>
 			<div class="text-center">
-			  <form id="id_delete_note" name="delete_note" action="{{ object.get_delete_url }}" method="post" class='form-inline form-modal-note'>
-			    {% csrf_token %}
-			    <div class='row'><!--row-->
-
-			        <div class="form-group">
-			          <input type="submit" class='btn btn-danger' value="Sim"/>
-			        </div>
-					<button name="close_delete_note" id="id_close_delete_note" class="btn btn-primary" aria-hidden="true" data-dismiss="modal" type="button">
-						Não
-					</button>
-			    </div>
-			  </form>
+				<form id="id_delete_note" name="delete_note" action="{{ object.get_delete_url }}" method="post" class='form-inline form-modal-note'>
+				{% csrf_token %}
+					<div class='row'>
+						<div class="form-group">
+							<input name="delete_note" id="id_delete_note" type="submit" class='btn btn-danger' value="Sim"/>
+						</div>
+						<button name="close_delete_note" id="id_close_delete_note" class="btn btn-primary" aria-hidden="true" data-dismiss="modal" type="button">
+							Não
+						</button>
+					</div><!-- END ROW -->
+				</form>
 			</div>
 		</div>
-	</div>
+	</div><!-- END ROW -->
 </div>

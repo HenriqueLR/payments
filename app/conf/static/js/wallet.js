@@ -26,7 +26,7 @@ $(function() {
 	}
 
 	//CHECK EXIST LIST-NOTE
-	if($('#list-note').length){
+	if($('#list_note').length){
 		list_dict = [];
 		list_dict.push({"timePicker": false});
 		list_dict.push(get_locale({"format": "DD/MM/YYYY"}));
@@ -34,7 +34,9 @@ $(function() {
 
 		//ACTION CLICK CHECKBOX
 	    $('#note-list-input input[type^="checkbox"]').click(function (e){
-	     	url = '/wallet/list_note/?note='+$(this).attr("id");
+			if($(this).prop('checked')){$(this).parents('li').addClass('completed');}
+            else{$(this).parents('li').removeClass('completed');}
+	     	url = '/wallet/update_status_note/'+$(this).attr("id");
 	     	note_get_function(url);
             setTimeout(function(){
                 get_list_alerts();

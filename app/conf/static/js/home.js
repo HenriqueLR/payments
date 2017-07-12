@@ -1,5 +1,3 @@
-// HOME
-
 //GLOBAL FUNCTIONS
 var global_function = {
     close_modal_dash:function(time){
@@ -56,6 +54,9 @@ var global_function = {
         setTimeout(function(){get_list_alerts();},time);
     },
 };//END GLOBAL FUNCTIONS
+
+
+// HOME
 
 //OBJECT NOTE
 var note = {
@@ -292,12 +293,12 @@ $(function(){
 //HOME ACTION CONTROLL
 $(document).ready(function(){
     //CHECK EXISTS DIV NOTAS
-    if($('#notas').length){
+    if($('#notes_home').length){
         //GET LIST NOTES
         note.list_note();
 
         //CHECKBOX UPDATE STATUS NOTE
-        $('#notas #context-notes').on('click','input[type^="checkbox"]',function(){
+        $('#notes_home #context-notes').on('click','input[type^="checkbox"]',function(){
             if($(this).prop('checked')){$(this).parents('li').addClass('completed');}
             else{$(this).parents('li').removeClass('completed');}
             note.update_status_note($(this).attr("id"));
@@ -306,17 +307,17 @@ $(document).ready(function(){
         });
 
         //DELETE NOTE
-        $('#notas #context-notes').on('click','.delete-note',function(e){
+        $('#notes_home #context-notes').on('click','.delete-note',function(e){
             note.get_form_note("/wallet/delete_note/"+$(this).attr("id"));
         });
 
         //EDIT NOTE
-        $('#notas #context-notes').on('click','.edit-note',function(e){
+        $('#notes_home #context-notes').on('click','.edit-note',function(e){
             note.get_form_note("/wallet/update_note/"+$(this).attr("id"));
         });
 
         //GET ADD FORM NOTE
-        $('#notas').on('click','.add-form',function(e){
+        $('#notes_home').on('click','.add-form',function(e){
             note.get_form_note('/wallet/add_note/');
         });
 
@@ -377,5 +378,4 @@ $(document).ready(function(){
         //GET OVERVIEW
         graphics.get_overview_timeout(100);
     }//END CHECK OVERLOAD
-
 });//END HOME ACTION CONTROLL

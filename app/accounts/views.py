@@ -210,7 +210,7 @@ def create_user(request):
 
 @ajax_required
 def reset_password(request):
-    template_name = 'accounts/register/reset_password.html'
+    template_name = 'accounts/auth/reset_password.html'
     context = {}
     form = PasswordResetForm(request.POST or None)
     if form.is_valid():

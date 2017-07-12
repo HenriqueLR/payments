@@ -7,7 +7,7 @@
 	<h4 class="modal-title">Apagar Depósito</h4>
 </div>
 <div class="modal-body">
-	<div class="row" id="deposit">
+	<div class="row" id="delete_deposit">
 		<div class='col-md-8 col-md-offset-2'>
 
 			<ul class="list-unstyled list-justify" style="margin-bottom:15px;">
@@ -20,23 +20,23 @@
 			</ul>
 
 			<div class="text-center">
-			  <form id="id_delete_deposit" name="delete_deposit" action="{{ object.get_delete_deposit }}" method="post" class='form-inline form-modal-deposit'>
-			    {% csrf_token %}
-			    <div class='row'>
+				<form id="id_delete_deposit" name="delete_deposit" action="{{ object.get_delete_deposit }}" method="post" class='form-inline form-modal-deposit'>
+				{% csrf_token %}
+					<div class='row'>
 
-			        <div class="form-group">
-			          <input type="submit" class='btn btn-danger' value="Sim"/>
-			        </div>
-			        <div class="form-group">
-						<button name="close_delete_deposit" id="id_close_delete_deposit" class="btn btn-primary" aria-hidden="true" data-dismiss="modal" type="button">
+						<div class="form-group">
+							<input type="submit" class='btn btn-danger' value="Sim"/>
+						</div>
+						<div class="form-group">
+							<button name="close_delete_deposit" id="id_close_delete_deposit" class="btn btn-primary" aria-hidden="true" data-dismiss="modal" type="button">
 							Não
-						</button>
-			        </div>
+							</button>
+						</div>
 
-			    </div>
-			  </form>
+					</div>
+				</form>
 			</div>
 
-		</div>
-	</div><!-- row -->
-</div><!-- modal-body -->
+		</div><!-- END COL-MD-8 -->
+	</div><!-- END ROW -->
+</div><!-- END MODAL-BODY -->

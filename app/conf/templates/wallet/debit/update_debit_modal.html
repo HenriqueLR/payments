@@ -1,103 +1,84 @@
 {% load formtags %}
+
 <div class="modal-header">
 	<button aria-hidden="true" data-dismiss="modal" class="close" type="button">
 		<i style="font-size:15px;" class='lnr lnr-cross'></i>
 	</button>
 	<h4 class="modal-title">Editar Débito</h4>
 </div>
+
 <div class="modal-body">
-	<div class="row" id="debit">
+	<div class="row" id="update_debit_modal">
+		<div class="col-md-12">
+			{% include "messages.html" %}
+		</div>
+
 		<div class="col-md-12">
 
-						{% if messages %}
-							{% for message in messages %}
-								<div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									<strong>{{ message.tags }}:</strong> {{ message }}.
-								</div>
-							{% endfor %}
-						{% endif %}
+			<form class="form-modal-debit" id="id_add_debit" name='add_debit' method='POST' action="{{ object.get_update_debit }}">
+			{% csrf_token %}
+				<div class='row' style="margin-bottom:15px;">
+					<div class='col-md-6'>
 
-						{% if form.errors %}
-							<div class="alert alert-danger">
-								<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-								<strong>Error: </strong>
-								{% for field, error in form.errors.items %}
-									{% if field != '__all__' %}{{ field }}{% endif %}
-									{{ error | striptags }}<br />
-								{% endfor %}
+						<div class='input-group {% if form.origin.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-exchange fa-fw'></i>
 							</div>
-						{% endif %}
+							{{ form.origin|placeholder:"Origem" |addcss:"form-control" }}
+						</div>
+						<span class="error text-danger">{{ form.origin.errors|join:"<br \>" }}</span>
+
+						<div class='input-group {% if form.value.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-money fa-fw'></i>
+							</div>
+							{{ form.value|placeholder:"Valor" |addcss:"form-control" }}
+						</div>
+						<span class="error text-danger">{{ form.value.errors|join:"<br \>" }}</span>
+
+						<div class='input-group {% if form.document.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-file-zip-o fa-fw'></i>
+							</div>
+							{{ form.document|placeholder:"Documento" |addcss:"form-control" }}
+						</div>
+						<span class="error text-danger">{{ form.document.errors|join:"<br \>" }}</span>
+
+						<div class='input-group {% if form.date_releases.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-calendar fa-fw'></i>
+							</div>
+							{{ form.date_releases|placeholder:"dd/mm/yyyy H:i" |addcss:"form-control" }}
+						</div>
+						<span class="error text-danger">{{ form.date_releases.errors|join:"<br \>" }}</span>
+
+					</div><!-- END COL-MD-6 -->
+
+					<div class='col-md-6'>
+						<div class='input-group {% if form.description.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-pencil fa-fw'></i>
+							</div>
+							{{ form.description|placeholder:"Descrição do débito" |textarea:"6" |addcss:"form-control" }}
+						</div>
+						<span class="error text-danger">{{ form.description.errors|join:"<br \>" }}</span>
+					</div><!-- END COL-MD-6 -->
+
+				</div><!-- END ROW -->
+
+				<div class="row">
+					<div class="text-center">
+						<button class='btn btn-primary' type='submit' name='update_debit' id='id_update_debit'>
+							Editar
+						</button>
+
+						<button name="close_update_debit" id="id_close_update_debit" class="btn btn-danger" aria-hidden="true" data-dismiss="modal" type="button">
+							Fechar
+						</button>
+					</div>
+				</div>
+
+			</form>
 		</div>
-							<div class="col-md-12">
-
-								<form class="form-modal-debit" id="id_add_debit" name='add_debit' method='POST' action="{{ object.get_update_debit }}">
-									{% csrf_token %}
-									<div class='row' style="margin-bottom:15px;">
-										<div class='col-md-6'>
-
-											<div class='input-group {% if form.origin.errors %}has-error{% endif %}'>
-												<div class='input-group-addon'>
-													<i class='fa fa-exchange fa-fw'></i>
-												</div>
-												{{ form.origin|placeholder:"Origem" |addcss:"form-control" }}
-											</div>
-											<span class="error text-danger">{{ form.origin.errors|join:"<br \>" }}</span>
-
-											<div class='input-group {% if form.value.errors %}has-error{% endif %}'>
-												<div class='input-group-addon'>
-													<i class='fa fa-money fa-fw'></i>
-												</div>
-												{{ form.value|placeholder:"Valor" |addcss:"form-control" }}
-											</div>
-											<span class="error text-danger">{{ form.value.errors|join:"<br \>" }}</span>
-
-											<div class='input-group {% if form.document.errors %}has-error{% endif %}'>
-												<div class='input-group-addon'>
-													<i class='fa fa-file-zip-o fa-fw'></i>
-												</div>
-												{{ form.document|placeholder:"Documento" |addcss:"form-control" }}
-											</div>
-											<span class="error text-danger">{{ form.document.errors|join:"<br \>" }}</span>
-
-											<div class='input-group {% if form.date_releases.errors %}has-error{% endif %}'>
-												<div class='input-group-addon'>
-													<i class='fa fa-calendar fa-fw'></i>
-												</div>
-												{{ form.date_releases|placeholder:"dd/mm/yyyy H:i" |addcss:"form-control" }}
-											</div>
-											<span class="error text-danger">{{ form.date_releases.errors|join:"<br \>" }}</span>
-
-										</div><!-- col-md-4 -->
-
-										<div class='col-md-6'>
-											<div class='input-group {% if form.description.errors %}has-error{% endif %}'>
-												<div class='input-group-addon'>
-													<i class='fa fa-pencil fa-fw'></i>
-												</div>
-												{{ form.description|placeholder:"Descrição do débito" |textarea:"6" |addcss:"form-control" }}
-											</div>
-											<span class="error text-danger">{{ form.description.errors|join:"<br \>" }}</span>
-										</div><!-- col-md-4 -->
-
-									</div><!-- row -->
-
-									<div class="row">
-									<div class="text-center">
-										<button class='btn btn-primary' type='submit' name='new_debit' id='id_new_debit'>
-										Editar
-										</button>
-
-										<button name="close_new_debit" id="id_close_new_debit" class="btn btn-danger" aria-hidden="true" data-dismiss="modal" type="button">
-										Fechar
-										</button>
-									</div>
-
-									</div>
-
-								</form>
-							</div>
 	</div>
 </div>

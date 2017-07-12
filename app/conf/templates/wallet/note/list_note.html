@@ -4,313 +4,122 @@
 
 {% block extra_styles %}
 	<link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
-
-	<style type="text/css">
-			/*.metric{
-				margin-bottom: 0 !important;
-			}*/
-			body{
-				font-family: 'Anaheim';
-			}
-			.metric .title {
-			    font-size: 14px;
-			    color: #a3a4a4;
-			}
-			.panel-footer{
-				background-color: white;
-				text-align: center;
-			}
-			table td, th{
-				text-align: center;
-			}
-			#notas .lnr{
-				font-size: 16px;
-			}
-			#overview .lnr{
-				font-size: 16px;
-			}
-			.layout-fullwidth #wrapper .btn-toggle-fullwidth {
-			    color: #696c6f;
-			}
-			.navbar-nav > li > .dropdown-menu {
-			    padding: 0;
-			    min-width: 200px;
-			}
-			ul.notifications > li > .more {
-			    padding-top: 12px;
-			    padding-bottom: 12px;
-			    text-align: center;
-			    text-decoration: none;
-			    font-weight: normal;
-			    color: #4787b2;
-			}
-			.navbar-btn {
-			    float: left;
-			    padding: 16px 0;
-			    margin-left: 13px;
-			}
-
-			.navbar-btn {
-			    margin-top: 8px;
-			    margin-bottom: 0px;
-			}
-
-			/* depositos */
-			.pagination {
-			    display: inline-block;
-			    padding-left: 0;
-			    margin: 0px 0px;
-			    border-radius: 4px;
-			}
-			.form-inline .input-group {
-    display: inline-table;
-    vertical-align: middle;
-
-}
-
-select:not([multiple]) {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-position: right 50%;
-    background-repeat: no-repeat;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDZFNDEwNjlGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDZFNDEwNkFGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NkU0MTA2N0Y3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NkU0MTA2OEY3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuGsgwQAAAA5SURBVHjaYvz//z8DOYCJgUxAf42MQIzTk0D/M+KzkRGPoQSdykiKJrBGpOhgJFYTWNEIiEeAAAMAzNENEOH+do8AAAAASUVORK5CYII=);
-    padding-right: 2.0em
-}
-input{
-	padding-right: 2.0em;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="tel"],
-input[type="select"] {
-    max-width: 280px;
-    min-width: 170px;
-}
-			/* end lancamentos */
-
-.main-content {
-    padding: 5px 10px;
-}
-.breadcrumb {
-    padding: 0px 0px;
-    margin-bottom: 5px;
-    list-style: none;
-    background-color: #f5f5fa;
-    border-radius: 4px;
-}
-
-.panel .right {
-    position: absolute;
-    right: 20px;
-    top: 32%;
-}
-
-#list-note .todo-list > li p {
-    display: inline-block;
-    vertical-align: middle;
-    width: 94%;
-    margin: 0;
-    padding: 5px 0 5px 40px;
-}
-
-#list-note .panel .table > thead > tr > td:first-child, .panel .table > thead > tr > th:first-child, .panel .table > tbody > tr > td:first-child, .panel .table > tbody > tr > th:first-child, .panel .table > tfoot > tr > td:first-child, .panel .table > tfoot > tr > th:first-child {
-    padding-left: 0px;
-    text-align: left;
-}
-
-#list-note .panel .table > thead > tr > td:last-child, .panel .table > thead > tr > th:last-child, .panel .table > tbody > tr > td:last-child, .panel .table > tbody > tr > th:last-child, .panel .table > tfoot > tr > td:last-child, .panel .table > tfoot > tr > th:last-child {
-    padding-left: 0px;
-    text-align: right;
-}
-#list-note .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    padding: 4px;
-    line-height: 1.42857143;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
-}
-.clean-td{
-	border-style : hidden!important;
-	background-color: white;
-	width: 20px;
-}
-.bg-danger{
-	background-color:#d9534f;
-}
-
-.right a{
-	color:#686B71;
-}
-
-.navbar-btn button {
-    font-size: 24px;
-    padding: 4px 5px;
-    line-height: .7;
-    border: none;
-    background: none;
-    outline: none;
-}
-
-#list-note #alert-label label {
-    display: inline-block;
-    max-width: 100%;
-    margin-bottom: 5px;
-    font-weight: 700;
-    height: 29px;
-}
-
-#list-note #alert-label .fancy-checkbox input[type="checkbox"] + span {
-    display: inline-block;
-    vertical-align: middle;
-    position: relative;
-    bottom: 1px;
-    width: 18px;
-    height: 18px;
-    margin-right: 10px;
-    content: "";
-    border: 0px solid #ccc;
-    margin-left: 10px;
-    margin-top: 9px;
-}
-
-
-#list-note .panel{
-	min-height: 320px;
-}
-
-	</style>
 {% endblock %}
 
 {% block content %}
-
-<div class="container-fluid">
-	<ol class="breadcrumb">
-	    <li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Inicio</a></li>
-		<li class='active'><i class="fa fa-tags fa-fw"></i> Notas</a></li>
-	</ol>
-	<!-- DEPÓSITOS -->
-	<div class="row" id="list-note">
-		<div class="col-md-12">
-			<!-- TABLE STRIPED -->
-			<div class="panel">
-				<div class="panel-heading">
-					<h3 class="panel-title">Notas</h3>
-										<div class='right'>
-<form class="form-inline" method="get">
-
-										  <label class="sr-only" for="id_status_note">status_alert</label>
-										  <div class="input-group">
-    										<div class="input-group-addon">
-     											<i class="fa fa-tags" aria-hidden="true"></i>
-    										</div>
-										    <select class="form-control" name="status_alert" id="id_status_alert">
-                <option {% if request.GET.status_alert == 'all' %}selected{% endif %} value="all">todos</option>
-                <option {% if request.GET.status_alert == 'True' %}selected{% endif %} value="True">alerta</option>
-                <option {% if request.GET.status_alert == 'False' %}selected{% endif %} value="False">notas</option>
-            </select>
-										  </div>
-
-										  <label class="sr-only" for="id_status_note">status_note</label>
-										  <div class="input-group">
-    										<div class="input-group-addon">
-     											<i class="fa fa-tags" aria-hidden="true"></i>
-    										</div>
-										    <select class="form-control" name="status_note" id="id_status_note">
-                <option {% if request.GET.status_note == 'all' %}selected{% endif %} value="all">todos</option>
-                <option {% if request.GET.status_note == 'True' %}selected{% endif %} value="True">abertas</option>
-                <option {% if request.GET.status_note == 'False' %}selected{% endif %} value="False">fechadas</option>
-            </select>
-										  </div>
-
-										  <label class="sr-only" for="date">Data</label>
-										  <div class="input-group">
-    										<div class="input-group-addon">
-     											<i class="fa fa-calendar"></i>
-    										</div>
-										    <input type="text" class="form-control" name='date' id="date" placeholder="dd/mm/yyyy" value="{% if request.GET.date %}{{ request.GET.date }}{% endif %}">
-										  </div>
-										  <button type="submit"><i class='lnr lnr-magnifier'></i></button>
-
-
-			<a href='{% url "wallet:add_note" %}'><i style="font-size:15px;" class='lnr lnr-plus-circle'></i></a>
-</form>
-
-										</div>
-				</div>
-				<div class="panel-body">
-
-
-					{% if messages %}
-					    {% for message in messages %}
-					      <div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
-					        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					        <strong>{{ message.tags }}:</strong> {{ message }}.
-					      </div>
-					    {% endfor %}
-					{% endif %}
-
-					<br>
-
-					{% if not object_list %}
-						<div class='empty-object'>
-							<center>
-								<h3>Não existem notas cadastradas</h3>
-							</center>
-						</div>
-					{% else %}
-
-						<ul class="list-unstyled todo-list">
-							{% for note in object_list %}
-								<li class='{% if not note.status_note %}completed{% endif %}'>
-									<label id='note-list-input' class="control-inline fancy-checkbox">
-										<input id='{{ note.pk }}' type="checkbox" {% if not note.status_note %}checked{% endif %}><span></span>
-									</label>
-									<p>
-										<span class="title">{{ note.title }}</span>
-										<span class="label label-primary"><i class='fa fa-edit'></i></span>
-										{% if note.status_alert %}
-											<span class="label label-success"><i class='fa fa-warning'></i></span>
-										{% endif %}
-										<span class="short-description">{{ note.description }}</span>
-										<span class="date">{{ note.date_note | date:"d/m/Y H:i" }}</span>
-									</p>
-									<div class="controls">
-										<a href="{{ note.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>
-										<a href="{{ note.get_delete_url }}"><i class="lnr lnr-trash"></i></a>
+	<div class="container-fluid">
+		<ol class="breadcrumb">
+			<li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Inicio</a></li>
+			<li class='active'><i class="fa fa-tags fa-fw"></i> Notas</li>
+		</ol>
+		<!-- ROW LIST NOTE -->
+		<div class="row" id="list_note">
+			<div class="col-md-12">
+				<div class="panel">
+					<div class="panel-heading">
+						<h3 class="panel-title">Notas</h3>
+						<div class='right'>
+							<form class="form-inline" method="get">
+								<label class="sr-only" for="id_status_note">status_alert</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-tags" aria-hidden="true"></i>
 									</div>
-								</li>
-							{% endfor %}
-						</ul>
+									<select class="form-control" name="status_alert" id="id_status_alert">
+										<option {% if request.GET.status_alert == 'all' %}selected{% endif %} value="all">todos</option>
+										<option {% if request.GET.status_alert == 'True' %}selected{% endif %} value="True">alerta</option>
+										<option {% if request.GET.status_alert == 'False' %}selected{% endif %} value="False">notas</option>
+									</select>
+								</div>
 
-						<nav><!--nav-->
-							<ul class="pagination pagination-centered" style='margin: 5px 0 7px;'><!--ul pagination pagination-centered -->
-								<li>
-									<a class='{% if page_obj.has_previous %}btn{% else %} btn disabled{% endif %}' href="?page=1" title=""><<</a>
-								</li>
+								<label class="sr-only" for="id_status_note">status_note</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-tags" aria-hidden="true"></i>
+									</div>
+									<select class="form-control" name="status_note" id="id_status_note">
+										<option {% if request.GET.status_note == 'all' %}selected{% endif %} value="all">todos</option>
+										<option {% if request.GET.status_note == 'True' %}selected{% endif %} value="True">abertas</option>
+										<option {% if request.GET.status_note == 'False' %}selected{% endif %} value="False">fechadas</option>
+									</select>
+								</div>
 
-								<li>
-									<a class='{% if page_obj.has_previous %}btn{% else %} btn disabled {% endif %}' href="?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% endif %}" title=""><</a>
-								</li>
+								<label class="sr-only" for="date">Data</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<input type="text" class="form-control" name='date' id="date" placeholder="dd/mm/yyyy" value="{% if request.GET.date %}{{ request.GET.date }}{% endif %}">
+								</div>
 
-								<li>
-									<a class='{% if page_obj.has_next %}btn{% else %} btn disabled{% endif %}' href="?page={% if page_obj.has_next %}{{ page_obj.next_page_number }}{% endif %}" title="">></a>
-								</li>
+								<button type="submit"><i class='lnr lnr-magnifier'></i></button>
 
-								<li>
-									<a class='{% if page_obj.has_next %}btn{% else %}btn disabled{% endif %}' href="?page={{paginator.num_pages}}" title="">>></a>
-								</li>
-							</ul><!--ul pagination pagination-centered -->
-						</nav><!--nav-->
-						<small>{{ page_obj.number }} de {{paginator.num_pages}}</small>
-					{% endif %}
+								<a href='{% url "wallet:add_note" %}'><i style="font-size:15px;" class='lnr lnr-plus-circle'></i></a>
+							</form>
+						</div>
+					</div>
+
+					<div class="panel-body">
+						{% include "messages.html" %}
+
+						{% if not object_list %}
+							<div class='empty-object'>
+								<center>
+									<h3>Não existem lançamentos de depósitos cadastrados</h3>
+								</center>
+							</div>
+						{% else %}
+							<ul class="list-unstyled todo-list">
+								{% for note in object_list %}
+									<li class='{% if not note.status_note %}completed{% endif %}'>
+										<label id='note-list-input' class="control-inline fancy-checkbox">
+											<input id='{{ note.pk }}' type="checkbox" {% if not note.status_note %}checked{% endif %}><span></span>
+										</label>
+										<p>
+											<span class="title">{{ note.title }}</span>
+											<span class="label label-primary"><i class='fa fa-edit'></i></span>
+											{% if note.status_alert %}
+												<span class="label label-success"><i class='fa fa-warning'></i></span>
+											{% endif %}
+											<span class="short-description">{{ note.description }}</span>
+											<span class="date">{{ note.date_note | date:"d/m/Y H:i" }}</span>
+										</p>
+										<div class="controls">
+											<a href="{{ note.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>
+											<a href="{{ note.get_delete_url }}"><i class="lnr lnr-trash"></i></a>
+										</div>
+									</li>
+								{% endfor %}
+							</ul>
+
+							<nav>
+								<ul class="pagination pagination-centered" style='margin: 5px 0 7px;'><!--ul pagination pagination-centered -->
+									<li>
+										<a class='{% if page_obj.has_previous %}btn{% else %} btn disabled{% endif %}' href="?page=1" title=""><<</a>
+									</li>
+
+									<li>
+										<a class='{% if page_obj.has_previous %}btn{% else %} btn disabled {% endif %}' href="?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% endif %}" title=""><</a>
+									</li>
+
+									<li>
+										<a class='{% if page_obj.has_next %}btn{% else %} btn disabled{% endif %}' href="?page={% if page_obj.has_next %}{{ page_obj.next_page_number }}{% endif %}" title="">></a>
+									</li>
+
+									<li>
+										<a class='{% if page_obj.has_next %}btn{% else %}btn disabled{% endif %}' href="?page={{paginator.num_pages}}" title="">>></a>
+									</li>
+								</ul><!--ul pagination pagination-centered -->
+							</nav><!--nav-->
+							<small>{{ page_obj.number }} de {{paginator.num_pages}}</small>
+						{% endif %}
+					</div>
+
 				</div>
 			</div>
 		</div>
+		<!-- END ROW LIST NOTE -->
 	</div>
-</div>
 {% endblock %}
 {% block extra_scripts %}
 	<script src="{% static 'js/libs/moment.min.js' %}"></script>

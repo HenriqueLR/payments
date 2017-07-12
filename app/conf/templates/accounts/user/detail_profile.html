@@ -2,114 +2,15 @@
 {% load staticfiles %}
 {% load formtags %}
 
-{% block extra_styles %}
-	<style type="text/css">
-		/****** PROFILE *******/
-
-		/* ####### */
-		#profile ol, ul {
-		margin-top: 0;
-		margin-bottom: 20px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#profile .todo-list > li p {
-		display: inline-block;
-		vertical-align: middle;
-		width: 90%;
-		margin: 0;
-		padding: 5px 0 5px 40px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#profile .todo-list .controls {
-		float: right;
-		position: absolute;
-		top: 50%;
-		right: 3px;
-		margin-top: -11px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#profile .todo-list > li:first-child {
-		border-top: 1px solid #F0F0F0;
-		}
-		/* ####### */
-
-		/* ####### */
-		#profile .todo-list .short-description {
-		display: block;
-		margin-top: 0px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.todo-list > li.completed .controls{
-		pointer-events: none;
-		cursor: default;
-		opacity: 0.4;
-		}
-		/* ####### */
-
-		/* ####### */
-		.navbar-btn button {
-		font-size: 24px;
-		padding: 4px 5px;
-		line-height: .7;
-		border: none;
-		background: none;
-		outline: none;
-		}
-		/* ####### */
-
-		/* ####### */
-		.profile-info {
-		padding: -1 100px;
-		margin: 0px 0;
-		}
-		/* ####### */
-
-		/* ####### */
-		.social-icons {
-		margin-bottom: 20px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.text-center {
-		text-align: center;
-		margin-top: 35px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.instagram {
-		background-color: #000 !important;
-		}
-		/* ####### */
-
-		/* ####### */
-		.instagram a{
-		color: #000 !important;
-		}
-		/* ####### */
-		/*** END PROFILE ***/
-	</style>
-{% endblock %}
-
 {% block content %}
 	<div class="container-fluid">
 		<ol class="breadcrumb">
 			<li><a href="{% url 'main:home' %}"><i class="fa fa-home fa-fw"></i> Inicio</a></li>
 			<li class="active"><i class="fa fa-user fa-fw"></i> Detalhar Perfil</li>
 		</ol>
-		<!-- PROFILE -->
-		<div class="row" id="profile">
+
+		<div class="row" id="detail_profile">
 			<div class="col-md-12">
-				<!-- TODO LIST -->
 				<div class="panel">
 					<div class="panel-heading">
 						<h3 class="panel-title">Detalhar Perfil</h3>
@@ -136,16 +37,16 @@
 									<p>{{ profile.description }}</p>
 								</div>
 								<div class="text-center">
-									<a href="{{ profile.user.get_edit_profile }}" class="btn btn-primary">Editar</a>
-									<a href="{% url 'main:home' %}" class='btn btn-danger' href='home.html' name='close_profile' id='close_profile'>Fechar</a>
+									<a name="detail_profile" id="id_detail_profile" href="{{ profile.user.get_edit_profile }}" class="btn btn-primary">Editar</a>
+									<a href="{% url 'main:home' %}" class='btn btn-danger' name='close_detail_profile' id='id_close_detail_profile'>Fechar</a>
 								</div>
 							</div>
 						</div>
 					</div>
+
 				</div>
-			<!-- END TODO LIST -->
 			</div>
-		</div>
-		<!-- END PROFILE -->
-	</div>
+
+		</div><!-- END ROW DETAIL PROFILE -->
+	</div><!-- END CONTAINER-FLUID -->
 {% endblock %}

@@ -4,106 +4,6 @@
 
 {% block extra_styles %}
 	<link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
-	<style>
-		/* EDIT PROFILE */
-
-		/* ####### */
-		#add-debit ol, ul {
-		margin-top: 0;
-		margin-bottom: 20px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#add-debit .todo-list > li p {
-		display: inline-block;
-		vertical-align: middle;
-		width: 90%;
-		margin: 0;
-		padding: 5px 0 5px 40px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#add-debit .todo-list .controls {
-		float: right;
-		position: absolute;
-		top: 50%;
-		right: 3px;
-		margin-top: -11px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#add-debit .todo-list > li:first-child {
-		border-top: 1px solid #F0F0F0;
-		}
-		/* ####### */
-
-		/* ####### */
-		#add-debit .todo-list .short-description {
-		display: block;
-		margin-top: 0px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.form-inline .input-group {
-		display: inline-table;
-		vertical-align: middle;
-
-		}
-		/* ####### */
-
-		/* ####### */
-		.todo-list > li.completed .controls{
-		pointer-events: none;
-		cursor: default;
-		opacity: 0.4;
-		}
-		/* ####### */
-
-		/* ####### */
-		.profile-info {
-		padding: 0 20px;
-		margin: 0px 0;
-		}
-		/* ####### */
-
-		/* ####### */
-		.social-icons {
-		margin-bottom: 20px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.text-center {
-		text-align: center;
-		margin-top: 35px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.instagram {
-		background-color: #000 !important;
-		}
-		/* ####### */
-
-		/* ####### */
-		.instagram a{
-		color: #000 !important;
-		}
-		/* ####### */
-
-		/* ####### */
-		#add-debit input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="select"] {
-		max-width: 100%;
-		min-width: 100%;
-		}
-		/* ####### */
-
-		/* END EDIT PROFILE */
-	</style>
 {% endblock %}
 
 {% block content %}
@@ -113,10 +13,10 @@
 			<li><a href="{% url 'wallet:list_debit' %}"><i class="fa fa-pie-chart fa-fw"></i> Débitos</a></li>
 			<li class="active"><i class="fa fa-plus fa-fw"></i> Novo Débito</li>
 		</ol>
-		<!-- NOTAS -->
-		<div class="row" id="add-debit">
+
+		<!-- ROW ADD DEBIT -->
+		<div class="row" id="add_debit">
 			<div class="col-md-12">
-				<!-- TODO LIST -->
 				<div class="panel">
 					<div class="panel-heading">
 						<h3 class="panel-title">Novo Débito</h3>
@@ -126,35 +26,15 @@
 							</ul>
 						</div>
 					</div>
+
 					<div class="panel-body">
-
-						{% if messages %}
-							{% for message in messages %}
-								<div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									<strong>{{ message.tags }}:</strong> {{ message }}.
-								</div>
-							{% endfor %}
-						{% endif %}
-
-						{% if form.errors %}
-							<div class="alert alert-danger">
-								<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-								<strong>Error: </strong>
-								{% for field, error in form.errors.items %}
-									{% if field != '__all__' %}{{ field }}{% endif %}
-									{{ error | striptags }}<br />
-								{% endfor %}
-							</div>
-						{% endif %}
+						{% include "messages.html" %}
 
 						<div class='col-md-12'>
 							<div class="profile-detail">
 
 								<form name='add_debit' method='POST'>
-									{% csrf_token %}
+								{% csrf_token %}
 									<div class='row'>
 										<div class='col-md-4 col-md-offset-2'>
 
@@ -204,14 +84,13 @@
 
 									</div><!-- row -->
 
-
 									<div class="text-center">
-										<button class='btn btn-primary' type='submit' name='save_debit' id='save_debit'>
-										Salvar
+										<button class='btn btn-primary' type='submit' name='new_debit' id='id_new_debit'>
+											Salvar
 										</button>
 
-										<a class='btn btn-danger' href="{% url 'wallet:list_debit' %}" name='close_debit' id='close_debit'>
-										Fechar
+										<a class='btn btn-danger' href="{% url 'wallet:list_debit' %}" name='close_new_debit' id='id_close_new_debit'>
+											Fechar
 										</a>
 									</div>
 
@@ -220,12 +99,10 @@
 						</div>
 					</div>
 				</div>
-				<!-- END TODO LIST -->
 			</div>
-		</div>
-		<!-- END add-debit -->
-	</div>
 
+		</div><!-- END ROW ADD DEBIT -->
+	</div><!-- END CONTAINER-FLUID -->
 {% endblock %}
 
 {% block extra_scripts %}

@@ -2,104 +2,6 @@
 {% load staticfiles %}
 {% load formtags %}
 
-{% block extra_styles %}
-	<style type="text/css">
-		/****** PROFILE *******/
-
-		/* ####### */
-		#deposit ol, ul {
-		margin-top: 0;
-		margin-bottom: 20px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#deposit .todo-list > li p {
-		display: inline-block;
-		vertical-align: middle;
-		width: 90%;
-		margin: 0;
-		padding: 5px 0 5px 40px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#deposit .todo-list .controls {
-		float: right;
-		position: absolute;
-		top: 50%;
-		right: 3px;
-		margin-top: -11px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#deposit .todo-list > li:first-child {
-		border-top: 1px solid #F0F0F0;
-		}
-		/* ####### */
-
-		/* ####### */
-		#deposit .todo-list .short-description {
-		display: block;
-		margin-top: 0px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.todo-list > li.completed .controls{
-		pointer-events: none;
-		cursor: default;
-		opacity: 0.4;
-		}
-		/* ####### */
-
-		/* ####### */
-		.navbar-btn button {
-		font-size: 24px;
-		padding: 4px 5px;
-		line-height: .7;
-		border: none;
-		background: none;
-		outline: none;
-		}
-		/* ####### */
-
-		/* ####### */
-		.profile-info {
-		padding: -1 100px;
-		margin: 0px 0;
-		}
-		/* ####### */
-
-		/* ####### */
-		.social-icons {
-		margin-bottom: 20px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.text-center {
-		text-align: center;
-		margin-top: 35px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.instagram {
-		background-color: #000 !important;
-		}
-		/* ####### */
-
-		/* ####### */
-		.instagram a{
-		color: #000 !important;
-		}
-		/* ####### */
-		/*** END deposit ***/
-	</style>
-{% endblock %}
-
 {% block content %}
 	<div class="container-fluid">
 		<ol class="breadcrumb">
@@ -107,10 +9,9 @@
 			<li><a href="{% url 'wallet:list_deposit' %}"><i class="fa fa-line-chart fa-fw"></i> Depósitos</a></li>
 			<li class="active"><i class="fa fa-pencil fa-fw"></i> Detalhar Depósito</li>
 		</ol>
-		<!-- deposit -->
-		<div class="row" id="deposit">
+		<!-- ROW DETAIL_DEPOSIT -->
+		<div class="row" id="detail_deposit">
 			<div class="col-md-12">
-				<!-- TODO LIST -->
 				<div class="panel">
 					<div class="panel-heading">
 						<h3 class="panel-title">Detalhar Depósito</h3>
@@ -121,18 +22,7 @@
 						</div>
 					</div>
 					<div class="panel-body">
-
-						{% if messages %}
-							{% for message in messages %}
-								<div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									<strong>{{ message.tags }}:</strong> {{ message }}.
-								</div>
-							{% endfor %}
-						{% endif %}
-
+						{% include "messages.html" %}
 						<div class='col-md-8 col-md-offset-2'>
 							<div class="profile-detail">
 								<div class="profile-info">
@@ -146,11 +36,11 @@
 									</ul>
 								</div>
 								<div class="text-center">
-									<a class='btn btn-primary' href="{{ object.get_update_deposit }}" name='edit_deposit' id='edit_deposit'>
+									<a class='btn btn-primary' href="{{ object.get_update_deposit }}" name='detail_deposit' id='id_detail_deposit'>
 									Editar
 									</a>
 
-									<a class='btn btn-danger' href="{% url 'wallet:list_deposit' %}" name='close_deposit' id='close_deposit'>
+									<a class='btn btn-danger' href="{% url 'wallet:list_deposit' %}" name='close_detail_deposit' id='id_close_detail_deposit'>
 									Fechar
 									</a>
 								</div>
@@ -158,9 +48,8 @@
 						</div>
 					</div>
 				</div>
-			<!-- END TODO LIST -->
 			</div>
 		</div>
-		<!-- END PROFILE -->
+		<!-- END ROW DETAIL_DEPOSIT -->
 	</div>
 {% endblock %}

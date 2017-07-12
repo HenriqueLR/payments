@@ -42,31 +42,10 @@
                                     <p class="lead">Carteira Virtual</p>
                                 </div>
 
-                                {% if messages %}
-                                    {% for message in messages %}
-                                        <div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            <strong>{{ message.tags }}:</strong> {{ message }}.
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
-
-                                {% if form.errors %}
-                                    <div class="alert alert-danger">
-                                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                        <strong>Error: </strong>
-                                        {% for field, error in form.errors.items %}
-                                            {% if field != '__all__' %}{{ field }}{% endif %}
-                                            {{ error | striptags }}
-                                            <br />
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
+                                {% include "messages.html" %}
 
                                 <form class="form-auth-small" method="POST">
-                                    {% csrf_token %}
+                                {% csrf_token %}
                                     <div class="form-group {% if form.username.errors %}has-error{% endif %}">
                                         <label for="id_username" class="control-label sr-only">Email</label>
                                         {{ form.username|placeholder:"E-mail" |addcss:"form-control" }}
@@ -83,8 +62,10 @@
                                             <span style="color:#fff;">Lembrar-me</span>
                                         </label>
                                     </div>
+
                                     <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                                     <a href="{% url 'accounts:create_account' %}" class="btn btn-danger btn-block">Criar Conta</a>
+
                                     <div class="bottom">
                                         <span class="helper-text"><i style='color: #d9534f;' class="fa fa-lock"></i> <a onclick="get_form_password('{% url 'accounts:reset_password' %}');" href="#" data-toggle="modal" data-target=".bs-example-modal-static"> Recuperar Senha</a></span>
                                     </div>
@@ -93,79 +74,76 @@
                         </div>
 
                         <div class="clearfix"></div>
+
                     </div>
                 </div>
             </div>
-        </div>
+        </div><!-- END WRAPPER -->
 
-    <!--MODAL INIT-->
-    <div class="modal fade bs-example-modal-static" tabindex="-1" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
+        <!-- MODAL -->
+        <div class="modal fade bs-example-modal-static" tabindex="-1" role="dialog" data-backdrop="static">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
 
-        <div class="modal-header">
-          <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><i style="font-size:15px;" class='lnr lnr-cross'></i></button>
-          <h4 class="modal-title">Recuperar Senha</h4>
-        </div>
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><i style="font-size:15px;" class='lnr lnr-cross'></i></button>
+                        <h4 class="modal-title">Recuperar Senha</h4>
+                    </div>
 
-        <div class="modal-body">
-            <div id="form-recovery-password"></div>
-        </div><!--modal-body-->
-      </div><!--modal-content-->
-    </div><!--modal-dialog-->
-    </div><!--modal-->
-    <!--MODAL END-->
+                    <div class="modal-body">
+                        <div id="modal_recovery_password"></div>
+                    </div><!--modal-body-->
+                </div><!--modal-content-->
+            </div><!--modal-dialog-->
+        </div><!--modal-->
+        <!-- MODAL END -->
 
-
-
-        <!-- END WRAPPER -->
+        <!-- JS -->
         <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
         <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'js/libs/remember.js' %}"></script>
+        <!-- END JS -->
 
         <script type="text/javascript">
             function get_form_password(url){
-              $.ajax({
-                type: 'get',
-                url: url,
-                success: function(data) {
-                    $("#form-recovery-password").replaceWith(data);
-                },
-                error: function (data) {
-                    msg = '<div class="alert alert-danger"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>Error: </strong> Contate o Administrador o sistema.</div><div class="text-center"><button aria-hidden="true" data-dismiss="modal" class="btn btn-danger" type="button">Close</button></div>';
-                    $("#form-recovery-password").html(msg);
-                  },
-
-              });
-              return false;
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    success: function(data) {
+                        $("#modal_recovery_password").replaceWith(data);
+                    },
+                    error: function (data) {
+                        msg = '<div class="alert alert-danger"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>Error: </strong> Contate o Administrador o sistema.</div><div class="text-center"><button aria-hidden="true" data-dismiss="modal" class="btn btn-danger" type="button">Close</button></div>';
+                        $("#modal_recovery_password").html(msg);
+                    },
+                });
+                return false;
             }
 
             function submit_password(url){
-              $('#send').prop('disabled', true);
-              $form=$('#myform');
+                $('#id_reset_password').prop('disabled', true);
+                $form=$('#reset_password');
 
-              var datastring = $form.serialize();
-              $.ajax({
-                type: 'post',
-                url: url,
-                data : datastring,
+                var datastring = $form.serialize();
+                $.ajax({
+                    type: 'post',
+                    url: url,
+                    data : datastring,
 
-                success: function(data) {
-                  if (data == 'ok'){
-                    window.location.href = '/accounts/sign_in/';
-                  }else{
-                    $("#form-recovery-password").replaceWith(data);}
-                },
-                error: function (data) {
-                    msg = '<div class="alert alert-danger"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>Error: </strong> Contate o Administrador o sistema.</div><div class="text-center"><button aria-hidden="true" data-dismiss="modal" class="btn btn-danger" type="button">Close</button></div>';
-                    $("#form-recovery-password").html(msg);
-                },
-
-              });
-              return false;
+                    success: function(data) {
+                        if (data == 'ok'){
+                            window.location.href = '/accounts/sign_in/';
+                        }else{
+                            $("#modal_recovery_password").replaceWith(data);}
+                        },
+                    error: function (data) {
+                        msg = '<div class="alert alert-danger"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>Error: </strong> Contate o Administrador o sistema.</div><div class="text-center"><button aria-hidden="true" data-dismiss="modal" class="btn btn-danger" type="button">Close</button></div>';
+                        $("#modal_recovery_password").html(msg);
+                    },
+                });
+                return false;
             }
         </script>
 
     </body>
-
 </html>

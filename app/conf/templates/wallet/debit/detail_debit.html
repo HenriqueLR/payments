@@ -2,104 +2,6 @@
 {% load staticfiles %}
 {% load formtags %}
 
-{% block extra_styles %}
-	<style type="text/css">
-		/****** PROFILE *******/
-
-		/* ####### */
-		#debit ol, ul {
-		margin-top: 0;
-		margin-bottom: 20px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#debit .todo-list > li p {
-		display: inline-block;
-		vertical-align: middle;
-		width: 90%;
-		margin: 0;
-		padding: 5px 0 5px 40px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#debit .todo-list .controls {
-		float: right;
-		position: absolute;
-		top: 50%;
-		right: 3px;
-		margin-top: -11px;
-		}
-		/* ####### */
-
-		/* ####### */
-		#debit .todo-list > li:first-child {
-		border-top: 1px solid #F0F0F0;
-		}
-		/* ####### */
-
-		/* ####### */
-		#debit .todo-list .short-description {
-		display: block;
-		margin-top: 0px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.todo-list > li.completed .controls{
-		pointer-events: none;
-		cursor: default;
-		opacity: 0.4;
-		}
-		/* ####### */
-
-		/* ####### */
-		.navbar-btn button {
-		font-size: 24px;
-		padding: 4px 5px;
-		line-height: .7;
-		border: none;
-		background: none;
-		outline: none;
-		}
-		/* ####### */
-
-		/* ####### */
-		.profile-info {
-		padding: -1 100px;
-		margin: 0px 0;
-		}
-		/* ####### */
-
-		/* ####### */
-		.social-icons {
-		margin-bottom: 20px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.text-center {
-		text-align: center;
-		margin-top: 35px;
-		}
-		/* ####### */
-
-		/* ####### */
-		.instagram {
-		background-color: #000 !important;
-		}
-		/* ####### */
-
-		/* ####### */
-		.instagram a{
-		color: #000 !important;
-		}
-		/* ####### */
-		/*** END debit ***/
-	</style>
-{% endblock %}
-
 {% block content %}
 	<div class="container-fluid">
 		<ol class="breadcrumb">
@@ -107,10 +9,9 @@
 			<li><a href="{% url 'wallet:list_debit' %}"><i class="fa fa-pie-chart fa-fw"></i> Débitos</a></li>
 			<li class="active"><i class="fa fa-pencil fa-fw"></i> Detalhar Débito</li>
 		</ol>
-		<!-- debit -->
-		<div class="row" id="debit">
+
+		<div class="row" id="detail_debit">
 			<div class="col-md-12">
-				<!-- TODO LIST -->
 				<div class="panel">
 					<div class="panel-heading">
 						<h3 class="panel-title">Detalhar Débito</h3>
@@ -122,16 +23,7 @@
 					</div>
 					<div class="panel-body">
 
-						{% if messages %}
-							{% for message in messages %}
-								<div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									<strong>{{ message.tags }}:</strong> {{ message }}.
-								</div>
-							{% endfor %}
-						{% endif %}
+						{% include "messages.html" %}
 
 						<div class='col-md-8 col-md-offset-2'>
 							<div class="profile-detail">
@@ -146,21 +38,21 @@
 									</ul>
 								</div>
 								<div class="text-center">
-									<a class='btn btn-primary' href="{{ object.get_update_debit }}" name='edit_debit' id='edit_debit'>
+									<a class='btn btn-primary' href="{{ object.get_update_debit }}" name='detail_debit' id='id_detail_debit'>
 									Editar
 									</a>
 
-									<a class='btn btn-danger' href="{% url 'wallet:list_debit' %}" name='close_debit' id='close_debit'>
+									<a class='btn btn-danger' href="{% url 'wallet:list_debit' %}" name='close_detail_debit' id='id_close_detail_debit'>
 									Fechar
 									</a>
 								</div>
 							</div>
 						</div>
 					</div>
+
 				</div>
-			<!-- END TODO LIST -->
 			</div>
-		</div>
-		<!-- END PROFILE -->
-	</div>
+
+		</div><!-- END ROW DETAIL DEBIT -->
+	</div><!-- END CONTAINER-FLUID -->
 {% endblock %}

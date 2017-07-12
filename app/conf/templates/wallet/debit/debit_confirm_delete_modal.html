@@ -6,8 +6,10 @@
 	</button>
 	<h4 class="modal-title">Apagar Débito</h4>
 </div>
+
 <div class="modal-body">
-	<div class="row" id="deposit">
+	<div class="row" id="delete_debit_modal">
+
 		<div class='col-md-8 col-md-offset-2'>
 			<ul class="list-unstyled list-justify" style="margin-bottom:15px;">
 				<li><i class='fa fa-exchange fa-fw'></i> Origem <span>{{ object.origin }}</span></li>
@@ -18,21 +20,21 @@
 				<li><i class='fa fa-pencil fa-fw'></i> Descrição <span>{{ object.description }}</span></li>
 			</ul>
 			<div class="text-center">
-			  <form id="id_delete_deposit" name="delete_debit" action="{{ object.get_delete_debit }}" method="post" class='form-inline form-modal-debit'>
-			    {% csrf_token %}
-			    <div class='row'>
-			        <div class="form-group">
-			          <input type="submit" class='btn btn-danger' value="Sim"/>
-			        </div>
-			        <div class="form-group">
-						<button name="close_delete_debit" id="id_close_delete_debit" class="btn btn-primary" aria-hidden="true" data-dismiss="modal" type="button">
-							Não
-						</button>
-			        </div>
-			    </div>
-			  </form>
+				<form id="id_delete_deposit" name="delete_debit" action="{{ object.get_delete_debit }}" method="post" class='form-inline form-modal-debit'>
+				{% csrf_token %}
+					<div class='row'>
+						<div class="form-group">
+							<input type="submit" class='btn btn-danger' value="Sim"/>
+						</div>
+						<div class="form-group">
+							<button name="close_delete_debit" id="id_close_delete_debit" class="btn btn-primary" aria-hidden="true" data-dismiss="modal" type="button">
+								Não
+							</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 
-	</div><!-- row -->
+	</div><!-- END ROW -->
 </div><!-- modal-body -->

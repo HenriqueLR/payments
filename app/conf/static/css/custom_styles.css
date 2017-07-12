@@ -1,8 +1,5 @@
-/****** HOME ******/
-/*.metric{
-	margin-bottom: 0 !important;
-}*/
-body{
+/****** GLOBAL ******/
+body {
 	font-family: 'Anaheim';
 }
 .metric .title {
@@ -14,21 +11,15 @@ body{
     font-size: 28px;
     font-weight: 300;
 }
-.panel-footer{
+.panel-footer {
 	background-color: white;
 	text-align: center;
 }
-.panel{
+.panel {
     margin-bottom: 20px;
 }
-table td, th{
+table td, th {
 	text-align: center;
-}
-#overview .panel{
-    min-height: 320px;
-}
-#overview .lnr{
-	font-size: 16px;
 }
 .layout-fullwidth #wrapper .btn-toggle-fullwidth {
     color: #696c6f;
@@ -64,9 +55,9 @@ select:not([multiple]) {
     background-position: right 50%;
     background-repeat: no-repeat;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDZFNDEwNjlGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDZFNDEwNkFGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NkU0MTA2N0Y3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NkU0MTA2OEY3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuGsgwQAAAA5SURBVHjaYvz//z8DOYCJgUxAf42MQIzTk0D/M+KzkRGPoQSdykiKJrBGpOhgJFYTWNEIiEeAAAMAzNENEOH+do8AAAAASUVORK5CYII=);
-    padding-right: 1.6em
+    padding-right: 1.6em;
 }
-input{
+input {
     padding-right: 2.0em;
 }
 input[type="text"],
@@ -92,77 +83,6 @@ input[type="select"] {
     right: 20px;
     top: 32%;
 }
-/* END GLOBAL */
-
-#payments .table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 10px;
-}
-#payments .panel .table > thead > tr > td:first-child, .panel .table > thead > tr > th:first-child, .panel .table > tbody > tr > td:first-child, .panel .table > tbody > tr > th:first-child, .panel .table > tfoot > tr > td:first-child, .panel .table > tfoot > tr > th:first-child {
-    padding-left: 0px;
-    text-align: left;
-}
-#payments .panel .table > thead > tr > td:last-child, .panel .table > thead > tr > th:last-child, .panel .table > tbody > tr > td:last-child, .panel .table > tbody > tr > th:last-child, .panel .table > tfoot > tr > td:last-child, .panel .table > tfoot > tr > th:last-child {
-    padding-left: 0px;
-    text-align: right;
-}
-#payments .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    padding: 0px;
-    line-height: 1.42857143;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
-    font-size: 14px;
-}
-#payments .lnr{
-    font-size: 16px;
-}
-#payments .panel{
-    min-height: 320px;
-}
-#payments #debit-col{
-    padding-right: 10px;
-}
-#payments #deposit-col{
-    padding-left: 10px;
-}
-
-#notas .panel{
-    min-height: 320px;
-}
-#notas .lnr{
-    font-size: 16px;
-}
-#notas ol, ul {
-    margin-top: 0;
-    margin-bottom: 0px;
-}
-#notas .todo-list > li p {
-    display: inline-block;
-    vertical-align: middle;
-    width: 94%;
-    margin: 0;
-    padding: 5px 0 5px 40px;
-}
-#notas .todo-list .controls {
-    float: right;
-    position: absolute;
-    top: 50%;
-    right: 3px;
-    margin-top: -11px;
-}
-#notas .todo-list > li:first-child {
-    border-top: 1px solid #F0F0F0;
-}
-#notas .todo-list .short-description {
-    display: block;
-    margin-top: 0px;
-    color:#a3a3a3;
-}
-#home .panel .panel-body {
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
 .metric {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -187,16 +107,16 @@ input[type="select"] {
     line-height: 1.0;
     text-align: right;
 }
-.clean-td{
-	border-style : hidden!important;
-	background-color: white;
-	width: 20px;
+.clean-td {
+    border-style : hidden!important;
+    background-color: white;
+    width: 20px;
 }
-.bg-danger{
-	background-color:#d9534f;
+.bg-danger {
+    background-color:#d9534f;
 }
-.right .list-inline a{
-	color:#686B71;
+.right .list-inline a {
+    color:#686B71;
 }
 .navbar-btn button {
     font-size: 24px;
@@ -217,38 +137,1265 @@ input[type="select"] {
 .alert-error .alert-link {
   color: #843534;
 }
-
-.icon-panel-danger{
+.icon-panel-danger {
     color: #d9534f !important;
 }
-
-.icon-panel-success{
+.icon-panel-success {
     color: #5cb85c !important;
 }
-/****** END HOME ******/
+.empty-object {
+    margin-top:80px;
+}
+.bg-warning {
+    background-color: #5cb85c;
+}
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 0px 0px;
+    border-radius: 4px;
+}
+.profile-info {
+    padding: -1 100px;
+    margin: 0px 0;
+}
+.text-center {
+    text-align: center;
+    margin-top: 35px;
+}
+/****** END GLOBAL ******/
 
-
-#confirm-reset-password{
-    margin-top:5%;
+/****** DASH ******/
+#overview .panel {
+    min-height: 320px;
+}
+#overview .lnr {
+    font-size: 16px;
+}
+#payments .table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+#payments .panel .table > thead > tr > td:first-child,
+.panel .table > thead > tr > th:first-child,
+.panel .table > tbody > tr > td:first-child,
+.panel .table > tbody > tr > th:first-child,
+.panel .table > tfoot > tr > td:first-child,
+.panel .table > tfoot > tr > th:first-child {
+    padding-left: 0px;
+    text-align: left;
+}
+#payments .panel .table > thead > tr > td:last-child,
+.panel .table > thead > tr > th:last-child,
+.panel .table > tbody > tr > td:last-child,
+.panel .table > tbody > tr > th:last-child,
+.panel .table > tfoot > tr > td:last-child,
+.panel .table > tfoot > tr > th:last-child {
+    padding-left: 0px;
+    text-align: right;
+}
+#payments .table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+    padding: 0px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    font-size: 14px;
+}
+#payments .lnr {
+    font-size: 16px;
+}
+#payments .panel {
+    min-height: 320px;
+}
+#payments #debit-col {
+    padding-right: 10px;
+}
+#payments #deposit-col {
+    padding-left: 10px;
 }
 
-
-
-/* NOTE */
-
-/* list note */
-#list-note .todo-list .short-description {
+#notes_home .panel {
+    min-height: 320px;
+}
+#notes_home .lnr {
+    font-size: 16px;
+}
+#notes_home ol, ul {
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+#notes_home .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 94%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#notes_home .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#notes_home .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#notes_home .todo-list .short-description {
     display: block;
     margin-top: 0px;
     color:#a3a3a3;
 }
 
-.bg-warning {
-    background-color: #5cb85c;
+#home .panel .panel-body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+#home .status_slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+#home .status_slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 1px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+#home input:checked + .status_slider {
+  background-color: #41b314;
+}
+#home input:focus + .status_slider {
+  box-shadow: 0 0 1px #41b314;
+}
+#home input:checked + .status_slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+/* Rounded sliders */
+#home .status_slider.round {
+  border-radius: 34px;
+}
+#home .status_slider.round:before {
+  border-radius: 50%;
+}
+#home .switch {
+    position: relative;
+    display: block;
+    width: 48px;
+    height: 23px;
+}
+/* Hide default HTML checkbox */
+#home .switch input {display:none;}
+/* The slider */
+#home .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+#home .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 1px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+#home input:checked + .slider {
+  background-color: #2196F3;
+}
+#home input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+#home input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+/* Rounded sliders */
+#home .slider.round {
+  border-radius: 34px;
+}
+#home .slider.round:before {
+  border-radius: 50%;
+}
+   /* Hiding the checkbox, but allowing it to be focused */
+#home .badgebox {
+    opacity: 0;
+}
+#home .badgebox + .badge {
+    /* Move the check mark away when unchecked */
+    text-indent: -999999px;
+    /* Makes the badge's width stay the same checked and unchecked */
+    width: 27px;
+}
+#home .badgebox:focus + .badge {
+    /* Set something to make the badge looks focused */
+    /* This really depends on the application, in my case it was: */
+
+    /* Adding a light border */
+    box-shadow: inset 0px 0px 5px;
+    /* Taking the difference out of the padding */
+}
+#home .badgebox:checked + .badge {
+    /* Move the check mark back when checked */
+    text-indent: 0;
 }
 
-/* END NOTE */
+/****** END DASH ******/
 
-.empty-object{
-    margin-top:80px;
+
+/****** NOTE ******/
+
+/* LIST NOTE */
+#list_note .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+    color:#a3a3a3;
 }
+#list_note .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 94%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#list_note .panel .table > thead > tr > td:first-child, .panel .table > thead > tr > th:first-child, .panel .table > tbody > tr > td:first-child, .panel .table > tbody > tr > th:first-child, .panel .table > tfoot > tr > td:first-child, .panel .table > tfoot > tr > th:first-child {
+    padding-left: 0px;
+    text-align: left;
+}
+#list_note .panel .table > thead > tr > td:last-child, .panel .table > thead > tr > th:last-child, .panel .table > tbody > tr > td:last-child, .panel .table > tbody > tr > th:last-child, .panel .table > tfoot > tr > td:last-child, .panel .table > tfoot > tr > th:last-child {
+    padding-left: 0px;
+    text-align: right;
+}
+#list_note .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 4px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+#list_note .right a {
+    color:#686B71;
+}
+#list_note #alert-label label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+    height: 29px;
+}
+#list_note #alert-label .fancy-checkbox input[type="checkbox"] + span {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    content: "";
+    border: 0px solid #ccc;
+    margin-left: 10px;
+    margin-top: 9px;
+}
+#list_note .panel {
+    min-height: 320px;
+}
+/* END LIST NOTE */
+
+/* UPDATE NOTE */
+#note_update ol, ul {
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+#note_update ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#note_update .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#note_update .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#note_update .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#note_update .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#note_update .todo-list > li.completed .controls{
+   pointer-events: none;
+   cursor: default;
+   opacity: 0.4;
+  }
+#note_update .switch {
+    position: relative;
+    display: block;
+    width: 48px;
+    height: 23px;
+}
+/* Hide default HTML checkbox */
+#note_update .switch input {
+    display:none;
+}
+/* The slider */
+#note_update .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+#note_update .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 1px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+#note_update input:checked + .slider {
+  background-color: #2196F3;
+}
+#note_update input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+#note_update input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+/* Rounded sliders */
+#note_update .slider.round {
+  border-radius: 34px;
+}
+#note_update .slider.round:before {
+  border-radius: 50%;
+}
+#note_update .status_slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+#note_update .status_slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 1px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+#note_update input:checked + .status_slider {
+  background-color: #41b314;
+}
+#note_update input:focus + .status_slider {
+  box-shadow: 0 0 1px #41b314;
+}
+#note_update input:checked + .status_slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+/* Rounded sliders */
+#note_update .status_slider.round {
+  border-radius: 34px;
+}
+#note_update .status_slider.round:before {
+  border-radius: 50%;
+}
+   /* Hiding the checkbox, but allowing it to be focused */
+#note_update .badgebox {
+    opacity: 0;
+}
+#note_update .badgebox + .badge {
+    /* Move the check mark away when unchecked */
+    text-indent: -999999px;
+    /* Makes the badge's width stay the same checked and unchecked */
+    width: 27px;
+}
+#note_update .badgebox:focus + .badge {
+    /* Set something to make the badge looks focused */
+    /* This really depends on the application, in my case it was: */
+
+    /* Adding a light border */
+    box-shadow: inset 0px 0px 5px;
+    /* Taking the difference out of the padding */
+}
+#note_update .badgebox:checked + .badge {
+    /* Move the check mark back when checked */
+    text-indent: 0;
+}
+#note_update .btn-group-sm > .btn, .btn-sm {
+    padding: 2px 10px;
+    margin-bottom: 5px;
+}
+#note_update .ul_note_create {
+    margin-bottom: 0px;
+}
+#note_update .right .list-inline a {
+    color:#686B71;
+}
+/* END UPDATE NOTE */
+
+
+/* DELETE NOTE */
+#delete_note ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#delete_note .profile-info {
+    padding: -1 100px;
+    margin: 0px 0;
+}
+/* END DELETE NOTE */
+
+/* DETAIL NOTE */
+#detail_note ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#detail_note .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#detail_note .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#detail_note .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#detail_note .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#detail_note .todo-list > li.completed .controls {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+#detail_note .profile-info {
+    padding: -1 100px;
+    margin: 0px 0;
+}
+#detail_note .text-center {
+    text-align: center;
+    margin-top: 35px;
+}
+/* END DETAIL NOTE */
+
+
+/* ADD NOTE */
+#add_note .todo-list > li.completed .controls{
+ pointer-events: none;
+ cursor: default;
+ opacity: 0.4;
+}
+#add_note .switch{
+  position: relative;
+  display: block;
+  width: 48px;
+  height: 23px;
+}
+/* Hide default HTML checkbox */
+#add_note .switch input{display:none;}
+/* The slider */
+#add_note .slider{
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+#add_note .slider:before{
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 1px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+#add_note input:checked + .slider {
+    background-color: #2196F3;
+}
+#add_note input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+#add_note input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+#add_note .slider.round {
+    border-radius: 34px;
+}
+#add_note .slider.round:before {
+    border-radius: 50%;
+}
+#add_note .status_slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+#add_note .status_slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 1px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+#add_note input:checked + .status_slider {
+    background-color: #41b314;
+}
+#add_note input:focus + .status_slider {
+    box-shadow: 0 0 1px #41b314;
+}
+#add_note input:checked + .status_slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+/* Rounded sliders */
+#add_note .status_slider.round {
+    border-radius: 34px;
+}
+#add_note .status_slider.round:before {
+    border-radius: 50%;
+}
+/* Hiding the checkbox, but allowing it to be focused */
+#add_note .badgebox {
+  opacity: 0;
+}
+#add_note .badgebox + .badge {
+  /* Move the check mark away when unchecked */
+  text-indent: -999999px;
+  /* Makes the badge's width stay the same checked and unchecked */
+    width: 27px;
+}
+#add_note .badgebox:focus + .badge {
+  /* Set something to make the badge looks focused */
+  /* This really depends on the application, in my case it was: */
+
+  /* Adding a light border */
+  box-shadow: inset 0px 0px 5px;
+  /* Taking the difference out of the padding */
+}
+#add_note .badgebox:checked + .badge {
+  /* Move the check mark back when checked */
+    text-indent: 0;
+}
+#add_note .btn-group-sm > .btn, .btn-sm {
+  padding: 2px 10px;
+  margin-bottom: 5px;
+}
+#add_note .ul_note_create {
+    margin-bottom: 0px;
+}
+#add_note .right .list-inline a {
+    color:#686B71;
+}
+/* END ADD NOTE */
+
+/****** END NOTE ******/
+
+
+/****** DEPOSIT ******/
+
+/* ADD DEPOSIT */
+#add_deposit ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#add_deposit .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#add_deposit .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#add_deposit .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#add_deposit .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#add_deposit .form-inline .input-group {
+    display: inline-table;
+    vertical-align: middle;
+}
+#add_deposit .todo-list > li.completed .controls{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+#add_deposit .profile-info {
+    padding: 0 20px;
+    margin: 0px 0;
+}
+#add_deposit .social-icons {
+    margin-bottom: 20px;
+}
+#add_deposit .text-center {
+    text-align: center;
+    margin-top: 35px;
+}
+#add_deposit input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="select"] {
+    max-width: 100%;
+    min-width: 100%;
+}
+/* END DEPOSIT */
+
+
+/* DELETE DEPOSIT */
+#delete_deposit ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#delete_deposit .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#delete_deposit .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#delete_deposit .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#delete_deposit .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#delete_deposit .todo-list > li.completed .controls{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+#delete_deposit .profile-info {
+    padding: -1 100px;
+    margin: 0px 0;
+}
+#delete_deposit .text-center {
+    text-align: center;
+    margin-top: 35px;
+}
+/* END DELETE DEPOSIT */
+
+
+/* DETAIL DEPOSIT */
+#detail_deposit ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#detail_deposit .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#detail_deposit .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#detail_deposit .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#detail_deposit .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#detail_deposit .todo-list > li.completed .controls{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+/* END DETAIL DEPOSIT */
+
+/* LIST DEPOSIT */
+#list_deposit .panel .table > thead > tr > td:first-child, .panel .table > thead > tr > th:first-child, .panel .table > tbody > tr > td:first-child, .panel .table > tbody > tr > th:first-child, .panel .table > tfoot > tr > td:first-child, .panel .table > tfoot > tr > th:first-child {
+    padding-left: 0px;
+    text-align: left;
+}
+#list_deposit .panel .table > thead > tr > td:last-child, .panel .table > thead > tr > th:last-child, .panel .table > tbody > tr > td:last-child, .panel .table > tbody > tr > th:last-child, .panel .table > tfoot > tr > td:last-child, .panel .table > tfoot > tr > th:last-child {
+    padding-left: 0px;
+    text-align: right;
+}
+#list_deposit .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 4px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+#list_deposit .panel {
+    min-height: 320px;
+}
+/* END LIST DEPOSIT */
+
+/* UPDATE DEPOSIT */
+#update_deposit ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#update_deposit .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#update_deposit .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#update_deposit .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#update_deposit .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#update_deposit .form-inline .input-group {
+    display: inline-table;
+    vertical-align: middle;
+}
+#update_deposit .todo-list > li.completed .controls{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+#update_deposit input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="select"] {
+    max-width: 100%;
+    min-width: 100%;
+}
+/* END UPDATE DEPOSIT */
+
+/****** END DEPOSIT ******/
+
+
+/****** DEBITS STYLES ******/
+
+/* ADD DEBIT */
+#add_debit ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#add_debit .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#add_debit .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#add_debit .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#add_debit .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#add_debit .todo-list > li.completed .controls{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+#add_debit input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="select"] {
+    max-width: 100%;
+    min-width: 100%;
+}
+/* END ADD DEBIT */
+
+/* DELETE DEBIT */
+#delete_debit ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#delete_debit .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#delete_debit .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#delete_debit .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#delete_debit .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#delete_debit .todo-list > li.completed .controls{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+/* END DELETE DEBIT */
+
+/* DETAIL DEBIT */
+
+#detail_debit ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#detail_debit .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#detail_debit .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#detail_debit .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#detail_debit .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#detail_debit .todo-list > li.completed .controls{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+
+/* END DETAIL DEBIT */
+
+/* LIST DEBIT */
+#list_debit .panel .table > thead > tr > td:first-child, .panel .table > thead > tr > th:first-child, .panel .table > tbody > tr > td:first-child, .panel .table > tbody > tr > th:first-child, .panel .table > tfoot > tr > td:first-child, .panel .table > tfoot > tr > th:first-child {
+    padding-left: 0px;
+    text-align: left;
+}
+
+#list_debit .panel .table > thead > tr > td:last-child, .panel .table > thead > tr > th:last-child, .panel .table > tbody > tr > td:last-child, .panel .table > tbody > tr > th:last-child, .panel .table > tfoot > tr > td:last-child, .panel .table > tfoot > tr > th:last-child {
+    padding-left: 0px;
+    text-align: right;
+}
+#list_debit .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 4px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+#list_debit .panel{
+    min-height: 320px;
+}
+/* END LIST DEBIT */
+
+
+/* UPDATE DEBIT */
+#update_debit ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#update_debit .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#update_debit .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#update_debit .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#update_debit .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#update_debit .todo-list > li.completed .controls{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+#update_debit input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="select"] {
+    max-width: 100%;
+    min-width: 100%;
+}
+/* END UPDATE DEBIT */
+
+/****** END DEBITS ******/
+
+
+/****** USER ******/
+
+/* CREATE USER */
+#create_user ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#create_user .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#create_user .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#create_user .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#create_user .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#create_user .todo-list > li.completed .controls{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+#create_user input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="select"] {
+    max-width: 100%;
+    min-width: 100%;
+}
+/* END CREATE USER */
+
+
+/* DETAIL PROFILE */
+#detail_profile ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#detail_profile .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#detail_profile .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#detail_profile .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#detail_profile .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#detail_profile .todo-list > li.completed .controls{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+/* END DETAIL PROFILE */
+
+
+/* UPDATE PROFILE */
+#update_profile ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#update_profile .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#update_profile .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#update_profile .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#update_profile .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#update_profile .todo-list > li.completed .controls{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+#update_profile input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="select"] {
+    max-width: 100%;
+    min-width: 100%;
+}
+/* END UPDATE PROFILE */
+
+
+/* UPDATE USER */
+#update_user ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#update_user .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#update_user .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#update_user .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#update_user .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#update_user .todo-list > li.completed .controls{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+#update_user input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="select"] {
+    max-width: 100%;
+    min-width: 100%;
+}
+/* END UPDATE USER */
+
+
+/* LIST USER */
+#list_user .panel .table > thead > tr > td:first-child, .panel .table > thead > tr > th:first-child, .panel .table > tbody > tr > td:first-child, .panel .table > tbody > tr > th:first-child, .panel .table > tfoot > tr > td:first-child, .panel .table > tfoot > tr > th:first-child {
+    padding-left: 0px;
+    text-align: left;
+}
+#list_user .panel .table > thead > tr > td:last-child, .panel .table > thead > tr > th:last-child, .panel .table > tbody > tr > td:last-child, .panel .table > tbody > tr > th:last-child, .panel .table > tfoot > tr > td:last-child, .panel .table > tfoot > tr > th:last-child {
+    padding-left: 0px;
+    text-align: right;
+}
+#list_user .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 4px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+#list_user .panel{
+    min-height: 320px;
+}
+/* END LIST USER */
+
+
+/* DELETE USER */
+#delete_user ol, ul {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#delete_user .todo-list > li p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 40px;
+}
+#delete_user .todo-list .controls {
+    float: right;
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    margin-top: -11px;
+}
+#delete_user .todo-list > li:first-child {
+    border-top: 1px solid #F0F0F0;
+}
+#delete_user .todo-list .short-description {
+    display: block;
+    margin-top: 0px;
+}
+#delete_user .todo-list > li.completed .controls{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+/* END DELETE USER */
+
+
+/****** END USER ******/
+
+
+/****** REGISTER ******/
+#confirm_reset_password {
+    margin-top:5%;
+}
+.create_account_register button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    background: transparent;
+    border: transparent;
+}
+.create_account_register {
+    font-size: 15px;
+}
+.create_account_register h1{
+    font-size: 50px;
+    color: white;
+}
+.create_account_register p{
+    color: white;
+    font-size: 20px;
+}
+.create_account_register .input-group{
+    margin-bottom:5px;
+}
+.create_account_register .alert {
+    padding: 15px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.create_account_register .alert-dismissible .close {
+    position: relative;
+    top: -2px;
+    right: -5px;
+    color: inherit;
+}
+
+#list_accounts .panel .table > thead > tr > td:first-child, .panel .table > thead > tr > th:first-child, .panel .table > tbody > tr > td:first-child, .panel .table > tbody > tr > th:first-child, .panel .table > tfoot > tr > td:first-child, .panel .table > tfoot > tr > th:first-child {
+    padding-left: 0px;
+    text-align: left;
+}
+
+#list_accounts .panel .table > thead > tr > td:last-child, .panel .table > thead > tr > th:last-child, .panel .table > tbody > tr > td:last-child, .panel .table > tbody > tr > th:last-child, .panel .table > tfoot > tr > td:last-child, .panel .table > tfoot > tr > th:last-child {
+    padding-left: 0px;
+    text-align: right;
+}
+#list_accounts .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 4px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+/****** END REGISTER ******/
