@@ -1349,34 +1349,27 @@ input[type="select"] {
 #confirm_reset_password {
     margin-top:5%;
 }
-.create_account_register button {
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    background: transparent;
-    border: transparent;
-}
-.create_account_register {
+#create_account_register {
     font-size: 15px;
 }
-.create_account_register h1{
+#create_account_register h1{
     font-size: 50px;
     color: white;
 }
-.create_account_register p{
+#create_account_register p{
     color: white;
     font-size: 20px;
 }
-.create_account_register .input-group{
+#create_account_register .input-group{
     margin-bottom:5px;
 }
-.create_account_register .alert {
+#create_account_register .alert {
     padding: 15px;
-    margin-bottom: 0px;
+    margin-bottom: 2px;
     border: 1px solid transparent;
     border-radius: 4px;
 }
-.create_account_register .alert-dismissible .close {
+#create_account_register .alert-dismissible .close {
     position: relative;
     top: -2px;
     right: -5px;

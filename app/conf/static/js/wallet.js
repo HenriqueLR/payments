@@ -2,7 +2,7 @@
 
 $(function() {
 	//CHECK EXISTS LIST-DEBIT
-	if($('#list-debit').length){
+	if($('#list_debit').length){
 		list_dict = [];
 		list_dict.push({"timePicker": false});
 		list_dict.push(get_locale({"format": "DD/MM/YYYY"}));
@@ -18,7 +18,7 @@ $(function() {
 	}
 
 	//CHECK EXISTS LIST-DEPOSIT
-	if($('#list-deposit').length){
+	if($('#list_deposit').length){
 		list_dict = [];
 		list_dict.push({"timePicker": false});
 		list_dict.push(get_locale({"format": "DD/MM/YYYY"}));

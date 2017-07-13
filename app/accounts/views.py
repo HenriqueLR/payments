@@ -38,25 +38,30 @@ class AccountView(View):
         form_account = AccountForm(self.request.POST or None)
 
         if form_profile.is_valid() and form_user.is_valid() and form_account.is_valid():
-            try:
-                profile = form_profile.save(commit=False)
-                user = form_user.save(profile=profile, commit=False)
-                user.account = form_account.save()
-                user.save()
-                profile.user = user
-                profile.order = Profile.ORDER_CHOICE[0][0]
-                profile.save()
+            profile = form_profile.save(commit=False)
+            user = form_user.save(profile=profile, commit=False)
+            user.account = form_account.save()
+            user.save()
 
-                account = AccountUtils(profile)
-                account.active_account(True)
-                account.add_user_group('customers')
-                account.save_account()
-                messages.info(self.request,'Cadastro criado com sucesso, aguarde para ser redirecionado '+\
-                              'para tela de pagamento ou clique')
+            profile.user = user
+            profile.order = Profile.ORDER_CHOICE[0][0]
+            profile.save()
+
+            account = AccountUtils(profile)
+            account.active_account(True)
+            account.add_user_group('customers')
+            account.save_account()
+
+            messages.info(self.request,'Cadastro criado com sucesso, aguarde para ser redirecionado '+\
+                          'para tela de pagamento ou clique')
+
+            try:
                 send_mail_confirm_account(profile)
-                return HttpResponseRedirect(self.success_url)
             except Exception as Error:
-                messages.error(self.request, Error)
+                pass
+
+            return HttpResponseRedirect(self.success_url)
+
         context = {'form_profile': form_profile, 'form_user': form_user,
                    'form_account': form_account}
         return render(self.request, self.template_name, context)

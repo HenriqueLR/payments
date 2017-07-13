@@ -21,48 +21,7 @@
 	</head>
 	<body background="{% static 'img/light.jpg' %}">
 
-		<div class='row' class="create_account_register">
-			<div class='col-md-8 col-md-offset-2' style='margin-top:40px;'>
-
-				{% include "messages.html" %}
-
-				{% if form_account.errors %}
-					<div class="alert alert-danger">
-						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-						<strong>Error: </strong>
-						{% for field, error in form_account.errors.items %}
-							{% if field != '__all__' %}{{ field }}{% endif %}
-							{{ error | striptags }}<br />
-						{% endfor %}
-					</div>
-				{% endif %}
-
-				{% if form_profile.errors %}
-					<div class="alert alert-danger">
-						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-						<strong>Error: </strong>
-						{% for field, error in form_profile.errors.items %}
-							{% if field != '__all__' %}{{ field }}{% endif %}
-							{{ error | striptags }}<br />
-						{% endfor %}
-					</div>
-				{% endif %}
-
-				{% if form_user.errors %}
-					<div class="alert alert-danger">
-						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-						<strong>Error: </strong>
-						{% for field, error in form_user.errors.items %}
-							{% if field != '__all__' %}{{ field }}{% endif %}
-							{{ error | striptags }}<br />
-						{% endfor %}
-					</div>
-				{% endif %}
-
-			</div>
-		</div>
-
-		<div class='row' class="create_account_register">
+		<div class='row' id="create_account_register">
 
 			<div class='col-md-4 col-md-offset-1' style='margin-top:10%;'>
 				<h1>Wallet</h1>
@@ -72,93 +31,135 @@
 
 			<div class='col-md-4'>
 
-				<form id='id_form_account' name='form_account' method='POST'>
+				<form id='id_form_account' name='form_account' method='POST' style="margin-bottom:50px;">
 				{% csrf_token %}
-					<div class='row'>
-
-						<div class='col-md-8 col-md-offset-2'>
-							<div class="text-center">
-								<h1>Cadastrar</h1>
+					<div class='col-md-8 col-md-offset-2'>
+						<div class="text-center">
+							<h1>Cadastrar</h1>
+						</div>
+						<div class='input-group {% if form_account.cpf.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-user fa-fw'></i>
 							</div>
-							<div class='input-group {% if form_account.cpf.errors %}has-error{% endif %}'>
-								<div class='input-group-addon'>
-									<i class='fa fa-user fa-fw'></i>
-								</div>
-								{{ form_account.cpf|placeholder:"Cpf" |addcss:"form-control" }}
+							{{ form_account.cpf|placeholder:"Cpf" |addcss:"form-control" }}
+						</div>
+
+						<div class='input-group {% if form_profile.first_name.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-id-card fa-fw'></i>
 							</div>
+							{{ form_profile.first_name|placeholder:"Nome" |addcss:"form-control" }}
+						</div>
 
-							<div class='input-group {% if form_profile.first_name.errors %}has-error{% endif %}'>
-								<div class='input-group-addon'>
-									<i class='fa fa-id-card fa-fw'></i>
-								</div>
-								{{ form_profile.first_name|placeholder:"Nome" |addcss:"form-control" }}
+						<div class='input-group {% if form_profile.last_name.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-id-card fa-fw'></i>
 							</div>
+							{{ form_profile.last_name|placeholder:"Sobrenome" |addcss:"form-control" }}
+						</div>
 
-							<div class='input-group {% if form_profile.last_name.errors %}has-error{% endif %}'>
-								<div class='input-group-addon'>
-									<i class='fa fa-id-card fa-fw'></i>
-								</div>
-								{{ form_profile.last_name|placeholder:"Sobrenome" |addcss:"form-control" }}
+						<div class='input-group {% if form_user.email.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-envelope fa-fw'></i>
 							</div>
+							{{ form_user.email|addcss:"form-control" }}
+						</div>
 
-							<div class='input-group {% if form_user.email.errors %}has-error{% endif %}'>
-								<div class='input-group-addon'>
-									<i class='fa fa-envelope fa-fw'></i>
-								</div>
-								{{ form_user.email|addcss:"form-control" }}
+						<div class='input-group {% if form_profile.birthday.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-birthday-cake fa-fw'></i>
 							</div>
+							{{ form_profile.birthday|addcss:"form-control" }}
+						</div>
 
-							<div class='input-group {% if form_profile.birthday.errors %}has-error{% endif %}'>
-								<div class='input-group-addon'>
-									<i class='fa fa-birthday-cake fa-fw'></i>
-								</div>
-								{{ form_profile.birthday|addcss:"form-control" }}
+						<div class='input-group {% if form_profile.state.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-map-marker fa-fw'></i>
 							</div>
+							{{ form_profile.state|addcss:"form-control" }}
+						</div>
 
-							<div class='input-group {% if form_profile.state.errors %}has-error{% endif %}'>
-								<div class='input-group-addon'>
-									<i class='fa fa-map-marker fa-fw'></i>
-								</div>
-								{{ form_profile.state|addcss:"form-control" }}
+						<div class='input-group {% if form_profile.url.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-bookmark fa-fw'></i>
 							</div>
+							{{ form_profile.url|placeholder:"Site / Rede Social" |addcss:"form-control" }}
+						</div>
 
-							<div class='input-group {% if form_profile.url.errors %}has-error{% endif %}'>
-								<div class='input-group-addon'>
-									<i class='fa fa-bookmark fa-fw'></i>
-								</div>
-								{{ form_profile.url|placeholder:"Site / Rede Social" |addcss:"form-control" }}
+						<div class='input-group {% if form_user.password1.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-key fa-fw'></i>
 							</div>
+							{{ form_user.password1|placeholder:"password" |addcss:"form-control" }}
+						</div>
 
-							<div class='input-group {% if form_user.password1.errors %}has-error{% endif %}'>
-								<div class='input-group-addon'>
-									<i class='fa fa-key fa-fw'></i>
-								</div>
-								{{ form_user.password1|placeholder:"password" |addcss:"form-control" }}
+						<div class='input-group {% if form_user.password2.errors %}has-error{% endif %}'>
+							<div class='input-group-addon'>
+								<i class='fa fa-lock fa-fw'></i>
 							</div>
+							{{ form_user.password2|placeholder:"Repeat password" |addcss:"form-control" }}
+						</div>
 
-							<div class='input-group {% if form_user.password2.errors %}has-error{% endif %}'>
-								<div class='input-group-addon'>
-									<i class='fa fa-lock fa-fw'></i>
-								</div>
-								{{ form_user.password2|placeholder:"Repeat password" |addcss:"form-control" }}
-							</div>
-
-							<div class="text-center" style='margin-top:20px;'>
-								<button class='btn btn-danger' type='submit' name='create_account' id='id_create_account'>
-									Criar Conta
-								</button>
-								<a class='btn btn-primary' href="{% url 'accounts:login' %}" name='login' id='id_login'>
-									Fazer Login
-								</a>
-							</div>
-
-						</div><!-- END COL-MD-8 -->
-
-					</div><!-- END ROW -->
+						<div class="text-center" style='margin-top:20px;'>
+							<button class='btn btn-danger' type='submit' name='create_account' id='id_create_account'>
+								Criar Conta
+							</button>
+							<a class='btn btn-primary' href="{% url 'accounts:login' %}" name='login' id='id_login'>
+								Fazer Login
+							</a>
+						</div>
+					</div><!-- END COL-MD-8 -->
 
 				</form>
 			</div><!-- END COL-MD-4 -->
 
+
+			<div class="col-md-3" style="margin-top:7.7%;right:80px;">
+				{% if messages %}
+					{% for message in messages %}
+						<div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>{{ message.tags }}:</strong> {{ message }}
+							{% if message.tags == "info" %}<a href='/main/payment/' target="_blank"> aqui</a>{% endif %}.
+						</div>
+					{% endfor %}
+				{% endif %}
+
+				{% if form_account.errors %}
+					<div class="alert alert-danger account">
+						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+						<strong>Error: </strong>
+						{% for field, error in form_account.errors.items %}
+							{% if field != '__all__' %}{{ field }}{% endif %}
+							{{ error | striptags }}<br>
+						{% endfor %}
+					</div>
+				{% endif %}
+
+				{% if form_profile.errors %}
+					<div class="alert alert-danger profile">
+						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+						<strong>Error: </strong>
+						{% for field, error in form_profile.errors.items %}
+							{% if field != '__all__' %}{{ field }}{% endif %}
+							{{ error | striptags }}<br>
+						{% endfor %}
+					</div>
+				{% endif %}
+
+				{% if form_user.errors %}
+					<div class="alert alert-danger user">
+						<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+						<strong>Error: </strong>
+						{% for field, error in form_user.errors.items %}
+							{% if field != '__all__' %}{{ field }}{% endif %}
+							{{ error | striptags }}<br>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
 		</div><!-- END ROW -->
 
 		<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
@@ -227,7 +228,7 @@
 				if($('.alert-info').length){
 					setTimeout(function(){
 						open_window_payment();
-					}, 7000);
+					}, 6000);
 				}
 
 				//CHECK EXIST NOTE
