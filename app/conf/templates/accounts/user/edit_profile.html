@@ -94,7 +94,6 @@
 												{{ form_profile.description|textarea:"7" |addcss:"form-control" }}
 											</div>
 											<span class="error text-danger">{{ form_profile.description.errors|join:"<br \>" }}</span>
-
 											<a onclick="get_form_password('{% url 'accounts:edit_password' %}');" class='col-sm-10 col-sm-offset-2' href="#" data-toggle="modal" data-target=".bs-example-modal-static">
 												<i class='fa fa-lock fa-fw'></i> * Editar Senha
 											</a>

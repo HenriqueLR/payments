@@ -17,4 +17,5 @@ urlpatterns = patterns('',
     url(r'^list_user/$','accounts.views.list_user',name='list_user'),
     url(r'^edit_user/(?P<pk>\d+)$','accounts.views.edit_user',name='edit_user'),
     url(r'^delete_user/(?P<pk>\d+)$','accounts.views.delete_user', name='delete_user'),
+    url(r'^edit_password_user/(?P<pk>\d+)$','accounts.views.edit_password_user',name='edit_password_user'),
 )

@@ -98,7 +98,7 @@ def edit_user(request, pk):
         form_user.save(profile=form_profile.save())
         messages.success(request, 'Os dados da sua conta foram alterados com sucesso')
     context = {'form_profile':form_profile, 'form_user':form_user, 'object_name':'User',
-               'apps':apps_permissions(request),'label_app':'Accounts',}
+               'apps':apps_permissions(request),'label_app':'Accounts', 'object':user}
     return render(request, template_name, context)
 
 
@@ -145,7 +145,6 @@ def active_account(request, pk):
 @ajax_required
 def edit_password(request):
     template_name = 'accounts/user/edit_password.html'
-    context = {}
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
@@ -155,7 +154,27 @@ def edit_password(request):
             return HttpResponse('ok')
     else:
         form = PasswordChangeForm(user=request.user)
-    context['form'] = form
+    context = {"form": form}
+    return render_to_response(template_name, context, context_instance=RequestContext(request))
+
+
+@login_required
+@ajax_required
+@user_passes_test(lambda u: u.groups.filter(name='customers').exists(),
+                                            login_url='accounts:logout')
+def edit_password_user(request, pk):
+    template_name = 'accounts/user/edit_password_user.html'
+    user = get_object_or_404(User, pk=pk, account=request.user.account)
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Senha alterada com sucesso')
+            update_session_auth_hash(request, form.user)
+            return HttpResponse('ok')
+    else:
+        form = PasswordChangeForm(user=user)
+    context = {"object":user, "form": form}
     return render_to_response(template_name, context, context_instance=RequestContext(request))
 
 

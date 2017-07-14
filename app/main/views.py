@@ -27,6 +27,7 @@ def home(request):
 
 
 @login_required
+@ajax_required
 def graphics(request):
 	if request.method == 'GET':
 		list_graphics = []
