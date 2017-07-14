@@ -14,7 +14,6 @@ class PermissionsGeralMixin(object):
 
     @classmethod
     def as_view(cls):
-        print cls
         return login_required(super(PermissionsGeralMixin, cls).as_view())
 
     @method_decorator(never_cache)
@@ -31,7 +30,7 @@ class PermissionsGeralMixin(object):
 class PermissionsNoteMixin(PermissionsGeralMixin):
 
     def get_queryset(self):
-        qs = self.model.objects.list_notes(self.request.user)
+        qs = self.model.objects.list_notes(self.request.user).order_by('-date_note')
 
         date = self.request.GET.get('date', '')
         if date != '':
@@ -60,13 +59,13 @@ class PermissionsNoteMixin(PermissionsGeralMixin):
 class PermissionsDebitMixin(PermissionsGeralMixin):
 
     def get_queryset(self):
-        qs = self.model.objects.list_debits(self.request.user)
+        qs = self.model.objects.list_debits(self.request.user).order_by('-date_releases')
 
         date = self.request.GET.get('date', '')
         if date != '':
             range_date = date.split('-')
             date_start, date_end = format_date(range_date[0], range_date[1])
-            qs = qs.filter(created_at__gte=date_start, created_at__lte=date_end)
+            qs = qs.filter(date_releases__gte=date_start, date_releases__lte=date_end)
 
         return qs
 
@@ -81,13 +80,13 @@ class PermissionsDebitMixin(PermissionsGeralMixin):
 class PermissionsDepositMixin(PermissionsGeralMixin):
 
     def get_queryset(self):
-        qs = self.model.objects.list_deposits(self.request.user)
+        qs = self.model.objects.list_deposits(self.request.user).order_by('-date_releases')
 
         date = self.request.GET.get('date', '')
         if date != '':
             range_date = date.split('-')
             date_start, date_end = format_date(range_date[0], range_date[1])
-            qs = qs.filter(created_at__gte=date_start, created_at__lte=date_end)
+            qs = qs.filter(date_releases__gte=date_start, date_releases__lte=date_end)
 
         return qs
 
