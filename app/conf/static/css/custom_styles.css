@@ -1041,7 +1041,6 @@ input[type="select"] {
 /* END DELETE DEBIT */
 
 /* DETAIL DEBIT */
-
 #detail_debit ol, ul {
     margin-top: 0;
     margin-bottom: 20px;
@@ -1072,20 +1071,34 @@ input[type="select"] {
     cursor: default;
     opacity: 0.4;
 }
-
 /* END DETAIL DEBIT */
 
 /* LIST DEBIT */
-#list_debit .panel .table > thead > tr > td:first-child, .panel .table > thead > tr > th:first-child, .panel .table > tbody > tr > td:first-child, .panel .table > tbody > tr > th:first-child, .panel .table > tfoot > tr > td:first-child, .panel .table > tfoot > tr > th:first-child {
+#list_debit .panel .table > thead > tr > td:first-child,
+.panel .table > thead > tr > th:first-child,
+.panel .table > tbody > tr > td:first-child,
+.panel .table > tbody > tr > th:first-child,
+.panel .table > tfoot > tr > td:first-child,
+.panel .table > tfoot > tr > th:first-child {
     padding-left: 0px;
     text-align: left;
 }
 
-#list_debit .panel .table > thead > tr > td:last-child, .panel .table > thead > tr > th:last-child, .panel .table > tbody > tr > td:last-child, .panel .table > tbody > tr > th:last-child, .panel .table > tfoot > tr > td:last-child, .panel .table > tfoot > tr > th:last-child {
+#list_debit .panel .table > thead > tr > td:last-child,
+.panel .table > thead > tr > th:last-child,
+.panel .table > tbody > tr > td:last-child,
+.panel .table > tbody > tr > th:last-child,
+.panel .table > tfoot > tr > td:last-child,
+.panel .table > tfoot > tr > th:last-child {
     padding-left: 0px;
     text-align: right;
 }
-#list_debit .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+#list_debit .table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
     padding: 4px;
     line-height: 1.42857143;
     vertical-align: top;
