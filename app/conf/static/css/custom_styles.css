@@ -1297,6 +1297,83 @@ input[type="select"] {
     max-width: 100%;
     min-width: 100%;
 }
+
+
+#update_user .switch{
+  position: relative;
+  display: block;
+  width: 48px;
+  height: 23px;
+}
+/* Hide default HTML checkbox */
+#update_user .switch input{display:none;}
+/* The slider */
+#update_user .slider{
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+#update_user .slider:before{
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 1px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+#update_user input:checked + .slider {
+    background-color: #2196F3;
+}
+#update_user input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+#update_user input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+#update_user .slider.round {
+    border-radius: 34px;
+}
+#update_user .slider.round:before {
+    border-radius: 50%;
+}
+/* Hiding the checkbox, but allowing it to be focused */
+#update_user .badgebox {
+  opacity: 0;
+}
+#update_user .badgebox + .badge {
+  /* Move the check mark away when unchecked */
+  text-indent: -999999px;
+  /* Makes the badge's width stay the same checked and unchecked */
+    width: 27px;
+}
+#update_user .badgebox:focus + .badge {
+  /* Set something to make the badge looks focused */
+  /* This really depends on the application, in my case it was: */
+
+  /* Adding a light border */
+  box-shadow: inset 0px 0px 5px;
+  /* Taking the difference out of the padding */
+}
+#update_user .badgebox:checked + .badge {
+  /* Move the check mark back when checked */
+    text-indent: 0;
+}
+#update_user .ul_user_edit {
+    margin-bottom: 0px;
+    margin-top: 15px;
+}
+
 /* END UPDATE USER */
 
 

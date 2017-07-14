@@ -40,7 +40,7 @@ class EditUserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['email']
+        fields = ['email', 'is_active']
         widgets = {
             'email':forms.TextInput(attrs = {'placeholder': 'Email'}),
         }
