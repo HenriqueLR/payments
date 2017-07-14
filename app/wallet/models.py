@@ -163,7 +163,7 @@ class Note(models.Model):
     author = models.CharField(verbose_name=u'Autor', db_column='author', max_length=30, null=False, blank=False)
     status_alert = models.BooleanField(verbose_name=u'Status Alert', default=False, db_column='status_alert')
     status_note = models.BooleanField(verbose_name=u'Status Note', default=True, db_column='status_note')
-    description = models.TextField(db_column='description', blank=True, null=True, verbose_name=u'Descricao')
+    description = models.TextField(db_column='description', blank=False, null=False, verbose_name=u'Descricao')
     date_note = models.DateTimeField(verbose_name=u'Data da Nota', db_column='date_note')
     created_at = models.DateTimeField(verbose_name=u'Data de criação', auto_now_add=True, db_column='date_created')
     updated_at = models.DateTimeField(verbose_name=u'Atualizado em', auto_now=True, db_column='updated_at')
