@@ -29,7 +29,7 @@ class AccountView(View):
 
     def get(self, request):
         context = {'form_profile': ProfileForm, 'form_user': AddUserForm,
-                   'form_account': AccountForm}
+                   'form_account': AccountForm, 'url_payment': reverse_lazy('main:payment')}
         return render(self.request, self.template_name, context)
 
     def post(self, request):
@@ -63,7 +63,7 @@ class AccountView(View):
             return HttpResponseRedirect(self.success_url)
 
         context = {'form_profile': form_profile, 'form_user': form_user,
-                   'form_account': form_account}
+                   'form_account': form_account, 'url_payment': reverse_lazy('main:payment')}
         return render(self.request, self.template_name, context)
 
 
@@ -235,16 +235,12 @@ def create_user(request):
 @ajax_required
 def reset_password(request):
     template_name = 'accounts/auth/reset_password.html'
-    context = {}
     form = PasswordResetForm(request.POST or None)
     if form.is_valid():
-        try:
-            form.save()
-            messages.success(request, 'Entre no seu e-mail, e confirme o link para resetar a sua senha')
-        except Exception as Error:
-            messages.error(request, 'Tente novamente por favor, ocorreu um erro ao enviar o e-mail de confirmação')
+        form.save()
+        messages.success(request, 'Entre no seu e-mail, e confirme o link para resetar a sua senha')
         return HttpResponse('ok')
-    context['form'] = form
+    context = {'form':form}
     return render(request, template_name, context)
 
 

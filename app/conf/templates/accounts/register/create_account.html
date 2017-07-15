@@ -31,7 +31,7 @@
 
 			<div class='col-md-4'>
 
-				<form id='id_form_account' name='form_account' method='POST' style="margin-bottom:50px;">
+				<form url-payment='{{ url_payment }}' class='accounts-user' id='id_form_account' name='form_account' method='POST' style="margin-bottom:50px;">
 				{% csrf_token %}
 					<div class='col-md-8 col-md-offset-2'>
 						<div class="text-center">
@@ -122,7 +122,7 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 							<strong>{{ message.tags }}:</strong> {{ message }}
-							{% if message.tags == "info" %}<a href='/main/payment/' target="_blank"> aqui</a>{% endif %}.
+							{% if message.tags == "info" %}<a href='{{ url_payment }}' target="_blank"> aqui</a>{% endif %}.
 						</div>
 					{% endfor %}
 				{% endif %}
@@ -166,81 +166,8 @@
 		<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 		<script src="{% static 'js/libs/moment.min.js' %}"></script>
 		<script src="{% static 'js/libs/daterangepicker.js' %}"></script>
-
-		<script type="text/javascript">
-
-			//SUCCESS CREATE ACCOUNT REDIRECT PGSEGURO
-			function open_window_payment(){
-				window.open('/main/payment/', '_blank');
-			}
-
-			//GET CONFIG DATAPICKER
-			function get_config_datapicker(list_dict){
-				context = {
-					"ranges": {
-					'Today': [moment(), moment()],
-					'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-					'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-					'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-					'This Month': [moment().startOf('month'), moment().endOf('month')],
-					'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-					},
-					"linkedCalendars": false,
-					"opens": "right",
-				}
-
-				$.each(list_dict, function(key, value) {
-					$.extend(context, value);
-				});
-				return context;
-
-			}//END FUNCTION
-
-			//GET LOCALE
-			function get_locale(format_date){
-				locale = {
-					"locale": {
-					"separator": " - ",
-					"applyLabel": "Apply",
-					"cancelLabel": "Cancel",
-					"fromLabel": "From",
-					"toLabel": "To",
-					"customRangeLabel": "Custom",
-					"weekLabel": "W",
-					"daysOfWeek": ["Su","Mo","Tu","We","Th","Fr","Sa"],
-					"monthNames": ["January","February","March","April","May","June","July",
-					"August","September","October","November","December"],
-					"firstDay": 1},
-				}
-				if(format_date){
-					$.extend(locale["locale"], format_date);
-				}
-				return locale;
-			}//END FUNCTION
-
-			$(function(){
-				//DISABLE BUTTON SUBMIT FORM
-				$("#id_form_account").submit(function(e){
-					$('#id_create_account').attr("disabled", true);
-				});
-
-				//AUTOMATIC OPEN WINDOW PAYMENT
-				if($('.alert-info').length){
-					setTimeout(function(){
-						open_window_payment();
-					}, 3500);
-				}
-
-				//CHECK EXIST NOTE
-				if($('#id_birthday')){
-					list_dict = [];
-					list_dict.push({"singleDatePicker": true,"timePicker": false});
-					list_dict.push(get_locale({"format": "DD/MM/YYYY"}));
-					$('input[name="birthday"]').daterangepicker(get_config_datapicker(list_dict));
-				}
-			});
-
-		</script>
+		<script src="{% static 'js/custom_app.js' %}"></script>
+		<script src="{% static 'js/accounts.js' %}"></script>
 
 	</body>
 </html>

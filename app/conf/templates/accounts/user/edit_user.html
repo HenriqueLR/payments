@@ -30,7 +30,7 @@
 						<div class='col-md-12'>
 							<div class="profile-detail">
 
-								<form name='edit_user' method='POST'>
+								<form name='edit_user' method='POST' class="include-password accounts-user">
 									{% csrf_token %}
 									<div class='row'>
 										<div class='col-md-4 col-md-offset-2'>
@@ -106,7 +106,7 @@
 													</div>
 												</li>
 												<li>
-													<a onclick="get_form_password('{% url 'accounts:edit_password_user' object.pk %}');" class='col-sm-12' href="#" data-toggle="modal" data-target=".bs-example-modal-static">
+													<a url-form="{% url 'accounts:edit_password_user' object.pk %}" class='col-sm-12 form-password' href="#" data-toggle="modal" data-target=".bs-example-modal-static">
 														<i class='fa fa-lock fa-fw'></i> * Editar Senha
 													</a>
 												</li>
@@ -141,15 +141,7 @@
 	<div class="modal fade bs-example-modal-static" tabindex="-1" role="dialog" data-backdrop="static">
 	<div class="modal-dialog">
 	  <div class="modal-content">
-
-	    <div class="modal-header">
-	      <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><i style="font-size:15px;" class='lnr lnr-cross'></i></button>
-	      <h4 class="modal-title">Editar Senha</h4>
-	    </div>
-
-	    <div class="modal-body">
-	    	<div id="modal_edit_password"></div>
-	    </div><!--modal-body-->
+	  	<div id="modal_edit_password"></div>
 	  </div><!--modal-content-->
 	</div><!--modal-dialog-->
 	</div><!--modal-->
@@ -160,47 +152,5 @@
 {% block extra_scripts %}
 	<script src="{% static 'js/libs/moment.min.js' %}"></script>
 	<script src="{% static 'js/libs/daterangepicker.js' %}"></script>
-	<script src="{% static 'js/profile.js' %}"></script>
-
-	<script type="text/javascript">
-		function get_form_password(url){
-		  $.ajax({
-		    type: 'get',
-		    url: url,
-		    success: function(data) {
-		        $("#modal_edit_password").replaceWith(data);
-		    },
-		    error: function (data) {
-		        $("#modal_edit_password").html("Error");
-		      },
-
-		  });
-		  return false;
-		}
-
-		function submit_password(url){
-		  $('#id_edit_password').prop('disabled', true);
-		  $form=$('#form_edit_password_user');
-
-		  var datastring = $form.serialize();
-		  $.ajax({
-		    type: 'post',
-		    url: url,
-		    data : datastring,
-
-		    success: function(data) {
-		      if (data == 'ok'){
-		        window.location.href = '/accounts/edit_user/'+{{ object.pk }};
-		      }else{
-		        $("#modal_edit_password").replaceWith(data);}
-		    },
-
-		    error: function (data) {
-		        $("#modal_edit_password").html("Error");
-		      },
-
-		  });
-		  return false;
-		}
-	</script>
+	<script src="{% static 'js/accounts.js' %}"></script>
 {% endblock %}

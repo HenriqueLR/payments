@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load formtags %}
+
 <!doctype html>
 <html lang="pt-br" class="fullscreen-bg">
 
@@ -29,7 +30,7 @@
 
     <body>
         <!-- WRAPPER -->
-        <div id="wrapper">
+        <div id="wrapper" class="login-row">
             <div class="vertical-align-wrap">
                 <div class="vertical-align-middle">
                     <div class="auth-box ">
@@ -44,7 +45,7 @@
 
                                 {% include "messages.html" %}
 
-                                <form class="form-auth-small" method="POST">
+                                <form id="login-form" class="form-auth-small" method="POST">
                                 {% csrf_token %}
                                     <div class="form-group {% if form.username.errors %}has-error{% endif %}">
                                         <label for="id_username" class="control-label sr-only">Email</label>
@@ -67,7 +68,7 @@
                                     <a href="{% url 'accounts:create_account' %}" class="btn btn-danger btn-block">Criar Conta</a>
 
                                     <div class="bottom">
-                                        <span class="helper-text"><i style='color: #d9534f;' class="fa fa-lock"></i> <a onclick="get_form_password('{% url 'accounts:reset_password' %}');" href="#" data-toggle="modal" data-target=".bs-example-modal-static"> Recuperar Senha</a></span>
+                                        <span class="helper-text"><i style='color: #d9534f;' class="fa fa-lock"></i> <a url-form="{% url 'accounts:reset_password' %}" class="recovery_password" href="#" data-toggle="modal" data-target=".bs-example-modal-static"> Recuperar Senha</a></span>
                                     </div>
                                 </form>
                             </div>
@@ -84,15 +85,7 @@
         <div class="modal fade bs-example-modal-static" tabindex="-1" role="dialog" data-backdrop="static">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
-
-                    <div class="modal-header">
-                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><i style="font-size:15px;" class='lnr lnr-cross'></i></button>
-                        <h4 class="modal-title">Recuperar Senha</h4>
-                    </div>
-
-                    <div class="modal-body">
-                        <div id="modal_recovery_password"></div>
-                    </div><!--modal-body-->
+                    <div id="modal_recovery_password"></div>
                 </div><!--modal-content-->
             </div><!--modal-dialog-->
         </div><!--modal-->
@@ -101,49 +94,9 @@
         <!-- JS -->
         <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
         <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/libs/remember.js' %}"></script>
+        <script src="{% static 'js/custom_app.js' %}"></script>
+        <script src="{% static 'js/login.js' %}"></script>
         <!-- END JS -->
-
-        <script type="text/javascript">
-            function get_form_password(url){
-                $.ajax({
-                    type: 'get',
-                    url: url,
-                    success: function(data) {
-                        $("#modal_recovery_password").replaceWith(data);
-                    },
-                    error: function (data) {
-                        msg = '<div class="alert alert-danger"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>Error: </strong> Contate o Administrador o sistema.</div><div class="text-center"><button aria-hidden="true" data-dismiss="modal" class="btn btn-danger" type="button">Close</button></div>';
-                        $("#modal_recovery_password").html(msg);
-                    },
-                });
-                return false;
-            }
-
-            function submit_password(url){
-                $('#id_reset_password').prop('disabled', true);
-                $form=$('#reset_password');
-
-                var datastring = $form.serialize();
-                $.ajax({
-                    type: 'post',
-                    url: url,
-                    data : datastring,
-
-                    success: function(data) {
-                        if (data == 'ok'){
-                            window.location.href = '/accounts/sign_in/';
-                        }else{
-                            $("#modal_recovery_password").replaceWith(data);}
-                        },
-                    error: function (data) {
-                        msg = '<div class="alert alert-danger"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>Error: </strong> Contate o Administrador o sistema.</div><div class="text-center"><button aria-hidden="true" data-dismiss="modal" class="btn btn-danger" type="button">Close</button></div>';
-                        $("#modal_recovery_password").html(msg);
-                    },
-                });
-                return false;
-            }
-        </script>
 
     </body>
 </html>
