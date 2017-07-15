@@ -146,7 +146,7 @@ def active_account(request, pk):
 def edit_password(request):
     template_name = 'accounts/user/edit_password.html'
     if request.method == 'POST':
-        form = PasswordChangeForm(data=request.POST, user=request.user)
+        form = PasswordChangeForm(data=request.POST or None, user=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, 'Senha alterada com sucesso')
@@ -166,14 +166,14 @@ def edit_password_user(request, pk):
     template_name = 'accounts/user/edit_password_user.html'
     user = get_object_or_404(User, pk=pk, account=request.user.account)
     if request.method == 'POST':
-        form = PasswordChangeForm(data=request.POST, user=user)
+        form = SetPasswordForm(user=user, data=request.POST or None)
         if form.is_valid():
             form.save()
             messages.success(request, 'Senha alterada com sucesso')
             update_session_auth_hash(request, form.user)
             return HttpResponse('ok')
     else:
-        form = PasswordChangeForm(user=user)
+        form = SetPasswordForm(user=user, data=request.POST or None)
     context = {"object":user, "form": form}
     return render_to_response(template_name, context, context_instance=RequestContext(request))
 
