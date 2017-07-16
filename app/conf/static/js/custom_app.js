@@ -61,6 +61,12 @@ var global_function = {
         list_dict.push(global_function.get_locale({"format": "DD/MM/YYYY"}));
         return global_function.get_config_datapicker(list_dict);
     },
+    get_custom_datetimepicker(date_format, dict){
+        list_dict = [];
+        list_dict.push(dict);
+        list_dict.push(global_function.get_locale({"format": date_format}));
+        return global_function.get_config_datapicker(list_dict);
+    },
     list_alerts_timeout:function(time){
         setTimeout(function(){global_function.list_alerts();},time);
     },

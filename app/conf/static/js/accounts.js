@@ -38,7 +38,9 @@ var user = {
 $(function() {
 	//SET DATE PLUGIN IN ADD - EDIT USER / PROFILE
 	if($('.accounts-user').length){
-		$('input[name="birthday"]').daterangepicker(global_function.get_single_date());
+		date_format = "DD/MM/YYYY"
+		dict = {"singleDatePicker": true, "timePicker": false, "showDropdowns": true}
+		$('input[name="birthday"]').daterangepicker(global_function.get_custom_datetimepicker(date_format, dict));
 	}
 
     //GET ADD FORM EDIT PASSWORD
