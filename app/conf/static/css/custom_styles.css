@@ -177,6 +177,9 @@ input[type="select"] {
     max-width: 100%;
     margin-bottom: 10px;
 }
+#payments table td, th {
+    text-align: left;
+}
 #payments .panel .table > thead > tr > td:first-child,
 .panel .table > thead > tr > th:first-child,
 .panel .table > tbody > tr > td:first-child,
@@ -184,7 +187,7 @@ input[type="select"] {
 .panel .table > tfoot > tr > td:first-child,
 .panel .table > tfoot > tr > th:first-child {
     padding-left: 0px;
-    text-align: left;
+    text-align: left !important;
 }
 #payments .panel .table > thead > tr > td:last-child,
 .panel .table > thead > tr > th:last-child,
@@ -193,7 +196,7 @@ input[type="select"] {
 .panel .table > tfoot > tr > td:last-child,
 .panel .table > tfoot > tr > th:last-child {
     padding-left: 0px;
-    text-align: right;
+    text-align: right !important;
 }
 #payments .table>tbody>tr>td,
 .table>tbody>tr>th,
@@ -203,7 +206,7 @@ input[type="select"] {
 .table>thead>tr>th {
     padding: 0px;
     line-height: 1.42857143;
-    vertical-align: top;
+    vertical-align: middle;
     border-top: 1px solid #ddd;
     font-size: 14px;
 }
@@ -905,18 +908,36 @@ input[type="select"] {
 /* END DETAIL DEPOSIT */
 
 /* LIST DEPOSIT */
-#list_deposit .panel .table > thead > tr > td:first-child, .panel .table > thead > tr > th:first-child, .panel .table > tbody > tr > td:first-child, .panel .table > tbody > tr > th:first-child, .panel .table > tfoot > tr > td:first-child, .panel .table > tfoot > tr > th:first-child {
-    padding-left: 0px;
+#list_deposit table td, th {
     text-align: left;
 }
-#list_deposit .panel .table > thead > tr > td:last-child, .panel .table > thead > tr > th:last-child, .panel .table > tbody > tr > td:last-child, .panel .table > tbody > tr > th:last-child, .panel .table > tfoot > tr > td:last-child, .panel .table > tfoot > tr > th:last-child {
+#list_deposit .panel .table > thead > tr > td:first-child,
+.panel .table > thead > tr > th:first-child,
+.panel .table > tbody > tr > td:first-child,
+.panel .table > tbody > tr > th:first-child,
+.panel .table > tfoot > tr > td:first-child,
+.panel .table > tfoot > tr > th:first-child {
     padding-left: 0px;
-    text-align: right;
+    text-align: left !important;
 }
-#list_deposit .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+#list_deposit .panel .table > thead > tr > td:last-child,
+.panel .table > thead > tr > th:last-child,
+.panel .table > tbody > tr > td:last-child,
+.panel .table > tbody > tr > th:last-child,
+.panel .table > tfoot > tr > td:last-child,
+.panel .table > tfoot > tr > th:last-child {
+    padding-left: 0px;
+    text-align: right !important;
+}
+#list_deposit .table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
     padding: 4px;
     line-height: 1.42857143;
-    vertical-align: top;
+    vertical-align: middle;
     border-top: 1px solid #ddd;
 }
 #list_deposit .panel {
@@ -1074,6 +1095,9 @@ input[type="select"] {
 /* END DETAIL DEBIT */
 
 /* LIST DEBIT */
+#list_debit table td, th {
+    text-align: left;
+}
 #list_debit .panel .table > thead > tr > td:first-child,
 .panel .table > thead > tr > th:first-child,
 .panel .table > tbody > tr > td:first-child,
@@ -1081,9 +1105,8 @@ input[type="select"] {
 .panel .table > tfoot > tr > td:first-child,
 .panel .table > tfoot > tr > th:first-child {
     padding-left: 0px;
-    text-align: left;
+    text-align: left !important;
 }
-
 #list_debit .panel .table > thead > tr > td:last-child,
 .panel .table > thead > tr > th:last-child,
 .panel .table > tbody > tr > td:last-child,
@@ -1091,7 +1114,7 @@ input[type="select"] {
 .panel .table > tfoot > tr > td:last-child,
 .panel .table > tfoot > tr > th:last-child {
     padding-left: 0px;
-    text-align: right;
+    text-align: right !important;
 }
 #list_debit .table>tbody>tr>td,
 .table>tbody>tr>th,
@@ -1101,10 +1124,10 @@ input[type="select"] {
 .table>thead>tr>th {
     padding: 4px;
     line-height: 1.42857143;
-    vertical-align: top;
+    vertical-align: middle;
     border-top: 1px solid #ddd;
 }
-#list_debit .panel{
+#list_debit .panel {
     min-height: 320px;
 }
 /* END LIST DEBIT */

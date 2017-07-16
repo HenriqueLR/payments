@@ -67,13 +67,13 @@
 											<tr>
 												<td class='clean-td'><i class='fa fa-minus text-danger'></i></td>
 												<td>{{ forloop.counter }}</td>
-												<td>{{ debit.origin }}</td>
-												<td>R$ {{ debit.value|decimal_to_real }}</td>
-												<td>{{ debit.date_releases | date:"d/m/Y H:i" }}</td>
-												<td>{{ debit.document }}</td>
-												<td>{{ debit.author }}</td>
-												<td>{{ debit.description }}</td>
-												<td class="actions">
+												<td style="width:240px;padding: 0px 10px 0px 0px;">{{ debit.origin }}</td>
+												<td style="width:120px;">R$ {{ debit.value|decimal_to_real }}</td>
+												<td style="width:140px;">{{ debit.date_releases | date:"d/m/Y H:i" }}</td>
+												<td style="width:100px;">{{ debit.document }}</td>
+												<td style="width:120px;">{{ debit.author }}</td>
+												<td style="width:235px;">{{ debit.description }}</td>
+												<td style="width:60px;" class="actions">
 													<a href="{{ debit.get_absolute_url }}"><i class="lnr lnr-pencil"></i></a>
 													<a href="{{ debit.get_delete_debit }}"><i class="lnr lnr-trash"></i></a>
 												</td>
