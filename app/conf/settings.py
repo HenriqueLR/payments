@@ -54,6 +54,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'conf.middleware.MenuLeft',
+    'conf.middleware.ForceDefaultLanguage',
 )
 
 EMAIL_BACKEND = "sgbackend.SendGridBackend"
@@ -87,7 +88,7 @@ LANGUAGES = (
 
 TIME_ZONE = 'America/Fortaleza'
 
-USE_I18N = False
+USE_I18N = True
 
 USE_L10N = True
 

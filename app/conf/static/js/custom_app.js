@@ -169,12 +169,13 @@ $(function(){
             }, 400);
         }
 
-        global_function.set_session_left_menu();
+        //UPDATE STATUS LOCAL STORAGE LEFT MENU
+        //global_function.set_session_left_menu();
         global_function.update_status_left_menu_session();
     });
 
-    //INIT STATUS LEFT MENU
-    global_function.left_menu_set_status();
+    //INIT STATUS LEFT MENU LOCAL STORAGE
+    //global_function.left_menu_set_status();
 
 
 });//END READY FUNCTIONS
