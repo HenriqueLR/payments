@@ -62,3 +62,10 @@ def alerts(request):
 									 date_note__gte=start_date, date_note__lte=end_date,
 									 status_note=True)
 		return render(request, template_name, {'alerts':alerts})
+
+
+@login_required
+@ajax_required
+def set_left_menu_session(request):
+	request.session["leftmenu"] = not request.session["leftmenu"]
+	return HttpResponse('ok')

@@ -61,7 +61,7 @@ var global_function = {
         list_dict.push(global_function.get_locale({"format": "DD/MM/YYYY"}));
         return global_function.get_config_datapicker(list_dict);
     },
-    get_custom_datetimepicker(date_format, dict){
+    get_custom_datetimepicker:function(date_format, dict){
         list_dict = [];
         list_dict.push(dict);
         list_dict.push(global_function.get_locale({"format": date_format}));
@@ -76,6 +76,21 @@ var global_function = {
 		    success: function(data){$("#alerts-nav-bar").html(data);},
 		    error: function (data){$("#alerts-nav-bar").html('Error');},
 		});
+    },
+    set_session_left_menu:function(){
+        if(Boolean(sessionStorage.getItem("layout-fullwidth"))){
+            sessionStorage.setItem("layout-fullwidth", "");
+        }else{sessionStorage.setItem("layout-fullwidth", "1");}
+    },
+    left_menu_set_status:function(){
+        if(!Boolean(sessionStorage.getItem("layout-fullwidth"))){
+            $('body').addClass('layout-fullwidth');
+        }else{
+            $('body').removeClass('layout-fullwidth');
+        }
+    },
+    update_status_left_menu_session:function(){
+        $.ajax({type: 'get', url: '/main/set_left_menu_session/'});
     },
 };//END GLOBAL FUNCTIONS
 
@@ -142,4 +157,24 @@ $(function(){
 	    $('#left-nav li > a').removeClass('active');
 	    $(this).addClass('active');
 	});
+
+    //CONTROLL ACTIONS OPEN MENU LEFT
+    $("#open-menu").click(function(event) {
+        event.preventDefault();
+
+        //RESIZE GRAPHIC IF EXISTS
+        if($("#overview").length){
+            setTimeout(function(){
+                graphics.adjust_graphic.call($('body'));
+            }, 400);
+        }
+
+        global_function.set_session_left_menu();
+        global_function.update_status_left_menu_session();
+    });
+
+    //INIT STATUS LEFT MENU
+    global_function.left_menu_set_status();
+
+
 });//END READY FUNCTIONS

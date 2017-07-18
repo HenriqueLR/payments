@@ -8,7 +8,7 @@ var releases = {
     list_debits:function(){
         $.ajax({type:'get', url:'/wallet/list_debit/',
             success:function(data){$("#context-debits").html(data);},
-            error:function (data){$("#context-debits").html("<h3>Não existem débitos cadastrados</h3>");},
+            error:function(data){$("#context-debits").html("<h3>Não existem débitos cadastrados</h3>");},
         });
     },
     list_deposits_timeout:function(time){
@@ -17,7 +17,7 @@ var releases = {
     list_deposits:function(){
         $.ajax({type:'get', url:'/wallet/list_deposit/',
             success:function(data){$("#context-deposits").html(data);},
-            error:function (data){$("#context-deposits").html("<h3>Não existem depósitos cadastrados</h3>");},
+            error:function(data){$("#context-deposits").html("<h3>Não existem depósitos cadastrados</h3>");},
         });
     },
     get_form_payment:function(url){
@@ -173,18 +173,33 @@ $(function(){
             // resizeEnd call function with pass context body
             graphics.adjust_graphic.call($('body'));}, 500);
     });
-
-    //RESIZE GRAPHIC CLICK OPEN MENU LEFT
-    $("#open-menu").click(function(event) {
-        event.preventDefault();
-        setTimeout(function(){
-            graphics.adjust_graphic.call($('body'));
-        }, 400);
-    });
 });//END GRAPHICS CONTROLL
 
 //HOME ACTION CONTROLL
 $(document).ready(function(){
+
+    $("#payments").bind("resize", function(){
+        console.log("OPA");
+    });
+
+    $(window).resize(function(){
+        $("#payments").resize();
+    });
+
+    $("#payments").on('resize,onresize,load,onload',function(){
+        console.log("aoakopakoa");
+    });
+
+    $("#payments").on('resize', function(size){
+        console.log("APOSFSOAPKF");
+        console.log(size.height);
+    });
+
+    $("#payments").bind('resize', function(){
+        console.log('resize');
+        return false;
+    });
+
     //CHECK EXISTS DIV NOTAS
     if($('#notes_home').length){
         //GET LIST NOTES

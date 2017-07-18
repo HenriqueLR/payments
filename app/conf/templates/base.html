@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load i18n %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -28,7 +29,7 @@
     {% block extra_styles %}{% endblock %}
   </head>
 
-  <body>
+  <body class="{% if request.session.leftmenu %}layout-fullwidth{% endif %}">
     <!-- WRAPPER -->
     <div id="wrapper">
       {% block navtop %}
@@ -48,7 +49,9 @@
             </div>-->
             <div class="navbar-btn">
               <button id='open-menu' type="button" class="btn-toggle-fullwidth">
-                <i class="lnr lnr-arrow-left-circle"></i>
+                <i class="{% if request.session.leftmenu %}lnr lnr-arrow-right-circle
+                          {% else %}lnr lnr-arrow-left-circle
+                          {% endif %}"></i>
               </button>
             </div>
             <div id="navbar-menu">

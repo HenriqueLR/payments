@@ -216,6 +216,9 @@ input[type="select"] {
 #payments .panel {
     min-height: 320px;
 }
+.force-min {
+   min-height: 400px !important;
+}
 #payments #debit-col {
     padding-right: 10px;
 }

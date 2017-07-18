@@ -26,7 +26,7 @@
                 {% for deposit in object_list %}
                     <tr>
                         <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
-                        <td>{{ forloop.counter }}</td>
+                        <td style="width:16px;">{{ forloop.counter }}</td>
                         <td style="width:110px;padding: 0px 10px 0px 0px;">{{ deposit.origin }}</td>
                         <td style="width:100px;">R$ {{ deposit.value|decimal_to_real }}</td>
                         <td style="width:130px;">{{ deposit.date_releases | date:"d/m/Y H:i" }}</td>

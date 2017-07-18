@@ -26,7 +26,7 @@
                 {% for debit in object_list %}
                     <tr>
                         <td class='clean-td'><i class='fa fa-minus text-danger'></i></td>
-                        <td>{{ forloop.counter }}</td>
+                        <td style="width:16px;">{{ forloop.counter }}</td>
                         <td style="width:110px;padding: 0px 10px 0px 0px;">{{ debit.origin }}</td>
                         <td style="width:100px;">R$ {{ debit.value|decimal_to_real }}</td>
                         <td style="width:130px;">{{ debit.date_releases | date:"d/m/Y H:i" }}</td>
