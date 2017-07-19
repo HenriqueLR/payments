@@ -12,14 +12,16 @@ var global_function = {
                 erro, tente novamente.</div></div>';
     },
     get_config_datapicker:function(list_dict){
-        context = {"ranges": {'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'),
-                           moment().subtract(1, 'month').endOf('month')]
-        },"linkedCalendars": false,"opens": "left",}
+        context = {'ranges':{'Hoje':[moment(), moment()],
+                   'Ontem':[moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                   'Últimos 7 dias':[moment().subtract(6, 'days'), moment()],
+                   'Últimos 30 dias':[moment().subtract(29, 'days'), moment()],
+                   'Este Mês':[moment().startOf('month'), moment().endOf('month')],
+                   'Último Mês':[moment().subtract(1, 'month').startOf('month'),
+                                 moment().subtract(1, 'month').endOf('month')]},
+                   'linkedCalendars':false, 'buttonClasses':'btn btn-sm','opens':'left',
+                   'applyClass':'btn-primary','cancelClass':'btn-danger',"autoApply":true
+        }
 
         $.each(list_dict,function(key, value){
             $.extend(context, value);
@@ -30,13 +32,13 @@ var global_function = {
     get_locale:function(format_date){
         locale = {
             "locale":{
-            "separator": " - ","applyLabel": "Apply",
-            "cancelLabel": "Cancel","fromLabel": "From",
-            "toLabel": "To","customRangeLabel": "Custom",
-            "weekLabel": "W","daysOfWeek": ["Su","Mo","Tu","We","Th","Fr","Sa"],
-            "monthNames": ["January","February","March","April",
-                           "May","June","July","August","September",
-                           "October","November","December"], "firstDay": 1},}
+            "separator": " - ","applyLabel": "<i class='fa fa-check'></i>",
+            "cancelLabel": "<i class='fa fa-times'></i>","fromLabel": "From",
+            "toLabel": "To","customRangeLabel": "Calendário",
+            "weekLabel": "W","daysOfWeek": ["Dom","Seg","Ter","Qua","Qui","Sex","Sab"],
+            "monthNames": ["Janeiro","Fevereiro","Março","Abril",
+                           "Maio","Junho","Julho","Agosto","Setembro",
+                           "Outubro","Novembro","Dezembro"], "firstDay": 1},}
         if(format_date){
             $.extend(locale["locale"], format_date);
         }

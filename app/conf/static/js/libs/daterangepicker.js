@@ -363,9 +363,12 @@
             this.container.find('.calendar-time').hide();
         }
 
+        /* CUSTOM MANUAL ACTIVE AUTOAPPLY SINGLE TIME DATE */
+        /*
         //can't be used together for now
         if (this.timePicker && this.autoApply)
             this.autoApply = false;
+        */
 
         if (this.autoApply && typeof options.ranges !== 'object') {
             this.container.find('.ranges').hide();
@@ -1353,9 +1356,10 @@
                 }
             }
 
+            /* CUSTOM ACTIVE AUTO APPLY SINGLE TIME DATE */
             if (this.singleDatePicker) {
                 this.setEndDate(this.startDate);
-                if (!this.timePicker)
+                if ((!this.timePicker) || (this.autoApply))
                     this.clickApply();
             }
 

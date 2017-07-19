@@ -2,6 +2,10 @@
 {% load staticfiles %}
 {% load formtags %}
 
+{% block extra_styles %}
+	<link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}">
+{% endblock %}
+
 {% block content %}
 	<div class="container-fluid">
 		<ol class="breadcrumb">
