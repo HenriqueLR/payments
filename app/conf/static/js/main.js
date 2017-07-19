@@ -177,29 +177,6 @@ $(function(){
 
 //HOME ACTION CONTROLL
 $(document).ready(function(){
-
-    $("#payments").bind("resize", function(){
-        console.log("OPA");
-    });
-
-    $(window).resize(function(){
-        $("#payments").resize();
-    });
-
-    $("#payments").on('resize,onresize,load,onload',function(){
-        console.log("aoakopakoa");
-    });
-
-    $("#payments").on('resize', function(size){
-        console.log("APOSFSOAPKF");
-        console.log(size.height);
-    });
-
-    $("#payments").bind('resize', function(){
-        console.log('resize');
-        return false;
-    });
-
     //CHECK EXISTS DIV NOTAS
     if($('#notes_home').length){
         //GET LIST NOTES
