@@ -9,7 +9,7 @@ class MenuLeft(object):
 	'''
 	def process_request(self, request):
 		if not request.session.has_key('leftmenu'):
-			request.session['leftmenu'] = False
+			request.session['leftmenu'] = True
 
 
 class ForceDefaultLanguage(object):
