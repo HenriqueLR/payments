@@ -172,6 +172,8 @@ input[type="select"] {
 #overview .lnr {
     font-size: 16px;
 }
+
+/*** DEPOSITS DASH ***/
 #payments .table {
     width: 100%;
     max-width: 100%;
@@ -216,16 +218,16 @@ input[type="select"] {
 #payments .panel {
     min-height: 320px;
 }
+#payments .clean-td {
+    border-style : hidden!important;
+    background-color: white;
+    width: 11px;
+}
+/****** END DEPOSITS DASH *******/
+
 .force-min {
    min-height: 400px !important;
 }
-#payments #debit-col {
-    padding-right: 10px;
-}
-#payments #deposit-col {
-    padding-left: 10px;
-}
-
 #notes_home .panel {
     min-height: 320px;
 }
