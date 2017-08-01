@@ -246,6 +246,10 @@ def update_status_note(request, pk):
     return HttpResponse("ok")
 
 
+def teste(request):
+    return HttpResponse("ok")
+
+
 delete_note = NoteDeleteView.as_view()
 detail_note = NoteDetailView.as_view()
 update_note = NoteUpdateView.as_view()

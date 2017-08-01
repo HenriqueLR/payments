@@ -25,4 +25,6 @@ urlpatterns = patterns('wallet.views',
 	url(r'^list_note/$', 'list_note', name='list_note'),
 	url(r'^add_note/$', 'add_note', name='add_note'),
 	url(r'^update_status_note/(?P<pk>\d+)$', 'update_status_note', name='update_status_note'),
+
+	url(r'^teste/$', 'teste', name='teste'),
 )

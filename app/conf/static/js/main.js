@@ -117,8 +117,8 @@ var graphics = {
             credits: {enabled: false},
             tooltip: {
                 formatter:function(){
-                    return '<b>' + this.point.series.name + '</b><br>Valor: <b>R$ '+
-                    Highcharts.numberFormat(this.point.y,2,',','.') + '</b><br>Data: '+
+                    return '<b>' + this.point.series.name + '</b><br>Valor: R$ '+
+                    Highcharts.numberFormat(this.point.y,2,',','.') + '<br>Data: '+
                     Highcharts.dateFormat('%d/%m/%Y', this.x*1000);
                 }
             },

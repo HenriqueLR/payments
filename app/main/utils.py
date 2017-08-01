@@ -154,5 +154,5 @@ def format_json_graphic(list_objects, name):
 	context = {'name':name, 'data': [],}
 	for obj in list_objects:
 		context['data'].append([time.mktime(obj['date'].timetuple()),
-								float(str(obj['total']))])
+								float(str(obj['total'])),])
 	return context
