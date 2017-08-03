@@ -263,6 +263,14 @@ $(document).ready(function() {
     if($("#overview").length) {
         //GET OVERVIEW
         graphics.get_overview_timeout(100);
+
+        //RESIZE GRAPH IN COLLAPSE EVENT BTN OVERVIEW
+        $('#overview').on('click', '.btn-toggle-collapse', function(event){
+            event.preventDefault();
+            setTimeout(function(){
+                graphics.adjust_graphic.call($('body'));
+            }, 400);
+        });
     }//END CHECK OVERLOAD
 
     //CONFIG CHARTS HOME
