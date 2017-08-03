@@ -9,15 +9,73 @@
 {% block content %}
     <div class="container-fluid" id="home">
         <ol class="breadcrumb">
-            <li class='active'><i class="fa fa-home fa-fw"></i> Inicio</li>
+            <li class='active'>
+                <i class="fa fa-home fa-fw"></i> Inicio
+            </li>
         </ol>
+        <div class='config-home'>
+          <a href="#" class='dropdown-btn'>
+            <i class="fa fa-cog"></i>
+          </a>
+          <div class="dropdown-menu-config">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-title">
+                        Configurar
+                    </div>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Totalizadores</label>
+                    <input name='overview' type='checkbox' checked />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Débitos</label>
+                    <input name='debit-col' type='checkbox' checked />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Depósitos</label>
+                    <input name='deposit-col' type='checkbox' checked />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Notas</label>
+                    <input name='notes_home' type='checkbox' checked />
+                </div>
+            </div>
+
+          </div>
+        </div>
         <!-- OVERVIEW -->
-        <div class="row" id="overview">
+        <div class="row customfade" id="overview">
             <div class="col-md-12">
                 <div class="panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">Totalizadores</h3>
+                        <div class="right">
+                            <ul class="list-inline">
+                                <li>
+                                    <button type="button" class="btn-toggle-collapse">
+                                        <i class="lnr lnr-chevron-up-circle"></i>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn-remove">
+                                        <i class="lnr lnr-cross-circle"></i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="panel-body">
 
@@ -72,7 +130,7 @@
 
         <!-- PAYMENTS -->
         <div class="row" id="payments">
-            <div class="col-md-12" id='debit-col'>
+            <div class="col-md-12 customfade" id='debit-col'>
                 <!-- TABLE STRIPED -->
                 <div class="panel">
                     <div class="panel-heading">
@@ -80,12 +138,17 @@
                         <div class="right">
                             <ul class="list-inline">
                                 <li><a class="add-form" data-toggle="modal" data-target=".bs-example-modal-static" href='#'>
-                                        <i style="font-size:16px;" class='lnr lnr-plus-circle'></i>
+                                        <i class='lnr lnr-plus-circle'></i>
                                     </a>
                                 </li>
                                 <li>
                                     <button type="button" class="btn-toggle-collapse">
                                         <i class="lnr lnr-chevron-up-circle"></i>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn-remove">
+                                        <i class="lnr lnr-cross-circle"></i>
                                     </button>
                                 </li>
                             </ul>
@@ -98,7 +161,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12" id='deposit-col'>
+            <div class="col-md-12 customfade" id='deposit-col'>
                 <!-- TABLE STRIPED -->
                 <div class="panel">
                     <div class="panel-heading">
@@ -106,11 +169,18 @@
                         <div class="right">
                             <ul class="list-inline">
                                 <li>
-                                    <a class="add-form" data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i style="font-size:16px;" class='lnr lnr-plus-circle'></i></a>
+                                    <a class="add-form" data-toggle="modal" data-target=".bs-example-modal-static" href='#'>
+                                        <i class='lnr lnr-plus-circle'></i>
+                                    </a>
                                 </li>
                                 <li>
                                     <button type="button" class="btn-toggle-collapse">
                                         <i class="lnr lnr-chevron-up-circle"></i>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn-remove">
+                                        <i class="lnr lnr-cross-circle"></i>
                                     </button>
                                 </li>
                             </ul>
@@ -126,7 +196,7 @@
         <!-- END PAYMENTS -->
 
         <!-- NOTE LIST -->
-        <div class="row" id="notes_home">
+        <div class="row customfade" id="notes_home">
             <div class="col-md-12">
                 <div class="panel">
                     <div class="panel-heading">
@@ -135,12 +205,17 @@
                             <ul class="list-inline">
                                 <li>
                                     <a class="add-form" data-toggle="modal" data-target=".bs-example-modal-static" href='#'>
-                                        <i style="font-size:16px;" class='lnr lnr-plus-circle'></i>
+                                        <i class='lnr lnr-plus-circle'></i>
                                     </a>
                                 </li>
                                 <li>
                                     <button type="button" class="btn-toggle-collapse">
                                         <i class="lnr lnr-chevron-up-circle"></i>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn-remove">
+                                        <i class="lnr lnr-cross-circle"></i>
                                     </button>
                                 </li>
                             </ul>
@@ -172,4 +247,5 @@
     <script src="{% static 'js/libs/daterangepicker.js' %}"></script>
     <script src="{% static 'js/libs/highcharts.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/libs/jquery-ui-1.10.3.min.js' %}"></script>
 {% endblock %}

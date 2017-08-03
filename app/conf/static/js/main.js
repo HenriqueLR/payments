@@ -23,7 +23,7 @@ var releases = {
     get_form_payment:function(url){
         $.ajax({type:'get', url:url,
             success:function(data){$("#modal-home").html(data);},
-            error:function(data){console.log(data);$("#modal-home").html(global_function.display_error_modal_dash());},
+            error:function(data){$("#modal-home").html(global_function.display_error_modal_dash());},
         }).done(function(){$('input[name="date_releases"]').daterangepicker(global_function.get_single_datetime());});
     },
     send_form_debit:function(form){
@@ -178,9 +178,9 @@ $(function(){
 });//END GRAPHICS CONTROLL
 
 //HOME ACTION CONTROLL
-$(document).ready(function(){
+$(document).ready(function() {
     //CHECK EXISTS DIV NOTAS
-    if($('#notes_home').length){
+    if($('#notes_home').length) {
         //GET LIST NOTES
         note.list_note();
 
@@ -215,7 +215,7 @@ $(document).ready(function(){
     }//END CHECK NOTES
 
     //CHECK EXISTS DIV PAYMENTS
-    if($('#payments').length){
+    if($('#payments').length) {
         //GET LIST DEBIT AND DEPOSITS
         releases.list_debits();
         releases.list_deposits();
@@ -260,8 +260,53 @@ $(document).ready(function(){
     }//END CHECK PAYMENTS
 
     //CHECK EXISTS DIV OVERLOAD
-    if($("#overview").length){
+    if($("#overview").length) {
         //GET OVERVIEW
         graphics.get_overview_timeout(100);
     }//END CHECK OVERLOAD
+
+    //CONFIG CHARTS HOME
+    if(($("#overview").length) &&
+        ($('#payments').length) &&
+        ($('#notes_home').length)) {
+
+        //SET INPUTS STAGE SESSION
+        for(var i = 0; i < sessionStorage.length; i += 1) {
+            input_element = $('.config-home').find('input[name^="'+sessionStorage.key(i)+'"]');
+            if(Boolean(parseInt(sessionStorage.getItem(sessionStorage.key(i))))){
+                input_element.prop('checked', !Boolean(parseInt(sessionStorage.getItem(sessionStorage.key(i)))));
+                id_element = '#'+input_element.attr('name');
+                $(id_element).hide();
+            }
+        }
+
+        $('.config-home').on('click', '.dropdown-btn', function(e) {
+            dropdown_element = $('.config-home').find('.dropdown-menu-config');
+            button_element = $('.config-home').find('i').addClass('fa-spin');
+            if(dropdown_element.css('display') == 'none') {
+                //dropdown_element.fadeIn(1000);
+                dropdown_element.show('fade', 'slow',
+                    function(){button_element.removeClass('fa-spin');});
+            }else{
+                dropdown_element.hide('fade', 'slow',
+                    function(){button_element.removeClass('fa-spin');});
+            }
+        });
+
+        //CHECKBOX CONFIG CHART HOME
+        $('.config-home').on('click', 'input[type^="checkbox"]', function(e) {
+            var id_element = '#'+$(this).attr('name');
+            if($(this).prop('checked')){
+                console.log('1');
+                sessionStorage.setItem($(this).attr('name'), "0");
+                $(id_element).fadeIn(600);
+            }
+            else{
+                console.log('2');
+                sessionStorage.setItem($(this).attr('name'), "1");
+                $(id_element).fadeOut(600);
+            }
+        });
+    }
+
 });//END HOME ACTION CONTROLL

@@ -72,11 +72,16 @@ $(document).ready(function() {
 
 	// panel remove
 	$('.panel .btn-remove').click(function(e){
-
 		e.preventDefault();
-		$(this).parents('.panel').fadeOut(300, function(){
+		row_element = $(this).parents('.customfade');
+		sessionStorage.setItem(row_element.attr('id'), "1");
+		row_element.fadeOut(600);
+		input_config = $('.config-home').find('input[name^="'+row_element.attr('id')+'"]');
+		input_config.prop('checked',false);
+		//$(this).parents('.panel').fadeOut(600);
+		/*$(this).parents('.panel').fadeOut(300, function(){
 			$(this).remove();
-		});
+		});*/
 	});
 
 	// panel collapse/expand
