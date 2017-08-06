@@ -321,6 +321,31 @@ min-height: 320px;
 /*#notes_home .panel {
 min-height: 320px;
 }*/
+
+.form-delete-note .btn-sm {
+  line-height: 0em;
+  padding: 0px 2px;
+  margin-bottom: 2px;
+  margin-right: -4px;
+}
+.form-delete-deposit .btn-sm {
+  line-height: 0em;
+  padding: 0px 2px;
+  margin-bottom: 2px;
+  margin-right: -4px;
+}
+
+.form-delete-debit .btn-sm {
+  line-height: 0em;
+  padding: 0px 2px;
+  margin-bottom: 2px;
+  margin-right: -4px;
+}
+
+#context-notes .todo-list a{
+  display: inline-block;
+}
+
 #notes_home .lnr {
   font-size: 16px;
 }
@@ -570,6 +595,15 @@ min-height: 320px;
 /* END LIST NOTE */
 
 /* UPDATE NOTE */
+
+#note_update_modal .input-group {
+  margin-bottom: 10px;
+}
+
+#note_update_modal .text-center {
+  margin-top: 0px;
+}
+
 #note_update ol, ul {
   margin-top: 0;
   margin-bottom: 0px;
@@ -760,6 +794,110 @@ min-height: 320px;
 
 
 /* DELETE NOTE */
+.opens-delete:before {
+  right: 6px;
+}
+.opens-delete:before {
+  top: 22px;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  border-bottom: 0px solid #ccc;
+  border-top: 7px solid #efc0c0;
+}
+.opens-delete:before,
+.opens-delete:after {
+  position: absolute;
+  display: inline-block;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+.opens-delete:after {
+  right: 7px;
+}
+.opens-delete:after {
+  top: 21px;
+  border-right: 4px solid transparent;
+  border-bottom: 0px solid #fff;
+  border-left: 4px solid transparent;
+  border-top: 6px solid #ffeded;
+}
+.opens-delete:before,
+.opens-delete:after {
+  position: absolute;
+  display: inline-block;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+.delete-context {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: -5px;
+  padding: 0px 3px 0px 0px;
+  width: 45px;
+  background-color: #ffeded;
+  border-radius: 2px;
+  text-align: center;
+  border-top: 1px solid #EFC0C0;
+  border-left: 1px solid #efc0c0;
+  border-right: 1px solid #efc0c0;
+  border-bottom: 1px solid #efc0c0;
+}
+
+.opens-delete-table:before {
+  right: 44px;
+}
+.opens-delete-table:before {
+  top: 6px;
+  border-right: 5px solid #efc0c0;
+  border-left: 3px solid transparent;
+  border-bottom: 3px solid transparent !important;
+  border-top: 3px solid transparent;
+}
+.opens-delete-table:before,
+.opens-delete-table:after {
+  position: absolute;
+  display: inline-block;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+.opens-delete-table:after {
+  right: 43px;
+}
+.opens-delete-table:after {
+  top: 7px;
+  border-right: 4px solid #ffeded;
+  border-bottom: 2px solid transparent !important;
+  border-left: 2px solid transparent;
+  border-top: 2px solid transparent;
+}
+.opens-delete-table:before,
+.opens-delete-table:after {
+  position: absolute;
+  display: inline-block;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+.delete-context-table {
+  display: none;
+  position: absolute;
+  right: -7px;
+  margin-top:-25px;
+  padding: 0px 3px 0px 0px;
+  width: 45px;
+  background-color: #ffeded;
+  border-radius: 2px;
+  text-align: center;
+  border-top: 1px solid #EFC0C0;
+  border-left: 1px solid #efc0c0;
+  border-right: 1px solid #efc0c0;
+  border-bottom: 1px solid #efc0c0;
+}
+
 #delete_note ol, ul {
   margin-top: 0;
   margin-bottom: 20px;
@@ -821,6 +959,14 @@ min-height: 320px;
 
 
 /* ADD NOTE */
+#add_note_modal .input-group {
+  margin-bottom: 10px;
+}
+
+#add_note_modal .text-center {
+  margin-top: 0px;
+}
+
 #add_note .todo-list > li.completed .controls{
   pointer-events: none;
   cursor: default;
@@ -977,6 +1123,14 @@ min-height: 320px;
 /****** DEPOSIT ******/
 
 /* ADD DEPOSIT */
+#add_deposit_modal .input-group {
+  margin-bottom: 10px;
+}
+
+#add_deposit_modal .text-center {
+  margin-top: 0px;
+}
+
 #add_deposit ol, ul {
   margin-top: 0;
   margin-bottom: 20px;
@@ -1152,6 +1306,38 @@ input[type="email"], input[type="tel"], input[type="select"] {
   text-align: right !important;
 }
 
+#context-deposits .table>tbody>tr>td,
+.table>tfoot>tr>td, .table>thead>tr>td {
+  padding: 2px 0px 2px 0px !important;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+
+#context-deposits .table>tbody>tr>th,
+.table>tfoot>tr>th, .table>thead>tr>th {
+  padding: 0px !important;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+
+#context-debits .table>tbody>tr>td,
+.table>tfoot>tr>td, .table>thead>tr>td {
+  padding: 2px 0px 2px 0px !important;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+
+#context-debits .table>tbody>tr>th,
+.table>tfoot>tr>th, .table>thead>tr>th {
+  padding: 0px !important;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+
 #list_deposit .table>tbody>tr>td,
 .table>tbody>tr>th,
 .table>tfoot>tr>td,
@@ -1170,6 +1356,14 @@ input[type="email"], input[type="tel"], input[type="select"] {
 /* END LIST DEPOSIT */
 
 /* UPDATE DEPOSIT */
+#update_deposit_modal .input-group {
+  margin-bottom: 10px;
+}
+
+#update_deposit_modal .text-center {
+  margin-top: 0px;
+}
+
 #update_deposit ol, ul {
   margin-top: 0;
   margin-bottom: 20px;
@@ -1224,6 +1418,14 @@ input[type="email"], input[type="tel"], input[type="select"] {
 /****** DEBITS STYLES ******/
 
 /* ADD DEBIT */
+#add_debit_modal .input-group {
+  margin-bottom: 10px;
+}
+
+#add_debit_modal .text-center {
+  margin-top: 0px;
+}
+
 #add_debit ol, ul {
   margin-top: 0;
   margin-bottom: 20px;
@@ -1387,6 +1589,14 @@ input[type="email"], input[type="tel"], input[type="select"] {
 
 
 /* UPDATE DEBIT */
+#update_debit_modal .input-group {
+  margin-bottom: 10px;
+}
+
+#update_debit_modal .text-center {
+  margin-top: 0px;
+}
+
 #update_debit ol, ul {
   margin-top: 0;
   margin-bottom: 20px;

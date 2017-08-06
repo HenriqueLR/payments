@@ -33,7 +33,7 @@ class DebitDeleteView(PermissionsDebitMixin, DeleteView):
 
     model = Debit
     template_name = 'wallet/debit/debit_confirm_delete.html'
-    template_name_ajax = 'wallet/debit/debit_confirm_delete_modal.html'
+    template_name_ajax = 'wallet/debit/delete_debit_single.html'
     success_url = reverse_lazy('wallet:list_debit')
     required_permissions = get_list_permissions(model, permission_list=['all'])
 
@@ -115,7 +115,7 @@ class DepositDeleteView(PermissionsDepositMixin, DeleteView):
 
     model = Deposit
     template_name = 'wallet/deposit/deposit_confirm_delete.html'
-    template_name_ajax = 'wallet/deposit/deposit_confirm_delete_modal.html'
+    template_name_ajax = 'wallet/deposit/delete_deposit_single.html'
     success_url = reverse_lazy('wallet:list_deposit')
     required_permissions = get_list_permissions(model, permission_list=['all'])
 
@@ -187,7 +187,7 @@ class NoteDeleteView(PermissionsNoteMixin, DeleteView):
 
     model = Note
     template_name = 'wallet/note/note_confirm_delete.html'
-    template_name_ajax = 'wallet/note/note_confirm_delete_modal.html'
+    template_name_ajax = 'wallet/note/delete_note_single.html'
     success_url = reverse_lazy('wallet:list_note')
     required_permissions = get_list_permissions(model, permission_list=['all'])
 

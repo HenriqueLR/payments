@@ -33,7 +33,11 @@
                         <td style="width:70px;">{{ deposit.author }}</td>
                         <td style="width:50px;" class="actions">
                             <a class="edit-deposit" id='{{ deposit.pk }}' data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i class="lnr lnr-pencil"></i></a>
-                            <a class="delete-deposit" id="{{ deposit.pk }}" data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i class="lnr lnr-trash"></i></a>
+                            <a class="delete-deposit" id="{{ deposit.pk }}" href='#'>
+                                <i class="lnr lnr-trash"></i>
+                            </a>
+                            <div class="delete-context-table opens-delete-table">
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}

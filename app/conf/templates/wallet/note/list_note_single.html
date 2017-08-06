@@ -22,9 +22,17 @@
                     <span class="short-description">{{ note.description }}</span>
                     <span class="date">{{ note.date_note | date:"d/m/Y H:i" }}</span>
                 </p>
+
+                <div class="delete-context opens-delete">
+                </div>
+
                 <div class="controls">
                     <a class="edit-note" id='{{ note.pk }}' data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i class="lnr lnr-pencil"></i></a>
-                    <a class="delete-note" id='{{ note.pk }}' data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i class="lnr lnr-trash"></i></a>
+
+                    <a class="delete-note" id='{{ note.pk }}' href='#'>
+                        <i class="lnr lnr-trash"></i>
+                    </a>
+                    <!--<a class="delete-note" id='{{ note.pk }}' data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i class="lnr lnr-trash"></i></a>-->
                 </div>
             </li>
         {% endfor %}

@@ -2,43 +2,46 @@
 
 <div class="modal-header">
 	<button aria-hidden="true" data-dismiss="modal" class="close" type="button">
-		<i style="font-size:15px;" class='lnr lnr-cross'></i>
+		<i class='lnr lnr-cross'></i>
 	</button>
 	<h4 class="modal-title">Novo Depósito</h4>
 </div>
+
 <div class="modal-body">
-	<div class="row" id="add_deposit_modal">
+	<div class="row">
 		<div class="col-md-12">
 			{% include "messages.html" %}
 		</div>
+	</div>
 
+	<div class="row" id="add_deposit_modal">
 		<div class="col-md-12">
 			<form class="form-modal-deposit" id="id_add_deposit" name='add_deposit' method='POST' action="{% url 'wallet:add_deposit' %}">
 			{% csrf_token %}
-				<div class='row' style="margin-bottom:15px;">
-					<div class='col-md-6'>
+				<div class='row'>
+					<div class='col-md-6 col-md-offset-3'>
 
 						<div class='input-group {% if form.origin.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-						<i class='fa fa-exchange fa-fw'></i>
-						</div>
-						{{ form.origin|placeholder:"Origem" |addcss:"form-control" }}
+							<div class='input-group-addon'>
+								<i class='fa fa-exchange fa-fw'></i>
+							</div>
+							{{ form.origin|placeholder:"Origem" |addcss:"form-control" }}
 						</div>
 						<span class="error text-danger">{{ form.origin.errors|join:"<br \>" }}</span>
 
 						<div class='input-group {% if form.value.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-						<i class='fa fa-money fa-fw'></i>
-						</div>
-						{{ form.value|placeholder:"Valor" |addcss:"form-control" }}
+							<div class='input-group-addon'>
+								<i class='fa fa-money fa-fw'></i>
+							</div>
+							{{ form.value|placeholder:"Valor" |addcss:"form-control" }}
 						</div>
 						<span class="error text-danger">{{ form.value.errors|join:"<br \>" }}</span>
 
 						<div class='input-group {% if form.document.errors %}has-error{% endif %}'>
-						<div class='input-group-addon'>
-						<i class='fa fa-file-zip-o fa-fw'></i>
-						</div>
-						{{ form.document|placeholder:"Documento" |addcss:"form-control" }}
+							<div class='input-group-addon'>
+								<i class='fa fa-file-zip-o fa-fw'></i>
+							</div>
+							{{ form.document|placeholder:"Documento" |addcss:"form-control" }}
 						</div>
 						<span class="error text-danger">{{ form.document.errors|join:"<br \>" }}</span>
 
@@ -46,13 +49,10 @@
 							<div class='input-group-addon'>
 								<i class='fa fa-calendar fa-fw'></i>
 							</div>
-								{{ form.date_releases|placeholder:"dd/mm/yyyy H:i" |addcss:"form-control" }}
+							{{ form.date_releases|placeholder:"dd/mm/yyyy H:i" |addcss:"form-control" }}
 						</div>
 						<span class="error text-danger">{{ form.date_releases.errors|join:"<br \>" }}</span>
 
-					</div><!-- col-md-6 -->
-
-					<div class='col-md-6'>
 						<div class='input-group {% if form.description.errors %}has-error{% endif %}'>
 							<div class='input-group-addon'>
 								<i class='fa fa-pencil fa-fw'></i>
@@ -77,6 +77,6 @@
 				</div><!-- END ROW -->
 
 			</form>
-		</div><<!-- COL-MD-12 -->
+		</div><!-- COL-MD-12 -->
 	</div>
 </div>

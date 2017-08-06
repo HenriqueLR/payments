@@ -110,6 +110,28 @@ var note = {
     update_status_note:function(id){
         $.ajax({type:'get', url:'/wallet/update_status_note/'+id});
     },
+    get_form_delete_note:function(element){
+        $.ajax({type:'get', url:'/wallet/delete_note/'+element.attr("id"),
+            beforeSend:function(){
+                element.find('.lnr').toggleClass('lnr lnr-trash fa fa-spinner fa-spin');
+            },
+            success:function(data){
+                context = element.parents('li').find('.delete-context');
+                context.html(data);
+                context.fadeIn(600);
+            },
+            error:function(data){
+                setTimeout(function(){
+                    element.find('.fa').toggleClass('fa fa-spinner fa-spin lnr lnr-trash');
+                }, 300);
+            },
+            complete:function(){
+                setTimeout(function(){
+                    element.find('.fa').toggleClass('fa fa-spinner fa-spin lnr lnr-trash');
+                }, 300);
+            },
+        });
+    },
     get_form_note:function(url){
         $.ajax({type:'get', url:url,
             success:function(data){$("#modal-home").html(data);},
@@ -120,10 +142,17 @@ var note = {
         $.ajax({type:form.attr('method'),
             url:form.attr('action'),
             data:form.serialize(),
-            beforeSend:function(){form.find(":submit").prop('disabled', true);},
+            beforeSend:function(){
+                submit = form.find(":submit").prop('disabled', true);
+                if(form.attr('name') == 'delete_note'){
+                    submit.find('i.fa').toggleClass('fa fa-check fa fa-spinner fa-spin');
+                }
+            },
             success:function(data, textStatus, xhr){
                 if(form.attr('name') == 'delete_note'){
-                    $("#context-notes").html(data);
+                    setTimeout(function(){
+                        $("#context-notes").html(data);
+                    }, 800);
                     if(($(data).find("div.alert-success").length)){
                         global_function.list_alerts_timeout(100);
                     }
@@ -135,12 +164,25 @@ var note = {
                     }
                 }
             },
-            error:function(data){$("#modal-home").html(global_function.display_error_modal_dash());},
-            complete:function(){form.find(":submit").prop('disabled', false);},
+            error:function(data){
+                if(form.attr('name') != 'delete_note'){
+                    $("#modal-home").html(global_function.display_error_modal_dash());
+                }else{
+                    submit = form.find(":submit").prop('disabled', true);
+                    setTimeout(function(){
+                        submit.find('i.fa').toggleClass('fa fa-spinner fa-spin fa fa-warning');
+                    }, 800);
+                }
+            },
+            complete:function(){
+                if(form.attr('name') != 'delete_note'){
+                    form.find(":submit").prop('disabled', false);
+                }
+            },
         }).done(function(){
             if(form.attr('name') != 'delete_note'){
                 $('input[name="date_note"]').daterangepicker(global_function.get_single_datetime());
-            }else{global_function.close_modal_dash(300);}
+            }
         });//END CALL AJAX
     },
 	complet_list_item:function(item){
@@ -156,12 +198,14 @@ $(function(){
 
 	//ACTIVE ITEM MENU LEFT
 	$('#left-nav').on('click', 'li > a', function(){
+        console.log('left menu');
 	    $('#left-nav li > a').removeClass('active');
 	    $(this).addClass('active');
 	});
 
     //CONTROLL ACTIONS OPEN MENU LEFT
     $("#open-menu").click(function(event) {
+        console.log('open menu');
         event.preventDefault();
 
         //RESIZE GRAPHIC IF EXISTS

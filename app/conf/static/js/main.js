@@ -20,6 +20,50 @@ var releases = {
             error:function(data){$("#context-deposits").html("<h3>Não existem depósitos cadastrados</h3>");},
         });
     },
+    get_form_delete_deposit:function(element){
+        $.ajax({type:'get', url:'/wallet/delete_deposit/'+element.attr("id"),
+            beforeSend:function(){
+                element.find('.lnr').toggleClass('lnr lnr-trash fa fa-spinner fa-spin');
+            },
+            success:function(data){
+                context = element.parents('.actions').find('.delete-context-table');
+                context.html(data);
+                context.fadeIn(600);
+            },
+            error:function(data){
+                setTimeout(function(){
+                    element.find('.fa').toggleClass('fa fa-spinner fa-spin lnr lnr-trash');
+                }, 300);
+            },
+            complete:function(){
+                setTimeout(function(){
+                    element.find('.fa').toggleClass('fa fa-spinner fa-spin lnr lnr-trash');
+                }, 300);
+            },
+        });
+    },
+    get_form_delete_debit:function(element){
+        $.ajax({type:'get', url:'/wallet/delete_debit/'+element.attr("id"),
+            beforeSend:function(){
+                element.find('.lnr').toggleClass('lnr lnr-trash fa fa-spinner fa-spin');
+            },
+            success:function(data){
+                context = element.parents('.actions').find('.delete-context-table');
+                context.html(data);
+                context.fadeIn(600);
+            },
+            error:function(data){
+                setTimeout(function(){
+                    element.find('.fa').toggleClass('fa fa-spinner fa-spin lnr lnr-trash');
+                }, 300);
+            },
+            complete:function(){
+                setTimeout(function(){
+                    element.find('.fa').toggleClass('fa fa-spinner fa-spin lnr lnr-trash');
+                }, 300);
+            },
+        });
+    },
     get_form_payment:function(url){
         $.ajax({type:'get', url:url,
             success:function(data){$("#modal-home").html(data);},
@@ -30,10 +74,17 @@ var releases = {
         $.ajax({type:form.attr('method'),
             url:form.attr('action'),
             data:form.serialize(),
-            beforeSend:function(){form.find(":submit").prop('disabled', true);},
+            beforeSend:function(){
+                submit = form.find(":submit").prop('disabled', true);
+                if(form.attr('name') == 'delete_debit'){
+                    submit.find('i.fa').toggleClass('fa fa-check fa fa-spinner fa-spin');
+                }
+            },
             success:function(data, textStatus, xhr){
                 if(form.attr('name') == 'delete_debit'){
-                    $("#context-debits").html(data);
+                    setTimeout(function(){
+                        $("#context-debits").html(data);
+                    }, 800);
                     if(($(data).find("div.alert-success").length)){
                         graphics.get_overview_timeout(100);
                     }
@@ -46,25 +97,41 @@ var releases = {
                 }
             },
             error:function(data){
-                $("#modal-home").html(global_function.display_error_modal_dash());
+                if(form.attr('name') != 'delete_debit'){
+                    $("#modal-home").html(global_function.display_error_modal_dash());
+                }else{
+                    submit = form.find(":submit").prop('disabled', true);
+                    setTimeout(function(){
+                        submit.find('i.fa').toggleClass('fa fa-spinner fa-spin fa fa-warning');
+                    }, 800);
+                }
             },
             complete:function(){
-                form.find(":submit").prop('disabled', false);
+                if(form.attr('name') != 'delete_debit'){
+                    form.find(":submit").prop('disabled', false);
+                }
             },
         }).done(function(){
             if(form.attr('name') != 'delete_debit'){
                 $('input[name="date_releases"]').daterangepicker(global_function.get_single_datetime());
-            }else{global_function.close_modal_dash(300);}
+            }
         });
     },
     send_form_deposit:function(form){
         $.ajax({type:form.attr('method'),
             url:form.attr('action'),
             data:form.serialize(),
-            beforeSend:function(){form.find(":submit").prop('disabled', true);},
+            beforeSend:function(){
+                submit = form.find(":submit").prop('disabled', true);
+                if(form.attr('name') == 'delete_deposit'){
+                    submit.find('i.fa').toggleClass('fa fa-check fa fa-spinner fa-spin');
+                }
+            },
             success:function(data, textStatus, xhr){
                 if(form.attr('name') == 'delete_deposit'){
-                    $("#context-deposits").html(data);
+                    setTimeout(function(){
+                        $("#context-deposits").html(data);
+                    }, 800);
                     if(($(data).find("div.alert-success").length)){
                         graphics.get_overview_timeout(100);
                     }
@@ -77,15 +144,24 @@ var releases = {
                 }
             },
             error:function(data){
-                $("#modal-home").html(global_function.display_error_modal_dash());
+                if(form.attr('name') != 'delete_deposit'){
+                    $("#modal-home").html(global_function.display_error_modal_dash());
+                }else{
+                    submit = form.find(":submit").prop('disabled', true);
+                    setTimeout(function(){
+                        submit.find('i.fa').toggleClass('fa fa-spinner fa-spin fa fa-warning');
+                    }, 800);
+                }
             },
             complete:function(){
-                form.find(":submit").prop('disabled', false);
+                if(form.attr('name') != 'delete_deposit'){
+                    form.find(":submit").prop('disabled', false);
+                }
             },
         }).done(function(){
             if(form.attr('name') != 'delete_deposit'){
                 $('input[name="date_releases"]').daterangepicker(global_function.get_single_datetime());
-            }else{global_function.close_modal_dash(300);}
+            }
         });
     },
 };//END DEBIT / DEPOSIT
@@ -186,29 +262,49 @@ $(document).ready(function() {
 
         //CHECKBOX UPDATE STATUS NOTE
         $('#notes_home #context-notes').on('click','input[type^="checkbox"]',function(){
+            console.log('input[type^="checkbox"]');
             note.complet_list_item($(this));
             note.update_status_note($(this).attr("id"));
             //CALL UPDATE STATUS NOTE
             global_function.list_alerts_timeout(100);
         });
 
-        //DELETE NOTE
+        //GET DELETE FORM NOTE
         $('#notes_home #context-notes').on('click','.delete-note',function(e){
-            note.get_form_note("/wallet/delete_note/"+$(this).attr("id"));
+            console.log('delete-note');
+            e.preventDefault();
+            note.get_form_delete_note($(this));
+            //note.get_form_note("/wallet/delete_note/"+$(this).attr("id"));
+        });
+        //CLOSE BOX BTN DELETE NOTE
+        $('#notes_home #context-notes').on('click', '.delete-context .btn-close-custom',
+            function(e){
+                console.log('close box btn delete note');
+                e.preventDefault();
+                $(this).parents('.delete-context').fadeOut(600);
+        });
+        //SUBMIT DELETE FORM NOTE
+        $('#notes_home #context-notes').on('submit','.delete-context .form-delete-note',function(e){
+            console.log('form-delete-note');
+            e.preventDefault();
+            note.send_form_note($(this));
         });
 
-        //EDIT NOTE
+        //GET EDIT FORM NOTE
         $('#notes_home #context-notes').on('click','.edit-note',function(e){
+            console.log('edit-note');
             note.get_form_note("/wallet/update_note/"+$(this).attr("id"));
         });
 
         //GET ADD FORM NOTE
         $('#notes_home').on('click','.add-form',function(e){
+            console.log('add-form');
             note.get_form_note('/wallet/add_note/');
         });
 
-        //SUBMIT ADD/EDIT/DELETE FORM NOTE
+        //SUBMIT ADD/EDIT FORM NOTE
         $('#modal-home').on('submit','.form-modal-note',function(e){
+            console.log('form-modal-note');
             e.preventDefault();
             note.send_form_note($(this));
         });
@@ -222,29 +318,61 @@ $(document).ready(function() {
 
         //GET ADD FORM DEBIT
         $('#payments #debit-col').on('click','.add-form',function(e){
+            console.log('add-form');
             releases.get_form_payment('/wallet/add_debit/');
         });
 
         $('#payments #deposit-col').on('click','.add-form',function(e){
+            console.log('add-form');
             releases.get_form_payment('/wallet/add_deposit/');
         });
 
-        //DELETE DEBIT AND DEPOSITS
+        //GET FORM DELETE DEPOSIT
         $('#payments #context-deposits').on('click','.delete-deposit',function(e){
-            releases.get_form_payment("/wallet/delete_deposit/"+$(this).attr("id"));
+            console.log('delete-deposit');
+            e.preventDefault();
+            releases.get_form_delete_deposit($(this));
+            //releases.get_form_payment("/wallet/delete_deposit/"+$(this).attr("id"));
+        });
+        //SUBMIT DELETE FORM DEPOSIT
+        $('#payments #context-deposits').on('submit','.delete-context-table .form-delete-deposit',
+            function(e){
+                console.log('form-delete-deposit');
+                e.preventDefault();
+                releases.send_form_deposit($(this));
         });
 
+        //CLOSE BOX BTN DELETE DEPOSIT / DEBIT
+        $('#payments').on('click', '.delete-context-table .btn-close-custom',
+            function(e){
+                console.log('close box btn delete deposit debit');
+                e.preventDefault();
+                $(this).parents('.delete-context-table').fadeOut(600);
+        });
+
+        //GET FORM DELETE DEBIT
         $('#payments #context-debits').on('click','.delete-debit',function(e){
-            releases.get_form_payment("/wallet/delete_debit/"+$(this).attr("id"));
+            console.log('delete-debit');
+            e.preventDefault();
+            releases.get_form_delete_debit($(this));
+        });
+        //SUBMIT DELETE FORM DEBIT
+        $('#payments #context-debits').on('submit','.delete-context-table .form-delete-debit',
+            function(e){
+                console.log('form-delete-debit');
+                e.preventDefault();
+                releases.send_form_debit($(this));
         });
 
         //SUBMIT ADD FORM DEBIT
         $('#modal-home').on('submit','.form-modal-debit',function(e){
+            console.log('form-modal-debit');
             e.preventDefault();
             releases.send_form_debit($(this));
         });
 
         $('#modal-home').on('submit','.form-modal-deposit',function(e){
+            console.log('form-modal-deposit');
             e.preventDefault();
             releases.send_form_deposit($(this));
         });
@@ -266,6 +394,7 @@ $(document).ready(function() {
 
         //RESIZE GRAPH IN COLLAPSE EVENT BTN OVERVIEW
         $('#overview').on('click', '.btn-toggle-collapse', function(event){
+            console.log('btn-toggle-collapse');
             event.preventDefault();
             setTimeout(function(){
                 graphics.adjust_graphic.call($('body'));
@@ -288,11 +417,13 @@ $(document).ready(function() {
             }
         }
 
+        //CLICK CONTROLL FADE
         $('.config-home').on('click', '.dropdown-btn', function(e) {
+            console.log('dropdown-btn');
+            e.preventDefault();
             dropdown_element = $('.config-home').find('.dropdown-menu-config');
             button_element = $('.config-home').find('i').addClass('fa-spin');
             if(dropdown_element.css('display') == 'none') {
-                //dropdown_element.fadeIn(1000);
                 dropdown_element.show('fade', 'slow',
                     function(){button_element.removeClass('fa-spin');});
             }else{
@@ -301,20 +432,23 @@ $(document).ready(function() {
             }
         });
 
-        //CHECKBOX CONFIG CHART HOME
+        //CHECKBOX CONTROLL
         $('.config-home').on('click', 'input[type^="checkbox"]', function(e) {
+            console.log('input[type^="checkbox"]');
             var id_element = '#'+$(this).attr('name');
+            setTimeout(function(){
+                graphics.adjust_graphic.call($('body'));
+            }, 400);
+
             if($(this).prop('checked')){
-                console.log('1');
                 sessionStorage.setItem($(this).attr('name'), "0");
                 $(id_element).fadeIn(600);
             }
             else{
-                console.log('2');
                 sessionStorage.setItem($(this).attr('name'), "1");
                 $(id_element).fadeOut(600);
             }
         });
-    }
+    }//END CHARTS HOME
 
 });//END HOME ACTION CONTROLL

@@ -2,21 +2,23 @@
 
 <div class="modal-header">
 	<button aria-hidden="true" data-dismiss="modal" class="close" type="button">
-		<i style="font-size:15px;" class='lnr lnr-cross'></i>
+		<i class='lnr lnr-cross'></i>
 	</button>
 	<h4 class="modal-title">Novo Débito</h4>
 </div>
 
 <div class="modal-body">
-	<div class="row" id="add_debit_modal">
+	<div class="row">
 		<div class="col-md-12">
 			{% include "messages.html" %}
 		</div>
+	</div>
+	<div class="row" id="add_debit_modal">
 		<div class="col-md-12">
 			<form class="form-modal-debit" id="id_add_debit" name='add_debit' method='POST' action="{% url 'wallet:add_debit' %}">
 			{% csrf_token %}
-				<div class='row' style="margin-bottom:15px;">
-					<div class='col-md-6'>
+				<div class='row'>
+					<div class='col-md-6 col-md-offset-3'>
 
 						<div class='input-group {% if form.origin.errors %}has-error{% endif %}'>
 							<div class='input-group-addon'>
@@ -50,9 +52,6 @@
 						</div>
 						<span class="error text-danger">{{ form.date_releases.errors|join:"<br \>" }}</span>
 
-					</div><!-- col-md-4 -->
-
-					<div class='col-md-6'>
 						<div class='input-group {% if form.description.errors %}has-error{% endif %}'>
 							<div class='input-group-addon'>
 								<i class='fa fa-pencil fa-fw'></i>
@@ -60,7 +59,8 @@
 							{{ form.description|placeholder:"Descrição do débito" |textarea:"6" |addcss:"form-control" }}
 						</div>
 						<span class="error text-danger">{{ form.description.errors|join:"<br \>" }}</span>
-					</div><!-- END COL-MD-6 -->
+
+					</div><!-- col-md-6 -->
 
 				</div><!-- row -->
 
@@ -74,8 +74,7 @@
 						Fechar
 						</button>
 					</div>
-
-				</div>
+				</div><!-- row -->
 
 			</form>
 		</div>

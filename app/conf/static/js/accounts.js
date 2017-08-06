@@ -45,11 +45,13 @@ $(function() {
 
     //GET ADD FORM EDIT PASSWORD
     $('.include-password').on('click','.form-password',function(e){
+    	console.log('accounts form-password');
         user.get_form_edit_password($(this).attr("url-form"));
     });
 
 	//SUBMIT FORM EDIT PASSWORD
 	$('#modal_edit_password').on('submit','.form-modal-edit-password',function(e){
+		console.log('form-modal-edit-password');
 	    e.preventDefault();
 	    user.send_form_password($(this));
 	});

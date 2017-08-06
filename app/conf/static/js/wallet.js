@@ -11,6 +11,7 @@ $(function() {
 	if($('#list_note').length){
         //ACTION CLICK CHECKBOX
 	    $('#note-list-input input[type^="checkbox"]').click(function (e){
+	    	console.log('wallet checkbox');
         	note.complet_list_item($(this));
             note.update_status_note($(this).attr("id"));
             //CALL UPDATE STATUS NOTE

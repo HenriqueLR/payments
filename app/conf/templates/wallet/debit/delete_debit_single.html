@@ -1,0 +1,11 @@
+{% load formtags %}
+
+<form name="delete_debit" action="{{ object.get_delete_debit }}" method="post" class='form-inline form-delete-debit'>
+{% csrf_token %}
+    <button type="submit" class='btn btn-danger btn-sm' >
+        <i class="fa fa-check"></i>
+    </button>
+    <button class="btn btn-primary btn-sm btn-close-custom" type="button">
+        <i class="fa fa-times"></i>
+    </button>
+</form>
