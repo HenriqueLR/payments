@@ -52,6 +52,7 @@ class DebitDetailView(PermissionsDebitMixin, DetailView):
 
     model = Debit
     template_name = 'wallet/debit/detail_debit.html'
+    template_name_ajax = 'wallet/debit/detail_debit_single.html'
     required_permissions = get_list_permissions(model, permission_list=['all'])
 
 
@@ -130,6 +131,7 @@ class DepositDetailView(PermissionsDepositMixin, DetailView):
 
     model = Deposit
     template_name = 'wallet/deposit/detail_deposit.html'
+    template_name_ajax = 'wallet/deposit/detail_deposit_single.html'
     required_permissions = get_list_permissions(model, permission_list=['all'])
 
 

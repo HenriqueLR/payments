@@ -3,6 +3,85 @@ body {
   font-family: 'Anaheim';
 }
 
+.open-dialog {
+  cursor: pointer;
+}
+
+.open-dialog-box {
+  position: absolute;
+  display: none;
+  z-index: 20;
+  max-width: 270px;
+  min-height: 150px;
+  width: 270px;
+  height: auto;
+  margin-left: -45px;
+  list-style: none;
+  background-color: #fff;
+  border-style: solid;
+  border-color: #eaeaea;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  padding: 5px 5px 5px 5px;
+}
+
+.open-dialog-box .panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.open-dialog-box .panel-body {
+  padding: 10px 15px;
+}
+
+.open-dialog-box .col-md-12 {
+  padding-top: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.open-dialog-box .text-center {
+  margin-top: 0px;
+}
+
+.open-dialog-box span {
+  font-size: 65px;
+  margin-bottom: 15px;
+}
+.open-dialog-box .fa {
+  color:#00aaff;
+}
+
+.open-dialog-box .panel-heading .right {
+    position: absolute;
+    right: 17px;
+    top: 32%;
+}
+
+.scroll-text {
+  width: 200px;
+  max-height: 150px;
+  word-wrap: break-word;
+  overflow: auto;
+  padding: 5px 5px 5px 5px;
+}
+
+.open-dialog-box ul {
+  margin-bottom: 10px;
+}
+
+.open-dialog-box ul>li {
+  display: inline-flex;
+}
+
+.actions {
+  width: 20px;
+}
+
 .metric .title {
   font-size: 14px;
   color: #a3a4a4;

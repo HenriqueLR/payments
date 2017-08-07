@@ -327,8 +327,70 @@ $(document).ready(function() {
             releases.get_form_payment('/wallet/add_deposit/');
         });
 
+        //GET DETAIL BOX TR TABLE DEPOSITS
+        $('#payments #deposit-col').on('click','#context-deposits .open-dialog',function(e){
+            console.log('click tr');
+            element_box = $(this).parents('tr').find('.open-dialog-box');
+            element_td = element_box.parents('td');
+            element_box.remove();
+            element_td.addClass('open-dialog');
+
+            parents_box = $(this).parents('tbody').find('.open-dialog-box');
+            if(parents_box.length > 0){
+                console.log('parents box dialog');
+                //SET INPUTS STAGE SESSION
+                for(var i = 0; i < parents_box.length; i += 1) {
+                    element_box_parents = $(parents_box[i]).parents('tr').find('.open-dialog-box');
+                    element_td_parents = element_box_parents.parents('td');
+                    element_box_parents.remove();
+                    element_td_parents.addClass('open-dialog');
+                }
+            }
+
+            $(this).removeClass('open-dialog');
+            $(this).append('<div class="open-dialog-box"> \
+                    <div class="panel-heading"> \
+                        <h3 class="panel-title">Detalhes do depósito</h3> \
+                        <div class="right"> \
+                            <button type="button" class="btn-remove"> \
+                                <i class="lnr lnr-cross-circle"></i> \
+                            </button> \
+                        </div> \
+                    </div> \
+                    <div class="panel-body"> \
+                    <div class="col-md-12 text-center"> \
+                        <span class="fa fa-spinner fa-spin"></span> \
+                    </div> \
+                    </div> \
+                    </div>');
+
+            element = $(this);
+            actions_parents = $(this).parents('tr').find('.actions');
+
+            element.find('.open-dialog-box').show('fade', 'slow', function(){
+                context = element.find('.open-dialog-box');
+
+                url = '/wallet/detail_deposit/'+actions_parents.find('a:first-child').attr('id');
+                //context.load(url);
+
+                $.ajax({type:'get', url: url,
+                    success:function(data){
+                        context.html(data);
+                    },
+                });
+
+            });
+        });
+
+        //CLOSE DETAIL BOX TR TABLE DEPOSITS
+        $('#payments #deposit-col').on('click','#context-deposits .open-dialog-box .btn-remove', function(e){
+            console.log('close detail box');
+            $(this).parents('td').addClass('open-dialog');
+            $(this).parents('.open-dialog-box').remove();
+        });
+
         //GET FORM DELETE DEPOSIT
-        $('#payments #context-deposits').on('click','.delete-deposit',function(e){
+        $('#payments #context-deposits').on('click','.delete-deposit', function(e){
             console.log('delete-deposit');
             e.preventDefault();
             releases.get_form_delete_deposit($(this));
@@ -351,7 +413,7 @@ $(document).ready(function() {
         });
 
         //GET FORM DELETE DEBIT
-        $('#payments #context-debits').on('click','.delete-debit',function(e){
+        $('#payments #context-debits').on('click','.delete-debit', function(e){
             console.log('delete-debit');
             e.preventDefault();
             releases.get_form_delete_debit($(this));
@@ -362,6 +424,68 @@ $(document).ready(function() {
                 console.log('form-delete-debit');
                 e.preventDefault();
                 releases.send_form_debit($(this));
+        });
+
+        //GET DETAIL BOX TR TABLE DEBITS
+        $('#payments #debit-col').on('click','#context-debits .open-dialog',function(e){
+            console.log('click tr debit');
+            element_box = $(this).parents('tr').find('.open-dialog-box');
+            element_td = element_box.parents('td');
+            element_box.remove();
+            element_td.addClass('open-dialog');
+
+            parents_box = $(this).parents('tbody').find('.open-dialog-box');
+            if(parents_box.length > 0){
+                console.log('parents box dialog');
+                //SET INPUTS STAGE SESSION
+                for(var i = 0; i < parents_box.length; i += 1) {
+                    element_box_parents = $(parents_box[i]).parents('tr').find('.open-dialog-box');
+                    element_td_parents = element_box_parents.parents('td');
+                    element_box_parents.remove();
+                    element_td_parents.addClass('open-dialog');
+                }
+            }
+
+            $(this).removeClass('open-dialog');
+            $(this).append('<div class="open-dialog-box"> \
+                    <div class="panel-heading"> \
+                        <h3 class="panel-title">Detalhes do débito</h3> \
+                        <div class="right"> \
+                            <button type="button" class="btn-remove"> \
+                                <i class="lnr lnr-cross-circle"></i> \
+                            </button> \
+                        </div> \
+                    </div> \
+                    <div class="panel-body"> \
+                    <div class="col-md-12 text-center"> \
+                        <span class="fa fa-spinner fa-spin"></span> \
+                    </div> \
+                    </div> \
+                    </div>');
+
+            element = $(this);
+            actions_parents = $(this).parents('tr').find('.actions');
+
+            element.find('.open-dialog-box').show('fade', 'slow', function(){
+                context = element.find('.open-dialog-box');
+
+                url = '/wallet/detail_debit/'+actions_parents.find('a:first-child').attr('id');
+                //context.load(url);
+
+                $.ajax({type:'get', url: url,
+                    success:function(data){
+                        context.html(data);
+                    },
+                });
+
+            });
+        });
+
+        //CLOSE DETAIL BOX TR TABLE DEPOSITS
+        $('#payments #debit-col').on('click','#context-debits .open-dialog-box .btn-remove', function(e){
+            console.log('close detail box');
+            $(this).parents('td').addClass('open-dialog');
+            $(this).parents('.open-dialog-box').remove();
         });
 
         //SUBMIT ADD FORM DEBIT
@@ -379,10 +503,12 @@ $(document).ready(function() {
 
         //EDIT NOTE
         $('#payments #context-debits').on('click','.edit-debit',function(e){
+            console.log('edit-debit');
             releases.get_form_payment("/wallet/update_debit/"+$(this).attr("id"));
         });
 
         $('#payments #context-deposits').on('click','.edit-deposit',function(e){
+            console.log('edit-deposit');
             releases.get_form_payment("/wallet/update_deposit/"+$(this).attr("id"));
         });
     }//END CHECK PAYMENTS

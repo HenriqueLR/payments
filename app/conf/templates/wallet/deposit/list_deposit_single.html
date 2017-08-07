@@ -18,6 +18,7 @@
                     <th>Origem</th>
                     <th>Valor</th>
                     <th>Data</th>
+                    <th>Documento</th>
                     <th>Autor</th>
                     <th></th>
                 </tr>
@@ -25,13 +26,14 @@
             <tbody>
                 {% for deposit in object_list %}
                     <tr>
-                        <td class='clean-td'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
-                        <td style="width:16px;">{{ forloop.counter }}</td>
-                        <td style="width:110px;padding: 0px 10px 0px 0px;">{{ deposit.origin }}</td>
-                        <td style="width:100px;">R$ {{ deposit.value|decimal_to_real }}</td>
-                        <td style="width:130px;">{{ deposit.date_releases | date:"d/m/Y H:i" }}</td>
-                        <td style="width:70px;">{{ deposit.author }}</td>
-                        <td style="width:50px;" class="actions">
+                        <td class='clean-td open-dialog'><i style='color:#5cb85c;' class='fa fa-plus'></i></td>
+                        <td class='open-dialog' style="width:16px;">{{ forloop.counter }}</td>
+                        <td class='open-dialog' style="width:110px;padding: 0px 10px 0px 0px;">{{ deposit.origin }}</td>
+                        <td class='open-dialog' style="width:80px;">R$ {{ deposit.value|decimal_to_real }}</td>
+                        <td class='open-dialog' style="width:80px;">{{ deposit.date_releases | date:"d/m/Y H:i" }}</td>
+                        <td class='open-dialog' style="width:70px;">{{ deposit.document }}</td>
+                        <td class='open-dialog' style="width:70px;">{{ deposit.author }}</td>
+                        <td class="actions">
                             <a class="edit-deposit" id='{{ deposit.pk }}' data-toggle="modal" data-target=".bs-example-modal-static" href='#'><i class="lnr lnr-pencil"></i></a>
                             <a class="delete-deposit" id="{{ deposit.pk }}" href='#'>
                                 <i class="lnr lnr-trash"></i>
