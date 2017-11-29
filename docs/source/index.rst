@@ -1,5 +1,0 @@
-
-Payments Documentation
-====================================
-
-.. include:: ../../LICENSE

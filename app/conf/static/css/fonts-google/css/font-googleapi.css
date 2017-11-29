@@ -1,7 +1,0 @@
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Anaheim';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Anaheim'), local('Anaheim-Regular'), url("../fonts/font-Anaheim.woff") format('woff');
-}
