@@ -1,21 +1,18 @@
 from conf.settings import *
 
-DEBUG = True
+DEBUG = eval(os.environ.get("DEBUG", default=True))
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = eval(os.environ.get("TEMPLATE_DEBUG", default=True))
 
-ALLOWED_HOSTS = [
-    '*'
-]
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 DATABASES = {
     'default': {
-        'ENGINE': ''.join(['django.db.backends.',
-            config.get('postgresql', 'DATABASE_ENGINE')]),
-        'NAME': config.get('postgresql', 'DATABASE_NAME'),
-        'USER': config.get('postgresql', 'DATABASE_USER'),
-        'PASSWORD': config.get('postgresql', 'DATABASE_PASSWORD'),
-        'HOST': config.get('postgresql', 'DATABASE_HOST'),
-        'PORT': config.get('postgresql', 'DATABASE_PORT'),
+        "ENGINE": os.environ.get("SQL_ENGINE"),
+        "NAME": os.environ.get("SQL_DATABASE"),
+        "USER": os.environ.get("SQL_USER"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD"),
+        "HOST": os.environ.get("SQL_HOST"),
+        "PORT": os.environ.get("SQL_PORT"),
     }
 }
