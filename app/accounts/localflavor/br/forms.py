@@ -3,7 +3,7 @@
 from django.core.validators import EMPTY_VALUES
 from django.forms import ValidationError
 from django.forms.fields import Field, RegexField, CharField, Select
-from django.utils.encoding import smart_unicode
+from django.utils.encoding import smart_text
 from django.utils.translation import ugettext_lazy as _
 import re
 
@@ -34,7 +34,7 @@ class BRPhoneNumberField(Field):
         super(BRPhoneNumberField, self).clean(value)
         if value in EMPTY_VALUES:
             return u''
-        value = re.sub('(\(|\)|\s+)', '', smart_unicode(value))
+        value = re.sub('(\(|\)|\s+)', '', smart_text(value))
         m = phone_digits_re.search(value)
         if m:
             return u'%s-%s-%s' % (m.group(1), m.group(2), m.group(3))
@@ -68,10 +68,10 @@ class BRStateChoiceField(Field):
         value = super(BRStateChoiceField, self).clean(value)
         if value in EMPTY_VALUES:
             value = u''
-        value = smart_unicode(value)
+        value = smart_text(value)
         if value == u'':
             return value
-        valid_values = set([smart_unicode(k) for k, v in self.widget.choices])
+        valid_values = set([smart_text(k) for k, v in self.widget.choices])
         if value not in valid_values:
             raise ValidationError(self.error_messages['invalid'])
         return value
@@ -92,7 +92,7 @@ class BRCPFField(CharField):
     }
 
     def __init__(self, max_length=14, min_length=11, *args, **kwargs):
-        super(BRCPFField, self).__init__(max_length, min_length, *args, **kwargs)
+        super(BRCPFField, self).__init__(*args, **kwargs)
 
     def clean(self, value):
         """
