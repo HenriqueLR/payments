@@ -1,7 +1,7 @@
 from django.template import Library
 from django.template.defaultfilters import floatformat
 from django.contrib.humanize.templatetags.humanize import intcomma
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 
 register = Library()
 
@@ -26,7 +26,7 @@ def textarea(value, arg):
 @register.filter(name='decimal_to_real')
 def decimal_to_real(value, precision=2):
 	value = floatformat(value, precision)
-	value, decimal = force_unicode(value).split(',')
+	value, decimal = force_text(value).split(',')
 	value = intcomma(value)
 	value = value.replace(',', '.') + ',' + decimal
 	return value
