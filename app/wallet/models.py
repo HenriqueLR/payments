@@ -1,10 +1,8 @@
-#coding: utf-8
-
 from django.db import models
 from accounts.models import Account
 from django.db.models import Sum
 from datetime import datetime
-
+from django.urls import reverse
 
 
 class DebitManager(models.Manager):
@@ -47,17 +45,14 @@ class Debit(models.Model):
     def __unicode__(self):
         return (u'%s - %s') % (self.origin, self.value)
 
-    @models.permalink
     def get_update_debit(self):
-        return ('wallet:update_debit', [int(self.pk)], {})
+        return reverse('wallet:update_debit', kwargs={'pk': self.pk})
 
-    @models.permalink
     def get_absolute_url(self):
-        return('wallet:detail_debit', [int(self.pk)], {})
+        return reverse('wallet:detail_debit', kwargs={'pk': self.pk})
 
-    @models.permalink
     def get_delete_debit(self):
-        return('wallet:delete_debit', [int(self.pk)], {})
+        return reverse('wallet:delete_debit', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Debit'
@@ -114,17 +109,14 @@ class Deposit(models.Model):
     def __unicode__(self):
         return (u'%s - %s') % (self.origin, self.value)
 
-    @models.permalink
     def get_update_deposit(self):
-        return ('wallet:update_deposit', [int(self.pk)], {})
+        return reverse('wallet:update_deposit', kwargs={'pk': self.pk})
 
-    @models.permalink
     def get_absolute_url(self):
-        return('wallet:detail_deposit', [int(self.pk)], {})
+        return reverse('wallet:detail_deposit', kwargs={'pk': self.pk})
 
-    @models.permalink
     def get_delete_deposit(self):
-        return('wallet:delete_deposit', [int(self.pk)], {})
+        return reverse('wallet:delete_deposit', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Deposit'
@@ -173,17 +165,14 @@ class Note(models.Model):
     def __unicode__(self):
         return (u'%s - %s') % (self.status_note, self.title)
 
-    @models.permalink
     def get_delete_url(self):
-        return('wallet:delete_note', [int(self.pk)], {})
+        return reverse('wallet:delete_note', kwargs={'pk': self.pk})
 
-    @models.permalink
     def get_update_url(self):
-        return ('wallet:update_note', [int(self.pk)], {})
+        return reverse('wallet:update_note', kwargs={'pk': self.pk})
 
-    @models.permalink
     def get_absolute_url(self):
-        return('wallet:detail_note', [int(self.pk)], {})
+        return reverse('wallet:detail_note', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Note'
