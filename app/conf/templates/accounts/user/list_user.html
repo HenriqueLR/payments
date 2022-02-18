@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 
 {% block content %}
 
@@ -64,8 +64,9 @@
 									</thead>
 									<tbody>
 										{% for user_list in object_list %}
+											
 											<tr>
-												<td>{{ user_list.profile_user.first_name }} {{ user_list.profile_user.last_name }}</td>
+												<td>{{ user_list.first_name }} {{ user_list.profile.last_name }}</td>
 												<td>{{ user_list.email }}</td>
 												<td>
 												{% if user_list.is_active %}
