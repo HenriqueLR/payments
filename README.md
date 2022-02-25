@@ -33,7 +33,7 @@ Aplicação que tem a ideia de uma carteira on-line, cadastre os seus depósitos
 
 * 3	- Exportar a variável de ambiente, com o nome do arquvio de configuração, rodando o script dentro do projeto.
 
-		./config_vars.sh
+		source ./config_vars.sh
 
 ### Instalação
 
