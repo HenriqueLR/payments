@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  app:
+    image: payments:1.0
+    container_name: payments
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    working_dir: /deploy/apps/payments/
+    command: python app/manage.py runserver 0.0.0.0:8009
+    volumes:
+      - .:/deploy/apps/payments/
+    ports:
+      - 8009:8009
+      - 8007:8007
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+  db:
+    image: payments_postgresql:1.0
+    container_name: payments_posgresql
+    build:
+      context: .
+      dockerfile: Dockerfile.bd
+    volumes:
+      - pg-data-payments:/var/lib/postgresql/12/main
+      - ./env/postgresql:/deploy/apps/payments/env/postgresql  
+    ports:
+      - 4444:5432
+    env_file:
+      - ./.envbd
+volumes:
+  pg-data-payments:
