@@ -3,24 +3,27 @@ from django.utils import translation
 
 
 
-class MenuLeft(object):
-	'''
-	Middleware init leftmenu status
-	'''
-	def process_request(self, request):
+class MenuLeft:
+	def __init__(self, get_response):
+		self.get_response = get_response
+
+	def __call__(self, request):
 		if not request.session.has_key('leftmenu'):
 			request.session['leftmenu'] = True
+		response = self.get_response(request)			
+		return response		
 
 
-class ForceDefaultLanguage(object):
-	'''
-	Force language default settings
-	'''
-	def process_request(self, request):
+class ForceDefaultLanguage:
+	def __init__(self, get_response):
+		self.get_response = get_response
 
-		if request.META.has_key('HTTP_ACCEPT_LANGUAGE'):
+	def __call__(self, request):
+		if 'HTTP_ACCEPT_LANGUAGE' in request.META:
 			del request.META['HTTP_ACCEPT_LANGUAGE']
 
 		request.LANG = getattr(settings, 'LANGUAGE_CODE', settings.LANGUAGE_CODE)
 		translation.activate(request.LANG)
 		request.LANGUAGE_CODE = request.LANG
+		response = self.get_response(request)
+		return response		

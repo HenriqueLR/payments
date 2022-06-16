@@ -1,7 +1,7 @@
 #encoding: utf-8
 
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -11,7 +11,6 @@ from wallet.forms import DebitForm, DepositForm, AddNoteForm, EditNoteForm
 from wallet.permissions import (PermissionsDebitMixin, PermissionsDepositMixin,
                                 PermissionsNoteMixin)
 from main.utils import get_list_permissions, apps_permissions
-from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
 from main.decorators import ajax_required
 from django.contrib.auth.decorators import login_required

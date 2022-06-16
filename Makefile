@@ -1,9 +1,20 @@
 #makefile
+SHELL := /bin/bash
+
+clean_all: clean clean_migrations clean_sqlitedb migrate
 
 config: clean migrate create_superuser start
 
 install:
 	pip install -r requirements.txt
+
+migrate_docker:
+	docker-compose exec app python app/manage.py makemigrations --settings=conf.settings_production ;\
+	docker-compose exec app python app/manage.py migrate --settings=conf.settings_production ;\
+	docker-compose exec app python app/manage.py collectstatic --noinput --settings=conf.settings_production ;\
+
+create_superuserdocker:
+	docker-compose exec app python app/conf/config_start.py "conf.settings" ;\
 
 clean:
 	@find . -name "*.pyc" | xargs rm -f

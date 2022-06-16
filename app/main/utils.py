@@ -97,12 +97,11 @@ def apps_permissions(request):
 	    'models': [manual_model],
     }
 
-	app_list = app_dict.values()
+	app_list = list(app_dict.values())
 	#app_list.sort(key=lambda x: x['name'])
 
 	#for app in app_list:
 	#	app['models'].sort(key=lambda x: x['name'])
-
 	app_list.insert(0, include_dict['main'])
 
 	return app_list

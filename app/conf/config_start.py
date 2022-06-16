@@ -12,6 +12,10 @@ from django.contrib.auth.hashers import make_password
 from accounts.models import Account, Profile, User
 from wallet.models import Debit, Deposit, Note
 from conf import settings
+from configparser import RawConfigParser
+
+config = RawConfigParser()
+config.read(''.join([str(settings.BASE_DIR), os.getenv('sys_arg', '')]))
 
 
 User = get_user_model()
@@ -20,9 +24,9 @@ User = get_user_model()
 class ConfigStart(object):
 
 	def __init__(self):
-		self.email = settings.config.get('user_config', 'EMAIL')
-		self.password = settings.config.get('user_config', 'PASSWORD')
-		self.cpf = settings.config.get('user_config', 'CPF')
+		self.email = config.get('user_config', 'EMAIL')
+		self.password = config.get('user_config', 'PASSWORD')
+		self.cpf = config.get('user_config', 'CPF')
 		self.group_admin = 'customers'
 		self.group_user = 'users'
 
@@ -54,7 +58,7 @@ class ConfigStart(object):
 		self.set_permission_group(group_user, Note)
 
 	def set_permission_group(self, group, model):
-		permissions = Permission.objects.filter(content_type__name = model.__name__).all()
+		permissions = Permission.objects.filter(codename__contains=model.__name__.lower())
 		for permission in permissions:
 			group.permissions.add(permission)
 		group.save()
@@ -67,5 +71,5 @@ if __name__ == '__main__':
 		config.create_user(config.create_account())
 		config.create_group()
 	except Exception as Error:
-		print Error
+		print(Error)
 		pass

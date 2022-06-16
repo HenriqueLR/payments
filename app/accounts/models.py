@@ -7,6 +7,7 @@ from django.conf import settings
 from django.core import validators
 from accounts.localflavor.br.br_states import STATE_CHOICES
 from django.contrib.auth.models import (AbstractBaseUser, PermissionsMixin, UserManager)
+from django.urls import reverse
 
 
 
@@ -57,7 +58,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     username = models.CharField(
         verbose_name=u'Nome de Usuário', max_length=30,
-        validators=[validators.RegexValidator(re.compile('^[\A-Za-z]+$'),
+        validators=[validators.RegexValidator(re.compile('[a-zA-Z]'),
             'O nome de usuário só pode conter letras, digitos ou os '
             'seguintes caracteres: @/./+/-/_', 'invalid')]
     )
@@ -88,21 +89,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_full_name(self):
         return str(self)
 
-    @models.permalink
     def get_edit_profile(self):
-        return ('accounts:edit_profile', {})
+        return reverse('accounts:edit_profile', kwargs={})
 
-    @models.permalink
     def get_detail_profile(self):
-        return ('accounts:detail_profile', {})
+        return reverse('accounts:detail_profile', kwargs={})
 
-    @models.permalink
     def get_edit_user(self):
-        return ('accounts:edit_user', [int(self.pk)], {})
+        return reverse('accounts:edit_user', kwargs={'pk':self.pk})
 
-    @models.permalink
     def get_delete_user(self):
-        return ('accounts:delete_user', [int(self.pk)], {})
+        return reverse('accounts:delete_user', kwargs={'pk':self.pk})
 
     class Meta:
         verbose_name = 'User'
@@ -164,7 +161,7 @@ class Profile(models.Model):
 
     id_profile = models.AutoField(primary_key=True, verbose_name=u'id_profile', db_column='id_profile')
     first_name = models.CharField(max_length=50, verbose_name=u'Nome', db_column='first_name',
-                                  validators=[validators.RegexValidator(re.compile('^[\A-Za-z]+$'),
+                                  validators=[validators.RegexValidator(re.compile('[A-Za-z]'),
                                              'O nome de usuário só pode conter letras', 'invalid')])
     last_name = models.CharField(max_length=100, verbose_name=u'Sobrenome', db_column='last_name')
     status_profile = models.BooleanField(verbose_name=u'Status', default=False, db_column='status_profile')
@@ -190,9 +187,8 @@ class Profile(models.Model):
     def get_full_name(self):
         return str(self)
 
-    @models.permalink
     def active_account(self):
-        return ('accounts:active_account', [int(self.pk)], {})
+        return reverse('accounts:active_account', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Profile'

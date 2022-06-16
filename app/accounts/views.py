@@ -3,8 +3,8 @@
 from django.views.generic.list import ListView
 from django.views.generic.edit import DeleteView
 from django.views.generic import View
-from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import render_to_response, render, redirect
+from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.template import RequestContext
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
@@ -155,7 +155,7 @@ def edit_password(request):
     else:
         form = PasswordChangeForm(user=request.user)
     context = {"form": form}
-    return render_to_response(template_name, context, context_instance=RequestContext(request))
+    return render(template_name, context, context_instance=RequestContext(request))
 
 
 @login_required
@@ -175,7 +175,7 @@ def edit_password_user(request, pk):
     else:
         form = SetPasswordForm(user=user, data=request.POST or None)
     context = {"object":user, "form": form}
-    return render_to_response(template_name, context, context_instance=RequestContext(request))
+    return render(template_name, context, context_instance=RequestContext(request))
 
 
 @login_required
