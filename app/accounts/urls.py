@@ -1,12 +1,11 @@
 #encoding: utf-8
 
-from django.urls import path
+from django.urls import path, reverse_lazy
 from accounts.views import (create_account, list_account, 
                             active_account, edit_profile, edit_password, 
                             detail_profile, reset_password, confirm_reset_password,
                             create_user, list_user, edit_user, delete_user, edit_password_user) 
 from django.contrib.auth.views import LoginView, LogoutView
-from django.urls import reverse_lazy
 
 urlpatterns=[
     path('sign_in/',LoginView.as_view(template_name='accounts/auth/login.html'), name='login'),
