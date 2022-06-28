@@ -15,6 +15,7 @@ migrations/
 build/
 develop-eggs/
 dist/
+.vscode
 downloads/
 eggs/
 lib64/
